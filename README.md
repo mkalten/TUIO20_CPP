@@ -13,7 +13,7 @@ Current Implementation
 ----------------------
 
 - encapsulates the TUIO 2.0 Token, Pointer, Symbol and Bounds components 
-- provides TUIO 2.0 Server and Client implementations for sending/receiving
+- provides Server and Client implementations for TUIO 2.0 encoding/decoding
 - optional TCP and Flash  transport layers in addition to the default UDP transport
 
 Alpha Code and API
@@ -29,7 +29,7 @@ Example Projects
 ----------------
 
 Apart from the actual cross-platform TUIO 2.0 implementation, this repository also provides several example
-projects that serve for the illustratation and testing of the overall API functionality. This includes TUIO 2.0
+projects that serve for the illustration and testing of the overall API functionality. This includes TUIO 2.0
 client and server demonstrations with a simple SDL GUI as well as some simple console test application.
 These examples should equally work on Linux, Mac OS X and Windows operating systems, the according Makefile 
 as well as XCode and Visual Studio project files are included.
