@@ -3,9 +3,10 @@ TUIO 2.0 C++ Library
 
 TUIO 2.0 is an open framework that defines a common protocol and API for tangible interactive 
 surfaces. The TUIO protocol allows the encoding and transmission of an abstract description of 
-interactive surfaces, including tangible object relations, geometries and multitouch input.
+interactive surfaces and tangible objects, including their geometries and relations as well as 
+multi-pointer input.
 
-http://www.tuio.org/?tuio20/
+http://www.tuio.org/?tuio20
 
 
 Current Implementation
