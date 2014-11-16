@@ -1,0 +1,6 @@
+/* Localized versions of Info.plist keys */
+
+CFBundleName = "SimpleSimulator";
+CFBundleShortVersionString = "SimpleSimulator version 1.5cvs";
+CFBundleGetInfoString = "SimpleSimulator version 1.5cvs, Copyright 2005-2009 Martin Kaltenbrunner";
+NSHumanReadableCopyright = "Copyright 2005-2009\nMartin Kaltenbrunner\nmartin@tuio.org";

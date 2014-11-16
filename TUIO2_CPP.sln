@@ -1,0 +1,46 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libTUIO2", "libTUIO2.vcxproj", "{E1C28E7D-466C-4D0A-AEB1-CFFD0F6F5645}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tuio2Dump", "Tuio2Dump.vcxproj", "{5E2EAE4F-8668-4647-98CA-562358EACC10}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E1C28E7D-466C-4D0A-AEB1-CFFD0F6F5645} = {E1C28E7D-466C-4D0A-AEB1-CFFD0F6F5645}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tuio2Demo", "Tuio2Demo.vcxproj", "{8737A4B6-C44F-4397-9BB5-432646375E9F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E1C28E7D-466C-4D0A-AEB1-CFFD0F6F5645} = {E1C28E7D-466C-4D0A-AEB1-CFFD0F6F5645}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tuio2Simulator", "Tuio2Simulator.vcxproj", "{810E065A-EC96-4C3F-8C8B-7EAE285DC797}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E1C28E7D-466C-4D0A-AEB1-CFFD0F6F5645} = {E1C28E7D-466C-4D0A-AEB1-CFFD0F6F5645}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E1C28E7D-466C-4D0A-AEB1-CFFD0F6F5645}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E1C28E7D-466C-4D0A-AEB1-CFFD0F6F5645}.Debug|Win32.Build.0 = Debug|Win32
+		{E1C28E7D-466C-4D0A-AEB1-CFFD0F6F5645}.Release|Win32.ActiveCfg = Release|Win32
+		{E1C28E7D-466C-4D0A-AEB1-CFFD0F6F5645}.Release|Win32.Build.0 = Release|Win32
+		{5E2EAE4F-8668-4647-98CA-562358EACC10}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5E2EAE4F-8668-4647-98CA-562358EACC10}.Debug|Win32.Build.0 = Debug|Win32
+		{5E2EAE4F-8668-4647-98CA-562358EACC10}.Release|Win32.ActiveCfg = Release|Win32
+		{5E2EAE4F-8668-4647-98CA-562358EACC10}.Release|Win32.Build.0 = Release|Win32
+		{8737A4B6-C44F-4397-9BB5-432646375E9F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8737A4B6-C44F-4397-9BB5-432646375E9F}.Debug|Win32.Build.0 = Debug|Win32
+		{8737A4B6-C44F-4397-9BB5-432646375E9F}.Release|Win32.ActiveCfg = Release|Win32
+		{8737A4B6-C44F-4397-9BB5-432646375E9F}.Release|Win32.Build.0 = Release|Win32
+		{810E065A-EC96-4C3F-8C8B-7EAE285DC797}.Debug|Win32.ActiveCfg = Debug|Win32
+		{810E065A-EC96-4C3F-8C8B-7EAE285DC797}.Debug|Win32.Build.0 = Debug|Win32
+		{810E065A-EC96-4C3F-8C8B-7EAE285DC797}.Release|Win32.ActiveCfg = Release|Win32
+		{810E065A-EC96-4C3F-8C8B-7EAE285DC797}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
