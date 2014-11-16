@@ -12,8 +12,8 @@ Current Implementation
 ----------------------
 
 - encapsulates the TUIO 2.0 Token, Pointer, Symbol and Bounds components 
-- provides the TUIO 2.0 Server and Client implementations for sending/receiving
-- optional TCP and Flash Socket transport layers in addition to the default UDP transport
+- provides TUIO 2.0 Server and Client implementations for sending/receiving
+- optional TCP and Flash  transport layers in addition to the default UDP transport
 
 Alpha Code and API
 ------------------
@@ -21,8 +21,8 @@ Alpha Code and API
 This library currently only implements a subset of the TUIO 2.0 specification, 
 the remaining object geometries and relations will be added subsequently.
 The current code also defines a general API for the encapsulation of TUIO components.
-This API is already quite usable, but may contain some partially or badly implemented sections,
-which are obviously subject to change and improvements.
+This API is already quite usable, but may still contain several partially or badly implemented sections,
+which are obviously subject to completion, change and improvements.
 
 Integration and Testing
 ----------------------
@@ -32,7 +32,7 @@ in order to support the development and testing of this common shared code base.
 The library is licensed under the LGPL in order to facilitate this collaboration.
 
 
-Feedback and Consulatation
+Feedback and Consultation
 --------------------------
 Please use the provided Github infrastructure for the discussion related to the design 
 and implementation of this library or the TUIO 2.0 specification in general. 
