@@ -30,7 +30,7 @@ Example Projects
 
 Apart from the actual cross-platform TUIO 2.0 implementation, this repository also provides several example
 projects that serve for the illustration and testing of the overall API functionality. This includes TUIO 2.0
-client and server demonstrations with a simple SDL GUI as well as some simple console test application.
+client and server demonstrations with a simple SDL GUI as well as some simple console test applications.
 These examples should equally work on Linux, Mac OS X and Windows operating systems, the according Makefile 
 as well as XCode and Visual Studio project files are included.
 
@@ -49,6 +49,6 @@ and implementation of this library or the TUIO 2.0 specification in general.
 Any suggestions for improvements of the API design and code quality are most welcome, 
 and should be submitted and discussed through pull requests. 
 
-For any other inquiries please get in touch with Martin Kaltebrunner via <martin[at]tuio.org>,
+For any other inquiries please get in touch with Martin Kaltebrunner via martin[at]tuio.org,
 although you may need to insist to receive a reply on this noisy communication channel.
 
