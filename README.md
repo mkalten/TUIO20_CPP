@@ -24,6 +24,15 @@ The current code also defines a general API for the encapsulation of TUIO compon
 This API is already quite usable, but may still contain several partially or badly implemented sections,
 which are obviously subject to completion, change and improvements.
 
+Example Projects
+----------------
+
+Apart from the actual cross-platform TUIO 2.0 implementation, this repository also provides several example
+projects that serve for the illustratation and testing of the overall API functionality. This includes TUIO 2.0
+client and server demonstrations with a simple SDL GUI as well as some simple console test application.
+These examples should equally work on Linux, Mac OS X and Windows operating systems, the according Makefile 
+as well as XCode and Visual Studio project files are included.
+
 Integration and Testing
 ----------------------
 
