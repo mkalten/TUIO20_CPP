@@ -83,14 +83,14 @@ namespace TUIO2 {
 		 * The default constructor only takes the Session ID
 		  * @param	s_id	the Session ID to assign
 		 */
-		TuioObject (int s_id);
+		TuioObject (unsigned int s_id);
         
         /**
          * This constructor takes a TuioTime and the Session ID
          * @param	ttime	the TuioTime to assign
          * @param	s_id	the Session ID to assign
          */
-        TuioObject (TuioTime ttime,int s_id);
+        TuioObject (TuioTime ttime, unsigned int s_id);
   
         /**
          * This constructor takes a TuioTime and the Session ID
@@ -98,7 +98,7 @@ namespace TUIO2 {
          * @param	src     the TuioSource to assign
          * @param	s_id	the Session ID to assign
          */
-        TuioObject (TuioTime ttime, TuioSource *src, int s_id);
+        TuioObject (TuioTime ttime, TuioSource *src, unsigned int s_id);
         
         /**
          * The default destructor also delets all assigned TUIO components
@@ -109,7 +109,7 @@ namespace TUIO2 {
          * Returns the associated Session ID
          * @return	the associated Session ID
          */
-        int getSessionID();
+        unsigned int getSessionID();
 	
         /**
          * Sets the assotiated TUIO source

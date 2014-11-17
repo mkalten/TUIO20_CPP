@@ -193,7 +193,7 @@ namespace TUIO2 {
 		char *fullBuffer; 
 		
         void checkBundleCapacity(int size);
-		void startTuioBundle(int fseq);
+		void startTuioBundle(unsigned int fseq);
 		void addTokenMessage(TuioToken *ttok);
         void addPointerMessage(TuioPointer *tptr);
         void addBoundsMessage(TuioBounds *tbnd);

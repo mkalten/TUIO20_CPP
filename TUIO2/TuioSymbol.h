@@ -85,7 +85,7 @@ namespace TUIO2 {
          * @param	type	the symbol type descriptor
          * @param	data	the symbol data to assign
          */
-		TuioSymbol (TuioTime ttime, int si, short ti, short ui, int sym, const char *type, const char *data);
+		TuioSymbol (TuioTime ttime, unsigned int si, short ti, short ui, int sym, const char *type, const char *data);
 
         /**
          * This constructor assigns the provided Session ID, Type ID, User ID and Symbol ID
@@ -98,7 +98,7 @@ namespace TUIO2 {
          * @param	type	the symbol type descriptor
          * @param	data	the symbol data to assign
          */
-        TuioSymbol (int si, short ti, short ui, int sym, const char *type, const char *data);
+        TuioSymbol (unsigned int si, short ti, short ui, int sym, const char *type, const char *data);
 		
 		/**
 		 * This constructor takes a TuioSymbol argument and sets its attributes

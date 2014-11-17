@@ -74,7 +74,7 @@ namespace TUIO2 {
 		 * @param	h	the height to assign
 		 * @param	f	the area to assign
 		 */
-		TuioBounds (TuioTime ttime, int si, float xp, float yp, float a, float w, float h, float f);
+		TuioBounds (TuioTime ttime, unsigned int si, float xp, float yp, float a, float w, float h, float f);
         
         /**
          * This constructor takes a TuioTime argument and assigns it along with the provided
@@ -88,7 +88,7 @@ namespace TUIO2 {
          * @param	h	the height to assign
          * @param	f	the area to assign
          */
-        TuioBounds (int si, float xp, float yp, float a, float w, float h, float f);
+        TuioBounds (unsigned int si, float xp, float yp, float a, float w, float h, float f);
 		
 		/**
 		 * This constructor takes the atttibutes of the provided TuioBounds 

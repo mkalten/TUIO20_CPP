@@ -92,7 +92,7 @@ namespace TUIO2 {
          * @param	r	the radius to assign
          * @param	p	the pressure to assign
 		 */
-		TuioPointer (TuioTime ttime, int si, short ti, short ui, int pi, float xp, float yp, float a, float sa, float r, float p);
+		TuioPointer (TuioTime ttime, unsigned int si, short ti, short ui, int pi, float xp, float yp, float a, float sa, float r, float p);
 
 		/**
 		 * This constructor takes the provided Session ID, Pointer ID, X and Y coordinate
@@ -109,7 +109,7 @@ namespace TUIO2 {
          * @param	r	the radius to assign
          * @param	p	the pressure to assign
 		 */
-		TuioPointer (int si, short ti, short ui, int pi, float xp, float yp, float a, float sa, float r, float p);
+		TuioPointer (unsigned int si, short ti, short ui, int pi, float xp, float yp, float a, float sa, float r, float p);
         
         
         /**
@@ -125,7 +125,7 @@ namespace TUIO2 {
          * @param	r	the radius to assign
          * @param	p	the pressure to assign
          */
-        TuioPointer (int si, int pi, float xp, float yp, float a, float sa, float r, float p);
+        TuioPointer (unsigned int si, int pi, float xp, float yp, float a, float sa, float r, float p);
 		
 		/**
 		 * This constructor takes the atttibutes of the provided TuioPointer 

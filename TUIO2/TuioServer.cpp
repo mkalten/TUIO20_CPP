@@ -185,7 +185,7 @@ void TuioServer::commitTuioFrame() {
 void TuioServer::sendEmptyTuioBundle() {
     oscPacket->Clear();
     (*oscPacket) << osc::BeginBundleImmediate;
-    (*oscPacket) << osc::BeginMessage( "/tuio2/frm") << -1 << TuioTime::getSystemTimeTag() << source->getSourceName() << source->getDimension() << osc::EndMessage;
+    (*oscPacket) << osc::BeginMessage( "/tuio2/frm") << 0 << TuioTime::getSystemTimeTag() << source->getSourceName() << source->getDimension() << osc::EndMessage;
     (*oscPacket) << osc::BeginMessage( "/tuio2/alv") << osc::EndMessage;
     (*oscPacket) << osc::EndBundle;
     deliverOscPacket( oscPacket );
@@ -202,11 +202,11 @@ void TuioServer::checkBundleCapacity(int msg_size) {
     }
 }
 
-void TuioServer::startTuioBundle(int fseq) {
+void TuioServer::startTuioBundle(unsigned int fseq) {
     
     oscPacket->Clear();
     (*oscPacket) << osc::BeginBundleImmediate;
-    if (source) (*oscPacket) << osc::BeginMessage( "/tuio2/frm") << currentFrame << frameTimeTag << source->getSourceName() << source->getDimension();
+    if (source) (*oscPacket) << osc::BeginMessage( "/tuio2/frm") << (int32_t)currentFrame << frameTimeTag << source->getSourceName() << source->getDimension();
     (*oscPacket) << osc::EndMessage;
 }
 
@@ -235,7 +235,7 @@ void TuioServer::addTokenMessage(TuioToken *ttok) {
 	}
 	
 	(*oscPacket) << osc::BeginMessage( "/tuio2/tok");
-	(*oscPacket) << ttok->getSessionID() << ttok->getTypeUserID() << ttok->getSymbolID() << xpos << ypos << angle;
+	(*oscPacket) << (int32)ttok->getSessionID() << ttok->getTypeUserID() << ttok->getSymbolID() << xpos << ypos << angle;
 	(*oscPacket) << xvel << yvel << rvel << ttok->getMotionAccel() << ttok->getRotationAccel();	
 	(*oscPacket) << osc::EndMessage;
 }
@@ -259,7 +259,7 @@ void TuioServer::addPointerMessage(TuioPointer *tptr) {
     }
     
     (*oscPacket) << osc::BeginMessage( "/tuio2/ptr");
-    (*oscPacket) << tptr->getSessionID() << tptr->getTypeUserID() << tptr->getPointerID();
+    (*oscPacket) << (int32_t)tptr->getSessionID() << tptr->getTypeUserID() << tptr->getPointerID();
     (*oscPacket) << xpos << ypos << tptr->getAngle() << tptr->getShear() << tptr->getRadius() << tptr->getPressure();
     (*oscPacket) << xvel << yvel << tptr->getPressureSpeed() << tptr->getMotionAccel() << tptr->getPressureAccel();
     (*oscPacket) << osc::EndMessage;
@@ -290,7 +290,7 @@ void TuioServer::addBoundsMessage(TuioBounds *tbnd) {
 	}
 	
 	(*oscPacket) << osc::BeginMessage( "/tuio2/bnd");
-	(*oscPacket) << tbnd->getSessionID() << xpos << ypos << angle << tbnd->getWidth() << tbnd->getHeight() << tbnd->getArea();
+	(*oscPacket) << (int32_t)tbnd->getSessionID() << xpos << ypos << angle << tbnd->getWidth() << tbnd->getHeight() << tbnd->getArea();
 	(*oscPacket) << xvel << yvel  << rvel << tbnd->getMotionAccel()  << tbnd->getRotationAccel();	
 	(*oscPacket) << osc::EndMessage;
 }
@@ -301,7 +301,7 @@ void TuioServer::addSymbolMessage(TuioSymbol *tsym) {
     checkBundleCapacity(SYM_MESSAGE_SIZE);
     
     (*oscPacket) << osc::BeginMessage( "/tuio2/sym");
-    (*oscPacket) << tsym->getSessionID() << tsym->getTypeUserID() << tsym->getSymbolID();
+    (*oscPacket) << (int32_t)tsym->getSessionID() << tsym->getTypeUserID() << tsym->getSymbolID();
     (*oscPacket) << tsym->getSymbolType() << tsym->getSymbolData();
     (*oscPacket) << osc::EndMessage;
 }
@@ -312,7 +312,7 @@ void TuioServer::sendTuioBundle() {
     (*oscPacket) << osc::BeginMessage( "/tuio2/alv");
     
     for(std::list<TuioObject*>::iterator tobj = tobjList.begin();tobj!= tobjList.end(); tobj++)
-        (*oscPacket) << (*tobj)->getSessionID();
+        (*oscPacket) << (int32_t)(*tobj)->getSessionID();
     
     (*oscPacket) << osc::EndMessage;
     //int after = oscPacket->Capacity()-oscPacket->Size();

@@ -103,7 +103,7 @@ namespace TUIO2 {
          * @return  an active TuioObject corresponding to the provided Session ID or NULL
          */
         using TuioDispatcher::getTuioObject;
-        TuioObject* getTuioObject(int src_id, int s_id);
+        TuioObject* getTuioObject(int src_id, unsigned int s_id);
         
         /**
          * Returns a list of all currently active TuioObject
@@ -125,7 +125,7 @@ namespace TUIO2 {
          * @return  an active TuioToken corresponding to the provided Session ID or NULL
          */
         using TuioDispatcher::getTuioToken;
-        TuioToken* getTuioToken(int src_id, int s_id);
+        TuioToken* getTuioToken(int src_id, unsigned int s_id);
 
 		/**
 		 * Returns a list of all currently active TuioTokens
@@ -147,7 +147,7 @@ namespace TUIO2 {
          * @return  an active TuioPointer corresponding to the provided Session ID or NULL
          */
         using TuioDispatcher::getTuioPointer;
-        TuioPointer* getTuioPointer(int src_id, int s_id);
+        TuioPointer* getTuioPointer(int src_id, unsigned int s_id);
         
 		/**
 		 * Returns a List of all currently active TuioPointers
@@ -169,7 +169,7 @@ namespace TUIO2 {
          * @return  an active TuioBounds corresponding to the provided Session ID or NULL
          */
         using TuioDispatcher::getTuioBounds;
-        TuioBounds* getTuioBounds(int src_id, int s_id);
+        TuioBounds* getTuioBounds(int src_id, unsigned int s_id);
         
 		/**
 		 * Returns a List of all currently active TuioBounds
@@ -191,7 +191,7 @@ namespace TUIO2 {
          * @return  an active TuioSymbol corresponding to the provided Session ID or NULL
          */
         using TuioDispatcher::getTuioSymbol;
-        TuioSymbol* getTuioSymbol(int src_id, int s_id);
+        TuioSymbol* getTuioSymbol(int src_id, unsigned int s_id);
         
         /**
          * Returns a List of all currently active TuioSymbol
@@ -210,7 +210,7 @@ namespace TUIO2 {
 		void initialize();
 		
         void addFrameContainer(TuioObject *con);
-        TuioObject* getFrameContainer(int src_id,int s_id);
+        TuioObject* getFrameContainer(int src_id,unsigned int s_id);
         std::list<int> aliveContainerList;
 		std::list<TuioObject*> frameContainer;
 		
@@ -218,7 +218,7 @@ namespace TUIO2 {
         TuioTime currentTime, frameTime;
         bool lateFrame;
 			
-        std::map<std::string,int> sourceList;
+        std::map<std::string,unsigned int> sourceList;
         TuioSource frameSource;
         int source_count;
 		

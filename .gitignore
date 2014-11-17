@@ -12,3 +12,8 @@ project.xcworkspace
 build
 
 doc
+*.o
+
+Tuio2Dump
+
+Tuio2Test

@@ -20,7 +20,7 @@
 
 using namespace TUIO2;
 
-TuioPointer::TuioPointer (TuioTime ttime, int si, short ti, short ui, int pi, float xp, float yp, float a, float sa, float r, float p):TuioComponent(ttime,si,xp,yp,a) {
+TuioPointer::TuioPointer (TuioTime ttime, unsigned int si, short ti, short ui, int pi, float xp, float yp, float a, float sa, float r, float p):TuioComponent(ttime,si,xp,yp,a) {
     type_id = ti;
     user_id = ui;
     pointer_id = pi;
@@ -29,7 +29,7 @@ TuioPointer::TuioPointer (TuioTime ttime, int si, short ti, short ui, int pi, fl
     pressure = p;
 }
 
-TuioPointer::TuioPointer (int si, short ti, short ui, int pi, float xp, float yp, float a, float sa, float r, float p):TuioComponent(si,xp,yp,a) {
+TuioPointer::TuioPointer (unsigned int si, short ti, short ui, int pi, float xp, float yp, float a, float sa, float r, float p):TuioComponent(si,xp,yp,a) {
     type_id = ti;
     user_id = ui;
     shear = sa;
@@ -38,7 +38,7 @@ TuioPointer::TuioPointer (int si, short ti, short ui, int pi, float xp, float yp
     pressure = p;
 }
 
-TuioPointer::TuioPointer (int si, int pi, float xp, float yp, float a, float sa, float r, float p):TuioComponent(si,xp,yp,a) {
+TuioPointer::TuioPointer (unsigned int si, int pi, float xp, float yp, float a, float sa, float r, float p):TuioComponent(si,xp,yp,a) {
     type_id = 0;
     user_id = 0;
     pointer_id = pi;

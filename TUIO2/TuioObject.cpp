@@ -20,7 +20,7 @@
 
 using namespace TUIO2;
 
-TuioObject::TuioObject (int s_id) {
+TuioObject::TuioObject (unsigned int s_id) {
     currentTime = TuioTime::getSystemTime();
     session_id = s_id;
     startTime = currentTime;
@@ -32,7 +32,7 @@ TuioObject::TuioObject (int s_id) {
     state = TUIO_ADDED;
 }
 
-TuioObject::TuioObject (TuioTime ttime, int s_id) {
+TuioObject::TuioObject (TuioTime ttime, unsigned int s_id) {
     currentTime = ttime;
     session_id = s_id;
     startTime = currentTime;
@@ -44,7 +44,7 @@ TuioObject::TuioObject (TuioTime ttime, int s_id) {
     state = TUIO_ADDED;
 }
 
-TuioObject::TuioObject (TuioTime ttime, TuioSource *src, int s_id) {
+TuioObject::TuioObject (TuioTime ttime, TuioSource *src, unsigned int s_id) {
     currentTime = ttime;
     session_id = s_id;
     startTime = currentTime;
@@ -61,7 +61,7 @@ TuioObject::~TuioObject() {
     deleteAllTuioComponents();
 }
 
-int TuioObject::getSessionID() {
+unsigned int TuioObject::getSessionID() {
     return session_id;
 }
 

@@ -57,7 +57,7 @@ namespace TUIO2 {
 		static long start_seconds;
 		static long start_micro_seconds;
         
-        int frame_id;
+        unsigned int frame_id;
 		
 	public:
 
@@ -181,13 +181,13 @@ namespace TUIO2 {
          * Returns the assigned Frame ID.
          * @return the assigned Frame ID
          */
-        int getFrameID() const;
+        unsigned int getFrameID() const;
 		
         /**
          * assigns a Frame ID.
          * @f_id the Frame ID to assign
          */
-        void setFrameID(long f_id);
+        void setFrameID(unsigned int f_id);
         
 		/**
 		 * This static method globally resets the TUIO session time.

@@ -61,7 +61,7 @@ namespace TUIO2 {
 		 * @param	yp	the Y coordinate to assign
 		 * @param	a	the angle to assign
 		 */
-		TuioToken (TuioTime ttime, int si, short ti, short ui, int sym, float xp, float yp, float a);
+		TuioToken (TuioTime ttime, unsigned int si, short ti, short ui, int sym, float xp, float yp, float a);
 
 		/**
 		 * This constructor takes the provided Session ID, Symbol ID, X and Y coordinate
@@ -75,7 +75,7 @@ namespace TUIO2 {
 		 * @param	yp	the Y coordinate to assign
 		 * @param	a	the angle to assign
 		 */	
-		TuioToken (int si, short ti, short ui, int sym, float xp, float yp, float a);
+		TuioToken (unsigned int si, short ti, short ui, int sym, float xp, float yp, float a);
         
         /**
          * This constructor takes the provided Session ID, Symbol ID, X and Y coordinate
@@ -87,7 +87,7 @@ namespace TUIO2 {
          * @param	yp	the Y coordinate to assign
          * @param	a	the angle to assign
          */
-        TuioToken (int si, int sym, float xp, float yp, float a);
+        TuioToken (unsigned int si, int sym, float xp, float yp, float a);
 		
 		/**
 		 * This constructor takes the atttibutes of the provided TuioToken 

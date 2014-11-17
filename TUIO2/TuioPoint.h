@@ -20,14 +20,11 @@
 #define INCLUDED_TUIOPOINT_H
 
 #include "TuioTime.h"
+#include "limits.h"
 #include <cmath>
 
 #ifndef M_PI
 #define M_PI	3.14159265358979323846
-#endif
-
-#ifndef INT_MAX
-#define INT_MAX 2147483647
 #endif
 
 namespace TUIO2 {

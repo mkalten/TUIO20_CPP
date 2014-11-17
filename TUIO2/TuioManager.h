@@ -105,7 +105,7 @@ namespace TUIO2 {
          *
          * @param	s_id	the Session ID of the internal TuioObject to remove
          */
-        void removeTuioObject(int s_id);
+        void removeTuioObject(unsigned int s_id);
         
         /**
          * Removes an internally managed TuioObject from the TuioServer's internal list of TuioObjects
@@ -160,7 +160,7 @@ namespace TUIO2 {
          * @param	a	the angle to assign
          * @return	a reference to the TuioObject of the TuioToken
          */
-        TuioObject* addTuioToken(int s_id, short t_id, short u_id, int sym, float xp, float yp, float a);
+        TuioObject* addTuioToken(unsigned int s_id, short t_id, short u_id, int sym, float xp, float yp, float a);
         
         /**
          * Creates a new TuioToken based on the given arguments.
@@ -177,7 +177,7 @@ namespace TUIO2 {
          * @param	a	the angle to assign
          * @return	a reference to the TuioObject of the TuioToken
          */
-        TuioObject* addTuioToken(int s_id, int sym, float xp, float yp, float a);
+        TuioObject* addTuioToken(unsigned int s_id, int sym, float xp, float yp, float a);
         
         /**
          * Adds the provided TuioToken to an existing TuioObject
@@ -237,7 +237,7 @@ namespace TUIO2 {
          * @param	p	the pressure to assign
          * @return	a reference to the TuioObject of the TuioPointer
          */
-        TuioObject* addTuioPointer(int s_id, float xp, float yp, float a, float s, float r, float p);
+        TuioObject* addTuioPointer(unsigned int s_id, float xp, float yp, float a, float s, float r, float p);
         
         /**
          * Creates a new TuioPointer based on the given arguments.
@@ -271,7 +271,7 @@ namespace TUIO2 {
          * @param	p	the pressure to assign
          * @return	a reference to the TuioObject of the TuioPointer
          */
-        TuioObject* addTuioPointer(int s_id, short t_id, short u_id, float xp, float yp, float a, float s, float r, float p);
+        TuioObject* addTuioPointer(unsigned int s_id, short t_id, short u_id, float xp, float yp, float a, float s, float r, float p);
         
         /**
          * Creates a new TuioPointer based on the given arguments.
@@ -305,7 +305,7 @@ namespace TUIO2 {
          * @param	p	the pressure to assign
          * @return	reference to the created TuioPointer
          */
-        TuioObject* addTuioPointer(int s_id, int p_id, float xp, float yp, float a, float s, float r, float p);
+        TuioObject* addTuioPointer(unsigned int s_id, int p_id, float xp, float yp, float a, float s, float r, float p);
         
         /**
          * Creates a new TuioPointer based on the given arguments.
@@ -343,7 +343,7 @@ namespace TUIO2 {
          * @param	p	the pressure to assign
          * @return	a reference to the TuioObject of the TuioPointer
          */
-        TuioObject* addTuioPointer(int s_id, int p_id, short t_id, short u_id, float xp, float yp, float a, float s, float r, float p);
+        TuioObject* addTuioPointer(unsigned int s_id, int p_id, short t_id, short u_id, float xp, float yp, float a, float s, float r, float p);
         
         /**
          * Adds the provided TuioPointer to an existing TuioObject
@@ -404,7 +404,7 @@ namespace TUIO2 {
          * @param	area	the area to assign
          * @return	a reference to the TuioObject of the TuioBounds
          */
-        TuioObject* addTuioBounds(int s_id, float xp, float yp, float angle, float width, float height, float area);
+        TuioObject* addTuioBounds(unsigned int s_id, float xp, float yp, float angle, float width, float height, float area);
 		
         /**
          * Adds the provided TuioBounds to an existing TuioObject
@@ -463,7 +463,7 @@ namespace TUIO2 {
          * @param	data	the synbol data to assign
          * @return	a reference to the TuioObject of the TuioSymbol
          */
-        TuioObject* addTuioSymbol(int s_id, short t_id, short u_id, int sym, const char *type, const char *data);
+        TuioObject* addTuioSymbol(unsigned int s_id, short t_id, short u_id, int sym, const char *type, const char *data);
         
         /**
          * Adds the provided TuioSymbol to an existing TuioObject
@@ -581,9 +581,9 @@ namespace TUIO2 {
 
 		TuioTime currentFrameTime;
         osc::TimeTag frameTimeTag;
-		int currentFrame;
+		unsigned int currentFrame;
 		int pointerCount, maxPointerID;
-		int sessionID;
+		unsigned int sessionID;
 
 		bool tobjUpdate;
 		bool verbose;

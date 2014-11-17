@@ -46,7 +46,7 @@ namespace TUIO2 {
 		/**
 		 * The unique Session ID that is assigned to each TUIO tobj.
 		 */ 
-        int session_id;
+        unsigned int session_id;
         /**
          * The rotation angle value.
          */
@@ -97,7 +97,7 @@ namespace TUIO2 {
 		 * @param	yp	the Y coordinate to assign
          * @param	a	the angle to assign
 		 */
-		TuioComponent (TuioTime ttime, int si, float xp, float yp, float a);
+		TuioComponent (TuioTime ttime, unsigned int si, float xp, float yp, float a);
 
 		/**
 		 * This constructor takes the provided Session ID, X and Y coordinate
@@ -108,7 +108,7 @@ namespace TUIO2 {
 		 * @param	yp	the Y coordinate to assign
          * @param	a	the angle to assign
 		 */
-		TuioComponent (int si, float xp, float yp,float a);
+		TuioComponent (unsigned int si, float xp, float yp,float a);
 		
 		/**
 		 * This constructor takes the atttibutes of the provided TuioComponent 
@@ -194,13 +194,13 @@ namespace TUIO2 {
          * Returns the Session ID of this TuioComponent.
          * @return	the Session ID of this TuioComponent
          */
-        virtual int getSessionID() const;
+        virtual unsigned int getSessionID() const;
 
 		/**
 		 * Sets the Session ID of this TuioComponent.
 		 * @param si	the new Session ID asscociated to this TuioComponent
 		 */
-		virtual void setSessionID(int si);
+		virtual void setSessionID(unsigned int si);
 		
 		/**
 		 * Returns the X velocity of this TuioComponent.

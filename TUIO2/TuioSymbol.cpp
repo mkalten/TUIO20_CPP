@@ -20,7 +20,7 @@
 
 using namespace TUIO2;
 
-TuioSymbol::TuioSymbol (TuioTime ttime, int si, short ti, short ui, int sym, const char *type, const char *data):TuioComponent(ttime,si,0,0,0) {
+TuioSymbol::TuioSymbol (TuioTime ttime, unsigned int si, short ti, short ui, int sym, const char *type, const char *data):TuioComponent(ttime,si,0,0,0) {
     currentTime = ttime;
     startTime = currentTime;
     session_id = si;
@@ -32,7 +32,7 @@ TuioSymbol::TuioSymbol (TuioTime ttime, int si, short ti, short ui, int sym, con
     state = TUIO_ADDED;
 }
 	
-TuioSymbol::TuioSymbol (int si, short ti, short ui, int sym, const char *type, const char *data):TuioComponent(si,0,0,0) {
+TuioSymbol::TuioSymbol (unsigned int si, short ti, short ui, int sym, const char *type, const char *data):TuioComponent(si,0,0,0) {
     currentTime = TuioTime::getSystemTime();
     startTime = currentTime;
     session_id = si;

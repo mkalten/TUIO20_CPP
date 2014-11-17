@@ -20,7 +20,7 @@
 #include "TuioObject.h"
 using namespace TUIO2;
 
-TuioComponent::TuioComponent (TuioTime ttime, int si, float xp, float yp, float a):TuioPoint(ttime, xp,yp)
+TuioComponent::TuioComponent (TuioTime ttime, unsigned int si, float xp, float yp, float a):TuioPoint(ttime, xp,yp)
 ,state(TUIO_ADDED)
 {
 	session_id = si;
@@ -35,7 +35,7 @@ TuioComponent::TuioComponent (TuioTime ttime, int si, float xp, float yp, float 
 	path.push_back(p);
  }
 
-TuioComponent::TuioComponent (int si, float xp, float yp, float a):TuioPoint(xp,yp)
+TuioComponent::TuioComponent (unsigned int si, float xp, float yp, float a):TuioPoint(xp,yp)
 ,state(TUIO_ADDED)
 {
 	session_id = si;
@@ -168,11 +168,11 @@ void TuioComponent::remove(TuioTime ttime) {
 	state = TUIO_REMOVED;
 }
 
-int TuioComponent::getSessionID() const{
+unsigned int TuioComponent::getSessionID() const{
     return session_id;
 }
 
-void TuioComponent::setSessionID(int si) {
+void TuioComponent::setSessionID(unsigned int si) {
 	session_id = si;
 }
 

@@ -110,7 +110,7 @@ namespace TUIO2 {
          *
          * @return  an active TuioObject corresponding to the provided Session ID or NULL
          */
-        TuioObject* getTuioObject(int s_id);
+        TuioObject* getTuioObject(unsigned int s_id);
         
 		/**
 		 * Returns the TuioToken corresponding to the provided Session ID
@@ -118,7 +118,7 @@ namespace TUIO2 {
 		 *
 		 * @return  an active TuioToken corresponding to the provided Session ID or NULL
 		 */
-		TuioToken* getTuioToken(int s_id);
+		TuioToken* getTuioToken(unsigned int s_id);
 
 		/**
 		 * Returns the TuioPointer corresponding to the provided Session ID
@@ -126,7 +126,7 @@ namespace TUIO2 {
 		 *
 		 * @return  an active TuioPointer corresponding to the provided Session ID or NULL
 		 */
-		TuioPointer* getTuioPointer(int s_id);
+		TuioPointer* getTuioPointer(unsigned int s_id);
 
 		/**
 		 * Returns the TuioBounds corresponding to the provided Session ID
@@ -134,7 +134,7 @@ namespace TUIO2 {
 		 *
 		 * @return  an active TuioBounds corresponding to the provided Session ID or NULL
 		 */
-		TuioBounds* getTuioBounds(int s_id);
+		TuioBounds* getTuioBounds(unsigned int s_id);
         
         /**
          * Returns the TuioSymbol corresponding to the provided Session ID
@@ -142,7 +142,7 @@ namespace TUIO2 {
          *
          * @return  an active TuioSymbol corresponding to the provided Session ID or NULL
          */
-        TuioSymbol* getTuioSymbol(int s_id);
+        TuioSymbol* getTuioSymbol(unsigned int s_id);
 		
 		/**
 		 * Locks the TuioToken list in order to avoid updates during access

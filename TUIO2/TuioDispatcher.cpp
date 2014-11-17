@@ -70,7 +70,7 @@ void TuioDispatcher::removeAllTuioListeners() {
 	listenerList.clear();
 }
 
-TuioObject* TuioDispatcher::getTuioObject(int s_id) {
+TuioObject* TuioDispatcher::getTuioObject(unsigned int s_id) {
     lockContainerList();
     for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj!=tobjList.end(); tobj++) {
         if((*tobj)->getSessionID()==s_id) {
@@ -82,28 +82,28 @@ TuioObject* TuioDispatcher::getTuioObject(int s_id) {
     return NULL;
 }
 
-TuioToken* TuioDispatcher::getTuioToken(int s_id) {
+TuioToken* TuioDispatcher::getTuioToken(unsigned int s_id) {
     TuioObject *tobj = getTuioObject(s_id);
     if (tobj==NULL) return NULL;
     
     return tobj->getTuioToken();
 }
 
-TuioPointer* TuioDispatcher::getTuioPointer(int s_id) {
+TuioPointer* TuioDispatcher::getTuioPointer(unsigned int s_id) {
     TuioObject *tobj = getTuioObject(s_id);
     if (tobj==NULL) return NULL;
     
     return tobj->getTuioPointer();
 }
 
-TuioBounds* TuioDispatcher::getTuioBounds(int s_id) {
+TuioBounds* TuioDispatcher::getTuioBounds(unsigned int s_id) {
     TuioObject *tobj = getTuioObject(s_id);
     if (tobj==NULL) return NULL;
     
     return tobj->getTuioBounds();
 }
 
-TuioSymbol* TuioDispatcher::getTuioSymbol(int s_id) {
+TuioSymbol* TuioDispatcher::getTuioSymbol(unsigned int s_id) {
     TuioObject *tobj = getTuioObject(s_id);
     if (tobj==NULL) return NULL;
     

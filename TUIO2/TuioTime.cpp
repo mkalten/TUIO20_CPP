@@ -114,11 +114,11 @@ long TuioTime::getTotalMilliseconds() const{
 	return seconds*MSEC_SECOND+micro_seconds/MSEC_SECOND;
 }
 
-int TuioTime::getFrameID() const{
+unsigned int TuioTime::getFrameID() const{
     return frame_id;
 }
 
-void TuioTime::setFrameID(long f_id) {
+void TuioTime::setFrameID(unsigned int f_id) {
     frame_id = f_id;
 }
 
