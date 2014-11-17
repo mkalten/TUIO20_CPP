@@ -70,7 +70,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
         if( strcmp( msg.AddressPattern(), "/tuio2/frm" ) == 0 ) {
 
             unsigned int u_fseq;
-            int32_t fseq,dim;
+            int32 fseq,dim;
             TimeTag timetag;
             const char* src_string;
             args >> fseq >> timetag >> src_string >> dim;
@@ -115,7 +115,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
         } else if( strcmp( msg.AddressPattern(), "/tuio2/tok" ) == 0 ) {
 
             if (lateFrame) return;
-            int32_t s_id, tu_id, c_id;
+            int32 s_id, tu_id, c_id;
             unsigned short t_id, u_id;
             float xpos, ypos, angle, xspeed, yspeed, rspeed, maccel, raccel;
             args >> s_id >> tu_id >> c_id >> xpos >> ypos >> angle >> xspeed >> yspeed >> rspeed >> maccel >> raccel;
@@ -140,7 +140,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
         } else if( strcmp( msg.AddressPattern(), "/tuio2/ptr" ) == 0 ) {
 
             if (lateFrame) return;
-            int32_t s_id, tu_id, c_id;
+            int32 s_id, tu_id, c_id;
             unsigned short t_id, u_id;
             float xpos, ypos, angle, shear,radius, pressure, xspeed, yspeed, rspeed, maccel, raccel;
             args >> s_id >> tu_id >> c_id >> xpos >> ypos >> angle >> shear >> radius >> pressure >> xspeed >> yspeed >> rspeed >> maccel >> raccel;
@@ -164,7 +164,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
         } else if( strcmp( msg.AddressPattern(), "/tuio2/bnd" ) == 0 ) {
 
             if (lateFrame) return;
-            int32_t s_id;
+            int32 s_id;
             float xpos, ypos, angle, width, height, area;
             float xspeed, yspeed, rspeed, maccel, raccel;
             args >> s_id >> xpos >> ypos >> angle >> width >> height >> area >> xspeed >> yspeed >> rspeed >> maccel >> raccel;
@@ -185,7 +185,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
         } else if( strcmp( msg.AddressPattern(), "/tuio2/sym" ) == 0 ) {
 
             if (lateFrame) return;
-            int32_t s_id, tu_id, c_id;
+            int32 s_id, tu_id, c_id;
             unsigned short t_id, u_id;
             const char* type;
             const char* data;
@@ -208,7 +208,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
         } else if( strcmp( msg.AddressPattern(), "/tuio2/alv" ) == 0 ) {
  
             if (lateFrame) return;
-            int32_t s_id;
+            int32 s_id;
             aliveContainerList.clear();
             while(!args.Eos()) {
                 args >> s_id;
@@ -218,7 +218,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             lockContainerList();
             //find the removed tobjs first
             for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj!=tobjList.end(); tobj++) {
-                std::list<int>::iterator iter = find(aliveContainerList.begin(), aliveContainerList.end(), (*tobj)->getSessionID());
+                std::list<unsigned int>::iterator iter = find(aliveContainerList.begin(), aliveContainerList.end(), (*tobj)->getSessionID());
                 if (iter == aliveContainerList.end()) {
                     (*tobj)->remove(frameTime);
                     addFrameContainer(*tobj);

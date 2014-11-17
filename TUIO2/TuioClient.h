@@ -211,7 +211,7 @@ namespace TUIO2 {
 		
         void addFrameContainer(TuioObject *con);
         TuioObject* getFrameContainer(int src_id,unsigned int s_id);
-        std::list<int> aliveContainerList;
+        std::list<unsigned int> aliveContainerList;
 		std::list<TuioObject*> frameContainer;
 		
 		osc::int32 currentFrame;
