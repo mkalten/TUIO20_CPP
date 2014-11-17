@@ -206,7 +206,7 @@ void TuioServer::startTuioBundle(unsigned int fseq) {
     
     oscPacket->Clear();
     (*oscPacket) << osc::BeginBundleImmediate;
-    if (source) (*oscPacket) << osc::BeginMessage( "/tuio2/frm") << (int32_t)currentFrame << frameTimeTag << source->getSourceName() << source->getDimension();
+    if (source) (*oscPacket) << osc::BeginMessage( "/tuio2/frm") << (int32)currentFrame << frameTimeTag << source->getSourceName() << source->getDimension();
     (*oscPacket) << osc::EndMessage;
 }
 
@@ -259,7 +259,7 @@ void TuioServer::addPointerMessage(TuioPointer *tptr) {
     }
     
     (*oscPacket) << osc::BeginMessage( "/tuio2/ptr");
-    (*oscPacket) << (int32_t)tptr->getSessionID() << tptr->getTypeUserID() << tptr->getPointerID();
+    (*oscPacket) << (int32)tptr->getSessionID() << tptr->getTypeUserID() << tptr->getPointerID();
     (*oscPacket) << xpos << ypos << tptr->getAngle() << tptr->getShear() << tptr->getRadius() << tptr->getPressure();
     (*oscPacket) << xvel << yvel << tptr->getPressureSpeed() << tptr->getMotionAccel() << tptr->getPressureAccel();
     (*oscPacket) << osc::EndMessage;
@@ -290,7 +290,7 @@ void TuioServer::addBoundsMessage(TuioBounds *tbnd) {
 	}
 	
 	(*oscPacket) << osc::BeginMessage( "/tuio2/bnd");
-	(*oscPacket) << (int32_t)tbnd->getSessionID() << xpos << ypos << angle << tbnd->getWidth() << tbnd->getHeight() << tbnd->getArea();
+	(*oscPacket) << (int32)tbnd->getSessionID() << xpos << ypos << angle << tbnd->getWidth() << tbnd->getHeight() << tbnd->getArea();
 	(*oscPacket) << xvel << yvel  << rvel << tbnd->getMotionAccel()  << tbnd->getRotationAccel();	
 	(*oscPacket) << osc::EndMessage;
 }
@@ -301,7 +301,7 @@ void TuioServer::addSymbolMessage(TuioSymbol *tsym) {
     checkBundleCapacity(SYM_MESSAGE_SIZE);
     
     (*oscPacket) << osc::BeginMessage( "/tuio2/sym");
-    (*oscPacket) << (int32_t)tsym->getSessionID() << tsym->getTypeUserID() << tsym->getSymbolID();
+    (*oscPacket) << (int32)tsym->getSessionID() << tsym->getTypeUserID() << tsym->getSymbolID();
     (*oscPacket) << tsym->getSymbolType() << tsym->getSymbolData();
     (*oscPacket) << osc::EndMessage;
 }
@@ -312,7 +312,7 @@ void TuioServer::sendTuioBundle() {
     (*oscPacket) << osc::BeginMessage( "/tuio2/alv");
     
     for(std::list<TuioObject*>::iterator tobj = tobjList.begin();tobj!= tobjList.end(); tobj++)
-        (*oscPacket) << (int32_t)(*tobj)->getSessionID();
+        (*oscPacket) << (int32)(*tobj)->getSessionID();
     
     (*oscPacket) << osc::EndMessage;
     //int after = oscPacket->Capacity()-oscPacket->Size();
