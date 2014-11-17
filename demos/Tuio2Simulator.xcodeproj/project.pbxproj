@@ -1,0 +1,517 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		002F39FA09D0881F00EBEB88 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002F39F909D0881F00EBEB88 /* SDL.framework */; };
+		002F3A0009D0884600EBEB88 /* SDL.framework in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = 002F39F909D0881F00EBEB88 /* SDL.framework */; };
+		002F3A2E09D0888800EBEB88 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F3A2C09D0888800EBEB88 /* SDLMain.m */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		B20EE47F0C340E0300026AC5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20EE47E0C340E0300026AC5 /* OpenGL.framework */; };
+		B20EE4830C340E1100026AC5 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20EE4820C340E1100026AC5 /* GLUT.framework */; };
+		B218B50C0FECFE5400BDAC0D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B218B50A0FECFE5400BDAC0D /* InfoPlist.strings */; };
+		B22B018E0F51EC4C00AE753B /* Tuio2Simulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22B018C0F51EC4C00AE753B /* Tuio2Simulator.cpp */; };
+		B2C2B8B2109067FB00262014 /* TUIO.icns in Resources */ = {isa = PBXBuildFile; fileRef = B2C2B8B1109067FB00262014 /* TUIO.icns */; };
+		B2E1CE441A1AB2CC00710202 /* FlashSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE1B1A1AB2CC00710202 /* FlashSender.cpp */; };
+		B2E1CE461A1AB2CC00710202 /* OscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE201A1AB2CC00710202 /* OscSender.cpp */; };
+		B2E1CE481A1AB2CC00710202 /* TcpSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE241A1AB2CC00710202 /* TcpSender.cpp */; };
+		B2E1CE491A1AB2CC00710202 /* TuioBounds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE261A1AB2CC00710202 /* TuioBounds.cpp */; };
+		B2E1CE4B1A1AB2CC00710202 /* TuioComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE2A1A1AB2CC00710202 /* TuioComponent.cpp */; };
+		B2E1CE4C1A1AB2CC00710202 /* TuioDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE2C1A1AB2CC00710202 /* TuioDispatcher.cpp */; };
+		B2E1CE4D1A1AB2CC00710202 /* TuioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE2F1A1AB2CC00710202 /* TuioManager.cpp */; };
+		B2E1CE4E1A1AB2CC00710202 /* TuioObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE311A1AB2CC00710202 /* TuioObject.cpp */; };
+		B2E1CE4F1A1AB2CC00710202 /* TuioPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE331A1AB2CC00710202 /* TuioPoint.cpp */; };
+		B2E1CE501A1AB2CC00710202 /* TuioPointer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE351A1AB2CC00710202 /* TuioPointer.cpp */; };
+		B2E1CE511A1AB2CC00710202 /* TuioServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE371A1AB2CC00710202 /* TuioServer.cpp */; };
+		B2E1CE521A1AB2CC00710202 /* TuioSymbol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE3A1A1AB2CC00710202 /* TuioSymbol.cpp */; };
+		B2E1CE531A1AB2CC00710202 /* TuioTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE3C1A1AB2CC00710202 /* TuioTime.cpp */; };
+		B2E1CE541A1AB2CC00710202 /* TuioToken.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE3E1A1AB2CC00710202 /* TuioToken.cpp */; };
+		B2E1CE561A1AB2CC00710202 /* UdpSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE421A1AB2CC00710202 /* UdpSender.cpp */; };
+		B2E1CEA01A1AB41600710202 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE831A1AB41600710202 /* IpEndpointName.cpp */; };
+		B2E1CEA11A1AB41600710202 /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE881A1AB41600710202 /* NetworkingUtils.cpp */; };
+		B2E1CEA21A1AB41600710202 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE891A1AB41600710202 /* UdpSocket.cpp */; };
+		B2E1CEA61A1AB41600710202 /* OscOutboundPacketStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE941A1AB41600710202 /* OscOutboundPacketStream.cpp */; };
+		B2E1CEA91A1AB41600710202 /* OscTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CE9B1A1AB41600710202 /* OscTypes.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		002F39FD09D0883400EBEB88 /* Copy Frameworks into .app bundle */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				002F3A0009D0884600EBEB88 /* SDL.framework in Copy Frameworks into .app bundle */,
+			);
+			name = "Copy Frameworks into .app bundle";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		002F39F909D0881F00EBEB88 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
+		002F3A2C09D0888800EBEB88 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = SOURCE_ROOT; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		8D1107310486CEB800E47090 /* Tuio2Simulator.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Tuio2Simulator.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* Tuio2Simulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tuio2Simulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20EE47E0C340E0300026AC5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		B20EE4820C340E1100026AC5 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+		B218B50B0FECFE5400BDAC0D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = InfoPlist.strings; sourceTree = "<group>"; };
+		B22B018C0F51EC4C00AE753B /* Tuio2Simulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tuio2Simulator.cpp; sourceTree = SOURCE_ROOT; };
+		B22B018D0F51EC4C00AE753B /* Tuio2Simulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tuio2Simulator.h; sourceTree = SOURCE_ROOT; };
+		B2C2B8B1109067FB00262014 /* TUIO.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TUIO.icns; sourceTree = SOURCE_ROOT; };
+		B2E1CE1B1A1AB2CC00710202 /* FlashSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FlashSender.cpp; path = ../TUIO2/FlashSender.cpp; sourceTree = "<group>"; };
+		B2E1CE1C1A1AB2CC00710202 /* FlashSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlashSender.h; path = ../TUIO2/FlashSender.h; sourceTree = "<group>"; };
+		B2E1CE201A1AB2CC00710202 /* OscSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OscSender.cpp; path = ../TUIO2/OscSender.cpp; sourceTree = "<group>"; };
+		B2E1CE211A1AB2CC00710202 /* OscSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OscSender.h; path = ../TUIO2/OscSender.h; sourceTree = "<group>"; };
+		B2E1CE241A1AB2CC00710202 /* TcpSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TcpSender.cpp; path = ../TUIO2/TcpSender.cpp; sourceTree = "<group>"; };
+		B2E1CE251A1AB2CC00710202 /* TcpSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TcpSender.h; path = ../TUIO2/TcpSender.h; sourceTree = "<group>"; };
+		B2E1CE261A1AB2CC00710202 /* TuioBounds.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioBounds.cpp; path = ../TUIO2/TuioBounds.cpp; sourceTree = "<group>"; };
+		B2E1CE271A1AB2CC00710202 /* TuioBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioBounds.h; path = ../TUIO2/TuioBounds.h; sourceTree = "<group>"; };
+		B2E1CE2A1A1AB2CC00710202 /* TuioComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioComponent.cpp; path = ../TUIO2/TuioComponent.cpp; sourceTree = "<group>"; };
+		B2E1CE2B1A1AB2CC00710202 /* TuioComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioComponent.h; path = ../TUIO2/TuioComponent.h; sourceTree = "<group>"; };
+		B2E1CE2C1A1AB2CC00710202 /* TuioDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioDispatcher.cpp; path = ../TUIO2/TuioDispatcher.cpp; sourceTree = "<group>"; };
+		B2E1CE2D1A1AB2CC00710202 /* TuioDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioDispatcher.h; path = ../TUIO2/TuioDispatcher.h; sourceTree = "<group>"; };
+		B2E1CE2E1A1AB2CC00710202 /* TuioListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioListener.h; path = ../TUIO2/TuioListener.h; sourceTree = "<group>"; };
+		B2E1CE2F1A1AB2CC00710202 /* TuioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioManager.cpp; path = ../TUIO2/TuioManager.cpp; sourceTree = "<group>"; };
+		B2E1CE301A1AB2CC00710202 /* TuioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioManager.h; path = ../TUIO2/TuioManager.h; sourceTree = "<group>"; };
+		B2E1CE311A1AB2CC00710202 /* TuioObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioObject.cpp; path = ../TUIO2/TuioObject.cpp; sourceTree = "<group>"; };
+		B2E1CE321A1AB2CC00710202 /* TuioObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioObject.h; path = ../TUIO2/TuioObject.h; sourceTree = "<group>"; };
+		B2E1CE331A1AB2CC00710202 /* TuioPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioPoint.cpp; path = ../TUIO2/TuioPoint.cpp; sourceTree = "<group>"; };
+		B2E1CE341A1AB2CC00710202 /* TuioPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioPoint.h; path = ../TUIO2/TuioPoint.h; sourceTree = "<group>"; };
+		B2E1CE351A1AB2CC00710202 /* TuioPointer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioPointer.cpp; path = ../TUIO2/TuioPointer.cpp; sourceTree = "<group>"; };
+		B2E1CE361A1AB2CC00710202 /* TuioPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioPointer.h; path = ../TUIO2/TuioPointer.h; sourceTree = "<group>"; };
+		B2E1CE371A1AB2CC00710202 /* TuioServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioServer.cpp; path = ../TUIO2/TuioServer.cpp; sourceTree = "<group>"; };
+		B2E1CE381A1AB2CC00710202 /* TuioServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioServer.h; path = ../TUIO2/TuioServer.h; sourceTree = "<group>"; };
+		B2E1CE391A1AB2CC00710202 /* TuioSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioSource.h; path = ../TUIO2/TuioSource.h; sourceTree = "<group>"; };
+		B2E1CE3A1A1AB2CC00710202 /* TuioSymbol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioSymbol.cpp; path = ../TUIO2/TuioSymbol.cpp; sourceTree = "<group>"; };
+		B2E1CE3B1A1AB2CC00710202 /* TuioSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioSymbol.h; path = ../TUIO2/TuioSymbol.h; sourceTree = "<group>"; };
+		B2E1CE3C1A1AB2CC00710202 /* TuioTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioTime.cpp; path = ../TUIO2/TuioTime.cpp; sourceTree = "<group>"; };
+		B2E1CE3D1A1AB2CC00710202 /* TuioTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioTime.h; path = ../TUIO2/TuioTime.h; sourceTree = "<group>"; };
+		B2E1CE3E1A1AB2CC00710202 /* TuioToken.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioToken.cpp; path = ../TUIO2/TuioToken.cpp; sourceTree = "<group>"; };
+		B2E1CE3F1A1AB2CC00710202 /* TuioToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioToken.h; path = ../TUIO2/TuioToken.h; sourceTree = "<group>"; };
+		B2E1CE421A1AB2CC00710202 /* UdpSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UdpSender.cpp; path = ../TUIO2/UdpSender.cpp; sourceTree = "<group>"; };
+		B2E1CE431A1AB2CC00710202 /* UdpSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UdpSender.h; path = ../TUIO2/UdpSender.h; sourceTree = "<group>"; };
+		B2E1CE831A1AB41600710202 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
+		B2E1CE841A1AB41600710202 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
+		B2E1CE851A1AB41600710202 /* NetworkingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingUtils.h; sourceTree = "<group>"; };
+		B2E1CE861A1AB41600710202 /* PacketListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketListener.h; sourceTree = "<group>"; };
+		B2E1CE881A1AB41600710202 /* NetworkingUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkingUtils.cpp; sourceTree = "<group>"; };
+		B2E1CE891A1AB41600710202 /* UdpSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UdpSocket.cpp; sourceTree = "<group>"; };
+		B2E1CE8A1A1AB41600710202 /* TimerListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerListener.h; sourceTree = "<group>"; };
+		B2E1CE8B1A1AB41600710202 /* UdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UdpSocket.h; sourceTree = "<group>"; };
+		B2E1CE911A1AB41600710202 /* MessageMappingOscPacketListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageMappingOscPacketListener.h; sourceTree = "<group>"; };
+		B2E1CE921A1AB41600710202 /* OscException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscException.h; sourceTree = "<group>"; };
+		B2E1CE931A1AB41600710202 /* OscHostEndianness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscHostEndianness.h; sourceTree = "<group>"; };
+		B2E1CE941A1AB41600710202 /* OscOutboundPacketStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OscOutboundPacketStream.cpp; sourceTree = "<group>"; };
+		B2E1CE951A1AB41600710202 /* OscOutboundPacketStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscOutboundPacketStream.h; sourceTree = "<group>"; };
+		B2E1CE961A1AB41600710202 /* OscPacketListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscPacketListener.h; sourceTree = "<group>"; };
+		B2E1CE9B1A1AB41600710202 /* OscTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OscTypes.cpp; sourceTree = "<group>"; };
+		B2E1CE9C1A1AB41600710202 /* OscTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscTypes.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				002F39FA09D0881F00EBEB88 /* SDL.framework in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				B20EE47F0C340E0300026AC5 /* OpenGL.framework in Frameworks */,
+				B20EE4830C340E1100026AC5 /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B22B018C0F51EC4C00AE753B /* Tuio2Simulator.cpp */,
+				B22B018D0F51EC4C00AE753B /* Tuio2Simulator.h */,
+				002F3A2C09D0888800EBEB88 /* SDLMain.m */,
+				B277CA320F51BCB800D84853 /* TUIO2 */,
+				B2E1CE801A1AB41600710202 /* oscpack */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B20EE4820C340E1100026AC5 /* GLUT.framework */,
+				B20EE47E0C340E0300026AC5 /* OpenGL.framework */,
+				002F39F909D0881F00EBEB88 /* SDL.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* Tuio2Simulator.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* TUIO_CPP */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = TUIO_CPP;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B2C2B8B1109067FB00262014 /* TUIO.icns */,
+				B218B5090FECFE5400BDAC0D /* English.lproj */,
+				8D1107310486CEB800E47090 /* Tuio2Simulator.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B218B5090FECFE5400BDAC0D /* English.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				B218B50A0FECFE5400BDAC0D /* InfoPlist.strings */,
+			);
+			path = English.lproj;
+			sourceTree = SOURCE_ROOT;
+		};
+		B277CA320F51BCB800D84853 /* TUIO2 */ = {
+			isa = PBXGroup;
+			children = (
+				B2E1CE371A1AB2CC00710202 /* TuioServer.cpp */,
+				B2E1CE381A1AB2CC00710202 /* TuioServer.h */,
+				B2E1CE2F1A1AB2CC00710202 /* TuioManager.cpp */,
+				B2E1CE301A1AB2CC00710202 /* TuioManager.h */,
+				B2E1CE2C1A1AB2CC00710202 /* TuioDispatcher.cpp */,
+				B2E1CE2D1A1AB2CC00710202 /* TuioDispatcher.h */,
+				B2E1CE2E1A1AB2CC00710202 /* TuioListener.h */,
+				B2E1CE201A1AB2CC00710202 /* OscSender.cpp */,
+				B2E1CE211A1AB2CC00710202 /* OscSender.h */,
+				B2E1CE421A1AB2CC00710202 /* UdpSender.cpp */,
+				B2E1CE431A1AB2CC00710202 /* UdpSender.h */,
+				B2E1CE241A1AB2CC00710202 /* TcpSender.cpp */,
+				B2E1CE251A1AB2CC00710202 /* TcpSender.h */,
+				B2E1CE1B1A1AB2CC00710202 /* FlashSender.cpp */,
+				B2E1CE1C1A1AB2CC00710202 /* FlashSender.h */,
+				B2E1CE311A1AB2CC00710202 /* TuioObject.cpp */,
+				B2E1CE321A1AB2CC00710202 /* TuioObject.h */,
+				B2E1CE331A1AB2CC00710202 /* TuioPoint.cpp */,
+				B2E1CE341A1AB2CC00710202 /* TuioPoint.h */,
+				B2E1CE2A1A1AB2CC00710202 /* TuioComponent.cpp */,
+				B2E1CE2B1A1AB2CC00710202 /* TuioComponent.h */,
+				B2E1CE3E1A1AB2CC00710202 /* TuioToken.cpp */,
+				B2E1CE3F1A1AB2CC00710202 /* TuioToken.h */,
+				B2E1CE351A1AB2CC00710202 /* TuioPointer.cpp */,
+				B2E1CE361A1AB2CC00710202 /* TuioPointer.h */,
+				B2E1CE261A1AB2CC00710202 /* TuioBounds.cpp */,
+				B2E1CE271A1AB2CC00710202 /* TuioBounds.h */,
+				B2E1CE3A1A1AB2CC00710202 /* TuioSymbol.cpp */,
+				B2E1CE3B1A1AB2CC00710202 /* TuioSymbol.h */,
+				B2E1CE3C1A1AB2CC00710202 /* TuioTime.cpp */,
+				B2E1CE3D1A1AB2CC00710202 /* TuioTime.h */,
+				B2E1CE391A1AB2CC00710202 /* TuioSource.h */,
+			);
+			name = TUIO2;
+			sourceTree = "<group>";
+		};
+		B2E1CE801A1AB41600710202 /* oscpack */ = {
+			isa = PBXGroup;
+			children = (
+				B2E1CE821A1AB41600710202 /* ip */,
+				B2E1CE901A1AB41600710202 /* osc */,
+			);
+			name = oscpack;
+			path = ../oscpack;
+			sourceTree = "<group>";
+		};
+		B2E1CE821A1AB41600710202 /* ip */ = {
+			isa = PBXGroup;
+			children = (
+				B2E1CE831A1AB41600710202 /* IpEndpointName.cpp */,
+				B2E1CE841A1AB41600710202 /* IpEndpointName.h */,
+				B2E1CE851A1AB41600710202 /* NetworkingUtils.h */,
+				B2E1CE861A1AB41600710202 /* PacketListener.h */,
+				B2E1CE871A1AB41600710202 /* posix */,
+				B2E1CE8A1A1AB41600710202 /* TimerListener.h */,
+				B2E1CE8B1A1AB41600710202 /* UdpSocket.h */,
+			);
+			path = ip;
+			sourceTree = "<group>";
+		};
+		B2E1CE871A1AB41600710202 /* posix */ = {
+			isa = PBXGroup;
+			children = (
+				B2E1CE881A1AB41600710202 /* NetworkingUtils.cpp */,
+				B2E1CE891A1AB41600710202 /* UdpSocket.cpp */,
+			);
+			path = posix;
+			sourceTree = "<group>";
+		};
+		B2E1CE901A1AB41600710202 /* osc */ = {
+			isa = PBXGroup;
+			children = (
+				B2E1CE911A1AB41600710202 /* MessageMappingOscPacketListener.h */,
+				B2E1CE921A1AB41600710202 /* OscException.h */,
+				B2E1CE931A1AB41600710202 /* OscHostEndianness.h */,
+				B2E1CE941A1AB41600710202 /* OscOutboundPacketStream.cpp */,
+				B2E1CE951A1AB41600710202 /* OscOutboundPacketStream.h */,
+				B2E1CE961A1AB41600710202 /* OscPacketListener.h */,
+				B2E1CE9B1A1AB41600710202 /* OscTypes.cpp */,
+				B2E1CE9C1A1AB41600710202 /* OscTypes.h */,
+			);
+			path = osc;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* Tuio2Simulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Tuio2Simulator" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+				002F39FD09D0883400EBEB88 /* Copy Frameworks into .app bundle */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tuio2Simulator;
+			productInstallPath = "$(HOME)/Applications";
+			productName = TUIO_CPP;
+			productReference = 8D1107320486CEB800E47090 /* Tuio2Simulator.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Tuio2Simulator" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* TUIO_CPP */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* Tuio2Simulator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B218B50C0FECFE5400BDAC0D /* InfoPlist.strings in Resources */,
+				B2C2B8B2109067FB00262014 /* TUIO.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2E1CE4B1A1AB2CC00710202 /* TuioComponent.cpp in Sources */,
+				B2E1CEA91A1AB41600710202 /* OscTypes.cpp in Sources */,
+				B2E1CE4F1A1AB2CC00710202 /* TuioPoint.cpp in Sources */,
+				B2E1CEA11A1AB41600710202 /* NetworkingUtils.cpp in Sources */,
+				002F3A2E09D0888800EBEB88 /* SDLMain.m in Sources */,
+				B2E1CEA61A1AB41600710202 /* OscOutboundPacketStream.cpp in Sources */,
+				B22B018E0F51EC4C00AE753B /* Tuio2Simulator.cpp in Sources */,
+				B2E1CE491A1AB2CC00710202 /* TuioBounds.cpp in Sources */,
+				B2E1CE511A1AB2CC00710202 /* TuioServer.cpp in Sources */,
+				B2E1CE4C1A1AB2CC00710202 /* TuioDispatcher.cpp in Sources */,
+				B2E1CEA21A1AB41600710202 /* UdpSocket.cpp in Sources */,
+				B2E1CE531A1AB2CC00710202 /* TuioTime.cpp in Sources */,
+				B2E1CE481A1AB2CC00710202 /* TcpSender.cpp in Sources */,
+				B2E1CE4D1A1AB2CC00710202 /* TuioManager.cpp in Sources */,
+				B2E1CE541A1AB2CC00710202 /* TuioToken.cpp in Sources */,
+				B2E1CE521A1AB2CC00710202 /* TuioSymbol.cpp in Sources */,
+				B2E1CE461A1AB2CC00710202 /* OscSender.cpp in Sources */,
+				B2E1CE441A1AB2CC00710202 /* FlashSender.cpp in Sources */,
+				B2E1CE501A1AB2CC00710202 /* TuioPointer.cpp in Sources */,
+				B2E1CE561A1AB2CC00710202 /* UdpSender.cpp in Sources */,
+				B2E1CEA01A1AB41600710202 /* IpEndpointName.cpp in Sources */,
+				B2E1CE4E1A1AB2CC00710202 /* TuioObject.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B218B50A0FECFE5400BDAC0D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B218B50B0FECFE5400BDAC0D /* English */,
+			);
+			name = InfoPlist.strings;
+			path = English.lproj;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = ../oscpack;
+				INFOPLIST_FILE = Tuio2Simulator.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = Tuio2Simulator;
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = "";
+				HEADER_SEARCH_PATHS = ../oscpack;
+				INFOPLIST_FILE = Tuio2Simulator.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = Tuio2Simulator;
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks",
+					/Library/Frameworks,
+					"$(FRAMEWORK_SEARCH_PATHS)",
+				);
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_PEDANTIC = NO;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Tuio2Simulator.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				PRODUCT_NAME = Tuio2Simulator;
+				SDKROOT = macosx10.10;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks",
+					/Library/Frameworks,
+					"$(FRAMEWORK_SEARCH_PATHS)",
+				);
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Tuio2Simulator.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
+				PRODUCT_NAME = Tuio2Simulator;
+				SDKROOT = macosx10.10;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Tuio2Simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Tuio2Simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

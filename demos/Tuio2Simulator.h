@@ -1,6 +1,6 @@
 /*
- TUIO2 C++ GUI Demo
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ TUIO C++ Server Demo
+ Copyright (c) 2005-2014 Martin Kaltenbrunner <martin@tuio.org>
  
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -17,18 +17,20 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef INCLUDED_TUIO2DEMO_H
-#define INCLUDED_TUIO2DEMO_H
+#ifndef INCLUDED_TUIO2SIMULATOR_H
+#define INCLUDED_TUIO2SIMULATOR_H
 
-#include "TuioListener.h"
-#include "TuioClient.h"
-#include "UdpReceiver.h"
-#include "TcpReceiver.h"
+#include "TuioServer.h"
+#include "TuioPointer.h"
+#include "osc/OscTypes.h"
 #include <list>
 #include <math.h>
 
-#include <SDL.h>
-#include <SDL_thread.h>
+#include "FlashSender.h"
+#include "TcpSender.h"
+
+#include <SDL/SDL.h>
+#include <SDL/SDL_thread.h>
 
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
@@ -42,37 +44,36 @@
 
 using namespace TUIO2;
 
-class Tuio2Demo : public TuioListener { 
+class Tuio2Simulator { 
 	
 public:
-	Tuio2Demo(int port);
-	~Tuio2Demo() {
-		tuioClient->disconnect();
-		delete tuioClient;
-		delete osc_receiver;
-	}
-	
-	void tuioAdd(TuioObject *tobj);
-	void tuioUpdate(TuioObject *tobj);
-	void tuioRemove(TuioObject *tobj);
-	void tuioRefresh(TuioTime frameTime);
+	Tuio2Simulator(TuioServer *server);
+	~Tuio2Simulator() {};
 	
 	void run();
+	TuioServer *tuioServer;
+	std::list<TuioPointer*> stickyPointerList;
+	std::list<TuioPointer*> jointPointerList;
+	std::list<TuioPointer*> activePointerList;
 	
 private:
-	void drawObjects();
-	void drawString(char *str);
+	void drawFrame();
+	void drawString(const char *str);
 	void processEvents();
 	void initWindow();
+
 	SDL_Surface *window;
-	bool verbose, fullscreen, running;
+	bool verbose, fullupdate, periodic, fullscreen, running, help;
 	
 	int width, height;
 	int screen_width, screen_height;
 	int window_width, window_height;
-
-	TuioClient *tuioClient;
-	OscReceiver *osc_receiver;
+	TuioTime frameTime;
+	
+	void mousePressed(float x, float y);
+	void mouseReleased(float x, float y);
+	void mouseDragged(float x, float y);
+	//int s_id;
 };
 
-#endif /* INCLUDED_Tuio2Demo_H */
+#endif /* INCLUDED_TUIO2SIMULATOR_H */

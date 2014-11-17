@@ -5,6 +5,8 @@
 
 *.perspectivev3
 
+*.user
+
 project.xcworkspace
 
 *.xcuserdatad

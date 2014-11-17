@@ -3,7 +3,7 @@
        Non-NIB-Code & other changes: Max Horn <max@quendi.de>
 */
 
-#import <SDL.h>
+#import <SDL/SDL.h>
 #import <Cocoa/Cocoa.h>
 #import <sys/param.h>
 #import <unistd.h>
