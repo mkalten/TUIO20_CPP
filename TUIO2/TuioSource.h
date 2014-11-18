@@ -113,12 +113,18 @@ namespace TUIO2 {
         
         void setSourceString(const char *src_string) {
             
-            /*source->setSourceName(strtok((char*)src, "@"));
-             char *addr = strtok(NULL, "@");
-             
-             if (addr!=NULL) source_addr = addr;
-             else source_addr = (char*)"localhost";
-             */
+            char *name_inst = strtok((char*)src_string, "@");
+
+            char *addr = strtok(NULL, "@");
+            if (addr!=NULL) source_addr = std::string(addr);
+            else source_addr = (char*)"0x7F000001";
+            
+            char *name = strtok((char*)name_inst, ":");
+            source_name = std::string(name);
+            
+            char *inst = strtok(NULL, ":");
+            if (inst!=NULL) source_instance = atoi(inst);
+            else source_instance = 0;
         }
         
         void setSourceString(unsigned int src_id, const char *src_string) {
