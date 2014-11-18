@@ -18,6 +18,7 @@
 
 #ifndef INCLUDED_TUIOSOURCE_H
 #define INCLUDED_TUIOSOURCE_H
+#include <sstream>
 
 namespace TUIO2 {
     
@@ -46,7 +47,7 @@ namespace TUIO2 {
         /**
          * The address of the TUIO source
          */
-        std::string source_addr;
+        std::string source_address;
         /**
          * The encoded sensor dimension
          */
@@ -63,7 +64,7 @@ namespace TUIO2 {
             source_id = 0;
             source_name = "";
             source_instance = 0;
-            source_addr = "localhost";
+            source_address = "localhost";
             dimension = 0;
         };
         
@@ -76,7 +77,7 @@ namespace TUIO2 {
             source_id = 0;
             source_name = std::string(src_name);
             source_instance = 0;
-            source_addr = "localhost";
+            source_address = "localhost";
             dimension = 0;
         };
         
@@ -91,7 +92,7 @@ namespace TUIO2 {
             source_id = 0;
             source_name = std::string(src_name);
             source_instance = src_inst;
-            source_addr = std::string(src_addr);
+            source_address = std::string(src_addr);
         };
         
         /**
@@ -106,7 +107,7 @@ namespace TUIO2 {
             source_id = src_id;
             source_name = std::string(src_name);
             source_instance = src_inst;
-            source_addr = std::string(src_addr);
+            source_address = std::string(src_addr);
         };
         
         ~TuioSource() {};
@@ -116,8 +117,8 @@ namespace TUIO2 {
             char *name_inst = strtok((char*)src_string, "@");
 
             char *addr = strtok(NULL, "@");
-            if (addr!=NULL) source_addr = std::string(addr);
-            else source_addr = (char*)"0x7F000001";
+            if (addr!=NULL) source_address = std::string(addr);
+            else source_address = (char*)"0x7F000001";
             
             char *name = strtok((char*)name_inst, ":");
             source_name = std::string(name);
@@ -135,7 +136,9 @@ namespace TUIO2 {
         
         const char* getSourceString() {
             
-            return "";
+            std::stringstream src_stream;
+            src_stream << source_name << ":" << source_instance << "@" << source_address;
+            return src_stream.str().c_str();
         }
         
         /**
@@ -156,7 +159,7 @@ namespace TUIO2 {
         /**
          * Returns the address of the TUIO source
          */
-        const char* getSourceAddress() { return source_addr.c_str(); }
+        const char* getSourceAddress() { return source_address.c_str(); }
         
         /**
          * Encodes the sensor dimension
