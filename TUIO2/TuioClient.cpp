@@ -70,10 +70,10 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
         if( strcmp( msg.AddressPattern(), "/tuio2/frm" ) == 0 ) {
 
             unsigned int fseq;
-            int32 fseq_raw,dim;
+            int32 fseq_raw,dim_raw;
             TimeTag timetag;
             const char* src_string;
-            args >> fseq_raw >> timetag >> src_string >> dim;
+            args >> fseq_raw >> timetag >> src_string >> dim_raw;
             fseq = (unsigned int)fseq_raw;
             
             frameTime = TuioTime(timetag);
@@ -108,7 +108,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             frameSource.setSourceString(source_id,src_string);
 
             // frame dimension
-            frameSource.setDimension(dim);
+            frameSource.setDimension((unsigned int)dim_raw);
             
 
             

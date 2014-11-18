@@ -34,7 +34,7 @@ namespace TUIO2 {
         /**
          * The ID of the TUIO source
          */
-        int source_id;
+        unsigned int source_id;
         /**
          * The name of the TUIO source
          */
@@ -42,7 +42,7 @@ namespace TUIO2 {
         /**
          * The instance of the TUIO source
          */
-        int source_instance;
+        unsigned int source_instance;
         /**
          * The address of the TUIO source
          */
@@ -50,7 +50,7 @@ namespace TUIO2 {
         /**
          * The encoded sensor dimension
          */
-        int dimension;
+        unsigned int dimension;
         
     public:
         
@@ -87,7 +87,7 @@ namespace TUIO2 {
          * @param	src_inst	the instance of the TUIO source
          * @param	src_addr	the address of the TUIO source
          */
-        TuioSource(const char *src_name, int src_inst, const char *src_addr) {
+        TuioSource(const char *src_name, unsigned int src_inst, const char *src_addr) {
             source_id = 0;
             source_name = std::string(src_name);
             source_instance = src_inst;
@@ -102,7 +102,7 @@ namespace TUIO2 {
          * @param	src_inst	the instance of the TUIO source
          * @param	src_addr	the address of the TUIO source
          */
-        TuioSource(int src_id, const char *src_name, int src_inst, const char *src_addr) {
+        TuioSource(unsigned int src_id, const char *src_name, unsigned int src_inst, const char *src_addr) {
             source_id = src_id;
             source_name = std::string(src_name);
             source_instance = src_inst;
@@ -121,7 +121,7 @@ namespace TUIO2 {
              */
         }
         
-        void setSourceString(int src_id, const char *src_string) {
+        void setSourceString(unsigned int src_id, const char *src_string) {
             
             source_id = src_id;
             setSourceString(src_string);
@@ -135,7 +135,7 @@ namespace TUIO2 {
         /**
          * Returns the ID of the TUIO source
          */
-        int getSourceID() { return source_id; }
+        unsigned int getSourceID() { return source_id; }
         
         /**
          * Returns the name of the TUIO source
@@ -145,7 +145,7 @@ namespace TUIO2 {
         /**
          * Returns the instance of the TUIO source
          */
-        int getSourceInstance() { return source_instance; }
+        unsigned int getSourceInstance() { return source_instance; }
         
         /**
          * Returns the address of the TUIO source
@@ -157,7 +157,7 @@ namespace TUIO2 {
          * @param   w   the sensor width
          * @param   h   the sensor height
          */
-        void setDimension(short w, short h) {
+        void setDimension(unsigned short w, unsigned short h) {
             dimension = w << 16 | h;
         }
       
@@ -165,7 +165,7 @@ namespace TUIO2 {
          * Sets the encoded sensor dimension
          * @param   d   the sensor dimension
          */
-        void setDimension(int d) {
+        void setDimension(unsigned int d) {
             dimension = d;
         }
         
@@ -173,7 +173,7 @@ namespace TUIO2 {
          * Returns the encoded sensor dimension
          * @return	the encoded sensor dimension
          */
-        int getDimension() {
+        unsigned int getDimension() {
             return dimension;
         }
         
@@ -181,8 +181,8 @@ namespace TUIO2 {
          * Returns the decoded sensor width
          * @return	the decoded sensor width
          */
-        short getWidth() {
-            short width = dimension >> 16;
+        unsigned short getWidth() {
+            unsigned short width = dimension >> 16;
             return width;
         }
         
@@ -190,8 +190,8 @@ namespace TUIO2 {
          * Returns the decoded sensor height
          * @return	the decoded sensor height
          */
-        short getHeight() {
-            short height = dimension & 0x0000FFFF;
+        unsigned short getHeight() {
+            unsigned short height = dimension & 0x0000FFFF;
             return height;
         }
     };

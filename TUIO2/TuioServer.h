@@ -103,7 +103,7 @@ namespace TUIO2 {
 		/**
 		 * Generates and sends TUIO messages of all currently active TUIO Components
 		 */
-		void sendFullMessages();
+		void sendFullTuioBundle();
 		
 		/**
 		 * Enables the full update of all currently active and inactive TUIO Components
@@ -173,7 +173,7 @@ namespace TUIO2 {
 		 * @param	name	the source name to assign
 		 */		
 		void setSourceName(const char* name);
-        void setDimension(short w, short h);
+        void setDimension(unsigned short w, unsigned short h);
 		
 		void addOscSender(OscSender *sender);
 				
@@ -205,9 +205,6 @@ namespace TUIO2 {
 		bool full_update, periodic_update;
 		TuioTime updateTime;
 		TuioSource *source;
-        
-        //osc::TimeTag frameTime;
-        //int frameID;
 	};
 }
 #endif /* INCLUDED_TUIOSERVER_H */

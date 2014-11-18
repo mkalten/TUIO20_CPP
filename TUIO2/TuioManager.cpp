@@ -672,7 +672,7 @@ void TuioManager::initTuioFrame(TuioTime ttime) {
     frameTimeTag = TuioTime::getSystemTimeTag();
 	currentFrameTime = TuioTime(ttime);
 	currentFrame++;
-    if (currentFrame==UINT_MAX) currentFrame = 0;
+    if (currentFrame==UINT_MAX) currentFrame = 1;
 }
 
 void TuioManager::commitTuioFrame() {
