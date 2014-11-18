@@ -35,15 +35,15 @@ namespace TUIO2 {
 		/**
 		 * The individual symbol ID number that is assigned to each TuioToken.
 		 */ 
-		int symbol_id;
+		unsigned int symbol_id;
         /**
         * The symbol type ID that is assigned to each TuioToken.
         */
-        short type_id;
+        unsigned short type_id;
         /**
          * The user ID that is assigned to each TuioToken.
          */
-        short user_id;
+        unsigned short user_id;
 		
 	public:
 		using TuioComponent::update;
@@ -61,7 +61,7 @@ namespace TUIO2 {
 		 * @param	yp	the Y coordinate to assign
 		 * @param	a	the angle to assign
 		 */
-		TuioToken (TuioTime ttime, unsigned int si, short ti, short ui, int sym, float xp, float yp, float a);
+		TuioToken (TuioTime ttime, unsigned int si, unsigned short ti, unsigned short ui, unsigned int sym, float xp, float yp, float a);
 
 		/**
 		 * This constructor takes the provided Session ID, Symbol ID, X and Y coordinate
@@ -75,7 +75,7 @@ namespace TUIO2 {
 		 * @param	yp	the Y coordinate to assign
 		 * @param	a	the angle to assign
 		 */	
-		TuioToken (unsigned int si, short ti, short ui, int sym, float xp, float yp, float a);
+		TuioToken (unsigned int si, unsigned short ti, unsigned short ui, unsigned int sym, float xp, float yp, float a);
         
         /**
          * This constructor takes the provided Session ID, Symbol ID, X and Y coordinate
@@ -87,7 +87,7 @@ namespace TUIO2 {
          * @param	yp	the Y coordinate to assign
          * @param	a	the angle to assign
          */
-        TuioToken (unsigned int si, int sym, float xp, float yp, float a);
+        TuioToken (unsigned int si, unsigned int sym, float xp, float yp, float a);
 		
 		/**
 		 * This constructor takes the atttibutes of the provided TuioToken 
@@ -121,31 +121,31 @@ namespace TUIO2 {
 		 * Returns the symbol ID of this TuioToken.
 		 * @return	the symbol ID of this TuioToken
 		 */
-		int getSymbolID() const;
+		unsigned int getSymbolID() const;
         
         /**
          * Returns the Type ID of this TuioToken.
          * @return	the Type ID of this TuioToken
          */
-        short getTypeID() const;
+        unsigned short getTypeID() const;
         
         /**
          * Returns the User ID of this TuioToken.
          * @return	the User ID of this TuioToken
          */
-        short getUserID() const;
+        unsigned short getUserID() const;
         
         /**
          * Returns the encoded Type & User ID of this TuioToken.
          * @return	the encoded Type & User ID of this TuioToken
          */
-        int getTypeUserID() const;
+        unsigned int getTypeUserID() const;
         
         /**
          * Decodes and assigns the Type & User ID to this TuioToken.
          * @param tu_id   the encoded Type & User ID of this TuioToken
          */
-        void setTypeUserID(int tu_id);
+        void setTypeUserID(unsigned int tu_id);
 	};
 }
 #endif

@@ -20,7 +20,7 @@
 
 using namespace TUIO2;
 
-TuioSymbol::TuioSymbol (TuioTime ttime, unsigned int si, short ti, short ui, int sym, const char *type, const char *data):TuioComponent(ttime,si,0,0,0) {
+TuioSymbol::TuioSymbol (TuioTime ttime, unsigned int si, unsigned short ti, unsigned short ui, unsigned int sym, const char *type, const char *data):TuioComponent(ttime,si,0,0,0) {
     currentTime = ttime;
     startTime = currentTime;
     session_id = si;
@@ -32,7 +32,7 @@ TuioSymbol::TuioSymbol (TuioTime ttime, unsigned int si, short ti, short ui, int
     state = TUIO_ADDED;
 }
 	
-TuioSymbol::TuioSymbol (unsigned int si, short ti, short ui, int sym, const char *type, const char *data):TuioComponent(si,0,0,0) {
+TuioSymbol::TuioSymbol (unsigned int si, unsigned short ti, unsigned short ui, unsigned int sym, const char *type, const char *data):TuioComponent(si,0,0,0) {
     currentTime = TuioTime::getSystemTime();
     startTime = currentTime;
     session_id = si;
@@ -56,24 +56,24 @@ TuioSymbol::TuioSymbol (TuioSymbol *tsym):TuioComponent(tsym->getTuioTime(),tsym
     state = TUIO_ADDED;
 }
 
-int TuioSymbol::getSymbolID() const {
+unsigned int TuioSymbol::getSymbolID() const {
     return symbol_id;
 }
         
-short TuioSymbol::getTypeID() const {
+unsigned short TuioSymbol::getTypeID() const {
     return type_id;
 }
         
-short TuioSymbol::getUserID() const {
+unsigned short TuioSymbol::getUserID() const {
     return user_id;
 }
 
-int TuioSymbol::getTypeUserID() const {
+unsigned int TuioSymbol::getTypeUserID() const {
     int tu_id = user_id << 16 | type_id;
     return tu_id;
 }
 
-void TuioSymbol::setTypeUserID(int tu_id) {
+void TuioSymbol::setTypeUserID(unsigned int tu_id) {
     user_id = tu_id >> 16;
     type_id = tu_id & 0x0000FFFF;
 }

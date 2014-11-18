@@ -52,7 +52,7 @@ namespace TUIO2 {
 		 *
 		 * @param  port  the number of the TCP port to listen to, defaults to 3333
 		 */
-		TcpReceiver (int port=3333);
+		TcpReceiver (unsigned short port=3333);
 
 		/**
 		 * This constructor creates a TcpReceiver connected to the provided host and TCP port 
@@ -60,7 +60,7 @@ namespace TUIO2 {
 		 * @param  host  the host name to connect
 		 * @param  port  the number of the TCP port to listen to, defaults to 3333
 		 */
-		TcpReceiver (const char *host, int port);
+		TcpReceiver (const char *host, unsigned short port);
 		
 		/**
 		 * The destructor is doing nothing in particular. 

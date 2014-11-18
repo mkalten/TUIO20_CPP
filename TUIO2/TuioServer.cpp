@@ -235,7 +235,7 @@ void TuioServer::addTokenMessage(TuioToken *ttok) {
 	}
 	
 	(*oscPacket) << osc::BeginMessage( "/tuio2/tok");
-	(*oscPacket) << (int32)ttok->getSessionID() << ttok->getTypeUserID() << ttok->getSymbolID() << xpos << ypos << angle;
+	(*oscPacket) << (int32)ttok->getSessionID() << (int32)ttok->getTypeUserID() << (int32)ttok->getSymbolID() << xpos << ypos << angle;
 	(*oscPacket) << xvel << yvel << rvel << ttok->getMotionAccel() << ttok->getRotationAccel();	
 	(*oscPacket) << osc::EndMessage;
 }
@@ -259,7 +259,7 @@ void TuioServer::addPointerMessage(TuioPointer *tptr) {
     }
     
     (*oscPacket) << osc::BeginMessage( "/tuio2/ptr");
-    (*oscPacket) << (int32)tptr->getSessionID() << tptr->getTypeUserID() << tptr->getPointerID();
+    (*oscPacket) << (int32)tptr->getSessionID() << (int32)tptr->getTypeUserID() << (int32)tptr->getPointerID();
     (*oscPacket) << xpos << ypos << tptr->getAngle() << tptr->getShear() << tptr->getRadius() << tptr->getPressure();
     (*oscPacket) << xvel << yvel << tptr->getPressureSpeed() << tptr->getMotionAccel() << tptr->getPressureAccel();
     (*oscPacket) << osc::EndMessage;
@@ -301,7 +301,7 @@ void TuioServer::addSymbolMessage(TuioSymbol *tsym) {
     checkBundleCapacity(SYM_MESSAGE_SIZE);
     
     (*oscPacket) << osc::BeginMessage( "/tuio2/sym");
-    (*oscPacket) << (int32)tsym->getSessionID() << tsym->getTypeUserID() << tsym->getSymbolID();
+    (*oscPacket) << (int32)tsym->getSessionID() << (int32)tsym->getTypeUserID() << (int32)tsym->getSymbolID();
     (*oscPacket) << tsym->getSymbolType() << tsym->getSymbolData();
     (*oscPacket) << osc::EndMessage;
 }

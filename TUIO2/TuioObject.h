@@ -41,7 +41,7 @@ namespace TUIO2 {
 		/**
 		 * The shared session ID
 		 */
-		int session_id;
+		unsigned int session_id;
         
         /**
          * The associated TuioSource
@@ -76,7 +76,7 @@ namespace TUIO2 {
         /**
          * Reflects the current state of the TuioObject
          */
-        int state;
+        unsigned char state;
 		
 	public:
 		/**
@@ -126,7 +126,7 @@ namespace TUIO2 {
         /**
          * Returns the ID of the associated TUIO source
          */
-        int getTuioSourceID();
+        unsigned int getTuioSourceID();
         
 		/**
 		 * This method assigns a TuioToken to this TuioObject
@@ -343,7 +343,7 @@ namespace TUIO2 {
          * Returns the TUIO state of this TuioObject.
          * @return	the TUIO state of this TuioObject
          */
-        int getTuioState() const;
+        unsigned char getTuioState() const;
 	};
 }
 #endif // INCLUDED_TUIOOBJECT_H

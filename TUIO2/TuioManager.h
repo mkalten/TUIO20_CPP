@@ -127,7 +127,7 @@ namespace TUIO2 {
          * @param	a	the angle to assign
          * @return	reference to the created TuioToken
          */
-        TuioObject* createTuioToken(int sym, float xp, float yp, float a);
+        TuioObject* createTuioToken(unsigned int sym, float xp, float yp, float a);
         
         /**
          * Creates a new TuioToken based on the given arguments.
@@ -143,7 +143,7 @@ namespace TUIO2 {
          * @param	a	the angle to assign
          * @return	a reference to the TuioObject of the TuioToken
          */
-        TuioObject* createTuioToken(int sym, short t_id, short u_id, float xp, float yp, float a);
+        TuioObject* createTuioToken(unsigned int sym, unsigned short t_id, unsigned short u_id, float xp, float yp, float a);
         
         /**
          * Creates a new TuioToken based on the given arguments.
@@ -160,7 +160,7 @@ namespace TUIO2 {
          * @param	a	the angle to assign
          * @return	a reference to the TuioObject of the TuioToken
          */
-        TuioObject* addTuioToken(unsigned int s_id, short t_id, short u_id, int sym, float xp, float yp, float a);
+        TuioObject* addTuioToken(unsigned int s_id, unsigned short t_id, unsigned short u_id, unsigned int sym, float xp, float yp, float a);
         
         /**
          * Creates a new TuioToken based on the given arguments.
@@ -177,7 +177,7 @@ namespace TUIO2 {
          * @param	a	the angle to assign
          * @return	a reference to the TuioObject of the TuioToken
          */
-        TuioObject* addTuioToken(unsigned int s_id, int sym, float xp, float yp, float a);
+        TuioObject* addTuioToken(unsigned int s_id, unsigned int sym, float xp, float yp, float a);
         
         /**
          * Adds the provided TuioToken to an existing TuioObject
@@ -254,7 +254,7 @@ namespace TUIO2 {
          * @param	p	the pressure to assign
          * @return	a reference to the TuioObject of the TuioPointer
          */
-        TuioObject* createTuioPointer(short t_id, short u_id, float xp, float yp, float a, float s, float r, float p);
+        TuioObject* createTuioPointer(unsigned short t_id, unsigned short u_id, float xp, float yp, float a, float s, float r, float p);
      
         /**
          * Creates a new TuioPointer based on the given arguments.
@@ -271,7 +271,7 @@ namespace TUIO2 {
          * @param	p	the pressure to assign
          * @return	a reference to the TuioObject of the TuioPointer
          */
-        TuioObject* addTuioPointer(unsigned int s_id, short t_id, short u_id, float xp, float yp, float a, float s, float r, float p);
+        TuioObject* addTuioPointer(unsigned int s_id, unsigned short t_id, unsigned short u_id, float xp, float yp, float a, float s, float r, float p);
         
         /**
          * Creates a new TuioPointer based on the given arguments.
@@ -288,7 +288,7 @@ namespace TUIO2 {
          * @param	p	the pressure to assign
          * @return	reference to the created TuioPointer
          */
-        TuioObject* createTuioPointer(int p_id, float xp, float yp, float a, float s, float r, float p);
+        TuioObject* createTuioPointer(unsigned int p_id, float xp, float yp, float a, float s, float r, float p);
         
         /**
          * Creates a new TuioPointer based on the given arguments.
@@ -305,7 +305,7 @@ namespace TUIO2 {
          * @param	p	the pressure to assign
          * @return	reference to the created TuioPointer
          */
-        TuioObject* addTuioPointer(unsigned int s_id, int p_id, float xp, float yp, float a, float s, float r, float p);
+        TuioObject* addTuioPointer(unsigned int s_id, unsigned int p_id, float xp, float yp, float a, float s, float r, float p);
         
         /**
          * Creates a new TuioPointer based on the given arguments.
@@ -324,7 +324,7 @@ namespace TUIO2 {
          * @param	p	the pressure to assign
          * @return	a reference to the TuioObject of the TuioPointer
          */
-        TuioObject* createTuioPointer(int p_id, short t_id, short u_id, float xp, float yp, float a, float s, float r, float p);
+        TuioObject* createTuioPointer(unsigned int p_id, unsigned short t_id, unsigned short u_id, float xp, float yp, float a, float s, float r, float p);
         
         /**
          * Creates a new TuioPointer based on the given arguments.
@@ -343,7 +343,7 @@ namespace TUIO2 {
          * @param	p	the pressure to assign
          * @return	a reference to the TuioObject of the TuioPointer
          */
-        TuioObject* addTuioPointer(unsigned int s_id, int p_id, short t_id, short u_id, float xp, float yp, float a, float s, float r, float p);
+        TuioObject* addTuioPointer(unsigned int s_id, unsigned int p_id, unsigned short t_id, unsigned short u_id, float xp, float yp, float a, float s, float r, float p);
         
         /**
          * Adds the provided TuioPointer to an existing TuioObject
@@ -449,7 +449,7 @@ namespace TUIO2 {
          * @param	data	the synbol data to assign
          * @return	a reference to the TuioObject of the TuioSymbol
          */
-        TuioObject* createTuioSymbol(short t_id, short u_id, int sym, const char *type, const char *data);
+        TuioObject* createTuioSymbol(unsigned short t_id, unsigned short u_id, unsigned int sym, const char *type, const char *data);
         
         /**
          * Creates a new TuioSymbol based on the given arguments.
@@ -463,7 +463,7 @@ namespace TUIO2 {
          * @param	data	the synbol data to assign
          * @return	a reference to the TuioObject of the TuioSymbol
          */
-        TuioObject* addTuioSymbol(unsigned int s_id, short t_id, short u_id, int sym, const char *type, const char *data);
+        TuioObject* addTuioSymbol(unsigned int s_id, unsigned short t_id, unsigned short u_id, unsigned int sym, const char *type, const char *data);
         
         /**
          * Adds the provided TuioSymbol to an existing TuioObject
@@ -582,7 +582,7 @@ namespace TUIO2 {
 		TuioTime currentFrameTime;
         osc::TimeTag frameTimeTag;
 		unsigned int currentFrame;
-		int pointerCount, maxPointerID;
+		unsigned int pointerCount, maxPointerID;
 		unsigned int sessionID;
 
 		bool tobjUpdate;

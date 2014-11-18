@@ -73,7 +73,7 @@ TuioSource* TuioObject::getTuioSource() {
     return &source;
 }
 
-int TuioObject::getTuioSourceID() {
+unsigned int TuioObject::getTuioSourceID() {
     return source.getSourceID();
 }
 
@@ -305,7 +305,7 @@ TuioTime TuioObject::getStartTime() const{
 	return startTime;
 }
 
-int TuioObject::getTuioState() const{
+unsigned char TuioObject::getTuioState() const{
     return state;
 }
 

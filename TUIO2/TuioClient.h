@@ -61,7 +61,7 @@ namespace TUIO2 {
 		 *
 		 * @param  port  the UDP port the internal UdpReceiver is listening to
 		 */
-		TuioClient(int port);
+		TuioClient(unsigned short port);
 		
 		/**
 		 * This constructor creates a TuioClient that uses the provided OscReceiver for the incoming OSC data
@@ -103,7 +103,7 @@ namespace TUIO2 {
          * @return  an active TuioObject corresponding to the provided Session ID or NULL
          */
         using TuioDispatcher::getTuioObject;
-        TuioObject* getTuioObject(int src_id, unsigned int s_id);
+        TuioObject* getTuioObject(unsigned int src_id, unsigned int s_id);
         
         /**
          * Returns a list of all currently active TuioObject
@@ -113,7 +113,7 @@ namespace TUIO2 {
          * @return  a list of TuioObject
          */
         using TuioDispatcher::getTuioObjectList;
-        std::list<TuioObject*> getTuioObjectList(int src_id);
+        std::list<TuioObject*> getTuioObjectList(unsigned int src_id);
         
         /**
          * Returns the TuioToken corresponding to the provided Session ID
@@ -125,7 +125,7 @@ namespace TUIO2 {
          * @return  an active TuioToken corresponding to the provided Session ID or NULL
          */
         using TuioDispatcher::getTuioToken;
-        TuioToken* getTuioToken(int src_id, unsigned int s_id);
+        TuioToken* getTuioToken(unsigned int src_id, unsigned int s_id);
 
 		/**
 		 * Returns a list of all currently active TuioTokens
@@ -135,7 +135,7 @@ namespace TUIO2 {
 		 * @return  a list of TuioTokens
 		 */
         using TuioDispatcher::getTuioTokenList;
-		std::list<TuioToken*> getTuioTokenList(int src_id);
+		std::list<TuioToken*> getTuioTokenList(unsigned int src_id);
 	
         /**
          * Returns the TuioPointer corresponding to the provided Session ID
@@ -147,7 +147,7 @@ namespace TUIO2 {
          * @return  an active TuioPointer corresponding to the provided Session ID or NULL
          */
         using TuioDispatcher::getTuioPointer;
-        TuioPointer* getTuioPointer(int src_id, unsigned int s_id);
+        TuioPointer* getTuioPointer(unsigned int src_id, unsigned int s_id);
         
 		/**
 		 * Returns a List of all currently active TuioPointers
@@ -157,7 +157,7 @@ namespace TUIO2 {
 		 * @return  a List of TuioPointers
 		 */
         using TuioDispatcher::getTuioPointerList;
-		std::list<TuioPointer*> getTuioPointerList(int src_id);
+		std::list<TuioPointer*> getTuioPointerList(unsigned int src_id);
 		
         /**
          * Returns the TuioBounds corresponding to the provided Session ID
@@ -169,7 +169,7 @@ namespace TUIO2 {
          * @return  an active TuioBounds corresponding to the provided Session ID or NULL
          */
         using TuioDispatcher::getTuioBounds;
-        TuioBounds* getTuioBounds(int src_id, unsigned int s_id);
+        TuioBounds* getTuioBounds(unsigned int src_id, unsigned int s_id);
         
 		/**
 		 * Returns a List of all currently active TuioBounds
@@ -179,7 +179,7 @@ namespace TUIO2 {
 		 * @return  a List of TuioBounds
 		 */
         using TuioDispatcher::getTuioBoundsList;
-		std::list<TuioBounds*> getTuioBoundsList(int src_id);
+		std::list<TuioBounds*> getTuioBoundsList(unsigned int src_id);
         
         /**
          * Returns the TuioSymbol corresponding to the provided Session ID
@@ -191,7 +191,7 @@ namespace TUIO2 {
          * @return  an active TuioSymbol corresponding to the provided Session ID or NULL
          */
         using TuioDispatcher::getTuioSymbol;
-        TuioSymbol* getTuioSymbol(int src_id, unsigned int s_id);
+        TuioSymbol* getTuioSymbol(unsigned int src_id, unsigned int s_id);
         
         /**
          * Returns a List of all currently active TuioSymbol
@@ -201,7 +201,7 @@ namespace TUIO2 {
          * @return  a List of TuioSymbol
          */
          using TuioDispatcher::getTuioSymbolList;
-         std::list<TuioSymbol*> getTuioSymbolList(int src_id);
+         std::list<TuioSymbol*> getTuioSymbolList(unsigned int src_id);
 
 		
 		void processOSC( const osc::ReceivedMessage& message);
@@ -210,7 +210,7 @@ namespace TUIO2 {
 		void initialize();
 		
         void addFrameContainer(TuioObject *con);
-        TuioObject* getFrameContainer(int src_id,unsigned int s_id);
+        TuioObject* getFrameContainer(unsigned int src_id,unsigned int s_id);
         std::list<unsigned int> aliveContainerList;
 		std::list<TuioObject*> frameContainer;
 		
@@ -220,7 +220,7 @@ namespace TUIO2 {
 			
         std::map<std::string,unsigned int> sourceList;
         TuioSource frameSource;
-        int source_count;
+        unsigned int source_count;
 		
 		OscReceiver *receiver;
 		bool local_receiver;

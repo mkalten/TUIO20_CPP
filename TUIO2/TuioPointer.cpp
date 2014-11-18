@@ -20,7 +20,7 @@
 
 using namespace TUIO2;
 
-TuioPointer::TuioPointer (TuioTime ttime, unsigned int si, short ti, short ui, int pi, float xp, float yp, float a, float sa, float r, float p):TuioComponent(ttime,si,xp,yp,a) {
+TuioPointer::TuioPointer (TuioTime ttime, unsigned int si, unsigned short ti, unsigned short ui, unsigned int pi, float xp, float yp, float a, float sa, float r, float p):TuioComponent(ttime,si,xp,yp,a) {
     type_id = ti;
     user_id = ui;
     pointer_id = pi;
@@ -29,7 +29,7 @@ TuioPointer::TuioPointer (TuioTime ttime, unsigned int si, short ti, short ui, i
     pressure = p;
 }
 
-TuioPointer::TuioPointer (unsigned int si, short ti, short ui, int pi, float xp, float yp, float a, float sa, float r, float p):TuioComponent(si,xp,yp,a) {
+TuioPointer::TuioPointer (unsigned int si, unsigned short ti, unsigned short ui, unsigned int pi, float xp, float yp, float a, float sa, float r, float p):TuioComponent(si,xp,yp,a) {
     type_id = ti;
     user_id = ui;
     shear = sa;
@@ -38,7 +38,7 @@ TuioPointer::TuioPointer (unsigned int si, short ti, short ui, int pi, float xp,
     pressure = p;
 }
 
-TuioPointer::TuioPointer (unsigned int si, int pi, float xp, float yp, float a, float sa, float r, float p):TuioComponent(si,xp,yp,a) {
+TuioPointer::TuioPointer (unsigned int si, unsigned int pi, float xp, float yp, float a, float sa, float r, float p):TuioComponent(si,xp,yp,a) {
     type_id = 0;
     user_id = 0;
     pointer_id = pi;
@@ -88,24 +88,24 @@ void TuioPointer::update (TuioPointer *tptr) {
     pressure = tptr->getPressure();
 }
 
-int TuioPointer::getPointerID() const{
+unsigned int TuioPointer::getPointerID() const{
 	return pointer_id;
 };
 
-short TuioPointer::getTypeID() const{
+unsigned short TuioPointer::getTypeID() const{
     return type_id;
 };
 
-short TuioPointer::getUserID() const{
+unsigned short TuioPointer::getUserID() const{
     return user_id;
 };
 
-int TuioPointer::getTypeUserID() const {
+unsigned int TuioPointer::getTypeUserID() const {
     int tu_id = user_id << 16 | type_id;
     return tu_id;
 }
 
-void TuioPointer::setTypeUserID(int tu_id) {
+void TuioPointer::setTypeUserID(unsigned int tu_id) {
     user_id = tu_id >> 16;
     type_id = tu_id & 0x0000FFFF;
 }

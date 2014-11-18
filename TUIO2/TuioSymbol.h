@@ -38,19 +38,19 @@ namespace TUIO2 {
         /**
          * The unique Session ID that is assigned to each TUIO tobj.
          */
-        long session_id;
+        unsigned int session_id;
         /**
          * The individual symbol ID number that is assigned to each TuioToken.
          */
-        int symbol_id;
+        unsigned int symbol_id;
         /**
          * The symbol type ID that is assigned to each TuioToken.
          */
-        short type_id;
+        unsigned short type_id;
         /**
          * The user ID that is assigned to each TuioToken.
          */
-        short user_id;
+        unsigned short user_id;
         /**
          * The symbol type descriptor
          */
@@ -70,7 +70,7 @@ namespace TUIO2 {
         /**
          * Reflects the current state of the TuioSymbol
          */
-        int state;
+        unsigned char state;
 
 	public:
         /**
@@ -85,7 +85,7 @@ namespace TUIO2 {
          * @param	type	the symbol type descriptor
          * @param	data	the symbol data to assign
          */
-		TuioSymbol (TuioTime ttime, unsigned int si, short ti, short ui, int sym, const char *type, const char *data);
+		TuioSymbol (TuioTime ttime, unsigned int si, unsigned short ti, unsigned short ui, unsigned int sym, const char *type, const char *data);
 
         /**
          * This constructor assigns the provided Session ID, Type ID, User ID and Symbol ID
@@ -98,7 +98,7 @@ namespace TUIO2 {
          * @param	type	the symbol type descriptor
          * @param	data	the symbol data to assign
          */
-        TuioSymbol (unsigned int si, short ti, short ui, int sym, const char *type, const char *data);
+        TuioSymbol (unsigned int si, unsigned short ti, unsigned short ui, unsigned int sym, const char *type, const char *data);
 		
 		/**
 		 * This constructor takes a TuioSymbol argument and sets its attributes
@@ -112,31 +112,31 @@ namespace TUIO2 {
          * Returns the Symbol ID of this TuioSymbol.
          * @return	the Symbol ID of this TuioSymbol
          */
-        int getSymbolID() const;
+        unsigned int getSymbolID() const;
         
         /**
          * Returns the Type ID of this TuioSymbol.
          * @return	the Type ID of this TuioSymbol
          */
-        short getTypeID() const;
+        unsigned short getTypeID() const;
         
         /**
          * Returns the User ID of this TuioSymbol.
          * @return	the User ID of this TuioSymbol
          */
-        short getUserID() const;
+        unsigned short getUserID() const;
         
         /**
          * Returns the encoded Type & User ID of this TuioSymbol.
          * @return	the encoded Type & User ID of this TuioSymbol
          */
-        int getTypeUserID() const;
+        unsigned int getTypeUserID() const;
         
         /**
          * Decodes and assigns the Type & User ID to this TuioSymbol.
          * @param tu_id   the encoded Type & User ID of this TuioSymbol
          */
-        void setTypeUserID(int tu_id);
+        void setTypeUserID(unsigned int tu_id);
         
         /**
          * Returns the Type string of this TuioSymbol.

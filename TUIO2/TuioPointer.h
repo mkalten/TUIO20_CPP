@@ -36,17 +36,17 @@ namespace TUIO2 {
 		/**
 		 * The individual pointer ID number that is assigned to each TuioPointer.
 		 */ 
-		int pointer_id;
+		unsigned int pointer_id;
         
         /**
          * The pointer type ID that is assigned to each TuioPointer.
          */
-        short type_id;
+        unsigned short type_id;
         
         /**
          * The user ID that is assigned to each TuioPointer.
          */
-        short user_id;
+        unsigned short user_id;
         
         /**
          * The shear angle that is assigned to each TuioPointer.
@@ -92,7 +92,7 @@ namespace TUIO2 {
          * @param	r	the radius to assign
          * @param	p	the pressure to assign
 		 */
-		TuioPointer (TuioTime ttime, unsigned int si, short ti, short ui, int pi, float xp, float yp, float a, float sa, float r, float p);
+		TuioPointer (TuioTime ttime, unsigned int si, unsigned short ti, unsigned short ui, unsigned int pi, float xp, float yp, float a, float sa, float r, float p);
 
 		/**
 		 * This constructor takes the provided Session ID, Pointer ID, X and Y coordinate
@@ -109,7 +109,7 @@ namespace TUIO2 {
          * @param	r	the radius to assign
          * @param	p	the pressure to assign
 		 */
-		TuioPointer (unsigned int si, short ti, short ui, int pi, float xp, float yp, float a, float sa, float r, float p);
+		TuioPointer (unsigned int si, unsigned short ti, unsigned short ui, unsigned int pi, float xp, float yp, float a, float sa, float r, float p);
         
         
         /**
@@ -125,7 +125,7 @@ namespace TUIO2 {
          * @param	r	the radius to assign
          * @param	p	the pressure to assign
          */
-        TuioPointer (unsigned int si, int pi, float xp, float yp, float a, float sa, float r, float p);
+        TuioPointer (unsigned int si, unsigned int pi, float xp, float yp, float a, float sa, float r, float p);
 		
 		/**
 		 * This constructor takes the atttibutes of the provided TuioPointer 
@@ -203,31 +203,31 @@ namespace TUIO2 {
 		 * Returns the Pointer ID of this TuioPointer.
 		 * @return	the Pointer ID of this TuioPointer
 		 */
-		int getPointerID() const;
+		unsigned int getPointerID() const;
         
         /**
          * Returns the Type ID of this TuioPointer.
          * @return	the Type ID of this TuioPointer
          */
-        short getTypeID() const;
+        unsigned short getTypeID() const;
         
         /**
          * Returns the User ID of this TuioPointer.
          * @return	the User ID of this TuioPointer
          */
-        short getUserID() const;
+        unsigned short getUserID() const;
         
         /**
          * Returns the encoded Type & User ID of this TuioPointer.
          * @return	the encoded Type & User ID of this TuioPointer
          */
-        int getTypeUserID() const;
+        unsigned int getTypeUserID() const;
         
         /**
          * Decodes and assigns the Type & User ID to this TuioPointer.
          * @param tu_id   the encoded Type & User ID of this TuioPointer
          */
-        void setTypeUserID(int tu_id);
+        void setTypeUserID(unsigned int tu_id);
         
         /**
          * Returns the shear angle of this TuioPointer.

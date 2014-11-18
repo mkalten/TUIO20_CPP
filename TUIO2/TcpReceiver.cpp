@@ -113,7 +113,7 @@ static DWORD WINAPI ServerThreadFunc( LPVOID obj )
 	return 0;
 };
 
-TcpReceiver::TcpReceiver(int port)
+TcpReceiver::TcpReceiver(unsigned short port)
 : tcp_socket	(-1)
 , locked	(false)
 {
@@ -161,7 +161,7 @@ TcpReceiver::TcpReceiver(int port)
 	std::cout << "TUIO/TCP socket created on port " << port << std::endl;
 }
 
-TcpReceiver::TcpReceiver(const char *host, int port)
+TcpReceiver::TcpReceiver(const char *host, unsigned short port)
 : tcp_socket	(-1)
 , locked		(false)
 {

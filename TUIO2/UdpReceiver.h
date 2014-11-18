@@ -44,7 +44,7 @@ namespace TUIO2 {
 		 *
 		 * @param  port  the number of the UDP port to listen to, defaults to 3333
 		 */
-		UdpReceiver (int port=3333);
+		UdpReceiver (unsigned short port=3333);
 
 		/**
 		 * The destructor is doing nothing in particular. 
