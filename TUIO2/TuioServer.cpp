@@ -32,7 +32,7 @@ TuioServer::TuioServer()
 	initialize();
 }
 
-TuioServer::TuioServer(const char *host, int port) 
+TuioServer::TuioServer(const char *host, unsigned short port)
 :local_sender			(true)
 ,full_update			(false)	
 ,periodic_update		(false)

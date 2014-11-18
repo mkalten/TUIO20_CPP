@@ -86,7 +86,7 @@ namespace TUIO2 {
 		 * @param  host  the host name for UDP deleivery
 		 * @param  port  the UDP port number on the provided host
 		 */
-		TuioServer(const char *host, int port);
+		TuioServer(const char *host, unsigned short port);
 		
 		/**
 		 * This constructor creates a TuioServer that sends OSC data using the provided OscSender
