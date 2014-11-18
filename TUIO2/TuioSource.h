@@ -18,7 +18,10 @@
 
 #ifndef INCLUDED_TUIOSOURCE_H
 #define INCLUDED_TUIOSOURCE_H
+
 #include <sstream>
+#include <string.h>
+#include <stdlib.h>
 
 namespace TUIO2 {
     
