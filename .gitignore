@@ -14,15 +14,20 @@ project.xcworkspace
 build
 
 doc
+
 *.o
+
+*.so
+
+*.a
+
+*.db
+
+*.dylib
 
 Tuio2Dump
 
 Tuio2Test
-
-libTUIO.dylib
-
-libTUIO2.a
 
 Tuio2Demo
 
