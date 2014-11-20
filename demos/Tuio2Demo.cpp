@@ -255,7 +255,7 @@ int main(int argc, char* argv[])
 #ifndef __MACOSX__
 	glutInit(&argc,argv);
 #else
-	if ( (std::string(argv[1]).find("-NSDocumentRevisionsDebugMode")==0 ) || (std::string(argv[1]).find("-psn_")==0) ) argc = 1;
+	if ((argc>1) && ((std::string(argv[1]).find("-NSDocumentRevisionsDebugMode")==0 ) || (std::string(argv[1]).find("-psn_")==0))) argc = 1;
 #endif
 
 	if( argc >= 2 && strcmp( argv[1], "-h" ) == 0 ){

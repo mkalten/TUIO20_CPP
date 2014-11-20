@@ -2,6 +2,7 @@ ENDIANESS=OSC_HOST_LITTLE_ENDIAN
 PLATFORM=$(shell uname)
 
 LD_FLAGS = -lGL -lGLU -lglut
+SDL_FLAGS = -lSDL
 
 TUIO_DEMO = Tuio2Demo
 TUIO_DUMP = Tuio2Dump
@@ -22,7 +23,8 @@ ifeq ($(PLATFORM), Darwin)
 	CFLAGS += -mmacosx-version-min=10.5 -arch i386 -arch x86_64
 	CXXFLAGS += -mmacosx-version-min=10.5 -arch i386 -arch x86_64
 	TUIO_SHARED  = libTUIO.dylib
-	LD_FLAGS =  -framework OpenGL -framework GLUT -framework SDL -framework Cocoa
+	LD_FLAGS = -framework OpenGL -framework GLUT -framework SDL -framework Cocoa
+	SDL_FLAGS = 
  	SHARED_OPTIONS = -dynamiclib -Wl,-dylib_install_name,$(TUIO_SHARED)
 	OBJC_SOURCES = SDLMain.m
 	OBJC_OBJECTS = SDLMain.o
@@ -61,10 +63,10 @@ dump:	$(COMMON_TUIO_OBJECTS) $(CLIENT_TUIO_OBJECTS) $(OSC_OBJECTS) $(DUMP_OBJECT
 	$(CXX) $+ -lpthread -o $(TUIO_DUMP)
 
 demo:	$(COMMON_TUIO_OBJECTS) $(CLIENT_TUIO_OBJECTS) $(OSC_OBJECTS) $(DEMO_OBJECTS)
-	$(CXX) $+ -lpthread -o $(TUIO_DEMO) $(LD_FLAGS) -lSDL
+	$(CXX) $+ -lpthread -o $(TUIO_DEMO) $(LD_FLAGS) $(SDL_FLAGS)
 
 simulator:	$(COMMON_TUIO_OBJECTS) $(SERVER_TUIO_OBJECTS) $(OSC_OBJECTS) $(SIMULATOR_OBJECTS)
-	$(CXX) $+ -lpthread -o $(TUIO_SIMULATOR) $(LD_FLAGS) -lSDL
+	$(CXX) $+ -lpthread -o $(TUIO_SIMULATOR) $(LD_FLAGS) $(SDL_FLAGS)
 
 test:	$(COMMON_TUIO_OBJECTS) $(SERVER_TUIO_OBJECTS) $(OSC_OBJECTS) $(TEST_OBJECTS)
 	$(CXX) $+ -lpthread -o $(TUIO_TEST) $(SDL_LDFLAGS) $(LD_FLAGS)
