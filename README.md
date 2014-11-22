@@ -15,6 +15,7 @@ Current Implementation
 - encapsulates the TUIO 2.0 Token, Pointer, Symbol and Bounds components 
 - provides Server and Client implementations for TUIO 2.0 encoding/decoding
 - optional TCP and Flash  transport layers in addition to the default UDP transport
+- supports the multiplexing of multiple TUIO2 sources
 
 Alpha Code and API
 ------------------
