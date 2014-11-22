@@ -214,12 +214,11 @@ namespace TUIO2 {
         std::list<unsigned int> aliveContainerList;
 		std::list<TuioObject*> frameContainer;
 		
-		osc::int32 currentFrame;
-        TuioTime currentTime, frameTime;
+        TuioTime frameTime;
         bool lateFrame;
 			
-        std::map<std::string,unsigned int> sourceList;
-        TuioSource frameSource;
+        std::map<std::string,TuioSource*> sourceList;
+        TuioSource *frameSource;
         unsigned int source_count;
 		
 		OscReceiver *receiver;

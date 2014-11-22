@@ -55,6 +55,10 @@ namespace TUIO2 {
          * The encoded sensor dimension
          */
         unsigned int dimension;
+        /**
+         * The TuioTime of the last frame
+         */
+        TuioTime frameTime;
         
     public:
         
@@ -76,12 +80,10 @@ namespace TUIO2 {
          *
          * @param	src_name	the name of the TUIO source
          */
-        TuioSource(const char *src_name) {
-            source_id = 0;
-            source_name = std::string(src_name);
-            source_instance = 0;
-            source_address = "localhost";
-            dimension = 0;
+        TuioSource(unsigned int sid, const char *src_string, unsigned int dim) {
+            source_id = sid;
+            setSourceString(src_string);
+            setDimension(dim);
         };
         
         /**
@@ -205,6 +207,22 @@ namespace TUIO2 {
         unsigned short getHeight() {
             unsigned short height = dimension & 0x0000FFFF;
             return height;
+        }
+        
+        /**
+         * Sets the last frame time
+         * @param   ttime   the TuioTime of the last frame
+         */
+        void setFrameTime(TuioTime ttime) {
+            frameTime = ttime;
+        }
+        
+        /**
+         * Returns the last frame time
+         * @return	the TuioTime of the last frame
+         */
+        TuioTime getFrameTime() {
+            return frameTime;
         }
     };
 }
