@@ -41,7 +41,7 @@ TuioDispatcher::~TuioDispatcher() {
 #endif		
 }
 
-void TuioDispatcher::lockContainerList() {
+void TuioDispatcher::lockObjectList() {
 #ifndef WIN32	
 	pthread_mutex_lock(&tobjMutex);
 #else
@@ -49,7 +49,7 @@ void TuioDispatcher::lockContainerList() {
 #endif		
 }
 
-void TuioDispatcher::unlockContainerList() {
+void TuioDispatcher::unlockObjectList() {
 #ifndef WIN32	
 	pthread_mutex_unlock(&tobjMutex);
 #else
@@ -71,14 +71,14 @@ void TuioDispatcher::removeAllTuioListeners() {
 }
 
 TuioObject* TuioDispatcher::getTuioObject(unsigned int s_id) {
-    lockContainerList();
+    lockObjectList();
     for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj!=tobjList.end(); tobj++) {
         if((*tobj)->getSessionID()==s_id) {
-            unlockContainerList();
+            unlockObjectList();
             return (*tobj);
         }
     }
-    unlockContainerList();
+    unlockObjectList();
     return NULL;
 }
 
@@ -112,54 +112,54 @@ TuioSymbol* TuioDispatcher::getTuioSymbol(unsigned int s_id) {
 
 std::list<TuioObject*> TuioDispatcher::getTuioObjectList() {
     std::list<TuioObject*> listBuffer;
-    lockContainerList();
+    lockObjectList();
     for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj!=tobjList.end(); tobj++) {
         listBuffer.push_back(*tobj);
     }
-    unlockContainerList();
+    unlockObjectList();
     return listBuffer;
 }
 
 std::list<TuioToken*> TuioDispatcher::getTuioTokenList() {
 	std::list<TuioToken*> listBuffer;
-    lockContainerList();
+    lockObjectList();
     for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj!=tobjList.end(); tobj++) {
         TuioToken *ttok = (*tobj)->getTuioToken();
         if (ttok!=NULL) listBuffer.push_back(ttok);
     }
-    unlockContainerList();
+    unlockObjectList();
 	return listBuffer;
 }
 
 std::list<TuioPointer*> TuioDispatcher::getTuioPointerList() {
     std::list<TuioPointer*> listBuffer;
-    lockContainerList();
+    lockObjectList();
     for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj!=tobjList.end(); tobj++) {
         TuioPointer *tptr = (*tobj)->getTuioPointer();
         if (tptr!=NULL) listBuffer.push_back(tptr);
     }
-    unlockContainerList();
+    unlockObjectList();
     return listBuffer;
 }
 
 std::list<TuioBounds*> TuioDispatcher::getTuioBoundsList() {
     std::list<TuioBounds*> listBuffer;
-    lockContainerList();
+    lockObjectList();
     for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj!=tobjList.end(); tobj++) {
         TuioBounds *tbnd = (*tobj)->getTuioBounds();
         if (tbnd!=NULL) listBuffer.push_back(tbnd);
     }
-    unlockContainerList();
+    unlockObjectList();
     return listBuffer;
 }
 
 std::list<TuioSymbol*> TuioDispatcher::getTuioSymbolList() {
     std::list<TuioSymbol*> listBuffer;
-    lockContainerList();
+    lockObjectList();
     for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj!=tobjList.end(); tobj++) {
         TuioSymbol *tsym = (*tobj)->getTuioSymbol();
         if (tsym!=NULL) listBuffer.push_back(tsym);
     }
-    unlockContainerList();
+    unlockObjectList();
     return listBuffer;
 }

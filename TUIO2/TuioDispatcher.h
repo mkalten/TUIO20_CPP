@@ -145,14 +145,14 @@ namespace TUIO2 {
         TuioSymbol* getTuioSymbol(unsigned int s_id);
 		
 		/**
-		 * Locks the TuioToken list in order to avoid updates during access
+		 * Locks the TuioObject list in order to avoid updates during access
 		 */
-		void lockContainerList();
+		void lockObjectList();
 
 		/**
-		 * Releases the lock of the TuioToken list
+		 * Releases the lock of the TuioObject list
 		 */
-		void unlockContainerList();
+		void unlockObjectList();
 		
 	protected:
 		std::list<TuioListener*> listenerList;

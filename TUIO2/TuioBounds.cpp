@@ -19,13 +19,13 @@
 #include "TuioBounds.h"
 using namespace TUIO2;
 
-TuioBounds::TuioBounds (TuioTime ttime, unsigned int si, float xp, float yp, float a, float w, float h, float f):TuioComponent(ttime, si, xp, yp,a) {
+TuioBounds::TuioBounds (TuioTime ttime, TuioObject *tobj, float xp, float yp, float a, float w, float h, float f):TuioComponent(ttime, tobj, xp, yp,a) {
 	width = w;
 	height = h;
     area = f;
 }
 
-TuioBounds::TuioBounds (unsigned int si, float xp, float yp, float a, float  w, float h, float f):TuioComponent(si, xp, yp, a) {
+TuioBounds::TuioBounds (TuioObject *tobj, float xp, float yp, float a, float  w, float h, float f):TuioComponent(tobj, xp, yp, a) {
 	width = w;
 	height = h; 
 	area = f;

@@ -73,10 +73,6 @@ TuioSource* TuioObject::getTuioSource() {
     return &source;
 }
 
-unsigned int TuioObject::getTuioSourceID() {
-    return source.getSourceID();
-}
-
 void TuioObject::setTuioToken (TuioToken *ttok) {
     token = ttok;
     currentTime = TuioTime::getSystemTime();

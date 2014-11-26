@@ -39,14 +39,15 @@ namespace TUIO2 {
 	 * @author Martin Kaltenbrunner
 	 * @version 2.0.a0
 	 */
-        
+    
+    class TuioObject;
 	class LIBDECL TuioComponent: public TuioPoint {
 		
 	protected:
 		/**
-		 * The unique Session ID that is assigned to each TUIO tobj.
+		 * The TuioObject that contains this TUIO component.
 		 */ 
-        unsigned int session_id;
+        TuioObject *container;
         /**
          * The rotation angle value.
          */
@@ -92,23 +93,23 @@ namespace TUIO2 {
 		 * Session ID, X and Y coordinate to the newly created TuioComponent.
 		 *
 		 * @param	ttime	the TuioTime to assign
-		 * @param	si	the Session ID to assign
+		 * @param	tobj	the TuioObject to assign
 		 * @param	xp	the X coordinate to assign
 		 * @param	yp	the Y coordinate to assign
          * @param	a	the angle to assign
 		 */
-		TuioComponent (TuioTime ttime, unsigned int si, float xp, float yp, float a);
+		TuioComponent (TuioTime ttime, TuioObject *tobj, float xp, float yp, float a);
 
 		/**
 		 * This constructor takes the provided Session ID, X and Y coordinate
 		 * and assigs these values to the newly created TuioComponent.
 		 *
-		 * @param	si	the Session ID to assign
+		 * @param	tobj	the TuioObject to assign
 		 * @param	xp	the X coordinate to assign
 		 * @param	yp	the Y coordinate to assign
          * @param	a	the angle to assign
 		 */
-		TuioComponent (unsigned int si, float xp, float yp,float a);
+		TuioComponent (TuioObject *tobj, float xp, float yp,float a);
 		
 		/**
 		 * This constructor takes the atttibutes of the provided TuioComponent 
@@ -122,7 +123,13 @@ namespace TUIO2 {
 		 * The destructor is doing nothing in particular. 
 		 */
 		virtual ~TuioComponent(){};
-		 
+        
+        /**
+         * Returns the TuioObject containing this TuioComponent.
+         * @return	the TuioObject containing this TuioComponent
+         */
+        virtual TuioObject* getContainingTuioObject();
+        
         /**
          * Takes a TuioTime argument and assigns it along with the provided
          * X and Y coordinate to the private TuioComponent attributes.
@@ -195,12 +202,6 @@ namespace TUIO2 {
          * @return	the Session ID of this TuioComponent
          */
         virtual unsigned int getSessionID() const;
-
-		/**
-		 * Sets the Session ID of this TuioComponent.
-		 * @param si	the new Session ID asscociated to this TuioComponent
-		 */
-		virtual void setSessionID(unsigned int si);
 		
 		/**
 		 * Returns the X velocity of this TuioComponent.

@@ -65,7 +65,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
         ReceivedMessageArgumentStream args = msg.ArgumentStream();
         
         if( strcmp( msg.AddressPattern(), "/tuio2/frm" ) == 0 ) {
-
+            //lockFrame();
             int32 fseq_raw,dim_raw;
             TimeTag timetag;
             const char* src_string;
@@ -91,11 +91,10 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             lateFrame = false;
             unsigned int lastFrameID = frameSource->getFrameTime().getFrameID();
             unsigned int timeDiff = frameTime.getTotalMilliseconds() - frameSource->getFrameTime().getTotalMilliseconds();
+            frameSource->setFrameTime(frameTime);
             
             // drop late frames (but accept the reserved ID 0 and consider a possible reset after 1sec
             if ((currentFrameID<lastFrameID) && (currentFrameID!=0) && (timeDiff<1000)) lateFrame = true;
-            
-            frameSource->setFrameTime(frameTime);
             
         } else if( strcmp( msg.AddressPattern(), "/tuio2/tok" ) == 0 ) {
 
@@ -111,19 +110,19 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             t_id = tu_id_raw >> 16;
             u_id = tu_id_raw & 0x0000FFFF;
             
-            TuioObject *tobj = getFrameContainer(frameSource->getSourceID(),s_id);
+            TuioObject *tobj = getFrameObject(frameSource->getSourceID(),s_id);
             //if (tobj == NULL) std::cout << "new cont " << s_id << " " << frameSource.getSourceID() << std::endl;
             if (tobj == NULL) tobj = new TuioObject(frameTime,frameSource,s_id);
             TuioToken *ttok = tobj->getTuioToken();
             if (ttok == NULL) {
-                ttok = new TuioToken(frameTime,s_id,t_id,u_id,c_id,xpos,ypos,angle);
+                ttok = new TuioToken(frameTime,tobj,t_id,u_id,c_id,xpos,ypos,angle);
                 tobj->setTuioToken(ttok);
-                addFrameContainer(tobj);
+                addFrameObject(tobj);
             } else if ( (ttok->getX()!=xpos) || (ttok->getY()!=ypos) || (ttok->getAngle()!=angle) || (ttok->getXSpeed()!=xspeed) || (ttok->getYSpeed()!=yspeed) || (ttok->getRotationSpeed()!=rspeed) || (ttok->getMotionAccel()!=maccel) || (ttok->getRotationAccel()!=raccel) ) {
 
                 ttok->update(frameTime,xpos,ypos,angle,xspeed,yspeed,rspeed,maccel,raccel);
                 tobj->update(frameTime);
-                addFrameContainer(tobj);
+                addFrameObject(tobj);
             }
             
         } else if( strcmp( msg.AddressPattern(), "/tuio2/ptr" ) == 0 ) {
@@ -140,19 +139,19 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             t_id = tu_id_raw >> 16;
             u_id = tu_id_raw & 0x0000FFFF;
             
-            TuioObject *tobj = getFrameContainer(frameSource->getSourceID(),s_id);
+            TuioObject *tobj = getFrameObject(frameSource->getSourceID(),s_id);
             //if (tobj == NULL) std::cout << "new cont " << s_id << " " << frameSource.getSourceID() << std::endl;
             if (tobj == NULL) tobj = new TuioObject(frameTime,frameSource,s_id);
             TuioPointer *tptr = tobj->getTuioPointer();
             if (tptr == NULL) {
-                tptr = new TuioPointer(frameTime,s_id,t_id,u_id,c_id,xpos,ypos,angle,shear,radius,pressure);
+                tptr = new TuioPointer(frameTime,tobj,t_id,u_id,c_id,xpos,ypos,angle,shear,radius,pressure);
                 tobj->setTuioPointer(tptr);
-                addFrameContainer(tobj);
+                addFrameObject(tobj);
             } else if ( (tptr->getX()!=xpos) || (tptr->getY()!=ypos) || (tptr->getAngle()!=angle) || (tptr->getShear()!=shear) || (tptr->getRadius()!=radius) || (tptr->getPressure()!=pressure) || (tptr->getXSpeed()!=xspeed) || (tptr->getYSpeed()!=yspeed) || (tptr->getMotionAccel()!=maccel) ) {
                 
                 tptr->update(frameTime,xpos,ypos,angle,shear,radius,pressure,xspeed,yspeed,rspeed,maccel,raccel);
                 tobj->update(frameTime);
-                addFrameContainer(tobj);
+                addFrameObject(tobj);
             }
         } else if( strcmp( msg.AddressPattern(), "/tuio2/bnd" ) == 0 ) {
 
@@ -164,18 +163,18 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             args >> s_id_raw >> xpos >> ypos >> angle >> width >> height >> area >> xspeed >> yspeed >> rspeed >> maccel >> raccel;
             s_id = (unsigned int)s_id_raw;
             
-            TuioObject *tobj = getFrameContainer(frameSource->getSourceID(),s_id);
+            TuioObject *tobj = getFrameObject(frameSource->getSourceID(),s_id);
             if (tobj == NULL) tobj = new TuioObject(frameTime,frameSource,s_id);
             TuioBounds *tbnd = tobj->getTuioBounds();
             if (tbnd == NULL) {
-                tbnd = new TuioBounds(frameTime,s_id,xpos,ypos,angle,width,height,area);
+                tbnd = new TuioBounds(frameTime,tobj,xpos,ypos,angle,width,height,area);
                 tobj->setTuioBounds(tbnd);
-                addFrameContainer(tobj);
+                addFrameObject(tobj);
             } else if ( (tbnd->getX()!=xpos) || (tbnd->getY()!=ypos) || (tbnd->getAngle()!=angle) || (tbnd->getWidth()!=width) || (tbnd->getHeight()!=height) || (tbnd->getArea()!=area) || (tbnd->getXSpeed()!=xspeed) || (tbnd->getYSpeed()!=yspeed) || (tbnd->getRotationSpeed()!=rspeed) || (tbnd->getMotionAccel()!=maccel) || (tbnd->getRotationAccel()!=raccel)) {
                 
                 tbnd->update(frameTime,xpos,ypos,angle,width,height,area,xspeed,yspeed,rspeed,maccel,raccel);
                 tobj->update(frameTime);
-                addFrameContainer(tobj);
+                addFrameObject(tobj);
             }
         } else if( strcmp( msg.AddressPattern(), "/tuio2/sym" ) == 0 ) {
 
@@ -192,40 +191,41 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             t_id = tu_id_raw >> 16;
             u_id = tu_id_raw & 0x0000FFFF;
             
-            TuioObject *tobj = getFrameContainer(frameSource->getSourceID(),s_id);
+            TuioObject *tobj = getFrameObject(frameSource->getSourceID(),s_id);
             if (tobj == NULL) tobj = new TuioObject(frameTime,frameSource,s_id);
             TuioSymbol *tsym = tobj->getTuioSymbol();
             if (tsym == NULL) {
-                tsym = new TuioSymbol(frameTime,s_id,t_id,u_id,c_id,type,data);
+                tsym = new TuioSymbol(frameTime,tobj,t_id,u_id,c_id,type,data);
                 tobj->setTuioSymbol(tsym);
-                addFrameContainer(tobj);
+                addFrameObject(tobj);
             } else {
                 tsym->update(frameTime);
                 tobj->update(frameTime);
-                addFrameContainer(tobj);
+                addFrameObject(tobj);
             }
         } else if( strcmp( msg.AddressPattern(), "/tuio2/alv" ) == 0 ) {
  
             if (lateFrame) return;
             int32 s_id;
-            aliveContainerList.clear();
+            aliveObjectList.clear();
             while(!args.Eos()) {
                 args >> s_id;
-                aliveContainerList.push_back((unsigned int)s_id);
+                aliveObjectList.push_back((unsigned int)s_id);
             }
             
-            lockContainerList();
+            lockObjectList();
             //find the removed tobjs first
             for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj!=tobjList.end(); tobj++) {
-                std::list<unsigned int>::iterator iter = find(aliveContainerList.begin(), aliveContainerList.end(), (*tobj)->getSessionID());
-                if (iter == aliveContainerList.end()) {
+                if ((*tobj)->getTuioSource()->getSourceID()!=frameSource->getSourceID()) continue;
+                std::list<unsigned int>::iterator iter = find(aliveObjectList.begin(), aliveObjectList.end(), (*tobj)->getSessionID());
+                if (iter == aliveObjectList.end()) {
                     (*tobj)->remove(frameTime);
-                    addFrameContainer(*tobj);
+                    addFrameObject(*tobj);
                 }
             }
-            unlockContainerList();
+            unlockObjectList();
             
-            for (std::list<TuioObject*>::iterator iter=frameContainer.begin(); iter!=frameContainer.end(); iter++) {
+            for (std::list<TuioObject*>::iterator iter=frameObjectList.begin(); iter!=frameObjectList.end(); iter++) {
                 TuioObject *tobj = (*iter);
                 
                 switch (tobj->getTuioState()) {
@@ -234,21 +234,21 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
                         for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener!=listenerList.end(); listener++)
                             (*listener)->tuioRemove(tobj);
                         
-                        lockContainerList();
+                        lockObjectList();
                         for (std::list<TuioObject*>::iterator delcon=tobjList.begin(); delcon!=tobjList.end(); delcon++) {
-                            if((*delcon)->getSessionID()==tobj->getSessionID()) {
+                            if (((*delcon)->getSessionID()==tobj->getSessionID()) && ((*delcon)->getTuioSource()->getSourceID()==frameSource->getSourceID())) {
                                 delete *delcon;
                                 tobjList.erase(delcon);
                                 break;
                             }
                         }
-                        unlockContainerList();
+                        unlockObjectList();
                         break;
                     case TUIO_ADDED:
                         
-                        //lockContainerList();
+                        lockObjectList();
                         tobjList.push_back(tobj);
-                        //unlockContainerList();
+                        unlockObjectList();
                         for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++)
                             (*listener)->tuioAdd(tobj);
                         
@@ -263,10 +263,12 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++)
                 (*listener)->tuioRefresh(frameTime);
             
-            frameContainer.clear();
+            frameObjectList.clear();
+            //unlockFrame();
         }         
     } catch( Exception& e ){
         std::cerr << "error parsing TUIO2 message: "<< msg.AddressPattern() <<  " - " << e.what() << std::endl;
+        //unlockFrame();
     }
 }
 
@@ -277,14 +279,13 @@ bool TuioClient::isConnected() {
 void TuioClient::connect(bool lock) {
 				
 	receiver->connect(lock);
-	unlockContainerList();
+	unlockObjectList();
 }
 
 void TuioClient::disconnect() {
 	
 	receiver->disconnect();
-	
-	aliveContainerList.clear();
+	aliveObjectList.clear();
 
 	for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++)
 		delete (*iter);
@@ -292,77 +293,77 @@ void TuioClient::disconnect() {
 }
 
 TuioObject* TuioClient::getTuioObject(unsigned int src_id, unsigned int s_id) {
-    lockContainerList();
+    lockObjectList();
     for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++) {
         if (((*iter)->getSessionID()==s_id) && ((*iter)->getTuioSource()->getSourceID()==src_id)) {
-            unlockContainerList();
+            unlockObjectList();
             return (*iter);
         }
     }
-    unlockContainerList();
+    unlockObjectList();
     return NULL;
 }
 
 TuioToken* TuioClient::getTuioToken(unsigned int src_id, unsigned int s_id) {
-	lockContainerList();
+	lockObjectList();
 	for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++) {
 		if (((*iter)->getSessionID()==s_id) && ((*iter)->getTuioSource()->getSourceID()==src_id)) {
-			unlockContainerList();
+			unlockObjectList();
             return (*iter)->getTuioToken();
 		}
 	}	
-	unlockContainerList();
+	unlockObjectList();
 	return NULL;
 }
 
 TuioPointer* TuioClient::getTuioPointer(unsigned int src_id, unsigned int s_id) {
-    lockContainerList();
+    lockObjectList();
     for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++) {
         if (((*iter)->getSessionID()==s_id) && ((*iter)->getTuioSource()->getSourceID()==src_id)) {
-            unlockContainerList();
+            unlockObjectList();
             return (*iter)->getTuioPointer();
         }
     }
-    unlockContainerList();
+    unlockObjectList();
     return NULL;
 }
 
 TuioBounds* TuioClient::getTuioBounds(unsigned int src_id, unsigned int s_id) {
-    lockContainerList();
+    lockObjectList();
     for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++) {
         if (((*iter)->getSessionID()==s_id) && ((*iter)->getTuioSource()->getSourceID()==src_id)) {
-            unlockContainerList();
+            unlockObjectList();
             return (*iter)->getTuioBounds();
         }
     }
-    unlockContainerList();
+    unlockObjectList();
     return NULL;
 }
 
 TuioSymbol* TuioClient::getTuioSymbol(unsigned int src_id, unsigned int s_id) {
-    lockContainerList();
+    lockObjectList();
     for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++) {
         if (((*iter)->getSessionID()==s_id) && ((*iter)->getTuioSource()->getSourceID()==src_id)) {
-            unlockContainerList();
+            unlockObjectList();
             return (*iter)->getTuioSymbol();
         }
     }
-    unlockContainerList();
+    unlockObjectList();
     return NULL;
 }
 
 std::list<TuioObject*> TuioClient::getTuioObjectList(unsigned int src_id) {
-    lockContainerList();
+    lockObjectList();
     std::list<TuioObject*> listBuffer;
     for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj != tobjList.end(); tobj++) {
         if ((*tobj)->getTuioSource()->getSourceID()==src_id) listBuffer.push_back(*tobj);
     }
-    unlockContainerList();
+    unlockObjectList();
     return listBuffer;
 }
 
 std::list<TuioToken*> TuioClient::getTuioTokenList(unsigned int src_id) {
-    lockContainerList();
+    lockObjectList();
     std::list<TuioToken*> listBuffer;
     for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj != tobjList.end(); tobj++) {
         if ((*tobj)->getTuioSource()->getSourceID()==src_id) {
@@ -370,12 +371,12 @@ std::list<TuioToken*> TuioClient::getTuioTokenList(unsigned int src_id) {
             if (ttok!=NULL) listBuffer.push_back(ttok);
         }
     }
-    unlockContainerList();
+    unlockObjectList();
     return listBuffer;
 }
 
 std::list<TuioPointer*> TuioClient::getTuioPointerList(unsigned int src_id) {
-    lockContainerList();
+    lockObjectList();
     std::list<TuioPointer*> listBuffer;
     for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj != tobjList.end(); tobj++) {
         if ((*tobj)->getTuioSource()->getSourceID()==src_id) {
@@ -383,12 +384,12 @@ std::list<TuioPointer*> TuioClient::getTuioPointerList(unsigned int src_id) {
             if (tptr!=NULL) listBuffer.push_back(tptr);
         }
     }
-    unlockContainerList();
+    unlockObjectList();
     return listBuffer;
 }
 
 std::list<TuioBounds*> TuioClient::getTuioBoundsList(unsigned int src_id) {
-    lockContainerList();
+    lockObjectList();
     std::list<TuioBounds*> listBuffer;
     for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj != tobjList.end(); tobj++) {
         if ((*tobj)->getTuioSource()->getSourceID()==src_id) {
@@ -396,12 +397,12 @@ std::list<TuioBounds*> TuioClient::getTuioBoundsList(unsigned int src_id) {
             if (tbnd!=NULL) listBuffer.push_back(tbnd);
         }
     }
-    unlockContainerList();
+    unlockObjectList();
     return listBuffer;
 }
 
 std::list<TuioSymbol*> TuioClient::getTuioSymbolList(unsigned int src_id) {
-    lockContainerList();
+    lockObjectList();
     std::list<TuioSymbol*> listBuffer;
     for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj != tobjList.end(); tobj++) {
         if ((*tobj)->getTuioSource()->getSourceID()==src_id) {
@@ -409,26 +410,42 @@ std::list<TuioSymbol*> TuioClient::getTuioSymbolList(unsigned int src_id) {
             if (tsym!=NULL) listBuffer.push_back(tsym);
         }
     }
-    unlockContainerList();
+    unlockObjectList();
     return listBuffer;
 }
 
-void TuioClient::addFrameContainer(TuioObject *tobj) {
-    for (std::list<TuioObject*>::iterator iter=frameContainer.begin(); iter != frameContainer.end(); iter++) {
+void TuioClient::addFrameObject(TuioObject *tobj) {
+    for (std::list<TuioObject*>::iterator iter=frameObjectList.begin(); iter != frameObjectList.end(); iter++) {
         if ((*iter)->getSessionID()==tobj->getSessionID()) return;
     }
     
-    frameContainer.push_back(tobj);
+    frameObjectList.push_back(tobj);
 }
 
-TuioObject* TuioClient::getFrameContainer(unsigned int src_id, unsigned int s_id) {
-    for (std::list<TuioObject*>::iterator tobj=frameContainer.begin(); tobj != frameContainer.end(); tobj++) {
+TuioObject* TuioClient::getFrameObject(unsigned int src_id, unsigned int s_id) {
+    for (std::list<TuioObject*>::iterator tobj=frameObjectList.begin(); tobj != frameObjectList.end(); tobj++) {
         if ((*tobj)->getSessionID()==s_id) return *tobj;
     }
     
     for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj != tobjList.end(); tobj++) {
-        if (((*tobj)->getSessionID()==s_id) && ((*tobj)->getTuioSourceID()==src_id)) return *tobj;
+        if (((*tobj)->getSessionID()==s_id) && ((*tobj)->getTuioSource()->getSourceID()==src_id)) return *tobj;
     }
     
     return NULL;
+}
+
+void TuioClient::lockFrame() {
+#ifndef WIN32
+    pthread_mutex_lock(&frameMutex);
+#else
+    WaitForSingleObject(frameMutex, INFINITE);
+#endif
+}
+
+void TuioClient::unlockFrame() {
+#ifndef WIN32
+    pthread_mutex_unlock(&frameMutex);
+#else
+    ReleaseMutex(frameMutex);
+#endif
 }

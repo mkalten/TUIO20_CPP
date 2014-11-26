@@ -66,7 +66,7 @@ namespace TUIO2 {
 		 * Session ID, X and Y coordinate, width, height and angle to the newly created TuioBounds.
 		 *
 		 * @param	ttime	the TuioTime to assign
-		 * @param	si	the Session ID to assign
+		 * @param	tobj	the TuioObject to assign
 		 * @param	xp	the X coordinate to assign
 		 * @param	yp	the Y coordinate to assign
 		 * @param	a	the angle to assign
@@ -74,13 +74,13 @@ namespace TUIO2 {
 		 * @param	h	the height to assign
 		 * @param	f	the area to assign
 		 */
-		TuioBounds (TuioTime ttime, unsigned int si, float xp, float yp, float a, float w, float h, float f);
+		TuioBounds (TuioTime ttime, TuioObject *tobj, float xp, float yp, float a, float w, float h, float f);
         
         /**
          * This constructor takes a TuioTime argument and assigns it along with the provided
          * Session ID, X and Y coordinate, width, height and angle to the newly created TuioBounds.
          *
-         * @param	si	the Session ID to assign
+         * @param	tobj	the TuioObject to assign
          * @param	xp	the X coordinate to assign
          * @param	yp	the Y coordinate to assign
          * @param	a	the angle to assign
@@ -88,7 +88,7 @@ namespace TUIO2 {
          * @param	h	the height to assign
          * @param	f	the area to assign
          */
-        TuioBounds (unsigned int si, float xp, float yp, float a, float w, float h, float f);
+        TuioBounds (TuioObject *tobj, float xp, float yp, float a, float w, float h, float f);
 		
 		/**
 		 * This constructor takes the atttibutes of the provided TuioBounds 

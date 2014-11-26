@@ -53,7 +53,7 @@ namespace TUIO2 {
 		 * Session ID, Symbol ID, X and Y coordinate and angle to the newly created TuioToken.
 		 *
 		 * @param	ttime	the TuioTime to assign
-		 * @param	si	the Session ID to assign
+		 * @param	tobj	the TuioObject to assign
          * @param	ti	the Type ID  to assign
          * @param	ui	the User ID  to assign
 		 * @param	sym	the Symbol ID  to assign
@@ -61,13 +61,13 @@ namespace TUIO2 {
 		 * @param	yp	the Y coordinate to assign
 		 * @param	a	the angle to assign
 		 */
-		TuioToken (TuioTime ttime, unsigned int si, unsigned short ti, unsigned short ui, unsigned int sym, float xp, float yp, float a);
+		TuioToken (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, float xp, float yp, float a);
 
 		/**
 		 * This constructor takes the provided Session ID, Symbol ID, X and Y coordinate
 		 * and angle, and assigs these values to the newly created TuioToken.
 		 *
-		 * @param	si	the Session ID to assign
+		 * @param	tobj	the TuioObject to assign
          * @param	ti	the Type ID  to assign
          * @param	ui	the User ID  to assign
 		 * @param	sym	the Symbol ID  to assign
@@ -75,19 +75,19 @@ namespace TUIO2 {
 		 * @param	yp	the Y coordinate to assign
 		 * @param	a	the angle to assign
 		 */	
-		TuioToken (unsigned int si, unsigned short ti, unsigned short ui, unsigned int sym, float xp, float yp, float a);
+		TuioToken (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, float xp, float yp, float a);
         
         /**
          * This constructor takes the provided Session ID, Symbol ID, X and Y coordinate
          * and angle, and assigs these values to the newly created TuioToken.
          *
-         * @param	si	the Session ID to assign
+         * @param	tobj	the TuioObject to assign
          * @param	sym	the Symbol ID  to assign
          * @param	xp	the X coordinate to assign
          * @param	yp	the Y coordinate to assign
          * @param	a	the angle to assign
          */
-        TuioToken (unsigned int si, unsigned int sym, float xp, float yp, float a);
+        TuioToken (TuioObject *tobj, unsigned int sym, float xp, float yp, float a);
 		
 		/**
 		 * This constructor takes the atttibutes of the provided TuioToken 

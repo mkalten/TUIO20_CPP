@@ -203,26 +203,39 @@ namespace TUIO2 {
          using TuioDispatcher::getTuioSymbolList;
          std::list<TuioSymbol*> getTuioSymbolList(unsigned int src_id);
 
-		
-		void processOSC( const osc::ReceivedMessage& message);
+        /**
+         * Parses the incoming OSC message
+         *
+         * @param  message  the incoming OSC message
+         */
+         void processOSC( const osc::ReceivedMessage& message);
 		
 	private:
 		void initialize();
 		
-        void addFrameContainer(TuioObject *con);
-        TuioObject* getFrameContainer(unsigned int src_id,unsigned int s_id);
-        std::list<unsigned int> aliveContainerList;
-		std::list<TuioObject*> frameContainer;
+        void addFrameObject(TuioObject *con);
+        TuioObject* getFrameObject(unsigned int src_id,unsigned int s_id);
+        std::list<unsigned int> aliveObjectList;
+		std::list<TuioObject*> frameObjectList;
 		
         TuioTime frameTime;
         bool lateFrame;
 			
+        unsigned int source_count;
         std::map<std::string,TuioSource*> sourceList;
         TuioSource *frameSource;
-        unsigned int source_count;
-		
+        
 		OscReceiver *receiver;
 		bool local_receiver;
+        
+#ifndef WIN32
+        pthread_mutex_t frameMutex;
+#else
+        HANDLE frameMutex;
+#endif
+        
+        void lockFrame();
+        void unlockFrame();
 	};
 };
 #endif /* INCLUDED_TUIOCLIENT_H */

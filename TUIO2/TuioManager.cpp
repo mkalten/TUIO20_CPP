@@ -136,7 +136,7 @@ TuioObject* TuioManager::createTuioToken(unsigned int sym, float x, float y, flo
 TuioObject* TuioManager::createTuioToken(unsigned int sym, unsigned short t_id, unsigned short u_id, float x, float y, float a) {
 	sessionID++;
     TuioObject *tobj = new TuioObject(sessionID);
-	TuioToken *ttok = new TuioToken(currentFrameTime,sessionID, t_id, u_id, sym, x, y, a);
+	TuioToken *ttok = new TuioToken(currentFrameTime,tobj, t_id, u_id, sym, x, y, a);
     tobj->setTuioToken(ttok);
 	tobjList.push_back(tobj);
 	tobjUpdate = true;
@@ -162,7 +162,7 @@ TuioObject* TuioManager::addTuioToken(unsigned int s_id, unsigned short t_id, un
     }
     if (tobj==NULL) return NULL;
     
-    TuioToken *ttok = new TuioToken(currentFrameTime,tobj->getSessionID(), t_id, u_id, sym, x, y, a);
+    TuioToken *ttok = new TuioToken(currentFrameTime,tobj, t_id, u_id, sym, x, y, a);
     tobj->setTuioToken(ttok);
     tobjUpdate = true;
     
@@ -265,7 +265,7 @@ TuioObject* TuioManager::createTuioPointer(unsigned short t_id, unsigned short u
         delete freePointer;
 	} else maxPointerID = pointerID;	
 	
-	TuioPointer *tptr = new TuioPointer(currentFrameTime, sessionID, t_id, u_id, pointerID, x, y, a, s, r, p);
+	TuioPointer *tptr = new TuioPointer(currentFrameTime, tobj, t_id, u_id, pointerID, x, y, a, s, r, p);
     tobj->setTuioPointer(tptr);
     pointerCount++;
 	tobjList.push_back(tobj);
@@ -302,7 +302,7 @@ TuioObject* TuioManager::addTuioPointer(unsigned int s_id, unsigned short t_id, 
         delete freePointer;
     } else maxPointerID = pointerID;
     
-    TuioPointer *tptr = new TuioPointer(currentFrameTime, sessionID, t_id, u_id, pointerID, x, y, a, s, r, p);
+    TuioPointer *tptr = new TuioPointer(currentFrameTime, tobj, t_id, u_id, pointerID, x, y, a, s, r, p);
     tobj->setTuioPointer(tptr);
     pointerCount++;
     tobjUpdate = true;
@@ -329,7 +329,7 @@ TuioObject* TuioManager::createTuioPointer(unsigned int p_id, unsigned short t_i
     sessionID++;
     TuioObject *tobj = new TuioObject(sessionID);
     
-    TuioPointer *tptr = new TuioPointer(currentFrameTime, sessionID, t_id, u_id, p_id, x, y, a, s, r, p);
+    TuioPointer *tptr = new TuioPointer(currentFrameTime, tobj, t_id, u_id, p_id, x, y, a, s, r, p);
     tobj->setTuioPointer(tptr);
     pointerCount++;
     tobjList.push_back(tobj);
@@ -352,7 +352,7 @@ TuioObject* TuioManager::addTuioPointer(unsigned int s_id, unsigned int p_id, un
     }
     
     if (tobj==NULL) return NULL;
-    TuioPointer *tptr = new TuioPointer(currentFrameTime, sessionID, t_id, u_id, p_id, x, y, a, s, r, p);
+    TuioPointer *tptr = new TuioPointer(currentFrameTime, tobj, t_id, u_id, p_id, x, y, a, s, r, p);
     tobj->setTuioPointer(tptr);
     pointerCount++;
     tobjUpdate = true;
@@ -468,9 +468,8 @@ TuioObject* TuioManager::createTuioBounds(float x, float y, float a, float w, fl
     sessionID++;
     TuioObject *tobj = new TuioObject(sessionID);
     
-    TuioBounds *tbnd = new TuioBounds(currentFrameTime, sessionID, x, y, a, w, h, f);
+    TuioBounds *tbnd = new TuioBounds(currentFrameTime, tobj, x, y, a, w, h, f);
     tobj->setTuioBounds(tbnd);
-    pointerCount++;
     tobjList.push_back(tobj);
     tobjUpdate = true;
     
@@ -492,9 +491,8 @@ TuioObject* TuioManager::addTuioBounds(unsigned int s_id, float x, float y, floa
     }
     if (tobj==NULL) return NULL;
 	
-	TuioBounds *tbnd = new TuioBounds(currentFrameTime, sessionID, x, y, a, w, h, f);
+	TuioBounds *tbnd = new TuioBounds(currentFrameTime, tobj, x, y, a, w, h, f);
     tobj->setTuioBounds(tbnd);
-    pointerCount++;
     tobjUpdate = true;
 	
     for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++)
@@ -574,9 +572,8 @@ TuioObject* TuioManager::createTuioSymbol(unsigned short t_id, unsigned short u_
     sessionID++;
     TuioObject *tobj = new TuioObject(sessionID);
     
-    TuioSymbol *tsym = new TuioSymbol(currentFrameTime, sessionID, t_id, u_id, sym, type, data);
+    TuioSymbol *tsym = new TuioSymbol(currentFrameTime, tobj, t_id, u_id, sym, type, data);
     tobj->setTuioSymbol(tsym);
-    pointerCount++;
     tobjList.push_back(tobj);
     tobjUpdate = true;
     
@@ -598,9 +595,8 @@ TuioObject* TuioManager::addTuioSymbol(unsigned int s_id, unsigned short t_id, u
     }
     if (tobj==NULL) return NULL;
     
-    TuioSymbol *tsym = new TuioSymbol(currentFrameTime, sessionID, t_id, u_id, sym, type, data);
+    TuioSymbol *tsym = new TuioSymbol(currentFrameTime, tobj, t_id, u_id, sym, type, data);
     tobj->setTuioSymbol(tsym);
-    pointerCount++;
     tobjUpdate = true;
     
     for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++)

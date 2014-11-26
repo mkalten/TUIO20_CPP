@@ -20,10 +20,10 @@
 #include "TuioObject.h"
 using namespace TUIO2;
 
-TuioComponent::TuioComponent (TuioTime ttime, unsigned int si, float xp, float yp, float a):TuioPoint(ttime, xp,yp)
+TuioComponent::TuioComponent (TuioTime ttime, TuioObject *tobj, float xp, float yp, float a):TuioPoint(ttime, xp,yp)
 ,state(TUIO_ADDED)
 {
-	session_id = si;
+	container = tobj;
     angle = a;
 	x_speed = 0.0f;
 	y_speed = 0.0f;
@@ -35,10 +35,10 @@ TuioComponent::TuioComponent (TuioTime ttime, unsigned int si, float xp, float y
 	path.push_back(p);
  }
 
-TuioComponent::TuioComponent (unsigned int si, float xp, float yp, float a):TuioPoint(xp,yp)
+TuioComponent::TuioComponent (TuioObject *tobj, float xp, float yp, float a):TuioPoint(xp,yp)
 ,state(TUIO_ADDED)
 {
-	session_id = si;
+	container = tobj;
     angle = a;
 	x_speed = 0.0f;
 	y_speed = 0.0f;
@@ -50,11 +50,11 @@ TuioComponent::TuioComponent (unsigned int si, float xp, float yp, float a):Tuio
 	path.push_back(p);
 }
 
-TuioComponent::TuioComponent (TuioComponent *tcon):TuioPoint(tcon)
+TuioComponent::TuioComponent (TuioComponent *tcomp):TuioPoint(tcomp)
 ,state(TUIO_ADDED)		
 {
-	session_id = tcon->getSessionID();
-    angle = tcon->getAngle();
+	container = tcomp->getContainingTuioObject();
+    angle = tcomp->getAngle();
 	x_speed = 0.0f;
 	y_speed = 0.0f;
 	motion_speed = 0.0f;
@@ -63,6 +63,10 @@ TuioComponent::TuioComponent (TuioComponent *tcon):TuioPoint(tcon)
     rotation_accel = 0.0f;
 	TuioPoint p(currentTime,xpos,ypos);
 	path.push_back(p);
+}
+
+TuioObject* TuioComponent::getContainingTuioObject() {
+    return container;
 }
 
 void TuioComponent::update (TuioTime ttime, float xp, float yp, float a) {
@@ -144,17 +148,17 @@ void TuioComponent::update (float xp, float yp, float a, float xs, float ys, flo
     else state = TUIO_STOPPED;
 }
 
-void TuioComponent::update (TuioComponent *tcon) {
-	TuioPoint::update(tcon);
-    angle = tcon->getAngle();
-	x_speed = tcon->getXSpeed();
-	y_speed =  tcon->getYSpeed();
-	motion_speed =  tcon->getMotionSpeed();
-    rotation_speed = tcon->getRotationSpeed();
-	motion_accel = tcon->getMotionAccel();
-    rotation_accel = tcon->getRotationAccel();
+void TuioComponent::update (TuioComponent *tcomp) {
+	TuioPoint::update(tcomp);
+    angle = tcomp->getAngle();
+	x_speed = tcomp->getXSpeed();
+	y_speed =  tcomp->getYSpeed();
+	motion_speed =  tcomp->getMotionSpeed();
+    rotation_speed = tcomp->getRotationSpeed();
+	motion_accel = tcomp->getMotionAccel();
+    rotation_accel = tcomp->getRotationAccel();
 	
-	TuioPoint p(tcon->getTuioTime(),xpos,ypos);
+	TuioPoint p(tcomp->getTuioTime(),xpos,ypos);
 	path.push_back(p);
 	
 	if (motion_accel>0) state = TUIO_ACCELERATING;
@@ -169,11 +173,7 @@ void TuioComponent::remove(TuioTime ttime) {
 }
 
 unsigned int TuioComponent::getSessionID() const{
-    return session_id;
-}
-
-void TuioComponent::setSessionID(unsigned int si) {
-	session_id = si;
+    return container->getSessionID();
 }
 
 float TuioComponent::getAngle() const{

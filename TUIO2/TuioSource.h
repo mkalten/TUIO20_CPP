@@ -64,12 +64,23 @@ namespace TUIO2 {
         
         /**
          * Sets the ID, name and address of the TUIO source
-         *
-         * @param	src_name	the name of the TUIO source
          */
         TuioSource() {
             source_id = 0;
             source_name = "";
+            source_instance = 0;
+            source_address = "localhost";
+            dimension = 0;
+        };
+        
+        /**
+         * Sets the ID, name and address of the TUIO source
+         *
+         * @param	src_name	the name of the TUIO source
+         */
+        TuioSource(const char *src_name) {
+            source_id = 0;
+            source_name = src_name;
             source_instance = 0;
             source_address = "localhost";
             dimension = 0;

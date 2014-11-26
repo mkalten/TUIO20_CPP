@@ -42,12 +42,10 @@ namespace TUIO2 {
 		 * The shared session ID
 		 */
 		unsigned int session_id;
-        
         /**
          * The associated TuioSource
          */
         TuioSource source;
-        
         /**
          * the associated TuioToken
          */
@@ -64,7 +62,6 @@ namespace TUIO2 {
          * the associated TuioSymbol
          */
         TuioSymbol *symbol;
-        
         /**
          * The time stamp of the last update represented as TuioTime (time since session start)
          */
@@ -122,12 +119,7 @@ namespace TUIO2 {
          * Returns the associated TUIO source
          */
         TuioSource* getTuioSource();
-        
-        /**
-         * Returns the ID of the associated TUIO source
-         */
-        unsigned int getTuioSourceID();
-        
+                
 		/**
 		 * This method assigns a TuioToken to this TuioObject
 		 * @param	ttok	the TuioToken to assign

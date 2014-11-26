@@ -20,19 +20,19 @@
 
 using namespace TUIO2;
 
-TuioToken::TuioToken (TuioTime ttime, unsigned int si, unsigned short ti, unsigned short ui, unsigned int sym, float xp, float yp, float a):TuioComponent(ttime, si, xp, yp,a) {
+TuioToken::TuioToken (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, float xp, float yp, float a):TuioComponent(ttime, tobj, xp, yp,a) {
     type_id = ti;
     user_id = ui;
     symbol_id = sym;
 }
 
-TuioToken::TuioToken (unsigned int si, unsigned short ti, unsigned short ui, unsigned int sym, float xp, float yp, float a):TuioComponent(si, xp, yp, a) {
+TuioToken::TuioToken (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, float xp, float yp, float a):TuioComponent(tobj, xp, yp, a) {
     type_id = ti;
     user_id = ui;
     symbol_id = sym;
 }
 
-TuioToken::TuioToken (unsigned int si, unsigned int sym, float xp, float yp, float a):TuioComponent(si, xp, yp, a) {
+TuioToken::TuioToken (TuioObject *tobj, unsigned int sym, float xp, float yp, float a):TuioComponent(tobj, xp, yp, a) {
     type_id = 0;
     user_id = 0;
     symbol_id = sym;

@@ -20,10 +20,9 @@
 
 using namespace TUIO2;
 
-TuioSymbol::TuioSymbol (TuioTime ttime, unsigned int si, unsigned short ti, unsigned short ui, unsigned int sym, const char *type, const char *data):TuioComponent(ttime,si,0,0,0) {
+TuioSymbol::TuioSymbol (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, const char *type, const char *data):TuioComponent(ttime,tobj,0,0,0) {
     currentTime = ttime;
     startTime = currentTime;
-    session_id = si;
     type_id = ti;
     user_id = ui;
     symbol_id = sym;
@@ -32,10 +31,9 @@ TuioSymbol::TuioSymbol (TuioTime ttime, unsigned int si, unsigned short ti, unsi
     state = TUIO_ADDED;
 }
 	
-TuioSymbol::TuioSymbol (unsigned int si, unsigned short ti, unsigned short ui, unsigned int sym, const char *type, const char *data):TuioComponent(si,0,0,0) {
+TuioSymbol::TuioSymbol (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, const char *type, const char *data):TuioComponent(tobj,0,0,0) {
     currentTime = TuioTime::getSystemTime();
     startTime = currentTime;
-    session_id = si;
     type_id = ti;
     user_id = ui;
     symbol_id = sym;
@@ -44,7 +42,7 @@ TuioSymbol::TuioSymbol (unsigned int si, unsigned short ti, unsigned short ui, u
     state = TUIO_ADDED;
 }
 
-TuioSymbol::TuioSymbol (TuioSymbol *tsym):TuioComponent(tsym->getTuioTime(),tsym->getSessionID(),0,0,0) {
+TuioSymbol::TuioSymbol (TuioSymbol *tsym):TuioComponent(tsym->getTuioTime(),tsym->getContainingTuioObject(),0,0,0) {
     currentTime = TuioTime::getSystemTime();
     startTime = currentTime;
     session_id = tsym->getSessionID();
