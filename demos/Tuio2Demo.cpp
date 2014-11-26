@@ -47,8 +47,10 @@ void Tuio2Demo::drawObjects() {
 	
 	// draw the pointers
 	std::list<TuioPointer*> pointerList = tuioClient->getTuioPointerList();
+    tuioClient->lockObjectList();
 	for (std::list<TuioPointer*>::iterator iter = pointerList.begin(); iter!=pointerList.end(); iter++) {
 		TuioPointer *tuioPointer = (*iter);
+        if (tuioPointer==NULL) continue;
  		std::list<TuioPoint> path = tuioPointer->getPath();
 		if (path.size()>0) {
 			
@@ -78,9 +80,11 @@ void Tuio2Demo::drawObjects() {
 			drawString(id);
 		}
 	}
+    tuioClient->unlockObjectList();
 	
 	// draw the objects
 	std::list<TuioToken*> objectList = tuioClient->getTuioTokenList();
+    tuioClient->lockObjectList();
 	for (std::list<TuioToken*>::iterator iter = objectList.begin(); iter!=objectList.end(); iter++) {
 		TuioToken *TuioToken = (*iter);
 		int pos_size = height/25.0f;
@@ -106,9 +110,11 @@ void Tuio2Demo::drawObjects() {
 		sprintf(id,"%d",TuioToken->getSymbolID());
 		drawString(id);
 	}
+    tuioClient->unlockObjectList();
 	
 	// draw the blobs
 	std::list<TuioBounds*> blobList = tuioClient->getTuioBoundsList();
+    tuioClient->lockObjectList();
 	for (std::list<TuioBounds*>::iterator iter = blobList.begin(); iter!=blobList.end(); iter++) {
 		TuioBounds *tuioBounds = (*iter);
 		float blob_width = tuioBounds->getScreenWidth(width)/2;
@@ -140,7 +146,8 @@ void Tuio2Demo::drawObjects() {
 		glRasterPos2f(xpos,ypos+5);
 		drawString(id);
 	}
-	
+    tuioClient->unlockObjectList();
+
 	SDL_GL_SwapBuffers();
 }
 
