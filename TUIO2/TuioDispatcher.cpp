@@ -110,6 +110,20 @@ TuioSymbol* TuioDispatcher::getTuioSymbol(unsigned int s_id) {
     return tobj->getTuioSymbol();
 }
 
+TuioGeometry* TuioDispatcher::getTuioCHG(unsigned int s_id) {
+	TuioObject *tobj = getTuioObject(s_id);
+	if (tobj==NULL) return NULL;
+	
+	return tobj->getTuioCHG();
+}
+
+TuioGeometry* TuioDispatcher::getTuioOCG(unsigned int s_id) {
+	TuioObject *tobj = getTuioObject(s_id);
+	if (tobj==NULL) return NULL;
+	
+	return tobj->getTuioOCG();
+}
+
 std::list<TuioObject*> TuioDispatcher::getTuioObjectList() {
     std::list<TuioObject*> listBuffer;
     lockObjectList();
@@ -162,4 +176,26 @@ std::list<TuioSymbol*> TuioDispatcher::getTuioSymbolList() {
     }
     unlockObjectList();
     return listBuffer;
+}
+
+std::list<TuioGeometry*> TuioDispatcher::getTuioCHGList() {
+	std::list<TuioGeometry*> listBuffer;
+	lockObjectList();
+	for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj!=tobjList.end(); tobj++) {
+		TuioGeometry *tgeom = (*tobj)->getTuioCHG();
+		if (tgeom!=NULL) listBuffer.push_back(tgeom);
+	}
+	unlockObjectList();
+	return listBuffer;
+}
+
+std::list<TuioGeometry*> TuioDispatcher::getTuioOCGList() {
+	std::list<TuioGeometry*> listBuffer;
+	lockObjectList();
+	for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj!=tobjList.end(); tobj++) {
+		TuioGeometry *tgeom = (*tobj)->getTuioOCG();
+		if (tgeom!=NULL) listBuffer.push_back(tgeom);
+	}
+	unlockObjectList();
+	return listBuffer;
 }

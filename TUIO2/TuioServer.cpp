@@ -310,6 +310,28 @@ void TuioServer::addSymbolMessage(TuioSymbol *tsym) {
     (*oscPacket) << osc::EndMessage;
 }
 
+void TuioServer::addCHGMessage(TuioGeometry *tchg) {
+	checkBundleCapacity(CHG_MESSAGE_SIZE + 8 * tchg->getPoints().size());
+	
+	(*oscPacket) << osc::BeginMessage( "/tuio2/chg");
+	(*oscPacket) << (int32)tchg->getSessionID();
+	for (std::list<TuioPoint>::iterator tpoint = tchg->getPoints().begin(); tpoint!=tchg->getPoints().end(); tpoint++) {
+		(*oscPacket) << tpoint->getX() << tpoint->getY();
+	}
+	(*oscPacket) << osc::EndMessage;
+}
+
+void TuioServer::addOCGMessage(TuioGeometry *tocg) {
+	checkBundleCapacity(OCG_MESSAGE_SIZE + 8 * tocg->getPoints().size());
+	
+	(*oscPacket) << osc::BeginMessage( "/tuio2/ocg");
+	(*oscPacket) << (int32)tocg->getSessionID();
+	for (std::list<TuioPoint>::iterator tpoint = tocg->getPoints().begin(); tpoint!=tocg->getPoints().end(); tpoint++) {
+		(*oscPacket) << tpoint->getX() << tpoint->getY();
+	}
+	(*oscPacket) << osc::EndMessage;
+}
+
 void TuioServer::sendTuioBundle() {
     
     //int before = oscPacket->Capacity()-oscPacket->Size();

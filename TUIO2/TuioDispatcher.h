@@ -103,7 +103,21 @@ namespace TUIO2 {
          * @return  a List of all currently active TuioSymbols
          */
         std::list<TuioSymbol*> getTuioSymbolList();
+		
+		/**
+		 * Returns a List of all currently active convex hull geometries
+		 *
+		 * @return  a List of all currently active convex hull geometries
+		 */
+		std::list<TuioGeometry*> getTuioCHGList();
 
+		/**
+		 * Returns a List of all currently active outer contour geometries
+		 *
+		 * @return  a List of all currently active outer contour geometries
+		 */
+		std::list<TuioGeometry*> getTuioOCGList();
+		
         /**
          * Returns the TuioObject corresponding to the provided Session ID
          * or NULL if the Session ID does not refer to an active TuioObject
@@ -143,6 +157,22 @@ namespace TUIO2 {
          * @return  an active TuioSymbol corresponding to the provided Session ID or NULL
          */
         TuioSymbol* getTuioSymbol(unsigned int s_id);
+		
+		/**
+		 * Returns the convex hull geometry corresponding to the provided Session ID
+		 * or NULL if the Session ID does not refer to an active convex hull geometry
+		 *
+		 * @return  an active convex hull geometry corresponding to the provided Session ID or NULL
+		 */
+		TuioGeometry* getTuioCHG(unsigned int s_id);
+		
+		/**
+		 * Returns the outer contour geometry corresponding to the provided Session ID
+		 * or NULL if the Session ID does not refer to an active outer contour geometry
+		 *
+		 * @return  an active outer contour geometry corresponding to the provided Session ID or NULL
+		 */
+		TuioGeometry* getTuioOCG(unsigned int s_id);
 		
 		/**
 		 * Locks the TuioObject list in order to avoid updates during access
