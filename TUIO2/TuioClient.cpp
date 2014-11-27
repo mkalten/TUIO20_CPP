@@ -203,7 +203,71 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
                 tobj->update(frameTime);
                 addFrameObject(tobj);
             }
-        } else if( strcmp( msg.AddressPattern(), "/tuio2/alv" ) == 0 ) {
+		} else if( strcmp( msg.AddressPattern(), "/tuio2/chg" ) == 0 ) {
+			
+			if (lateFrame) return;
+			int32 s_id_raw
+			unsigned int s_id;
+			std::list<TuioPoint> points;
+			args >> s_id_raw;
+			
+			s_id = (unsigned int)s_id_raw;
+			
+			while(!args.Eos())
+			{
+				float xpos;
+				float ypos;
+				args >> xpos;
+				args >> ypos;
+				points.push_back(TuioPoint(frameTime, xpos, ypos));
+			}
+			
+			TuioObject *tobj = getFrameObject(frameSource->getSourceID(),s_id);
+			if (tobj == NULL) tobj = new TuioObject(frameTime,frameSource,s_id);
+								 
+			TuioGeometry *tchg = tobj->getTuioCHG();
+			if (tchg == NULL) {
+				tchg = new TuioGeometry(frameMutex, tobj, points);
+				tobj->setTuioCHG(tchg);
+				addFrameObject(tobj);
+			} else {
+				tchg->update(frameTime);
+				tobj->update(frameTime);
+				addFrameObject(tobj);
+			}
+		} else if( strcmp( msg.AddressPattern(), "/tuio2/ocg" ) == 0 ) {
+			
+			if (lateFrame) return;
+			int32 s_id_raw
+			unsigned int s_id;
+			std::list<TuioPoint> points;
+			args >> s_id_raw;
+			
+			s_id = (unsigned int)s_id_raw;
+			
+			while(!args.Eos())
+			{
+				float xpos;
+				float ypos;
+				args >> xpos;
+				args >> ypos;
+				points.push_back(TuioPoint(frameTime, xpos, ypos));
+			}
+			
+			TuioObject *tobj = getFrameObject(frameSource->getSourceID(),s_id);
+			if (tobj == NULL) tobj = new TuioObject(frameTime,frameSource,s_id);
+			
+			TuioGeometry *tocg = tobj->getTuioOCG();
+			if (tocg == NULL) {
+				tocg = new TuioGeometry(frameMutex, tobj, points);
+				tobj->setTuioOCG(tocg);
+				addFrameObject(tobj);
+			} else {
+				tocg->update(frameTime);
+				tobj->update(frameTime);
+				addFrameObject(tobj);
+			}
+		} else if( strcmp( msg.AddressPattern(), "/tuio2/alv" ) == 0 ) {
  
             if (lateFrame) return;
             int32 s_id;
@@ -352,6 +416,30 @@ TuioSymbol* TuioClient::getTuioSymbol(unsigned int src_id, unsigned int s_id) {
     return NULL;
 }
 
+TuioGeometry* TuioClient::getTuioCHG(unsigned int src_id, unsigned int s_id) {
+	lockObjectList();
+	for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++) {
+		if (((*iter)->getSessionID()==s_id) && ((*iter)->getTuioSource()->getSourceID()==src_id)) {
+			unlockObjectList();
+			return (*iter)->getTuioCHG();
+		}
+	}
+	unlockObjectList();
+	return NULL;
+}
+
+TuioGeometry* TuioClient::getTuioOCG(unsigned int src_id, unsigned int s_id) {
+	lockObjectList();
+	for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++) {
+		if (((*iter)->getSessionID()==s_id) && ((*iter)->getTuioSource()->getSourceID()==src_id)) {
+			unlockObjectList();
+			return (*iter)->getTuioOCG();
+		}
+	}
+	unlockObjectList();
+	return NULL;
+}
+
 std::list<TuioObject*> TuioClient::getTuioObjectList(unsigned int src_id) {
     lockObjectList();
     std::list<TuioObject*> listBuffer;
@@ -412,6 +500,32 @@ std::list<TuioSymbol*> TuioClient::getTuioSymbolList(unsigned int src_id) {
     }
     unlockObjectList();
     return listBuffer;
+}
+
+std::list<TuioGeometry*> TuioClient::getTuioCHGList(unsigned int src_id) {
+	lockObjectList();
+	std::list<TuioGeometry*> listBuffer;
+	for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj != tobjList.end(); tobj++) {
+		if ((*tobj)->getTuioSource()->getSourceID()==src_id) {
+			TuioGeometry *tchg = (*tobj)->getTuioCHG();
+			if (tchg!=NULL) listBuffer.push_back(tchg);
+		}
+	}
+	unlockObjectList();
+	return listBuffer;
+}
+
+std::list<TuioGeometry*> TuioClient::getTuioOCGList(unsigned int src_id) {
+	lockObjectList();
+	std::list<TuioGeometry*> listBuffer;
+	for (std::list<TuioObject*>::iterator tobj=tobjList.begin(); tobj != tobjList.end(); tobj++) {
+		if ((*tobj)->getTuioSource()->getSourceID()==src_id) {
+			TuioGeometry *tocg = (*tobj)->getTuioOCG();
+			if (tocg!=NULL) listBuffer.push_back(tocg);
+		}
+	}
+	unlockObjectList();
+	return listBuffer;
 }
 
 void TuioClient::addFrameObject(TuioObject *tobj) {

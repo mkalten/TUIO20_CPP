@@ -25,6 +25,7 @@
 #include "TuioBounds.h"
 #include "TuioSymbol.h"
 #include "TuioSource.h"
+#include "TuioGeometry.h"
 
 namespace TUIO2 {
 	
@@ -62,9 +63,17 @@ namespace TUIO2 {
          * the associated TuioSymbol
          */
         TuioSymbol *symbol;
-        /**
-         * The time stamp of the last update represented as TuioTime (time since session start)
-         */
+		/**
+		 * the associated convex hull geometry
+		 */
+		TuioGeometry *chg;
+		/**
+		 * the associated outer contour geometry
+		 */
+		TuioGeometry *ocg;
+		/**
+		 * The time stamp of the last update represented as TuioTime (time since session start)
+		 */
         TuioTime currentTime;
 		/**
 		 * The creation time of this TuioObject represented as TuioTime (time since session start)
@@ -143,7 +152,19 @@ namespace TUIO2 {
          * @param	tsym	the TuioSymbol to assign
          */
         void setTuioSymbol(TuioSymbol *tsym);
-  
+
+		/**
+		 * This method assigns an convex hull geometry to this TuioObject
+		 * @param	tocg	the geometry to assign
+		 */
+		void setTuioCHG(TuioGeometry *tchg);
+		
+		/**
+		 * This method assigns an outer contour geometry to this TuioObject
+		 * @param	tocg	the geometry to assign
+		 */
+		void setTuioOCG(TuioGeometry *tocg);
+		
         /**
          * This method sets all TuioComponents in this TuioObject to TUIO_REMOVED state
          */
@@ -168,7 +189,17 @@ namespace TUIO2 {
          * This method sets the TuioSymbol in this TuioObject to TUIO_REMOVED state
          */
         void removeTuioSymbol(TuioTime ttime);
-        
+
+		/**
+		 * This method sets the convex hull geometry in this TuioObject to TUIO_REMOVED state
+		 */
+		void removeTuioCHG(TuioTime ttime);
+		
+		/**
+		 * This method sets the outer contour geometry in this TuioObject to TUIO_REMOVED state
+		 */
+		void removeTuioOCG(TuioTime ttime);
+		
         /**
          * This method deletes all TuioComponents in this TuioObject
          */
@@ -193,7 +224,17 @@ namespace TUIO2 {
          * This method deletes the TuioSymbol in this TuioObject
          */
         void deleteTuioSymbol();
-        
+		
+		/**
+		 * This method deletes the convex hull geometry in this TuioObject
+		 */
+		void deleteTuioCHG();
+		
+		/**
+		 * This method deletes the outer contour geometry in this TuioObject
+		 */
+		void deleteTuioOCG();
+		
         /**
          * This method clears all TuioComponents in this TuioObject
          */
@@ -218,7 +259,17 @@ namespace TUIO2 {
          * This method clears the TuioSymbol in this TuioObject
          */
         void clearTuioSymbol();
-        
+		
+		/**
+		 * This method clears the convex hull geometry in this TuioObject
+		 */
+		void clearTuioCHG();
+		
+		/**
+		 * This method clears the outer contour geometry in this TuioObject
+		 */
+		void clearTuioOCG();
+		
         /**
          * This method tests for any TuioComponent in this TuioObject
          * @return true if any TuioComponent has been assigned
@@ -248,7 +299,19 @@ namespace TUIO2 {
          * @return true if a TuioSymbol has been assigned
          */
         bool containsTuioSymbol();
-        
+		
+		/**
+		 * This method tests for an convex hull geometry in this TuioObject
+		 * @return true if an convex hull geometry has been assigned
+		 */
+		bool containsTuioCHG();
+		
+		/**
+		 * This method tests for an outer contour geometry in this TuioObject
+		 * @return true if an outer contour geometry has been assigned
+		 */
+		bool containsTuioOCG();
+		
         /**
          * This method tests if a new TuioToken has been added to this TuioObject
          * @return true if a TuioToken has been added
@@ -272,6 +335,18 @@ namespace TUIO2 {
          * @return true if a TuioSymbol has been added
          */
         bool containsNewTuioSymbol();
+		
+		/**
+		 * This method tests if a new convex hull geometry has beed added to this TuioObject
+		 * @return true if an convex hull geometry has been added
+		 */
+		bool containsNewTuioCHG();
+		
+		/**
+		 * This method tests if a new outer contour geometry has beed added to this TuioObject
+		 * @return true if an outer contour geometry has been added
+		 */
+		bool containsNewTuioOCG();
 
         /**
          * This method returns the TuioToken associated to this TuioObject
@@ -296,7 +371,19 @@ namespace TUIO2 {
          * @return	the associated TuioSymbol
          */
         TuioSymbol* getTuioSymbol();
-        
+
+		/**
+		 * This method returns the convex hull geometry associated to this TuioObject
+		 * @return	the associated convex hull geometry
+		 */
+		TuioGeometry* getTuioCHG();
+		
+		/**
+		 * This method returns the outer contour geometry associated to this TuioObject
+		 * @return	the associated outer contour geometry
+		 */
+		TuioGeometry* getTuioOCG();
+		
         /**
          * This method stops all encapsulated TuioComponents
          */

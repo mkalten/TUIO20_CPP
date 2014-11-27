@@ -35,6 +35,8 @@
 #define BND_MESSAGE_SIZE 116
 #define SYM_MESSAGE_SIZE 116
 #define ALV_MESSAGE_SIZE 20
+#define CHG_MESSAGE_SIZE 24
+#define OCG_MESSAGE_SIZE 24
 
 namespace TUIO2 {
 	/**
@@ -198,6 +200,8 @@ namespace TUIO2 {
         void addPointerMessage(TuioPointer *tptr);
         void addBoundsMessage(TuioBounds *tbnd);
         void addSymbolMessage(TuioSymbol *tsym);
+		void addCHGMessage(TuioGeometry *tchg);
+		void addOCGMessage(TuioGeometry *tocg);
 		void sendTuioBundle();
         void sendEmptyTuioBundle();
 		

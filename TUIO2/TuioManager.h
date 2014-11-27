@@ -163,10 +163,11 @@ namespace TUIO2 {
         TuioObject* addTuioToken(unsigned int s_id, unsigned short t_id, unsigned short u_id, unsigned int sym, float xp, float yp, float a);
         
         /**
-         * Creates a new TuioToken based on the given arguments.
-         * and adds it to an existing TuioObject with the Session ID
-         * from the TuioServer's internal list of TuioObjects
-         * and the TuioToken reference is returned to the caller.
+		 * Creates a new TuioToken based on the given arguments
+		 * and adds it to an existing TuioObject with the Session ID
+		 * from the TuioServer's internal list of TuioObjects.
+		 * The new TuioToken is added to the TuioServer's internal list of active TuioTokens
+		 * The TuioToken reference is returned to the caller.
          *
          * @param	s_id	the Session ID of the existing TuioObject
          * @param	t_id	the Type ID to assign
@@ -223,10 +224,11 @@ namespace TUIO2 {
 		TuioObject* createTuioPointer(float xp, float yp, float a, float s, float r, float p);
         
         /**
-         * Creates a new TuioPointer based on the given arguments.
-         * and adds it to an existing TuioObject with the Session ID
-         * The new TuioPointer is added to the TuioServer's internal list of active TuioPointers
-         * and a reference of the TuioObject is returned to the caller.
+		 * Creates a new TuioPointer based on the given arguments
+		 * and adds it to an existing TuioObject with the Session ID
+		 * from the TuioServer's internal list of TuioObjects.
+		 * The new TuioPointer is added to the TuioServer's internal list of active TuioPointers
+		 * The TuioPointer reference is returned to the caller.
          *
          * @param	s_id	the Session ID of the existing TuioObject
          * @param	xp	the X coordinate to assign
@@ -392,10 +394,13 @@ namespace TUIO2 {
 		TuioObject* createTuioBounds(float xp, float yp, float angle, float width, float height, float area);
         
         /**
-         * Creates a new TuioBounds based on the given arguments.
-         * The new TuioBounds is added to the TuioServer's internal list of active TuioBounds
-         * and a reference is returned to the caller.
-         *
+		 * Creates a new TuioBounds based on the given arguments
+		 * and adds it to an existing TuioObject with the Session ID
+		 * from the TuioServer's internal list of TuioObjects.
+		 * The new TuioBounds is added to the TuioServer's internal list of active TuioBounds
+		 * The TuioBounds reference is returned to the caller.
+		 *
+		 * @param	s_id	the Session ID of the existing TuioObject
          * @param	xp	the X coordinate to assign
          * @param	yp	the Y coordinate to assign
          * @param	angle	the angle to assign
@@ -451,11 +456,14 @@ namespace TUIO2 {
          */
         TuioObject* createTuioSymbol(unsigned short t_id, unsigned short u_id, unsigned int sym, const char *type, const char *data);
         
-        /**
-         * Creates a new TuioSymbol based on the given arguments.
-         * The new TuioSymbol is added to the TuioServer's internal list of TuioObjects
-         * and a reference is returned to the caller.
-         *
+		/**
+		 * Creates a new TuioSymbol based on the given arguments
+		 * and adds it to an existing TuioObject with the Session ID
+		 * from the TuioServer's internal list of TuioObjects.
+		 * The new TuioSymbol is added to the TuioServer's internal list of active TuioSymbol
+		 * The TuioSymbols reference is returned to the caller.
+		 *
+		 * @param	s_id	the Session ID of the existing TuioObject
          * @param	t_id	the Type ID to assign
          * @param	u_id	the User ID to assign
          * @param	sym     the Symbol ID to assign
@@ -482,6 +490,104 @@ namespace TUIO2 {
          * @param	tsym	the TuioSymbol to remove
          */
         void removeTuioSymbol(TuioSymbol *tsym);
+		
+		/**
+		 * Creates a new convex hull geometry object based on the given arguments.
+		 * The new geometry object is added to the TuioServer's internal list of active TuioBounds
+		 * and a reference is returned to the caller.
+		 *
+		 * @param	tpoints the points forming the geometry
+		 * @return	a reference to the TuioObject of the geometry
+		 */
+		TuioObject* createTuioCHG(std::list<TuioPoint> tpoints);
+		
+		/**
+		 * Creates a new convex hull geometry based on the given arguments
+		 * and adds it to an existing TuioObject with the Session ID
+		 * from the TuioServer's internal list of TuioObjects.
+		 * The new convex hull geometry is added to the TuioServer's internal list of active convex hull geometries
+		 * The convex hull geometry reference is returned to the caller.
+		 *
+		 * @param	s_id	the Session ID of the existing TuioObject
+		 * @param	tpoints the points forming the geometry
+		 * @return	a reference to the TuioObject of the geometry
+		 */
+		TuioObject* addTuioCHG(unsigned int s_id, std::list<TuioPoint> tpoints);
+		
+		/**
+		 * Adds the provided convex hull geometry to an existing TuioObject
+		 * from the TuioServer's internal list of TuioObjects
+		 * or creates the according TuioObject if not found.
+		 *
+		 * @param	tgeom the geometry points to be used
+		 * @return	a reference to the TuioObject of the geometry
+		 */
+		TuioObject* addTuioCHG(TuioGeometry *tchg);
+		
+		/**
+		 * Updates the referenced convex hull geometry based on the given points.
+		 *
+		 * @param	tgeom	the geometry to update
+		 * @param	tpoints the points forming the geometry
+		 */
+		void updateTuioCHG(TuioGeometry *tchg, std::list<TuioPoint> tpoints);
+		
+		/**
+		 * Removes the referenced convex hull geometry from the TuioServer's internal list of TuioObjects
+		 * and also deletes its TuioObject (and all its encapsulated TUIO Components)
+		 *
+		 * @param	tgeom	the geometry to remove
+		 */
+		void removeTuioCHG(TuioGeometry *tchg);
+		
+		/**
+		 * Creates a new outer contour geometry object based on the given arguments.
+		 * The new geometry object is added to the TuioServer's internal list of active TuioBounds
+		 * and a reference is returned to the caller.
+		 *
+		 * @param	tpoints the points forming the geometry
+		 * @return	a reference to the TuioObject of the geometry
+		 */
+		TuioObject* createTuioOCG(std::list<TuioPoint> tpoints);
+		
+		/**
+		 * Creates a new outer contour geometry based on the given arguments
+		 * and adds it to an existing TuioObject with the Session ID
+		 * from the TuioServer's internal list of TuioObjects.
+		 * The new geometry is added to the TuioServer's internal list of active outer contour geometries
+		 * The geometry reference is returned to the caller.
+		 *
+		 * @param	s_id	the Session ID of the existing TuioObject
+		 * @param	tpoints the points forming the geometry
+		 * @return	a reference to the TuioObject of the TuioBounds
+		 */
+		TuioObject* addTuioOCG(unsigned int s_id, std::list<TuioPoint> tpoints);
+		
+		/**
+		 * Adds the provided outer contour geometry to an existing TuioObject
+		 * from the TuioServer's internal list of TuioObjects
+		 * or creates the according TuioObject if not found.
+		 *
+		 * @param	tgeom the geometry points to be used
+		 * @return	a reference to the TuioObject of the geometry
+		 */
+		TuioObject* addTuioOCG(TuioGeometry *tocg);
+		
+		/**
+		 * Updates the referenced outer contour geometry based on the given points.
+		 *
+		 * @param	tgeom	the geometry to update
+		 * @param	tpoints the points forming the geometry
+		 */
+		void updateTuioOCG(TuioGeometry *tocg, std::list<TuioPoint> tpoints);
+		
+		/**
+		 * Removes the referenced outer contour geometry from the TuioServer's internal list of TuioObjects
+		 * and also deletes its TuioObject (and all its encapsulated TUIO Components)
+		 *
+		 * @param	tgeom	the geometry to remove
+		 */
+		void removeTuioOCG(TuioGeometry *tocg);
 		
 		/**
 		 * Initializes a new frame with the given TuioTime

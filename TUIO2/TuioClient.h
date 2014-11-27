@@ -202,6 +202,50 @@ namespace TUIO2 {
          */
          using TuioDispatcher::getTuioSymbolList;
          std::list<TuioSymbol*> getTuioSymbolList(unsigned int src_id);
+		
+		/**
+		 * Returns the convex hull geometry object corresponding to the provided Session ID
+		 * which is associated to the given Source ID
+		 * or NULL if the Session ID does not refer to an active geometry
+		 *
+		 * @param  src_id  the source ID of the corresponding TUIO source
+		 * @param  s_id  the session ID of the corresponding convex hull geometry object
+		 * @return  an active convex hull geometry object corresponding to the provided Session ID or NULL
+		 */
+		using TuioDispatcher::getTuioCHG;
+		TuioGeometry* getTuioCHG(unsigned int src_id, unsigned int s_id);
+		
+		/**
+		 * Returns a List of all currently active convex hull geometry objects
+		 * which are associated to the given Source ID
+		 *
+		 * @param  src_id  the source ID of the corresponding TUIO source
+		 * @return  a List of convex hull geometry objects
+		 */
+		using TuioDispatcher::getTuioCHGList;
+		std::list<TuioSymbol*> getTuioCHGList(unsigned int src_id);
+		
+		/**
+		 * Returns the outer contour geometry object corresponding to the provided Session ID
+		 * which is associated to the given Source ID
+		 * or NULL if the Session ID does not refer to an active geometry
+		 *
+		 * @param  src_id  the source ID of the corresponding TUIO source
+		 * @param  s_id  the session ID of the corresponding outer contour geometry object
+		 * @return  an active outer contour geometry object corresponding to the provided Session ID or NULL
+		 */
+		using TuioDispatcher::getTuioOCG;
+		TuioGeometry* getTuioOCG(unsigned int src_id, unsigned int s_id);
+		
+		/**
+		 * Returns a List of all currently active outer contour geometry objects
+		 * which are associated to the given Source ID
+		 *
+		 * @param  src_id  the source ID of the corresponding TUIO source
+		 * @return  a List of outer contour geometry objects
+		 */
+		using TuioDispatcher::getTuioOCGList;
+		std::list<TuioSymbol*> getTuioOCGList(unsigned int src_id);
 
         /**
          * Parses the incoming OSC message

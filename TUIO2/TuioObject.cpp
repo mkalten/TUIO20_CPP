@@ -97,11 +97,25 @@ void TuioObject::setTuioSymbol (TuioSymbol *tsym) {
     state = TUIO_ADDED;
 }
 
+void TuioObject::setTuioCHG(TuioGeometry *tchg) {
+	chg = tchg;
+	currentTime = TuioTime::getSystemTime();
+	state = TUIO_ADDED;
+}
+
+void TuioObject::setTuioOCG (TuioGeometry *tocg) {
+	ocg = tocg;
+	currentTime = TuioTime::getSystemTime();
+	state = TUIO_ADDED;
+}
+
 void TuioObject::removeAllTuioComponents(TuioTime ttime) {
     removeTuioToken(ttime);
     removeTuioPointer(ttime);
     removeTuioBounds(ttime);
     removeTuioSymbol(ttime);
+	removeTuioOCG(ttime);
+	removeTuioCHG(ttime);
 }
 
 void TuioObject::removeTuioToken (TuioTime ttime) {
@@ -122,6 +136,16 @@ void TuioObject::removeTuioBounds (TuioTime ttime) {
 void TuioObject::removeTuioSymbol (TuioTime ttime) {
     if (symbol != NULL) symbol->remove(ttime);
     currentTime = ttime;
+}
+
+void TuioObject::removeTuioCHG(TuioTime ttime) {
+	if (chg != NULL) chg->remove(ttime);
+	currentTime = ttime;
+}
+
+void TuioObject::removeTuioOCG(TuioTime ttime) {
+	if (ocg != NULL) ocg->remove(ttime);
+	currentTime = ttime;
 }
 
 void TuioObject::deleteAllTuioComponents() {
@@ -163,6 +187,22 @@ void TuioObject::deleteTuioSymbol () {
     }
 }
 
+void TuioObject::deleteTuioCHG () {
+	if (chg != NULL) {
+		delete chg;
+		chg = NULL;
+		//currentTime = TuioTime::getSessionTime();
+	}
+}
+
+void TuioObject::deleteTuioOCG () {
+	if (ocg != NULL) {
+		delete ocg;
+		ocg = NULL;
+		//currentTime = TuioTime::getSessionTime();
+	}
+}
+
 void TuioObject::clearAllTuioComponents() {
     clearTuioToken();
     clearTuioPointer();
@@ -198,6 +238,20 @@ void TuioObject::clearTuioSymbol () {
     }
 }
 
+void TuioObject::clearTuioCHG () {
+	if (chg != NULL) {
+		chg = NULL;
+		//currentTime = TuioTime::getSessionTime();
+	}
+}
+
+void TuioObject::clearTuioOCG () {
+	if (ocg != NULL) {
+		ocg = NULL;
+		//currentTime = TuioTime::getSessionTime();
+	}
+}
+
 bool TuioObject::containsAnyTuioComponent () {
     if (token != NULL) return true;
     else if (pointer != NULL) return true;
@@ -226,6 +280,16 @@ bool TuioObject::containsTuioSymbol () {
     else return false;
 }
 
+bool TuioObject::containsTuioCHG () {
+	if (chg != NULL) return true;
+	else return false;
+}
+
+bool TuioObject::containsTuioOCG () {
+	if (ocg != NULL) return true;
+	else return false;
+}
+
 bool TuioObject::containsNewTuioToken () {
     if (token == NULL) return false;
     else if (token->getTuioState()==TUIO_ADDED) return true;
@@ -250,6 +314,18 @@ bool TuioObject::containsNewTuioSymbol () {
     else return false;
 }
 
+bool TuioObject::containsNewTuioCHG () {
+	if (chg == NULL) return false;
+	else if (chg->getTuioState()==TUIO_ADDED) return true;
+	else return false;
+}
+
+bool TuioObject::containsNewTuioOCG () {
+	if (ocg == NULL) return false;
+	else if (ocg->getTuioState()==TUIO_ADDED) return true;
+	else return false;
+}
+
 TuioToken* TuioObject::getTuioToken () {
     return token;
 }
@@ -266,6 +342,14 @@ TuioSymbol* TuioObject::getTuioSymbol () {
     return symbol;
 }
 
+TuioGeometry* TuioObject::getTuioCHG () {
+	return chg;
+}
+
+TuioGeometry* TuioObject::getTuioOCG () {
+	return ocg;
+}
+
 void TuioObject::stop(TuioTime ttime){
     if (token!=NULL) token->stop(ttime);
     if (pointer!=NULL) pointer->stop(ttime);
@@ -277,6 +361,9 @@ void TuioObject::remove(TuioTime ttime){
     if (token!=NULL) token->remove(ttime);
     if (pointer!=NULL) pointer->remove(ttime);
     if (bounds!=NULL) bounds->remove(ttime);
+	if (symbol != NULL) symbol->remove(ttime);
+	if (chg != NULL) chg->remove(ttime);
+	if (ocg != NULL) ocg->remove(ttime);
     currentTime = ttime;
     state = TUIO_REMOVED;
 }

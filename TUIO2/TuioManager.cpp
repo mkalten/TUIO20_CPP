@@ -123,7 +123,17 @@ void TuioManager::removeTuioObject(TuioObject *tobj) {
         if (verbose) std::cout << "del sym " << tobj->getSessionID() << std::endl;
         tobj->deleteTuioSymbol();
     }
-    
+
+	if (tobj->containsTuioCHG()) {
+		if (verbose) std::cout << "del chg " << tobj->getSessionID() << std::endl;
+		tobj->deleteTuioCHG();
+	}
+
+	if (tobj->containsTuioOCG()) {
+		if (verbose) std::cout << "del ocg " << tobj->getSessionID() << std::endl;
+		tobj->deleteTuioOCG();
+	}
+	
     tobjList.remove(tobj);
     tobjUpdate = true;
     delete tobj;
@@ -650,6 +660,214 @@ void TuioManager::removeTuioSymbol(TuioSymbol *tsym) {
     } else removeTuioObject(tobj);
 }
 
+TuioObject* TuioManager::createTuioCHG(std::list<TuioPoint> tpoints) {
+	sessionID++;
+	TuioObject *tobj = new TuioObject(sessionID);
+	
+	TuioGeometry *tchg = new TuioGeometry(currentFrameTime, tobj, tpoints);
+	tobj->setTuioCHG(tchg);
+	tobjList.push_back(tobj);
+	tobjUpdate = true;
+	
+	for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++)
+		(*listener)->tuioAdd(tobj);
+	
+	if (verbose)std::cout << "add chg " << tobj->getSessionID() << std::endl;
+	
+	return tobj;
+}
+
+TuioObject* TuioManager::addTuioCHG(unsigned int s_id, std::list<TuioPoint> tpoints) {
+	TuioObject *tobj = NULL;
+	for(std::list<TuioObject*>::iterator iter = tobjList.begin();iter!= tobjList.end(); iter++) {
+		if((*iter)->getSessionID()==s_id) {
+			tobj = *iter;
+			break;
+		}
+	}
+	if (tobj==NULL) return NULL;
+	
+	TuioGeometry *tchg = new TuioGeometry(tobj, tpoints);
+	tobj->setTuioCHG(tchg);
+	tobjUpdate = true;
+	
+	for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++)
+		(*listener)->tuioAdd(tobj);
+	
+	if (verbose)std::cout << "add chg " << tobj->getSessionID() << std::endl;
+	
+	return tobj;
+}
+
+TuioObject* TuioManager::addTuioCHG(TuioGeometry *tchg) {
+	if (tchg==NULL) return NULL;
+	
+	TuioObject *tobj = NULL;
+	for(std::list<TuioObject*>::iterator iter = tobjList.begin();iter!= tobjList.end(); iter++) {
+		if((*iter)->getSessionID()==tchg->getSessionID()) {
+			tobj = *iter;
+			break;
+		}
+	}
+	
+	if (tobj!=NULL) tobjUpdate = true;
+	else tobj = new TuioObject(tchg->getSessionID());
+	tobj->setTuioCHG(tchg);
+	
+	for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++) {
+		if (tobjUpdate)(*listener)->tuioUpdate(tobj);
+		else(*listener)->tuioAdd(tobj);
+	}
+	
+	if (verbose) std::cout << "add chg " << tobj->getSessionID() << std::endl;
+	tobjUpdate = true;
+	
+	return tobj;
+}
+
+void TuioManager::updateTuioCHG(TuioGeometry *tchg, std::list<TuioPoint> tpoints) {
+	if (tchg==NULL) return;
+	if (tchg->getTuioTime()==currentFrameTime) return;
+	
+	
+	TuioObject *tobj = NULL;
+	for(std::list<TuioObject*>::iterator iter = tobjList.begin();iter!= tobjList.end(); iter++) {
+		if((*iter)->getSessionID()==tchg->getSessionID()) {
+			tobj = *iter;
+			break;
+		}
+	}
+	
+	tchg->update(currentFrameTime, tpoints);
+	tobjUpdate = true;
+	
+	for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++)
+		(*listener)->tuioUpdate(tobj);
+	
+	if (verbose)std::cout << "set chg " << tobj->getSessionID() << std::endl;
+}
+
+void TuioManager::removeTuioCHG(TuioGeometry *tchg) {
+	if (tchg==NULL) return;
+	
+	TuioObject *tobj = NULL;
+	for(std::list<TuioObject*>::iterator iter = tobjList.begin();iter!= tobjList.end(); iter++) {
+		if((*iter)->getSessionID()==tchg->getSessionID()) {
+			tobj = *iter;
+			break;
+		}
+	}
+	
+	if (tobj==NULL) {
+		delete tchg;
+		return;
+	} else removeTuioObject(tobj);
+}
+
+TuioObject* TuioManager::createTuioOCG(std::list<TuioPoint> tpoints) {
+	sessionID++;
+	TuioObject *tobj = new TuioObject(sessionID);
+	
+	TuioGeometry *tocg = new TuioGeometry(currentFrameTime, tobj, tpoints);
+	tobj->setTuioOCG(tocg);
+	tobjList.push_back(tobj);
+	tobjUpdate = true;
+	
+	for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++)
+		(*listener)->tuioAdd(tobj);
+	
+	if (verbose)std::cout << "add ocg " << tobj->getSessionID() << std::endl;
+	
+	return tobj;
+}
+
+TuioObject* TuioManager::addTuioOCG(unsigned int s_id, std::list<TuioPoint> tpoints) {
+	TuioObject *tobj = NULL;
+	for(std::list<TuioObject*>::iterator iter = tobjList.begin();iter!= tobjList.end(); iter++) {
+		if((*iter)->getSessionID()==s_id) {
+			tobj = *iter;
+			break;
+		}
+	}
+	if (tobj==NULL) return NULL;
+	
+	TuioGeometry *tocg = new TuioGeometry(tobj, tpoints);
+	tobj->setTuioOCG(tocg);
+	tobjUpdate = true;
+	
+	for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++)
+		(*listener)->tuioAdd(tobj);
+	
+	if (verbose)std::cout << "add ocg " << tobj->getSessionID() << std::endl;
+	
+	return tobj;
+}
+
+TuioObject* TuioManager::addTuioOCG(TuioGeometry *tocg) {
+	if (tocg==NULL) return NULL;
+	
+	TuioObject *tobj = NULL;
+	for(std::list<TuioObject*>::iterator iter = tobjList.begin();iter!= tobjList.end(); iter++) {
+		if((*iter)->getSessionID()==tocg->getSessionID()) {
+			tobj = *iter;
+			break;
+		}
+	}
+	
+	if (tobj!=NULL) tobjUpdate = true;
+	else tobj = new TuioObject(tocg->getSessionID());
+	tobj->setTuioCHG(tocg);
+	
+	for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++) {
+		if (tobjUpdate)(*listener)->tuioUpdate(tobj);
+		else(*listener)->tuioAdd(tobj);
+	}
+	
+	if (verbose) std::cout << "add ocg " << tobj->getSessionID() << std::endl;
+	tobjUpdate = true;
+	
+	return tobj;
+}
+
+void TuioManager::updateTuioOCG(TuioGeometry *tocg, std::list<TuioPoint> tpoints) {
+	if (tocg==NULL) return;
+	if (tocg->getTuioTime()==currentFrameTime) return;
+	
+	
+	TuioObject *tobj = NULL;
+	for(std::list<TuioObject*>::iterator iter = tobjList.begin();iter!= tobjList.end(); iter++) {
+		if((*iter)->getSessionID()==tocg->getSessionID()) {
+			tobj = *iter;
+			break;
+		}
+	}
+	
+	tocg->update(currentFrameTime, tpoints);
+	tobjUpdate = true;
+	
+	for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++)
+		(*listener)->tuioUpdate(tobj);
+	
+	if (verbose)std::cout << "set ocg " << tobj->getSessionID() << std::endl;
+}
+
+void TuioManager::removeTuioOCG(TuioGeometry *tocg) {
+	if (tocg==NULL) return;
+	
+	TuioObject *tobj = NULL;
+	for(std::list<TuioObject*>::iterator iter = tobjList.begin();iter!= tobjList.end(); iter++) {
+		if((*iter)->getSessionID()==tocg->getSessionID()) {
+			tobj = *iter;
+			break;
+		}
+	}
+	
+	if (tobj==NULL) {
+		delete tocg;
+		return;
+	} else removeTuioObject(tobj);
+}
+
 int TuioManager::getSessionID() {
 	sessionID++;
     if (sessionID==UINT_MAX) sessionID = 0;
@@ -753,7 +971,15 @@ std::list<TuioObject*> TuioManager::getUntouchedObjects() {
         if ((*tobj)->containsTuioSymbol()) {
             if ((*tobj)->getTuioSymbol()->getTuioTime()==currentFrameTime) touched=true;
         }
-        
+		
+		if ((*tobj)->containsTuioCHG()) {
+			if ((*tobj)->getTuioCHG()->getTuioTime()==currentFrameTime) touched=true;
+		}
+
+		if ((*tobj)->containsTuioOCG()) {
+			if ((*tobj)->getTuioOCG()->getTuioTime()==currentFrameTime) touched=true;
+		}
+		
         if (!touched) untouched.push_back(*tobj);
 		
 	}	
