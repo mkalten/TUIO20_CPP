@@ -49,9 +49,9 @@ void Tuio2Demo::drawObjects() {
 	std::list<TuioPointer*> pointerList = tuioClient->getTuioPointerList();
     tuioClient->lockObjectList();
 	for (std::list<TuioPointer*>::iterator iter = pointerList.begin(); iter!=pointerList.end(); iter++) {
-		TuioPointer *tuioPointer = (*iter);
-        if (tuioPointer==NULL) continue;
- 		std::list<TuioPoint> path = tuioPointer->getPath();
+		TuioPointer *tptr = (*iter);
+        if (tptr==NULL) continue;
+ 		std::list<TuioPoint> path = tptr->getPath();
 		if (path.size()>0) {
 			
 			TuioPoint last_point = path.front();
@@ -75,8 +75,8 @@ void Tuio2Demo::drawObjects() {
 			glPopMatrix();
 			
 			glColor3f(0.0, 0.0, 0.0);
-			glRasterPos2f(tuioPointer->getScreenX(width),tuioPointer->getScreenY(height));
-			sprintf(id,"%d",tuioPointer->getPointerID());
+			glRasterPos2f(tptr->getScreenX(width),tptr->getScreenY(height));
+			sprintf(id,"%d",tptr->getPointerID());
 			drawString(id);
 		}
 	}
@@ -86,12 +86,12 @@ void Tuio2Demo::drawObjects() {
 	std::list<TuioToken*> objectList = tuioClient->getTuioTokenList();
     tuioClient->lockObjectList();
 	for (std::list<TuioToken*>::iterator iter = objectList.begin(); iter!=objectList.end(); iter++) {
-		TuioToken *TuioToken = (*iter);
+		TuioToken *ttok = (*iter);
 		int pos_size = height/25.0f;
 		int neg_size = -1*pos_size;
-		float xpos  = TuioToken->getScreenX(width);
-		float ypos  = TuioToken->getScreenY(height);
-		float angle = TuioToken->getAngleDegrees();
+		float xpos  = ttok->getScreenX(width);
+		float ypos  = ttok->getScreenY(height);
+		float angle = ttok->getAngleDegrees();
 		
 		glColor3f(0.0, 0.0, 0.0);
 		glPushMatrix();
@@ -107,7 +107,7 @@ void Tuio2Demo::drawObjects() {
 		
 		glColor3f(1.0, 1.0, 1.0);
 		glRasterPos2f(xpos,ypos+5);
-		sprintf(id,"%d",TuioToken->getSymbolID());
+		sprintf(id,"%d",ttok->getSymbolID());
 		drawString(id);
 	}
     tuioClient->unlockObjectList();
@@ -116,12 +116,12 @@ void Tuio2Demo::drawObjects() {
 	std::list<TuioBounds*> blobList = tuioClient->getTuioBoundsList();
     tuioClient->lockObjectList();
 	for (std::list<TuioBounds*>::iterator iter = blobList.begin(); iter!=blobList.end(); iter++) {
-		TuioBounds *tuioBounds = (*iter);
-		float blob_width = tuioBounds->getScreenWidth(width)/2;
-		float blob_height = tuioBounds->getScreenHeight(height)/2;
-		float xpos  = tuioBounds->getScreenX(width);
-		float ypos  = tuioBounds->getScreenY(height);
-		float angle = tuioBounds->getAngleDegrees();
+		TuioBounds *tbnd = (*iter);
+		float blob_width = tbnd->getScreenWidth(width)/2;
+		float blob_height = tbnd->getScreenHeight(height)/2;
+		float xpos  = tbnd->getScreenX(width);
+		float ypos  = tbnd->getScreenY(height);
+		float angle = tbnd->getAngleDegrees();
 		
 		glColor3f(0.25, 0.25, 0.25);
 		glPushMatrix();
