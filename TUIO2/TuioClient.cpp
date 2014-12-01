@@ -113,16 +113,14 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             TuioObject *tobj = getFrameObject(frameSource->getSourceID(),s_id);
             //if (tobj == NULL) std::cout << "new cont " << s_id << " " << frameSource.getSourceID() << std::endl;
             if (tobj == NULL) tobj = new TuioObject(frameTime,frameSource,s_id);
+            addFrameObject(tobj);
             TuioToken *ttok = tobj->getTuioToken();
             if (ttok == NULL) {
                 ttok = new TuioToken(frameTime,tobj,t_id,u_id,c_id,xpos,ypos,angle);
                 tobj->setTuioToken(ttok);
-                addFrameObject(tobj);
             } else if ( (ttok->getX()!=xpos) || (ttok->getY()!=ypos) || (ttok->getAngle()!=angle) || (ttok->getXSpeed()!=xspeed) || (ttok->getYSpeed()!=yspeed) || (ttok->getRotationSpeed()!=rspeed) || (ttok->getMotionAccel()!=maccel) || (ttok->getRotationAccel()!=raccel) ) {
 
                 ttok->update(frameTime,xpos,ypos,angle,xspeed,yspeed,rspeed,maccel,raccel);
-                tobj->update(frameTime);
-                addFrameObject(tobj);
             }
             
         } else if( strcmp( msg.AddressPattern(), "/tuio2/ptr" ) == 0 ) {
@@ -142,16 +140,15 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             TuioObject *tobj = getFrameObject(frameSource->getSourceID(),s_id);
             //if (tobj == NULL) std::cout << "new cont " << s_id << " " << frameSource.getSourceID() << std::endl;
             if (tobj == NULL) tobj = new TuioObject(frameTime,frameSource,s_id);
+            addFrameObject(tobj);
             TuioPointer *tptr = tobj->getTuioPointer();
             if (tptr == NULL) {
                 tptr = new TuioPointer(frameTime,tobj,t_id,u_id,c_id,xpos,ypos,angle,shear,radius,pressure);
                 tobj->setTuioPointer(tptr);
-                addFrameObject(tobj);
+               
             } else if ( (tptr->getX()!=xpos) || (tptr->getY()!=ypos) || (tptr->getAngle()!=angle) || (tptr->getShear()!=shear) || (tptr->getRadius()!=radius) || (tptr->getPressure()!=pressure) || (tptr->getXSpeed()!=xspeed) || (tptr->getYSpeed()!=yspeed) || (tptr->getMotionAccel()!=maccel) ) {
                 
                 tptr->update(frameTime,xpos,ypos,angle,shear,radius,pressure,xspeed,yspeed,rspeed,maccel,raccel);
-                tobj->update(frameTime);
-                addFrameObject(tobj);
             }
         } else if( strcmp( msg.AddressPattern(), "/tuio2/bnd" ) == 0 ) {
 
@@ -165,16 +162,14 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             
             TuioObject *tobj = getFrameObject(frameSource->getSourceID(),s_id);
             if (tobj == NULL) tobj = new TuioObject(frameTime,frameSource,s_id);
+            addFrameObject(tobj);
             TuioBounds *tbnd = tobj->getTuioBounds();
             if (tbnd == NULL) {
                 tbnd = new TuioBounds(frameTime,tobj,xpos,ypos,angle,width,height,area);
                 tobj->setTuioBounds(tbnd);
-                addFrameObject(tobj);
             } else if ( (tbnd->getX()!=xpos) || (tbnd->getY()!=ypos) || (tbnd->getAngle()!=angle) || (tbnd->getWidth()!=width) || (tbnd->getHeight()!=height) || (tbnd->getArea()!=area) || (tbnd->getXSpeed()!=xspeed) || (tbnd->getYSpeed()!=yspeed) || (tbnd->getRotationSpeed()!=rspeed) || (tbnd->getMotionAccel()!=maccel) || (tbnd->getRotationAccel()!=raccel)) {
                 
                 tbnd->update(frameTime,xpos,ypos,angle,width,height,area,xspeed,yspeed,rspeed,maccel,raccel);
-                tobj->update(frameTime);
-                addFrameObject(tobj);
             }
         } else if( strcmp( msg.AddressPattern(), "/tuio2/sym" ) == 0 ) {
 
@@ -193,15 +188,13 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             
             TuioObject *tobj = getFrameObject(frameSource->getSourceID(),s_id);
             if (tobj == NULL) tobj = new TuioObject(frameTime,frameSource,s_id);
+            addFrameObject(tobj);
             TuioSymbol *tsym = tobj->getTuioSymbol();
             if (tsym == NULL) {
                 tsym = new TuioSymbol(frameTime,tobj,t_id,u_id,c_id,type,data);
                 tobj->setTuioSymbol(tsym);
-                addFrameObject(tobj);
             } else {
                 tsym->update(frameTime);
-                tobj->update(frameTime);
-                addFrameObject(tobj);
             }
         } else if( strcmp( msg.AddressPattern(), "/tuio2/alv" ) == 0 ) {
  
