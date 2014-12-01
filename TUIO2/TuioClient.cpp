@@ -105,6 +105,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             float xpos, ypos, angle, xspeed, yspeed, rspeed, maccel, raccel;
             args >> s_id_raw >> tu_id_raw >> c_id_raw >> xpos >> ypos >> angle;
             if (!args.Eos()) args >> xspeed >> yspeed >> rspeed >> maccel >> raccel;
+            else xspeed = yspeed = rspeed = maccel = raccel = 0.0f;
             
             s_id = (unsigned int)s_id_raw;
             c_id = (unsigned int)c_id_raw;
@@ -130,9 +131,10 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             int32 s_id_raw, tu_id_raw, c_id_raw;
             unsigned short t_id, u_id;
             unsigned int s_id,c_id;
-            float xpos, ypos, angle, shear,radius, pressure, xspeed, yspeed, rspeed, maccel, raccel;
+            float xpos, ypos, angle, shear,radius, pressure, xspeed, yspeed, pspeed, maccel, paccel;
             args >> s_id_raw >> tu_id_raw >> c_id_raw >> xpos >> ypos >> angle >> shear >> radius >> pressure;
-            if (!args.Eos()) args >> xspeed >> yspeed >> rspeed >> maccel >> raccel;
+            if (!args.Eos()) args >> xspeed >> yspeed >> pspeed >> maccel >> paccel;
+            else xspeed = yspeed = pspeed = maccel = paccel = 0.0f;
             
             s_id = (unsigned int)s_id_raw;
             c_id = (unsigned int)c_id_raw;
@@ -148,9 +150,9 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
                 tptr = new TuioPointer(frameTime,tobj,t_id,u_id,c_id,xpos,ypos,angle,shear,radius,pressure);
                 tobj->setTuioPointer(tptr);
                
-            } else if ( (tptr->getX()!=xpos) || (tptr->getY()!=ypos) || (tptr->getAngle()!=angle) || (tptr->getShear()!=shear) || (tptr->getRadius()!=radius) || (tptr->getPressure()!=pressure) || (tptr->getXSpeed()!=xspeed) || (tptr->getYSpeed()!=yspeed) || (tptr->getMotionAccel()!=maccel) ) {
+            } else if ( (tptr->getX()!=xpos) || (tptr->getY()!=ypos) || (tptr->getAngle()!=angle) || (tptr->getShear()!=shear) || (tptr->getRadius()!=radius) || (tptr->getPressure()!=pressure) || (tptr->getXSpeed()!=xspeed) || (tptr->getYSpeed()!=yspeed) || (tptr->getPressureSpeed()!=pspeed) || (tptr->getMotionAccel()!=maccel) || (tptr->getPressureAccel()!=paccel) ) {
                 
-                tptr->update(frameTime,xpos,ypos,angle,shear,radius,pressure,xspeed,yspeed,rspeed,maccel,raccel);
+                tptr->update(frameTime,xpos,ypos,angle,shear,radius,pressure,xspeed,yspeed,pspeed,maccel,paccel);
             }
         } else if( strcmp( msg.AddressPattern(), "/tuio2/bnd" ) == 0 ) {
 
@@ -161,6 +163,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             float xspeed, yspeed, rspeed, maccel, raccel;
             args >> s_id_raw >> xpos >> ypos >> angle >> width >> height >> area;
             if (!args.Eos()) args >> xspeed >> yspeed >> rspeed >> maccel >> raccel;
+            else xspeed = yspeed = rspeed = maccel = raccel = 0.0f;
             
             s_id = (unsigned int)s_id_raw;
             TuioObject *tobj = getFrameObject(frameSource->getSourceID(),s_id);
