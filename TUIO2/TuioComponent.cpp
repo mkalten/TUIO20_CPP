@@ -102,6 +102,7 @@ void TuioComponent::update (TuioTime ttime, float xp, float yp, float a) {
     
 	TuioPoint p(currentTime,xpos,ypos);
 	path.push_back(p);
+    if (path.size()>MAX_PATH_SIZE) path.pop_front();
 	
 	if (motion_accel>0) state = TUIO_ACCELERATING;
 	else if (motion_accel<0) state = TUIO_DECELERATING;
