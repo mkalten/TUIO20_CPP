@@ -36,10 +36,10 @@ void Tuio2Test::run() {
 	frameTime = TuioTime::getSystemTime();
 	tuioServer->initTuioFrame(frameTime);
 	TuioObject *tobj = tuioServer->createTuioObject();
-	tuioServer->addTuioPointer(tobj->getSessionID(),0.0,0.0,0.0,0.0,0.0,0.0);
-	tuioServer->addTuioToken(tobj->getSessionID(),0,0.0,0.0,0.0);
-	tuioServer->addTuioBounds(tobj->getSessionID(),0,0,0,0,0,0);
-	tuioServer->addTuioSymbol(tobj->getSessionID(),0,0,0,"type0","data0");
+	tuioServer->addTuioPointer(tobj,0.0,0.0,0.0,0.0,0.0,0.0);
+	tuioServer->addTuioToken(tobj,0,0.0,0.0,0.0);
+	tuioServer->addTuioBounds(tobj,0,0,0,0,0,0);
+	tuioServer->addTuioSymbol(tobj,0,0,0,"type0","data0");
 	tuioServer->commitTuioFrame();
 	usleep(10000);
 	
