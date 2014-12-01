@@ -75,24 +75,28 @@ TuioSource* TuioObject::getTuioSource() {
 
 void TuioObject::setTuioToken (TuioToken *ttok) {
     token = ttok;
+    token->setContainingTuioObject(this);
     currentTime = TuioTime::getSystemTime();
     state = TUIO_ADDED;
 }
 
 void TuioObject::setTuioPointer (TuioPointer *tptr) {
     pointer = tptr;
+    pointer->setContainingTuioObject(this);
     currentTime = TuioTime::getSystemTime();
     state = TUIO_ADDED;
 }
 
 void TuioObject::setTuioBounds (TuioBounds *tbnd) {
 	bounds = tbnd;
+    bounds->setContainingTuioObject(this);
     currentTime = TuioTime::getSystemTime();
     state = TUIO_ADDED;
 }
 
 void TuioObject::setTuioSymbol (TuioSymbol *tsym) {
     symbol = tsym;
+    symbol->setContainingTuioObject(this);
     currentTime = TuioTime::getSystemTime();
     state = TUIO_ADDED;
 }
