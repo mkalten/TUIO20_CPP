@@ -151,7 +151,7 @@ namespace TUIO2 {
          * from the TuioServer's internal list of TuioObjects
          * and the TuioToken reference is returned to the caller.
          *
-         * @param	s_id	the Session ID of the existing TuioObject
+         * @param	tobj	the existing TuioObject
          * @param	t_id	the Type ID to assign
          * @param	u_id	the User ID to assign
          * @param	sym	the Symbol ID to assign
@@ -160,7 +160,7 @@ namespace TUIO2 {
          * @param	a	the angle to assign
          * @return	a reference to the TuioObject of the TuioToken
          */
-        TuioObject* addTuioToken(unsigned int s_id, unsigned short t_id, unsigned short u_id, unsigned int sym, float xp, float yp, float a);
+        TuioObject* addTuioToken(TuioObject *tobj, unsigned short t_id, unsigned short u_id, unsigned int sym, float xp, float yp, float a);
         
         /**
          * Creates a new TuioToken based on the given arguments.
@@ -168,7 +168,7 @@ namespace TUIO2 {
          * from the TuioServer's internal list of TuioObjects
          * and the TuioToken reference is returned to the caller.
          *
-         * @param	s_id	the Session ID of the existing TuioObject
+         * @param	tobj	the existing TuioObject
          * @param	t_id	the Type ID to assign
          * @param	u_id	the User ID to assign
          * @param	sym	the Symbol ID to assign
@@ -177,7 +177,7 @@ namespace TUIO2 {
          * @param	a	the angle to assign
          * @return	a reference to the TuioObject of the TuioToken
          */
-        TuioObject* addTuioToken(unsigned int s_id, unsigned int sym, float xp, float yp, float a);
+        TuioObject* addTuioToken(TuioObject *tobj, unsigned int sym, float xp, float yp, float a);
         
         /**
          * Adds the provided TuioToken to an existing TuioObject
@@ -228,7 +228,7 @@ namespace TUIO2 {
          * The new TuioPointer is added to the TuioServer's internal list of active TuioPointers
          * and a reference of the TuioObject is returned to the caller.
          *
-         * @param	s_id	the Session ID of the existing TuioObject
+         * @param	tobj	the existing TuioObject
          * @param	xp	the X coordinate to assign
          * @param	yp	the Y coordinate to assign
          * @param	a	the rotation angle to assign
@@ -237,7 +237,7 @@ namespace TUIO2 {
          * @param	p	the pressure to assign
          * @return	a reference to the TuioObject of the TuioPointer
          */
-        TuioObject* addTuioPointer(unsigned int s_id, float xp, float yp, float a, float s, float r, float p);
+        TuioObject* addTuioPointer(TuioObject *tobj, float xp, float yp, float a, float s, float r, float p);
         
         /**
          * Creates a new TuioPointer based on the given arguments.
@@ -261,6 +261,7 @@ namespace TUIO2 {
          * The new TuioPointer is added to the TuioServer's internal list of active TuioPointers
          * and a reference is returned to the caller.
          *
+         * @param	tobj	the existing TuioObject
          * @param	t_id	the Type ID to assign
          * @param	u_id	the User ID to assign
          * @param	xp	the X coordinate to assign
@@ -271,7 +272,7 @@ namespace TUIO2 {
          * @param	p	the pressure to assign
          * @return	a reference to the TuioObject of the TuioPointer
          */
-        TuioObject* addTuioPointer(unsigned int s_id, unsigned short t_id, unsigned short u_id, float xp, float yp, float a, float s, float r, float p);
+        TuioObject* addTuioPointer(TuioObject *tobj, unsigned short t_id, unsigned short u_id, float xp, float yp, float a, float s, float r, float p);
         
         /**
          * Creates a new TuioPointer based on the given arguments.
@@ -295,6 +296,7 @@ namespace TUIO2 {
          * The new TuioPointer is added to the TuioServer's internal list of active TuioPointers
          * and a reference is returned to the caller.
          *
+         * @param	tobj	the existing TuioObject
          * @param	p_id	the Pointer ID to assign
          * @param	xp	the X coordinate to assign
          * @param	xp	the X coordinate to assign
@@ -305,7 +307,7 @@ namespace TUIO2 {
          * @param	p	the pressure to assign
          * @return	reference to the created TuioPointer
          */
-        TuioObject* addTuioPointer(unsigned int s_id, unsigned int p_id, float xp, float yp, float a, float s, float r, float p);
+        TuioObject* addTuioPointer(TuioObject *tobj, unsigned int p_id, float xp, float yp, float a, float s, float r, float p);
         
         /**
          * Creates a new TuioPointer based on the given arguments.
@@ -331,6 +333,7 @@ namespace TUIO2 {
          * The new TuioPointer is added to the TuioServer's internal list of active TuioPointers
          * and a reference is returned to the caller.
          *
+         * @param	tobj	the existing TuioObject
          * @param	p_id	the Pointer ID to assign
          * @param	t_id	the Type ID to assign
          * @param	u_id	the User ID to assign
@@ -343,7 +346,7 @@ namespace TUIO2 {
          * @param	p	the pressure to assign
          * @return	a reference to the TuioObject of the TuioPointer
          */
-        TuioObject* addTuioPointer(unsigned int s_id, unsigned int p_id, unsigned short t_id, unsigned short u_id, float xp, float yp, float a, float s, float r, float p);
+        TuioObject* addTuioPointer(TuioObject *tobj, unsigned int p_id, unsigned short t_id, unsigned short u_id, float xp, float yp, float a, float s, float r, float p);
         
         /**
          * Adds the provided TuioPointer to an existing TuioObject
@@ -358,7 +361,7 @@ namespace TUIO2 {
 		/**
 		 * Updates the referenced TuioPointer based on the given arguments.
 		 *
-		 * @param	tptr	the TuioToken to update
+		 * @param	tptr	the TuioPointer to update
 		 * @param	xp	the X coordinate to assign
 		 * @param	yp	the Y coordinate to assign
          * @param	a	the rotation angle to assign
@@ -396,6 +399,7 @@ namespace TUIO2 {
          * The new TuioBounds is added to the TuioServer's internal list of active TuioBounds
          * and a reference is returned to the caller.
          *
+         * @param	tobj	the existing TuioObject
          * @param	xp	the X coordinate to assign
          * @param	yp	the Y coordinate to assign
          * @param	angle	the angle to assign
@@ -404,7 +408,7 @@ namespace TUIO2 {
          * @param	area	the area to assign
          * @return	a reference to the TuioObject of the TuioBounds
          */
-        TuioObject* addTuioBounds(unsigned int s_id, float xp, float yp, float angle, float width, float height, float area);
+        TuioObject* addTuioBounds(TuioObject *tobj, float xp, float yp, float angle, float width, float height, float area);
 		
         /**
          * Adds the provided TuioBounds to an existing TuioObject
@@ -456,6 +460,7 @@ namespace TUIO2 {
          * The new TuioSymbol is added to the TuioServer's internal list of TuioObjects
          * and a reference is returned to the caller.
          *
+         * @param	tobj	the existing TuioObject
          * @param	t_id	the Type ID to assign
          * @param	u_id	the User ID to assign
          * @param	sym     the Symbol ID to assign
@@ -463,7 +468,7 @@ namespace TUIO2 {
          * @param	data	the synbol data to assign
          * @return	a reference to the TuioObject of the TuioSymbol
          */
-        TuioObject* addTuioSymbol(unsigned int s_id, unsigned short t_id, unsigned short u_id, unsigned int sym, const char *type, const char *data);
+        TuioObject* addTuioSymbol(TuioObject *tobj, unsigned short t_id, unsigned short u_id, unsigned int sym, const char *type, const char *data);
         
         /**
          * Adds the provided TuioSymbol to an existing TuioObject
