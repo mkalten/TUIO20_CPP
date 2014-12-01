@@ -31,6 +31,8 @@
 #define TUIO_STOPPED 5
 #define TUIO_REMOVED 6
 
+#define MAX_PATH_SIZE 128
+
 namespace TUIO2 {
 	
 	/**

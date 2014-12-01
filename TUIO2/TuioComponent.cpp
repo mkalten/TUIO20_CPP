@@ -121,6 +121,7 @@ void TuioComponent::update (TuioTime ttime, float xp, float yp, float a, float x
 	
 	TuioPoint p(currentTime,xpos,ypos);
 	path.push_back(p);
+    if (path.size()>MAX_PATH_SIZE) path.pop_front();
 	
 	if (motion_accel>0) state = TUIO_ACCELERATING;
 	else if (motion_accel<0) state = TUIO_DECELERATING;
@@ -138,9 +139,9 @@ void TuioComponent::update (float xp, float yp, float a, float xs, float ys, flo
 	motion_accel = ma;
     rotation_accel = ra;
 	
-	//path.pop_back();
 	TuioPoint p(currentTime,xpos,ypos);
 	path.push_back(p);
+    if (path.size()>MAX_PATH_SIZE) path.pop_front();
 	
     if (motion_accel>0) state = TUIO_ACCELERATING;
     else if (motion_accel<0) state = TUIO_DECELERATING;
@@ -160,6 +161,7 @@ void TuioComponent::update (TuioComponent *tcomp) {
 	
 	TuioPoint p(tcomp->getTuioTime(),xpos,ypos);
 	path.push_back(p);
+    if (path.size()>MAX_PATH_SIZE) path.pop_front();
 	
 	if (motion_accel>0) state = TUIO_ACCELERATING;
 	else if (motion_accel<0) state = TUIO_DECELERATING;
