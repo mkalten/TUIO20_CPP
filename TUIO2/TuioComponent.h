@@ -133,6 +133,12 @@ namespace TUIO2 {
         virtual TuioObject* getContainingTuioObject();
         
         /**
+         * Returns the TuioObject containing this TuioComponent.
+         * @param	the TuioObject containing this TuioComponent
+         */
+        virtual void setContainingTuioObject(TuioObject *tobj);
+        
+        /**
          * Takes a TuioTime argument and assigns it along with the provided
          * X and Y coordinate to the private TuioComponent attributes.
          * The speed and accleration values are calculated accordingly.

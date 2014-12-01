@@ -69,6 +69,10 @@ TuioObject* TuioComponent::getContainingTuioObject() {
     return container;
 }
 
+void TuioComponent::setContainingTuioObject(TuioObject *tobj) {
+    container = tobj;
+}
+
 void TuioComponent::update (TuioTime ttime, float xp, float yp, float a) {
 	TuioPoint lastPoint = path.back();
 	TuioPoint::update(ttime,xp, yp);
@@ -103,10 +107,13 @@ void TuioComponent::update (TuioTime ttime, float xp, float yp, float a) {
 	else if (motion_accel<0) state = TUIO_DECELERATING;
     else if ((rotation_accel!=0) && (state==TUIO_STOPPED)) state = TUIO_ROTATING;
 	else state = TUIO_STOPPED;
+    
+    container->update(ttime);
 }
 
 void TuioComponent::stop(TuioTime ttime) {
 	update(ttime,xpos,ypos);
+    container->update(ttime);
 }
 
 void TuioComponent::update (TuioTime ttime, float xp, float yp, float a, float xs, float ys, float rs, float ma, float ra) {
@@ -127,6 +134,8 @@ void TuioComponent::update (TuioTime ttime, float xp, float yp, float a, float x
 	else if (motion_accel<0) state = TUIO_DECELERATING;
     else if ((rotation_accel!=0) && (state==TUIO_STOPPED)) state = TUIO_ROTATING;
     else state = TUIO_STOPPED;
+    
+    container->update(ttime);
  }
 
 void TuioComponent::update (float xp, float yp, float a, float xs, float ys, float rs, float ma, float ra) {
@@ -147,6 +156,8 @@ void TuioComponent::update (float xp, float yp, float a, float xs, float ys, flo
     else if (motion_accel<0) state = TUIO_DECELERATING;
     else if ((rotation_accel!=0) && (state==TUIO_STOPPED)) state = TUIO_ROTATING;
     else state = TUIO_STOPPED;
+    
+    container->update(currentTime);
 }
 
 void TuioComponent::update (TuioComponent *tcomp) {
@@ -167,11 +178,14 @@ void TuioComponent::update (TuioComponent *tcomp) {
 	else if (motion_accel<0) state = TUIO_DECELERATING;
     else if ((rotation_accel!=0) && (state==TUIO_STOPPED)) state = TUIO_ROTATING;
 	else state = TUIO_STOPPED;
+    
+    container->update(tcomp->getTuioTime());
 }
 
 void TuioComponent::remove(TuioTime ttime) {
 	currentTime = ttime;
 	state = TUIO_REMOVED;
+    container->update(ttime);
 }
 
 unsigned int TuioComponent::getSessionID() const{
