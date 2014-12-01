@@ -185,7 +185,7 @@ void TuioServer::commitTuioFrame() {
 void TuioServer::sendEmptyTuioBundle() {
     oscPacket->Clear();
     (*oscPacket) << osc::BeginBundleImmediate;
-    (*oscPacket) << osc::BeginMessage( "/tuio2/frm") << 0 << TuioTime::getSystemTimeTag() << source->getSourceName() << (int32)source->getDimension() << osc::EndMessage;
+    (*oscPacket) << osc::BeginMessage( "/tuio2/frm") << 0 << TuioTime::getSystemTimeTag() << (int32)source->getDimension() << source->getSourceName() << osc::EndMessage;
     (*oscPacket) << osc::BeginMessage( "/tuio2/alv") << osc::EndMessage;
     (*oscPacket) << osc::EndBundle;
     deliverOscPacket( oscPacket );

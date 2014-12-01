@@ -69,7 +69,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             int32 fseq_raw,dim_raw;
             TimeTag timetag;
             const char* src_string;
-            args >> fseq_raw >> timetag >> src_string >> dim_raw;
+            args >> fseq_raw >> timetag >> dim_raw >> src_string;
            
             
             // check if we know that source
@@ -196,6 +196,76 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             } else {
                 tsym->update(frameTime);
             }
+            
+        } else if( strcmp( msg.AddressPattern(), "/tuio2/chg" ) == 0 ) {
+            if (lateFrame) return;
+            int32 s_id_raw;
+            args >> s_id_raw;
+            unsigned int  s_id = (unsigned int)s_id_raw;
+            
+            std::list<TuioPoint> pointList;
+            while(!args.Eos()) {
+                float xpos,ypos;
+                args >> xpos >> ypos;
+                pointList.push_back(TuioPoint(frameTime, xpos, ypos));
+            }
+            
+            TuioObject *tobj = getFrameObject(frameSource->getSourceID(),s_id);
+            if (tobj == NULL) tobj = new TuioObject(frameTime,frameSource,s_id);
+            addFrameObject(tobj);
+            
+            /*TuioGeometry *tgeo = tobj->getTuioGeometry();
+            if (tgeo == NULL) {
+                tgeo = new TuioGeometry(frameTime, tobj);
+                tobj->setTuioGeometry(tgeo);
+            } tgeo->setConvexHull(pointList);*/
+            
+        } else if( strcmp( msg.AddressPattern(), "/tuio2/ocg" ) == 0 ) {
+            if (lateFrame) return;
+            int32 s_id_raw;
+            args >> s_id_raw;
+            unsigned int s_id = (unsigned int)s_id_raw;
+ 
+            std::list<TuioPoint> pointList;
+            while(!args.Eos()) {
+                float xpos, ypos;
+                args >> xpos >> ypos;
+                pointList.push_back(TuioPoint(frameTime, xpos, ypos));
+            }
+            
+            TuioObject *tobj = getFrameObject(frameSource->getSourceID(),s_id);
+            if (tobj == NULL) tobj = new TuioObject(frameTime,frameSource,s_id);
+            addFrameObject(tobj);
+            
+            /*TuioGeometry *tgeo = tobj->getTuioGeometry();
+            if (tgeo == NULL) {
+                tgeo = new TuioGeometry(frameTime, tobj);
+                tobj->setTuioGeometry(tgeo);
+            } tgeo->setOuterContour(pointList);*/
+ 
+        } else if( strcmp( msg.AddressPattern(), "/tuio2/icg" ) == 0 ) {
+            if (lateFrame) return;
+            int32 s_id_raw;
+            args >> s_id_raw;
+            unsigned int  s_id = (unsigned int)s_id_raw;
+            
+            std::list<TuioPoint> pointList;
+            while(!args.Eos()) {
+                float xpos,ypos;
+                args >> xpos >> ypos;
+                pointList.push_back(TuioPoint(frameTime, xpos, ypos));
+            }
+            
+            TuioObject *tobj = getFrameObject(frameSource->getSourceID(),s_id);
+            if (tobj == NULL) tobj = new TuioObject(frameTime,frameSource,s_id);
+            addFrameObject(tobj);
+            
+            /*TuioGeometry *tgeo = tobj->getTuioGeometry();
+             if (tgeo == NULL) {
+             tgeo = new TuioGeometry(frameTime, tobj);
+             tobj->setTuioGeometry(tgeo);
+             } tgeo->setOuterContour(pointList);*/
+
         } else if( strcmp( msg.AddressPattern(), "/tuio2/alv" ) == 0 ) {
  
             if (lateFrame) return;
