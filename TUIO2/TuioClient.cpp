@@ -63,6 +63,7 @@ TuioClient::~TuioClient() {
 void TuioClient::processOSC( const ReceivedMessage& msg ) {
     try {
         ReceivedMessageArgumentStream args = msg.ArgumentStream();
+        //ReceivedMessage::const_iterator arg = msg.ArgumentsBegin();
         
         if( strcmp( msg.AddressPattern(), "/tuio2/frm" ) == 0 ) {
             //lockFrame();
@@ -70,7 +71,6 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             TimeTag timetag;
             const char* src_string;
             args >> fseq_raw >> timetag >> dim_raw >> src_string;
-           
             
             // check if we know that source
             std::map<std::string,TuioSource*>::iterator iter = sourceList.find(src_string);
@@ -103,7 +103,8 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             unsigned short t_id, u_id;
             unsigned int s_id,c_id;
             float xpos, ypos, angle, xspeed, yspeed, rspeed, maccel, raccel;
-            args >> s_id_raw >> tu_id_raw >> c_id_raw >> xpos >> ypos >> angle >> xspeed >> yspeed >> rspeed >> maccel >> raccel;
+            args >> s_id_raw >> tu_id_raw >> c_id_raw >> xpos >> ypos >> angle;
+            if (!args.Eos()) args >> xspeed >> yspeed >> rspeed >> maccel >> raccel;
             
             s_id = (unsigned int)s_id_raw;
             c_id = (unsigned int)c_id_raw;
@@ -130,7 +131,8 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             unsigned short t_id, u_id;
             unsigned int s_id,c_id;
             float xpos, ypos, angle, shear,radius, pressure, xspeed, yspeed, rspeed, maccel, raccel;
-            args >> s_id_raw >> tu_id_raw >> c_id_raw >> xpos >> ypos >> angle >> shear >> radius >> pressure >> xspeed >> yspeed >> rspeed >> maccel >> raccel;
+            args >> s_id_raw >> tu_id_raw >> c_id_raw >> xpos >> ypos >> angle >> shear >> radius >> pressure;
+            if (!args.Eos()) args >> xspeed >> yspeed >> rspeed >> maccel >> raccel;
             
             s_id = (unsigned int)s_id_raw;
             c_id = (unsigned int)c_id_raw;
@@ -157,9 +159,10 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             unsigned int s_id;
             float xpos, ypos, angle, width, height, area;
             float xspeed, yspeed, rspeed, maccel, raccel;
-            args >> s_id_raw >> xpos >> ypos >> angle >> width >> height >> area >> xspeed >> yspeed >> rspeed >> maccel >> raccel;
-            s_id = (unsigned int)s_id_raw;
+            args >> s_id_raw >> xpos >> ypos >> angle >> width >> height >> area;
+            if (!args.Eos()) args >> xspeed >> yspeed >> rspeed >> maccel >> raccel;
             
+            s_id = (unsigned int)s_id_raw;
             TuioObject *tobj = getFrameObject(frameSource->getSourceID(),s_id);
             if (tobj == NULL) tobj = new TuioObject(frameTime,frameSource,s_id);
             addFrameObject(tobj);
@@ -205,7 +208,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             
             std::list<TuioPoint> pointList;
             while(!args.Eos()) {
-                float xpos,ypos;
+                float xpos, ypos;
                 args >> xpos >> ypos;
                 pointList.push_back(TuioPoint(frameTime, xpos, ypos));
             }
