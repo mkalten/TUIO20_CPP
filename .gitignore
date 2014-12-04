@@ -32,3 +32,11 @@ Tuio2Test
 Tuio2Demo
 
 Tuio2Simulator
+
+*.sdf
+
+*.suo
+
+Debug
+
+Release
