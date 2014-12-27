@@ -74,7 +74,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             
             // check if we know that source
             std::map<std::string,TuioSource*>::iterator iter = sourceList.find(src_string);
-            
+
             if (iter==sourceList.end()) { // add a new source
                 frameSource = new TuioSource(source_count, src_string, (unsigned int)dim_raw);
                 sourceList[src_string] = frameSource;

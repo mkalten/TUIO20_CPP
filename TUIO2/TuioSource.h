@@ -130,7 +130,10 @@ namespace TUIO2 {
         
         void setSourceString(const char *src_string) {
             
-            char *name_inst = strtok((char*)src_string, "@");
+            char data[128];
+            strcpy(data,src_string);
+            
+            char *name_inst = strtok(data, "@");
 
             char *addr = strtok(NULL, "@");
             if (addr!=NULL) source_address = std::string(addr);
