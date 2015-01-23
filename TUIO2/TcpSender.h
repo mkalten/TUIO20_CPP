@@ -90,6 +90,13 @@ namespace TUIO2 {
 		 */
 		bool isConnected ();
 
+		/**
+		 * This method is called whenever a new client connects
+		 *
+		 * @param tcp_client the socket handle of the new client
+		 */
+		virtual void newClient( int tcp_client );
+
 		int port_no;
 		
 #ifdef WIN32
@@ -100,7 +107,7 @@ namespace TUIO2 {
 		std::list<int> tcp_client_list;
 #endif
 		bool connected;
-	private:
+	protected:
 		char data_size[4];
 		char data_buffer[MAX_TCP_SIZE+4];
 		
