@@ -41,7 +41,7 @@ SIMULATOR_SOURCES = Tuio2Simulator.cpp $(OBJC_SOURCES)
 SIMULATOR_OBJECTS = Tuio2Simulator.o $(OBJC_OBJECTS)
 
 COMMON_TUIO_SOURCES = ../TUIO2/TuioTime.cpp ../TUIO2/TuioPoint.cpp ../TUIO2/TuioObject.cpp ../TUIO2/TuioComponent.cpp ../TUIO2/TuioToken.cpp ../TUIO2/TuioPointer.cpp ../TUIO2/TuioBounds.cpp ../TUIO2/TuioSymbol.cpp ../TUIO2/TuioDispatcher.cpp ../TUIO2/TuioManager.cpp 
-SERVER_TUIO_SOURCES = ../TUIO2/TuioServer.cpp ../TUIO2/UdpSender.cpp ../TUIO2/TcpSender.cpp ../TUIO2/FlashSender.cpp ../TUIO2/base64.cpp ../TUIO2/sha1.cpp ../TUIO2/WebSockSender.cpp
+SERVER_TUIO_SOURCES = ../TUIO2/TuioServer.cpp ../TUIO2/UdpSender.cpp ../TUIO2/TcpSender.cpp ../TUIO2/FlashSender.cpp ../TUIO2/WebSockSender.cpp
 CLIENT_TUIO_SOURCES = ../TUIO2/TuioClient.cpp ../TUIO2/OscReceiver.cpp ../TUIO2/UdpReceiver.cpp ../TUIO2/TcpReceiver.cpp
 OSC_SOURCES = ../oscpack/osc/OscTypes.cpp ../oscpack/osc/OscOutboundPacketStream.cpp ../oscpack/osc/OscReceivedElements.cpp ../oscpack/osc/OscPrintReceivedElements.cpp ../oscpack/ip/posix/NetworkingUtils.cpp ../oscpack/ip/posix/UdpSocket.cpp
 

@@ -1,6 +1,7 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2015 Martin Kaltenbrunner <martin@tuio.org>
+ WebSockSender (c) 2015 Florian Echtler <floe@butterbrot.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -19,7 +20,20 @@
 #ifndef INCLUDED_WEBSOCKSENDER_H
 #define INCLUDED_WEBSOCKSENDER_H
 
+
+/* All of these macros assume use on a 32-bit variable.
+ Additionally, SWAP assumes we're little-endian.	*/
+#define SWAP(a) ((((a) >> 24) & 0x000000ff) | (((a) >>	8) & 0x0000ff00) | \
+(((a) <<	8) & 0x00ff0000) | (((a) << 24) & 0xff000000))
+#define ROL(a, b) (((a) << (b)) | ((a) >> (32 - (b))))
+#define ROR(a, b) ROL((a), (32 - (b)))
+#define SHA1_HASH_SIZE (160/8)
+
 #include "TcpSender.h"
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include <vector>
 
 namespace TUIO2 {
 	
@@ -64,7 +78,11 @@ namespace TUIO2 {
 		 * @param tcp_client the socket handle of the new client
 		 */
 		void newClient( int tcp_client );
-
+	
+	private:
+		
+		void sha1( uint8_t digest[SHA1_HASH_SIZE], const uint8_t* inbuf, size_t length );
+		std::string base64( uint8_t* buffer, size_t size );
 	};
 }
 #endif /* INCLUDED_WEBSOCKSENDER_H */
