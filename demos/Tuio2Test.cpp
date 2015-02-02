@@ -110,6 +110,11 @@ int main(int argc, char* argv[])
 	OscSender *flash_sender = new FlashSender();
 	server->addOscSender(flash_sender);
 
+	// add an additional WebSocket sender
+	WebSockSender *websock_sender = new WebSockSender();
+	server->addOscSender(websock_sender);
+	sleep(5); // give web client time to connect
+
 	Tuio2Test *test = new Tuio2Test(server);
 	test->run();
 
@@ -119,6 +124,7 @@ int main(int argc, char* argv[])
 	delete flash_sender;
 #endif
 	delete tcp_sender;
+	delete websock_sender;
 	return 0;
 }
 

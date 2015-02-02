@@ -78,6 +78,7 @@ static DWORD WINAPI ServerThreadFunc( LPVOID obj )
 			std::cout << "TUIO/TCP client connected from " << inet_ntoa(client_addr.sin_addr) << "@" << client_addr.sin_port << std::endl;
 			sender->tcp_client_list.push_back(tcp_client);
 			sender->connected=true;
+			sender->newClient(tcp_client);
 			//std::cout << sender->tcp_client_list.size() << " clients connected"<< std::endl;	
 		
 #ifndef WIN32
@@ -292,3 +293,5 @@ bool TcpSender::sendOscPacket (osc::OutboundPacketStream *bundle) {
 
 	return true;
 }
+
+void TcpSender::newClient( int tcp_client ) { }

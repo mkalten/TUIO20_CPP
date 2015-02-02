@@ -28,6 +28,7 @@
 
 #include "FlashSender.h"
 #include "TcpSender.h"
+#include "WebSockSender.h"
 
 using namespace TUIO2;
 
