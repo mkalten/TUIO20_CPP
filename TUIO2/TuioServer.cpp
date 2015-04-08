@@ -210,7 +210,7 @@ void TuioServer::startTuioBundle(unsigned int fseq) {
     
     oscPacket->Clear();
     (*oscPacket) << osc::BeginBundleImmediate;
-    if (source) (*oscPacket) << osc::BeginMessage( "/tuio2/frm") << (int32)currentFrame << frameTimeTag << source->getSourceName() << (int32)source->getDimension();
+    if (source) (*oscPacket) << osc::BeginMessage( "/tuio2/frm") << (int32)currentFrame << frameTimeTag << (int32)source->getDimension() << source->getSourceName();
     (*oscPacket) << osc::EndMessage;
 }
 
