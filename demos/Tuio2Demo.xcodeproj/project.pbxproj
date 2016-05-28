@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		002F3A2E09D0888800EBEB88 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 002F3A2C09D0888800EBEB88 /* SDLMain.m */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		B20EE3CE0C340C4B00026AC5 /* Tuio2Demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B20EE3C90C340C4B00026AC5 /* Tuio2Demo.cpp */; };
 		B20EE47F0C340E0300026AC5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20EE47E0C340E0300026AC5 /* OpenGL.framework */; };
 		B20EE4830C340E1100026AC5 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20EE4820C340E1100026AC5 /* GLUT.framework */; };
-		B2AF24CA19FFC0B4002C7BF8 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2AF24C919FFC0B4002C7BF8 /* SDL.framework */; };
+		B298572A1CFA1D0F0068D153 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29857291CFA1D0F0068D153 /* SDL2.framework */; };
 		B2C2B89D109067D000262014 /* TUIO.icns in Resources */ = {isa = PBXBuildFile; fileRef = B2C2B89C109067D000262014 /* TUIO.icns */; };
 		B2E1CED61A1AB50600710202 /* OscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CEAF1A1AB50600710202 /* OscReceiver.cpp */; };
 		B2E1CED81A1AB50600710202 /* TcpReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CEB31A1AB50600710202 /* TcpReceiver.cpp */; };
@@ -50,7 +49,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		002F3A2C09D0888800EBEB88 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = SOURCE_ROOT; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -60,7 +58,7 @@
 		B20EE3CA0C340C4B00026AC5 /* Tuio2Demo.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Tuio2Demo.h; sourceTree = SOURCE_ROOT; };
 		B20EE47E0C340E0300026AC5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		B20EE4820C340E1100026AC5 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
-		B2AF24C919FFC0B4002C7BF8 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = ../../../../../../Library/Frameworks/SDL.framework; sourceTree = "<group>"; };
+		B29857291CFA1D0F0068D153 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = /Library/Frameworks/SDL2.framework; sourceTree = "<absolute>"; };
 		B2C2B89C109067D000262014 /* TUIO.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TUIO.icns; sourceTree = SOURCE_ROOT; };
 		B2E1CEAF1A1AB50600710202 /* OscReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OscReceiver.cpp; path = ../TUIO2/OscReceiver.cpp; sourceTree = "<group>"; };
 		B2E1CEB01A1AB50600710202 /* OscReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OscReceiver.h; path = ../TUIO2/OscReceiver.h; sourceTree = "<group>"; };
@@ -117,10 +115,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2AF24CA19FFC0B4002C7BF8 /* SDL.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				B20EE47F0C340E0300026AC5 /* OpenGL.framework in Frameworks */,
 				B20EE4830C340E1100026AC5 /* GLUT.framework in Frameworks */,
+				B298572A1CFA1D0F0068D153 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,7 +130,6 @@
 			children = (
 				B20EE3C90C340C4B00026AC5 /* Tuio2Demo.cpp */,
 				B20EE3CA0C340C4B00026AC5 /* Tuio2Demo.h */,
-				002F3A2C09D0888800EBEB88 /* SDLMain.m */,
 				B277C9FB0F51B32800D84853 /* TUIO2 */,
 				B2E1CEE81A1AB57F00710202 /* oscpack */,
 			);
@@ -142,7 +139,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B2AF24C919FFC0B4002C7BF8 /* SDL.framework */,
+				B29857291CFA1D0F0068D153 /* SDL2.framework */,
 				B20EE4820C340E1100026AC5 /* GLUT.framework */,
 				B20EE47E0C340E0300026AC5 /* OpenGL.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
@@ -319,7 +316,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0730;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Tuio2Demo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -360,7 +357,6 @@
 				B2E1CF111A1AB57F00710202 /* OscTypes.cpp in Sources */,
 				B2E1CEDC1A1AB50600710202 /* TuioComponent.cpp in Sources */,
 				B2E1CEE01A1AB50600710202 /* TuioPoint.cpp in Sources */,
-				002F3A2E09D0888800EBEB88 /* SDLMain.m in Sources */,
 				B20EE3CE0C340C4B00026AC5 /* Tuio2Demo.cpp in Sources */,
 				B2E1CEDA1A1AB50600710202 /* TuioBounds.cpp in Sources */,
 				B2E1CF101A1AB57F00710202 /* OscReceivedElements.cpp in Sources */,

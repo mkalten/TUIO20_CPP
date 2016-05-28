@@ -27,14 +27,13 @@
 #include <list>
 #include <math.h>
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_thread.h>
-
 #ifdef __APPLE__
+#include <SDL2/SDL.h>
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #include <GLUT/glut.h>
 #else
+#include "SDL.h"
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -64,7 +63,9 @@ private:
 	void drawString(char *str);
 	void processEvents();
 	void initWindow();
-	SDL_Surface *window;
+	
+	SDL_Window *window;
+	SDL_Renderer *renderer;
 	bool verbose, fullscreen, running;
 	
 	int width, height;

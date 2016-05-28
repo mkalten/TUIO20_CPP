@@ -90,7 +90,7 @@ void Tuio2Simulator::drawFrame() {
 		drawString("ESC - Quit");
 	}
 
-	SDL_GL_SwapBuffers();
+	SDL_GL_SwapWindow(window);
 }
 
 void Tuio2Simulator::drawString(const char *str) {
@@ -110,12 +110,32 @@ void Tuio2Simulator::processEvents()
 
         switch( event.type ) {
 		case SDL_KEYDOWN:
-			if( event.key.keysym.sym == SDLK_ESCAPE ){
+			if (event.key.repeat) continue;
+			else if( event.key.keysym.sym == SDLK_ESCAPE ){
 				running = false;
 				SDL_Quit();
 			} else if( event.key.keysym.sym == SDLK_F1 ){
-				fullscreen=!fullscreen;
-				initWindow();
+				
+				if(fullscreen) {
+					width = window_width;
+					height = window_height;
+					SDL_SetWindowFullscreen(window, SDL_FALSE);
+					fullscreen = false;
+				} else {
+					width = screen_width;
+					height = screen_height;
+					SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+					fullscreen = true;
+				}
+				
+				glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+				glViewport(0, 0, (GLint)width, (GLint)height);
+				glMatrixMode(GL_PROJECTION);
+				glLoadIdentity();
+				gluOrtho2D(0, (GLfloat)width, (GLfloat)height, 0);
+				glMatrixMode(GL_MODELVIEW);
+				glLoadIdentity();
+				
 			} else if( event.key.keysym.sym == SDLK_f ){
 				fullupdate=!tuioServer->fullUpdateEnabled();
 				if (fullupdate) tuioServer->enableFullUpdate();
@@ -169,8 +189,8 @@ void Tuio2Simulator::mousePressed(float x, float y) {
 		}
 	}
 
-	Uint8 *keystate = SDL_GetKeyState(NULL);
-	if ((keystate[SDLK_LSHIFT]) || (keystate[SDLK_RSHIFT]))  {
+	const Uint8 *keystate = SDL_GetKeyboardState(NULL);
+	if ((keystate[SDL_SCANCODE_LSHIFT]) || (keystate[SDL_SCANCODE_RSHIFT]))  {
 
 		if (match!=NULL) {
 			std::list<TuioPointer*>::iterator joint = std::find( jointPointerList.begin(), jointPointerList.end(), match );
@@ -185,7 +205,7 @@ void Tuio2Simulator::mousePressed(float x, float y) {
 			stickyPointerList.push_back(tobj->getTuioPointer());
 			activePointerList.push_back(tobj->getTuioPointer());
 		}
-	} else if ((keystate[SDLK_LCTRL]) || (keystate[SDLK_RCTRL])) {
+	} else if ((keystate[SDL_SCANCODE_LCTRL]) || (keystate[SDL_SCANCODE_RCTRL])) {
 
 		if (match!=NULL) {
 			std::list<TuioPointer*>::iterator joint = std::find( jointPointerList.begin(), jointPointerList.end(), match );
@@ -283,9 +303,6 @@ Tuio2Simulator::Tuio2Simulator(TuioServer *server)
 		SDL_Quit();
 		exit(1);
 	}
-    
-    screen_width = SDL_GetVideoInfo()->current_w;
-    screen_height = SDL_GetVideoInfo()->current_h;
 
     //TuioTime::initSession();
     frameTime = TuioTime::getSystemTime();
@@ -294,31 +311,41 @@ Tuio2Simulator::Tuio2Simulator(TuioServer *server)
     tuioServer->setSourceName("t2sim");
     
     initWindow();
+	SDL_SetWindowTitle(window,"Tuio2Simulator");
 }
 
 void Tuio2Simulator::initWindow() {
 
-	int videoFlags = SDL_OPENGL | SDL_DOUBLEBUF;
+	SDL_DisplayMode mode;
+	SDL_GetCurrentDisplayMode(0, &mode);
+	screen_width = mode.w;
+	screen_height= mode.h;
+	
+	int videoFlags = SDL_WINDOW_OPENGL;
 	if( fullscreen ) {
-		videoFlags |= SDL_FULLSCREEN;
-		SDL_ShowCursor(false);
+		videoFlags |= SDL_WINDOW_FULLSCREEN;
 		width = screen_width;
 		height = screen_height;
 	} else {
 		width = window_width;
 		height = window_height;
 	}
-
-    tuioServer->setDimension(width,height);
-	window = SDL_SetVideoMode(width, height, 32, videoFlags);
+	
+	SDL_CreateWindowAndRenderer(width, height, videoFlags, &window, &renderer);
+	
 	if ( window == NULL ) {
 		std::cerr << "Could not open window: " << SDL_GetError() << std::endl;
 		SDL_Quit();
 		exit(1);
 	}
+	
+	SDL_GLContext context = SDL_GL_CreateContext(window);
+	if (!context) {
+		fprintf(stderr, "Couldn't create context: %s\n", SDL_GetError());
+		return;
+	}
 
 	SDL_ShowCursor(true);
-	SDL_WM_SetCaption("Tuio2Simulator", NULL);
 
 	glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 	glViewport(0, 0, width, height);
@@ -375,6 +402,12 @@ int main(int argc, char* argv[])
 	} else tcp_sender = new TcpSender(3333);
 	server->addOscSender(tcp_sender);
 
+	// add an additional TUIO/WEB sender
+	OscSender *web_sender = NULL;
+	try { web_sender = new WebSockSender(8080); }
+	catch (std::exception e) { web_sender = NULL; }
+	if (web_sender) server->addOscSender(web_sender);
+	
 	// add an additional TUIO/FLC sender
 	OscSender *flash_sender = new FlashSender();
 	server->addOscSender(flash_sender);
@@ -384,10 +417,7 @@ int main(int argc, char* argv[])
 
 	delete app;
 	delete server;
-#ifndef LINUX
-	delete flash_sender;
-#endif
-	delete tcp_sender;
+
 	return 0;
 }
 
