@@ -1,6 +1,7 @@
 /*
- TUIO2 C++ Library
- Copyright (c) 2009-2015 Martin Kaltenbrunner <martin@tuio.org>
+ TUIO C++ Library
+ Copyright (c) 2009-2016 Martin Kaltenbrunner <martin@tuio.org>
+ WebSockSender (c) 2015 Florian Echtler <floe@butterbrot.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -19,8 +20,9 @@
 #include "WebSockSender.h"
 
 #ifdef  WIN32
-#ifndef int32_t
-typedef DWORD int32_t;
+#if not 
+	defined int32_t
+	typedef DWORD int32_t;
 #endif
 #endif
 
@@ -40,10 +42,6 @@ WebSockSender::WebSockSender(int port)
 	local = true;
 	buffer_size = MAX_TCP_SIZE;
 	port_no = port;
-}
-
-WebSockSender::~WebSockSender()
-{
 }
 
 bool WebSockSender::sendOscPacket (osc::OutboundPacketStream *bundle) {
@@ -88,7 +86,11 @@ bool WebSockSender::sendOscPacket (osc::OutboundPacketStream *bundle) {
 void WebSockSender::newClient( int tcp_client ) {
 
 	// socket -> file descriptor
+#ifdef WIN32
+	FILE* conn = _fdopen( tcp_client, "r+" );
+#else
 	FILE* conn = fdopen( tcp_client, "r+" );
+#endif
 
 	// websocket challenge-response
 	uint8_t digest[SHA1_HASH_SIZE];
@@ -105,7 +107,7 @@ void WebSockSender::newClient( int tcp_client ) {
 		}
 	}
 
-	strncat(key,"258EAFA5-E914-47DA-95CA-C5AB0DC85B11",sizeof(key)-strlen(key));
+	strncat(key,"258EAFA5-E914-47DA-95CA-C5AB0DC85B11",sizeof(key)-strlen(key)-1);
 	sha1(digest,(uint8_t*)key,strlen(key));
 
 	snprintf(buf, sizeof(buf),

@@ -1,6 +1,6 @@
 /*
- TUIO2 C++ Library
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ TUIO C++ Library
+ Copyright (c) 2005-2016 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -44,7 +44,7 @@ namespace TUIO2 {
 	 *
 	 * @author Martin Kaltenbrunner
 	 * @version 2.0.a0
-	 */ 
+	 */
 	class LIBDECL TcpSender : public OscSender {
 				
 	public:
@@ -72,7 +72,7 @@ namespace TUIO2 {
 		/**
 		 * The destructor closes the socket. 
 		 */
-		~TcpSender();
+		virtual ~TcpSender();
 		
 		/**
 		 * This method delivers the provided OSC data
@@ -107,6 +107,8 @@ namespace TUIO2 {
 		std::list<int> tcp_client_list;
 #endif
 		bool connected;
+		const char* tuio_type() { return "TUIO/TCP"; }
+
 	protected:
 		char data_size[4];
 		char data_buffer[MAX_TCP_SIZE+4];

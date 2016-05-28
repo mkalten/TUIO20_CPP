@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2005-2016 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -33,7 +33,7 @@ namespace TUIO2 {
 	 *
 	 * @author Martin Kaltenbrunner
 	 * @version 2.0.a0
-	 */ 
+	 */
 	class LIBDECL OscSender {
 				
 	public:
@@ -45,7 +45,7 @@ namespace TUIO2 {
 
 		/**
 		 * The destructor is doing nothing in particular. 
-		 */
+		 */ 
 		virtual ~OscSender() {}
 		
 		/**
@@ -76,10 +76,15 @@ namespace TUIO2 {
 		 * @return the maximum bundle size in bytes
 		 */
 		int getBufferSize () { return buffer_size; };
+	
+		virtual const char* tuio_type() = 0;
 		
 	protected:
 		unsigned int buffer_size;
 		bool local;
 	};
 }
+
+
 #endif /* INCLUDED_OSCSENDER_H */
+

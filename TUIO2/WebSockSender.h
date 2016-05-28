@@ -1,6 +1,6 @@
 /*
- TUIO2 C++ Library
- Copyright (c) 2009-2015 Martin Kaltenbrunner <martin@tuio.org>
+ TUIO C++ Library
+ Copyright (c) 2009-2016 Martin Kaltenbrunner <martin@tuio.org>
  WebSockSender (c) 2015 Florian Echtler <floe@butterbrot.org>
  
  This library is free software; you can redistribute it and/or
@@ -19,6 +19,38 @@
 
 #ifndef INCLUDED_WEBSOCKSENDER_H
 #define INCLUDED_WEBSOCKSENDER_H
+
+#if defined(_MSC_VER) && _MSC_VER < 1900
+#include <Windows.h>
+#include <stdio.h>
+#define snprintf c99_snprintf
+#define vsnprintf c99_vsnprintf
+
+__inline int c99_vsnprintf(char *outBuf, size_t size, const char *format, va_list ap)
+{
+    int count = -1;
+
+    if (size != 0)
+        count = _vsnprintf_s(outBuf, size, _TRUNCATE, format, ap);
+    if (count == -1)
+        count = _vscprintf(format, ap);
+
+    return count;
+}
+
+__inline int c99_snprintf(char *outBuf, size_t size, const char *format, ...)
+{
+    int count;
+    va_list ap;
+
+    va_start(ap, format);
+    count = c99_vsnprintf(outBuf, size, format, ap);
+    va_end(ap);
+
+    return count;
+}
+
+#endif
 
 
 /* All of these macros assume use on a 32-bit variable.
@@ -62,7 +94,7 @@ namespace TUIO2 {
 		/**
 		 * The destructor closes the socket. 
 		 */
-		~WebSockSender();
+		virtual ~WebSockSender() {}
 		
 		/**
 		 * This method delivers the provided OSC data
@@ -79,6 +111,7 @@ namespace TUIO2 {
 		 */
 		void newClient( int tcp_client );
 	
+		const char* tuio_type() { return "TUIO/WEB"; }
 	private:
 		
 		void sha1( uint8_t digest[SHA1_HASH_SIZE], const uint8_t* inbuf, size_t length );

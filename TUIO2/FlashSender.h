@@ -137,8 +137,8 @@ typedef	DWORD u_int32_t;
 #endif //__TFFlashLCSHMEM_H__
 
 /*
- TUIO2 C++ Library
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ TUIO C++ Library
+ Copyright (c) 2005-2016 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -170,7 +170,7 @@ namespace TUIO2 {
 	 *
 	 * @author Martin Kaltenbrunner
 	 * @version 2.0.a0
-	 */ 
+	 */
 	class LIBDECL FlashSender : public OscSender {
 				
 	public:
@@ -188,7 +188,7 @@ namespace TUIO2 {
 		/**
 		 * The destructor closes the connection. 
 		 */
-		~FlashSender();
+		virtual ~FlashSender();
 		
 		/**
 		 * This method delivers the provided OSC data
@@ -205,6 +205,8 @@ namespace TUIO2 {
 		 * @return true if the connection is alive
 		 */
 		bool isConnected ();
+		
+		const char* tuio_type() { return "TUIO/FLC"; }
 		
 	private:
 		TFLCSLocalConnection_t* lcConnection;

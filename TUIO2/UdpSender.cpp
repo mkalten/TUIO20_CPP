@@ -1,6 +1,6 @@
 /*
- TUIO2 C++ Library
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ TUIO C++ Library
+ Copyright (c) 2005-2016 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -30,6 +30,7 @@ UdpSender::UdpSender() {
 	} catch (std::exception &e) { 
 		std::cout << "could not create UDP socket" << std::endl;
 		socket = NULL;
+		throw std::exception();
 	}
 }
 
@@ -48,6 +49,7 @@ UdpSender::UdpSender(const char *host, int port) {
 	} catch (std::exception &e) { 
 		std::cout << "could not create UDP socket" << std::endl;
 		socket = NULL;
+		throw std::exception();
 	}
 }
 
@@ -64,6 +66,7 @@ UdpSender::UdpSender(const char *host, int port, int size) {
 	} catch (std::exception &e) { 
 		std::cout << "could not create UDP socket" << std::endl;
 		socket = NULL;
+		throw std::exception();
 	}
 }
 

@@ -44,9 +44,9 @@
 
 #define	PROTOCOL_NAME				("localhost")
 
-#define WIN32_SEMAPHORE_NAME		("MacromediaMutexOmega")
-#define WIN32_SHMEM_NAME			("MacromediaFMOmega")
-#define POSIX_SEMAPHORE_NAME		("MacromediaSemaphoreDig")
+#define WIN32_SEMAPHORE_NAME			TEXT("MacromediaMutexOmega")
+#define WIN32_SHMEM_NAME			TEXT("MacromediaFMOmega")
+#define POSIX_SEMAPHORE_NAME			("MacromediaSemaphoreDig")
 #define	POSIX_SEMAPHORE_INITIAL_VALUE		(10)
 
 #define	AMF_TYPE_STRING				(0x02)
@@ -597,8 +597,8 @@ errorReturn:
 }
 
 /*
- TUIO2 C++ Library
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ TUIO C++ Library
+ Copyright (c) 2005-2016 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
