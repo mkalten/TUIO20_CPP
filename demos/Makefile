@@ -14,8 +14,8 @@ TUIO_STATIC  = libTUIO2.a
 TUIO_SHARED  = libTUIO2.so
 
 INCLUDES = -I../TUIO2 -I../oscpack
-CFLAGS  = -g -Wall -O3 -fPIC $(SDL_CFLAGS)
-#CFLAGS  =  -w -O3 -fPIC $(SDL_CFLAGS)
+#CFLAGS  = -g -Wall -O3 -fPIC $(SDL_CFLAGS)
+CFLAGS  =  -w -O3 -fPIC $(SDL_CFLAGS)
 CXXFLAGS = $(CFLAGS) $(INCLUDES) -D$(ENDIANESS)
 SHARED_OPTIONS = -shared -Wl,-soname,$(TUIO_SHARED)
 
