@@ -12,33 +12,31 @@ TUIO_STATIC  = libTUIO2.a
 TUIO_SHARED  = libTUIO2.so
 
 INCLUDES = -I../TUIO2 -I../oscpack
-#CFLAGS  = -g -Wall -O3 -fPIC
-CFLAGS  =  -w -O3 -fPIC
+CFLAGS  = -g -Wall -O3 -fPIC
+#CFLAGS  =  -w -O3 -fPIC
 CXXFLAGS = $(CFLAGS) $(INCLUDES) -D$(ENDIANESS)
 SHARED_OPTIONS = -shared -Wl,-soname,$(TUIO_SHARED)
 
 ifeq ($(PLATFORM), Darwin)
 	CC = gcc
 	CXX = g++ -stdlib=libstdc++
-	CFLAGS += -mmacosx-version-min=10.5 -arch i386 -arch x86_64
-	CXXFLAGS += -mmacosx-version-min=10.5 -arch i386 -arch x86_64
+	CFLAGS += -mmacosx-version-min=10.6 -arch i386 -arch x86_64
+	CXXFLAGS += -mmacosx-version-min=10.6 -arch i386 -arch x86_64
 	TUIO_SHARED  = libTUIO2.dylib
-	LD_FLAGS = -framework OpenGL -framework GLUT -framework SDL -framework Cocoa
+	LD_FLAGS = -framework OpenGL -framework GLUT -framework SDL2 -framework Cocoa
 	SDL_FLAGS = 
  	SHARED_OPTIONS = -dynamiclib -Wl,-dylib_install_name,$(TUIO_SHARED)
-	OBJC_SOURCES = SDLMain.m
-	OBJC_OBJECTS = SDLMain.o
 	SDL_LDFLAGS =
 endif
 
-DEMO_SOURCES = Tuio2Demo.cpp $(OBJC_SOURCES)
-DEMO_OBJECTS = Tuio2Demo.o $(OBJC_OBJECTS)
+DEMO_SOURCES = Tuio2Demo.cpp
+DEMO_OBJECTS = Tuio2Demo.o
 DUMP_SOURCES = Tuio2Dump.cpp
 DUMP_OBJECTS = Tuio2Dump.o
 TEST_SOURCES = Tuio2Test.cpp
 TEST_OBJECTS = Tuio2Test.o
-SIMULATOR_SOURCES = Tuio2Simulator.cpp $(OBJC_SOURCES)
-SIMULATOR_OBJECTS = Tuio2Simulator.o $(OBJC_OBJECTS)
+SIMULATOR_SOURCES = Tuio2Simulator.cpp
+SIMULATOR_OBJECTS = Tuio2Simulator.o
 
 COMMON_TUIO_SOURCES = ../TUIO2/TuioTime.cpp ../TUIO2/TuioPoint.cpp ../TUIO2/TuioObject.cpp ../TUIO2/TuioComponent.cpp ../TUIO2/TuioToken.cpp ../TUIO2/TuioPointer.cpp ../TUIO2/TuioBounds.cpp ../TUIO2/TuioSymbol.cpp ../TUIO2/TuioDispatcher.cpp ../TUIO2/TuioManager.cpp 
 SERVER_TUIO_SOURCES = ../TUIO2/TuioServer.cpp ../TUIO2/UdpSender.cpp ../TUIO2/TcpSender.cpp ../TUIO2/FlashSender.cpp ../TUIO2/WebSockSender.cpp
