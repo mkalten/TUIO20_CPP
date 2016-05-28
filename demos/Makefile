@@ -2,7 +2,9 @@ ENDIANESS=OSC_HOST_LITTLE_ENDIAN
 PLATFORM=$(shell uname)
 
 LD_FLAGS = -lGL -lGLU -lglut
-SDL_FLAGS = -lSDL
+
+SDL_LDFLAGS := $(shell sdl2-config --libs)
+SDL_CFLAGS  := $(shell sdl2-config --cflags)
 
 TUIO_DEMO = Tuio2Demo
 TUIO_DUMP = Tuio2Dump
@@ -12,8 +14,8 @@ TUIO_STATIC  = libTUIO2.a
 TUIO_SHARED  = libTUIO2.so
 
 INCLUDES = -I../TUIO2 -I../oscpack
-CFLAGS  = -g -Wall -O3 -fPIC
-#CFLAGS  =  -w -O3 -fPIC
+CFLAGS  = -g -Wall -O3 -fPIC $(SDL_CFLAGS)
+#CFLAGS  =  -w -O3 -fPIC $(SDL_CFLAGS)
 CXXFLAGS = $(CFLAGS) $(INCLUDES) -D$(ENDIANESS)
 SHARED_OPTIONS = -shared -Wl,-soname,$(TUIO_SHARED)
 
@@ -24,7 +26,7 @@ ifeq ($(PLATFORM), Darwin)
 	CXXFLAGS += -mmacosx-version-min=10.6 -arch i386 -arch x86_64
 	TUIO_SHARED  = libTUIO2.dylib
 	LD_FLAGS = -framework OpenGL -framework GLUT -framework SDL2 -framework Cocoa
-	SDL_FLAGS = 
+	SDL_CFLAGS =
  	SHARED_OPTIONS = -dynamiclib -Wl,-dylib_install_name,$(TUIO_SHARED)
 	SDL_LDFLAGS =
 endif
@@ -72,17 +74,17 @@ $(TUIO_DUMP): $(COMMON_TUIO_OBJECTS) $(CLIENT_TUIO_OBJECTS) $(OSC_OBJECTS) $(DUM
 
 $(TUIO_DEMO): $(COMMON_TUIO_OBJECTS) $(CLIENT_TUIO_OBJECTS) $(OSC_OBJECTS) $(DEMO_OBJECTS)
 	@echo [LD] $(TUIO_DEMO)
-	@ $(CXX) $+ -lpthread -o $(TUIO_DEMO) $(LD_FLAGS) $(SDL_FLAGS)
+	@ $(CXX) $+ -lpthread -o $(TUIO_DEMO) $(LD_FLAGS) $(SDL_LDFLAGS)
 
 $(TUIO_SIMULATOR): $(COMMON_TUIO_OBJECTS) $(SERVER_TUIO_OBJECTS) $(OSC_OBJECTS) $(SIMULATOR_OBJECTS)
 	@echo [LD] $(TUIO_SIMULATOR)
-	@ $(CXX) $+ -lpthread -o $(TUIO_SIMULATOR) $(LD_FLAGS) $(SDL_FLAGS)
+	@ $(CXX) $+ -lpthread -o $(TUIO_SIMULATOR) $(LD_FLAGS) $(SDL_LDFLAGS)
 
 $(TUIO_TEST): $(COMMON_TUIO_OBJECTS) $(SERVER_TUIO_OBJECTS) $(OSC_OBJECTS) $(TEST_OBJECTS)
 	@echo [LD] $(TUIO_TEST)
-	@$(CXX) $+ -lpthread -o $(TUIO_TEST) $(SDL_LDFLAGS) $(LD_FLAGS)
+	@$(CXX) $+ -lpthread -o $(TUIO_TEST) $(LD_FLAGS)
 
 clean:
 	@echo [CLEAN] $(TUIO_DUMP) $(TUIO_DEMO) $(TUIO_SIMULATOR) $(TUIO_TEST) $(TUIO_STATIC) $(TUIO_SHARED)
-	@ rm -f $(TUIO_DUMP) $(TUIO_DEMO) $(TUIO_SIMULATOR) $(TUIO_TEST) $(TUIO_STATIC) $(TUIO_SHARED) 
+	@ rm -f $(TUIO_DUMP) $(TUIO_DEMO) $(TUIO_SIMULATOR) $(TUIO_TEST) $(TUIO_STATIC) $(TUIO_SHARED)
 	@ rm -f $(COMMON_TUIO_OBJECTS) $(CLIENT_TUIO_OBJECTS) $(SERVER_TUIO_OBJECTS) $(TEST_OBJECTS) $(OSC_OBJECTS) $(DUMP_OBJECTS) $(DEMO_OBJECTS) $(SIMULATOR_OBJECTS)

@@ -309,9 +309,9 @@ Tuio2Simulator::Tuio2Simulator(TuioServer *server)
 
     tuioServer = server;
     tuioServer->setSourceName("t2sim");
-    
+
     initWindow();
-	SDL_SetWindowTitle(window,"Tuio2Simulator");
+    SDL_SetWindowTitle(window,"Tuio2Simulator");
 }
 
 void Tuio2Simulator::initWindow() {

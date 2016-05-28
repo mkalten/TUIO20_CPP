@@ -272,8 +272,8 @@ Tuio2Demo::Tuio2Demo(int port)
 		SDL_Quit();
 	}
 	
-	SDL_SetWindowTitle(window,"Tuio2Demo");
 	initWindow();
+	SDL_SetWindowTitle(window,"Tuio2Demo");
 }
 
 void Tuio2Demo::run() {
