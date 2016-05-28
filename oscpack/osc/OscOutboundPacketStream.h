@@ -105,7 +105,7 @@ public:
     OutboundPacketStream& operator<<( const InfinitumType& rhs );
     OutboundPacketStream& operator<<( int32 rhs );
 
-#if !(defined(__x86_64__) || defined(_M_X64))
+#if !(defined(__x86_64__) || defined(_M_X64) || defined(__aarch64__))
     OutboundPacketStream& operator<<( int rhs )
             { *this << (int32)rhs; return *this; }
 #endif
@@ -138,7 +138,7 @@ private:
     char *end_;
 
     char *typeTagsCurrent_; // stored in reverse order
-    char *messagePointer_;
+    char *messageCursor_;
     char *argumentCurrent_;
 
     // elementSizePtr_ has two special values: 0 indicates that a bundle
