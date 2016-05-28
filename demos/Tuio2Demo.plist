@@ -19,7 +19,7 @@
 	<key>CFBundleVersion</key>
 	<string>2.0.a0</string>
 	<key>Minimum system version</key>
-	<string>10.5</string>
+	<string>10.6</string>
 	<key>NSMainNibFile</key>
 	<string>SDLMain</string>
 	<key>NSPrincipalClass</key>
