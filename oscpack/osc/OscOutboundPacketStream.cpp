@@ -156,7 +156,7 @@ OutboundPacketStream::OutboundPacketStream( char *buffer, std::size_t capacity )
     : data_( buffer )
     , end_( data_ + capacity )
     , typeTagsCurrent_( end_ )
-    , messagePointer_( data_ )
+    , messageCursor_( data_ )
     , argumentCurrent_( data_ )
     , elementSizePtr_( 0 )
     , messageIsInProgress_( false )
@@ -267,7 +267,7 @@ void OutboundPacketStream::CheckForAvailableArgumentSpace( std::size_t argumentL
 void OutboundPacketStream::Clear()
 {
     typeTagsCurrent_ = end_;
-    messagePointer_ = data_;
+    messageCursor_ = data_;
     argumentCurrent_ = data_;
     elementSizePtr_ = 0;
     messageIsInProgress_ = false;
@@ -324,13 +324,13 @@ OutboundPacketStream& OutboundPacketStream::operator<<( const BundleInitiator& r
 
     CheckForAvailableBundleSpace();
 
-    messagePointer_ = BeginElement( messagePointer_ );
+    messageCursor_ = BeginElement( messageCursor_ );
 
-    std::memcpy( messagePointer_, "#bundle\0", 8 );
-    FromUInt64( messagePointer_ + 8, rhs.timeTag );
+    std::memcpy( messageCursor_, "#bundle\0", 8 );
+    FromUInt64( messageCursor_ + 8, rhs.timeTag );
 
-    messagePointer_ += 16;
-    argumentCurrent_ = messagePointer_;
+    messageCursor_ += 16;
+    argumentCurrent_ = messageCursor_;
 
     return *this;
 }
@@ -345,7 +345,7 @@ OutboundPacketStream& OutboundPacketStream::operator<<( const BundleTerminator& 
     if( IsMessageInProgress() )
         throw MessageInProgressException();
 
-    EndElement( messagePointer_ );
+    EndElement( messageCursor_ );
 
     return *this;
 }
@@ -358,20 +358,20 @@ OutboundPacketStream& OutboundPacketStream::operator<<( const BeginMessage& rhs 
 
     CheckForAvailableMessageSpace( rhs.addressPattern );
 
-    messagePointer_ = BeginElement( messagePointer_ );
+    messageCursor_ = BeginElement( messageCursor_ );
 
-    std::strcpy( messagePointer_, rhs.addressPattern );
+    std::strcpy( messageCursor_, rhs.addressPattern );
     std::size_t rhsLength = std::strlen(rhs.addressPattern);
-    messagePointer_ += rhsLength + 1;
+    messageCursor_ += rhsLength + 1;
 
     // zero pad to 4-byte boundary
     std::size_t i = rhsLength + 1;
     while( i & 0x3 ){
-        *messagePointer_++ = '\0';
+        *messageCursor_++ = '\0';
         ++i;
     }
 
-    argumentCurrent_ = messagePointer_;
+    argumentCurrent_ = messageCursor_;
     typeTagsCurrent_ = end_;
 
     messageIsInProgress_ = true;
@@ -397,35 +397,35 @@ OutboundPacketStream& OutboundPacketStream::operator<<( const MessageTerminator&
         // slot size includes comma and null terminator
         std::size_t typeTagSlotSize = RoundUp4( typeTagsCount + 2 );
 
-        std::size_t argumentsSize = argumentCurrent_ - messagePointer_;
+        std::size_t argumentsSize = argumentCurrent_ - messageCursor_;
 
-        std::memmove( messagePointer_ + typeTagSlotSize, messagePointer_, argumentsSize );
+        std::memmove( messageCursor_ + typeTagSlotSize, messageCursor_, argumentsSize );
 
-        messagePointer_[0] = ',';
+        messageCursor_[0] = ',';
         // copy type tags in reverse (really forward) order
         for( std::size_t i=0; i < typeTagsCount; ++i )
-            messagePointer_[i+1] = tempTypeTags[ (typeTagsCount-1) - i ];
+            messageCursor_[i+1] = tempTypeTags[ (typeTagsCount-1) - i ];
 
-        char *p = messagePointer_ + 1 + typeTagsCount;
+        char *p = messageCursor_ + 1 + typeTagsCount;
         for( std::size_t i=0; i < (typeTagSlotSize - (typeTagsCount + 1)); ++i )
             *p++ = '\0';
 
         typeTagsCurrent_ = end_;
 
-        // advance messagePointer_ for next message
-        messagePointer_ += typeTagSlotSize + argumentsSize;
+        // advance messageCursor_ for next message
+        messageCursor_ += typeTagSlotSize + argumentsSize;
 
     }else{
         // send an empty type tags string
-        std::memcpy( messagePointer_, ",\0\0\0", 4 );
+        std::memcpy( messageCursor_, ",\0\0\0", 4 );
 
-        // advance messagePointer_ for next message
-        messagePointer_ += 4;
+        // advance messageCursor_ for next message
+        messageCursor_ += 4;
     }
 
-    argumentCurrent_ = messagePointer_;
+    argumentCurrent_ = messageCursor_;
 
-    EndElement( messagePointer_ );
+    EndElement( messageCursor_ );
 
     messageIsInProgress_ = false;
 
