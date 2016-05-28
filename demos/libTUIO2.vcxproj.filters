@@ -41,9 +41,6 @@
     <ClCompile Include="..\TUIO2\OscReceiver.cpp">
       <Filter>Source Files\TUIO2</Filter>
     </ClCompile>
-    <ClCompile Include="..\TUIO2\OscSender.cpp">
-      <Filter>Source Files\TUIO2</Filter>
-    </ClCompile>
     <ClCompile Include="..\TUIO2\TcpReceiver.cpp">
       <Filter>Source Files\TUIO2</Filter>
     </ClCompile>
@@ -112,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="..\oscpack\ip\win32\UdpSocket.cpp">
       <Filter>Source Files\oscpack\ip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TUIO2\WebSockSender.cpp">
+      <Filter>Source Files\TUIO2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +219,9 @@
     </ClInclude>
     <ClInclude Include="..\oscpack\ip\UdpSocket.h">
       <Filter>Header Files\oscpack\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TUIO2\WebSockSender.h">
+      <Filter>Header Files\TUIO2</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
