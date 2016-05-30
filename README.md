@@ -31,9 +31,12 @@ Example Projects
 
 Apart from the actual cross-platform TUIO 2.0 implementation, this repository also provides several example
 projects that serve for the illustration and testing of the overall API functionality. This includes TUIO 2.0
-client and server demonstrations with a simple SDL GUI as well as some simple console test applications.
+client and server demonstrations with a simple SDL2 GUI as well as some simple console test applications.
 These examples should equally work on Linux, Mac OS X and Windows operating systems, the according Makefile 
-as well as XCode and Visual Studio project files are included.
+as well as XCode and Visual Studio project files are included. The Windows project already include the 
+necessary libraries, to build the GUI example on Linux make sure you have the SDL2, OpenGL and GLUT 
+libraries and headers installed on your system, the latest version 2.0.4 is recommended. On Mac OS X you 
+need to install the SDL2 Framework to /Library/Frameworks.
 
 Integration and Testing
 ----------------------
