@@ -56,7 +56,7 @@ void Tuio2Demo::drawObjects() {
 			
 			TuioPoint last_point = path.front();
 			glBegin(GL_LINES);
-			glColor3f(0.0, 0.0, 1.0);
+			glColor3f(0.0f, 0.0f, 1.0f);
 			
 			for (std::list<TuioPoint>::iterator point = path.begin(); point!=path.end(); point++) {
 				glVertex3f(last_point.getScreenX(width), last_point.getScreenY(height), 0.0f);
@@ -65,7 +65,7 @@ void Tuio2Demo::drawObjects() {
 			} glEnd();
 			
 			// draw the finger tip
-			glColor3f(0.75, 0.75, 0.75);
+			glColor3f(0.25, 0.0f, 0.25f);
 			glPushMatrix();
 			glTranslatef(last_point.getScreenX(width), last_point.getScreenY(height), 0.0);
 			glBegin(GL_TRIANGLE_FAN);
@@ -93,7 +93,7 @@ void Tuio2Demo::drawObjects() {
 		float ypos  = ttok->getScreenY(height);
 		float angle = ttok->getAngleDegrees();
 		
-		glColor3f(0.0, 0.0, 0.0);
+		glColor3f(0.25f, 0.0f, 0.0f);
 		glPushMatrix();
 		glTranslatef(xpos, ypos, 0.0);
 		glRotatef(angle, 0.0, 0.0, 1.0);
@@ -127,13 +127,6 @@ void Tuio2Demo::drawObjects() {
 		glPushMatrix();
 		glTranslatef(xpos, ypos, 0.0);
 		glRotatef(angle, 0.0, 0.0, 1.0);
-		
-		/*glBegin(GL_QUADS);
-		 glVertex2f(blob_width/-2, blob_height/-2);
-		 glVertex2f(blob_width/-2, blob_height/2);
-		 glVertex2f(blob_width/2, blob_height/2);
-		 glVertex2f(blob_width/2, blob_height/-2);
-		 glEnd();*/
 		
 		glBegin(GL_TRIANGLE_FAN);
 		for(double a = 0.0f; a <= 2*M_PI; a += 0.2f) {
@@ -192,7 +185,7 @@ void Tuio2Demo::initWindow() {
 	
 	SDL_ShowCursor(!fullscreen);
 	
-	glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+	glClearColor(0.0f, 0.0f, 0.25f, 0.0f);
 	glViewport(0, 0, (GLint)width, (GLint)height);
 	glMatrixMode(GL_PROJECTION);	
 	glLoadIdentity();
@@ -228,7 +221,7 @@ void Tuio2Demo::processEvents()
 						fullscreen = true;
 					}
 					
-					glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+					glClearColor(0.0f, 0.0f, 0.25f, 0.0f);
 					glViewport(0, 0, (GLint)width, (GLint)height);
 					glMatrixMode(GL_PROJECTION);
 					glLoadIdentity();
