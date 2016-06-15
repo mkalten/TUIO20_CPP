@@ -65,7 +65,7 @@ void Tuio2Demo::drawObjects() {
 			} glEnd();
 			
 			// draw the finger tip
-			glColor3f(0.25, 0.0f, 0.25f);
+			glColor3f(0.75f, 0.0f, 0.75f);
 			glPushMatrix();
 			glTranslatef(last_point.getScreenX(width), last_point.getScreenY(height), 0.0);
 			glBegin(GL_TRIANGLE_FAN);

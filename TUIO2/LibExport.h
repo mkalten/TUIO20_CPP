@@ -1,6 +1,6 @@
 /*
  TUIO C++ Library
- Copyright (c) 2005-2014 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2005-2016 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -26,7 +26,8 @@
 	#ifdef LIB_EXPORT
 		#define LIBDECL __declspec(dllexport)
 	#else
-		#define LIBDECL __declspec(dllimport)
+//		#define LIBDECL __declspec(dllimport)
+		#define LIBDECL
 	#endif
 #else
 	#define LIBDECL
