@@ -22,6 +22,7 @@
 #include <sstream>
 #include <string.h>
 #include <stdlib.h>
+#include <iostream>
 
 namespace TUIO2 {
     
@@ -131,7 +132,12 @@ namespace TUIO2 {
         void setSourceString(const char *src_string) {
             
             char data[128];
-            strcpy(data,src_string);
+            strncpy(data,src_string,128);
+            data[127] = 0;
+            if ( strlen(data) == 0 ) {
+              std::cerr << "setSourceString: empty src_string illegal" << std::endl;
+              return;
+            }
             
             char *name_inst = strtok(data, "@");
 
@@ -139,7 +145,7 @@ namespace TUIO2 {
             if (addr!=NULL) source_address = std::string(addr);
             else source_address = (char*)"0x7F000001";
             
-            char *name = strtok((char*)name_inst, ":");
+            char *name = strtok(name_inst, ":");
             source_name = std::string(name);
             
             char *inst = strtok(NULL, ":");
