@@ -1,5 +1,5 @@
-ENDIANESS=OSC_HOST_LITTLE_ENDIAN
 PLATFORM=$(shell uname)
+ENDIANESS=OSC_HOST_LITTLE_ENDIAN
 
 LD_FLAGS = -lGL -lGLU -lglut
 
@@ -24,6 +24,9 @@ ifeq ($(PLATFORM), Darwin)
 	CXX = g++ -stdlib=libstdc++
 	CFLAGS += -mmacosx-version-min=10.6 -arch i386 -arch x86_64
 	CXXFLAGS += -mmacosx-version-min=10.6 -arch i386 -arch x86_64
+#       CXX = g++ -stdlib=libc++
+#       CFLAGS += -mmacosx-version-min=10.9 -arch x86_64
+#       CXXFLAGS += -mmacosx-version-min=10.9 -arch x86_64
 	TUIO_SHARED  = libTUIO2.dylib
 	LD_FLAGS = -framework OpenGL -framework GLUT -framework SDL2 -framework Cocoa
 	SDL_CFLAGS =
