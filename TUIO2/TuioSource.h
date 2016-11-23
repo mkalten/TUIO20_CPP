@@ -68,7 +68,7 @@ namespace TUIO2 {
          */
         TuioSource() {
             source_id = 0;
-            source_name = "";
+            source_name = "default";
             source_instance = 0;
             source_address = "localhost";
             dimension = 0;
@@ -79,7 +79,7 @@ namespace TUIO2 {
          *
          * @param	src_name	the name of the TUIO source
          */
-        TuioSource(const char *src_name) {
+        TuioSource(std::string src_name) {
             source_id = 0;
             source_name = src_name;
             source_instance = 0;
@@ -92,7 +92,7 @@ namespace TUIO2 {
          *
          * @param	src_name	the name of the TUIO source
          */
-        TuioSource(unsigned int sid, const char *src_string, unsigned int dim) {
+        TuioSource(unsigned int sid, std::string src_string, unsigned int dim) {
             source_id = sid;
             setSourceString(src_string);
             setDimension(dim);
@@ -105,11 +105,11 @@ namespace TUIO2 {
          * @param	src_inst	the instance of the TUIO source
          * @param	src_addr	the address of the TUIO source
          */
-        TuioSource(const char *src_name, unsigned int src_inst, const char *src_addr) {
+        TuioSource(std::string src_name, unsigned int src_inst, std::string src_addr) {
             source_id = 0;
-            source_name = std::string(src_name);
+            source_name = src_name;
             source_instance = src_inst;
-            source_address = std::string(src_addr);
+            source_address = src_addr;
         };
         
         /**
@@ -120,25 +120,20 @@ namespace TUIO2 {
          * @param	src_inst	the instance of the TUIO source
          * @param	src_addr	the address of the TUIO source
          */
-        TuioSource(unsigned int src_id, const char *src_name, unsigned int src_inst, const char *src_addr) {
+        TuioSource(unsigned int src_id, std::string src_name, unsigned int src_inst, std::string src_addr) {
             source_id = src_id;
-            source_name = std::string(src_name);
+            source_name = src_name;
             source_instance = src_inst;
-            source_address = std::string(src_addr);
+            source_address = src_addr;
         };
         
         ~TuioSource() {};
         
-        void setSourceString(const char *src_string) {
+        void setSourceString(std::string src_string) {
             
-            char data[128];
-            strncpy(data,src_string,128);
-            data[127] = 0;
-            if ( strlen(data) == 0 ) {
-              std::cerr << "setSourceString: empty src_string illegal" << std::endl;
-              return;
-            }
-            
+			if (src_string.length()==0) return;
+            char *data = strdup(src_string.c_str());
+
             char *name_inst = strtok(data, "@");
 
             char *addr = strtok(NULL, "@");
@@ -153,17 +148,17 @@ namespace TUIO2 {
             else source_instance = 0;
         }
         
-        void setSourceString(unsigned int src_id, const char *src_string) {
+        void setSourceString(unsigned int src_id, std::string src_string) {
             
             source_id = src_id;
             setSourceString(src_string);
         }
         
-        const char* getSourceString() {
+        std::string getSourceString() {
             
             std::stringstream src_stream;
             src_stream << source_name << ":" << source_instance << "@" << source_address;
-            return src_stream.str().c_str();
+            return src_stream.str();
         }
         
         /**
