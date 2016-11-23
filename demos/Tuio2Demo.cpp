@@ -20,25 +20,43 @@
 #include "Tuio2Demo.h"
 
 void Tuio2Demo::tuioAdd(TuioObject *tobj) {
-	/*if (verbose)
-		std::cout << "add obj " << ttok->getSymbolID() << " (" << ttok->getSessionID() << ") "<< ttok->getX() << " " << ttok->getY() << " " << ttok->getAngle() << std::endl;*/
+	if (verbose)  {
+		if(tobj->containsNewTuioToken()) std::cout << "add tok " << tobj->getTuioToken()->getSessionID() << std::endl;
+		if(tobj->containsNewTuioPointer()) std::cout << "add ptr " << tobj->getTuioPointer()->getSessionID() << std::endl;
+		if(tobj->containsNewTuioBounds()) std::cout << "add bnd " << tobj->getTuioBounds()->getSessionID() << std::endl;
+		if(tobj->containsNewTuioSymbol()) std::cout << "add sym " << tobj->getTuioSymbol()->getSessionID() << std::endl;
+		std::cout << std::flush;
+	}
 }
 
 void Tuio2Demo::tuioUpdate(TuioObject *tobj) {
 
-	/*if (verbose)
-		std::cout << "set obj " << ttok->getSymbolID() << " (" << ttok->getSessionID() << ") "<< ttok->getX() << " " << ttok->getY() << " " << ttok->getAngle()
-		<< " " << ttok->getMotionSpeed() << " " << ttok->getRotationSpeed() << " " << ttok->getMotionAccel() << " " << ttok->getRotationAccel() << std::endl;*/
+	if (verbose)  {
+		if(tobj->containsTuioToken()) std::cout << "set tok " << tobj->getTuioToken()->getSessionID() << std::endl;
+		if(tobj->containsTuioPointer()) std::cout << "set ptr " << tobj->getTuioPointer()->getSessionID() << std::endl;
+		if(tobj->containsTuioBounds()) std::cout << "set bnd " << tobj->getTuioBounds()->getSessionID() << std::endl;
+		if(tobj->containsTuioSymbol()) std::cout << "set sym " << tobj->getTuioSymbol()->getSessionID() << std::endl;
+		std::cout << std::flush;
+	}
 }
 
 void Tuio2Demo::tuioRemove(TuioObject *tobj) {
 	
-	/*if (verbose)
-		std::cout << "del obj " << ttok->getSymbolID() << " (" << ttok->getSessionID() << ")" << std::endl;*/
+	if (verbose)  {
+		if(tobj->containsTuioToken()) std::cout << "del tok " << tobj->getSessionID() << std::endl;
+		if(tobj->containsTuioPointer()) std::cout << "del ptr " << tobj->getSessionID() << std::endl;
+		if(tobj->containsTuioBounds()) std::cout << "del bnd " << tobj->getSessionID() << std::endl;
+		if(tobj->containsTuioSymbol()) std::cout << "del sym " << tobj->getSessionID() << std::endl;
+		std::cout << std::flush;
+	}
 }
 
 void Tuio2Demo::tuioRefresh(TuioTime frameTime) {
-	//drawObjects();
+
+	if (verbose)  {
+		std::cout << "refresh " << frameTime.getFrameID() << " "<< frameTime.getTotalMilliseconds() << std::endl;
+		std::cout << std::flush;
+	}
 }
 
 void Tuio2Demo::drawObjects() {
