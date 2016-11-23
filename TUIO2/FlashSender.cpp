@@ -640,6 +640,7 @@ bool FlashSender::isConnected() {
 }
 
 bool FlashSender::sendOscPacket (osc::OutboundPacketStream *bundle) {
+	if (lcConnection==NULL)return false; 
 	if (!TFLCSConnectionHasConnectedClient(lcConnection))return false; 
 	if ( bundle->Size() > buffer_size ) return false;
 	if ( bundle->Size() == 0 ) return false;
