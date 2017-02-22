@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -39,7 +39,7 @@ static void* ClientThreadFunc( void* obj )
 	TcpReceiver *sender = static_cast<TcpReceiver*>(obj);
 	char data_buffer[MAX_TCP_SIZE+4];
 	char data_size[4];
-
+	int32_t bundle_size;
 #ifdef WIN32
 	SOCKET client = sender->tcp_client_list.back();
 #else
@@ -52,16 +52,17 @@ static void* ClientThreadFunc( void* obj )
 
 		if (bytes>=4) {
 			memcpy(&data_size[0],&data_buffer[0], 4);
+
 #ifdef OSC_HOST_LITTLE_ENDIAN
-			int32_t temp = (int32_t)(*data_size);
-			data_size[0] = temp>>24;
-			data_size[1] = (temp>>16) & 255;
-			data_size[2] = (temp>>8) & 255;
-			data_size[3] = (temp) & 255;
+			bundle_size = 0xFF & data_size[3];
+			bundle_size |= (0xFF & data_size[2]) << 8;
+			bundle_size |= (0xFF & data_size[1]) << 16;
+			bundle_size |= (int32_t)(0xFF & data_size[0]) << 24;
+#else
+			bundle_size = (int32_t)(*data_size);
 #endif
-			int32_t size = (int32_t)(*data_size);
-			if (size+4==bytes) {
-				sender->ProcessPacket(&data_buffer[4],(int)size,IpEndpointName());
+			if (bundle_size+4==bytes) {
+				sender->ProcessPacket(&data_buffer[4],(int)bundle_size,IpEndpointName());
 			}
 		}
 	}
