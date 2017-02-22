@@ -37,8 +37,8 @@
 
 #endif
 
-#define FLASHLC_SHM_SIZE				(64528)	// This is what Flash always uses as size
-#define	FLASHLC_SHM_LISTENERS_OFFSET	(40976)	// Another "magic number"
+#define FLASHLC_SHM_SIZE			(64528)	// This is what Flash always uses as size
+#define	FLASHLC_SHM_LISTENERS_OFFSET		(40976)	// Another "magic number"
 #define MAX_LISTENER_NAME_LEN			(64)
 #define MAX_LISTENER_METHOD_NAME		(64)
 

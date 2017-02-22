@@ -19,11 +19,8 @@
 
 #include "WebSockSender.h"
 
-#ifdef  WIN32
-#if not 
-	defined int32_t
+#if defined (WIN32) && !defined (int32_t)
 	typedef DWORD int32_t;
-#endif
 #endif
 
 using namespace TUIO2;
@@ -45,11 +42,11 @@ WebSockSender::WebSockSender(int port)
 }
 
 bool WebSockSender::sendOscPacket (osc::OutboundPacketStream *bundle) {
-	if (!connected) return false; 
+	if (!connected) return false;
 	if ( bundle->Size() > buffer_size ) return false;
 	if ( bundle->Size() == 0 ) return false;
-	
-#ifdef OSC_HOST_LITTLE_ENDIAN             
+
+#ifdef OSC_HOST_LITTLE_ENDIAN
 	data_size[0] =  bundle->Size()>>24;
 	data_size[1] = (bundle->Size()>>16) & 255;
 	data_size[2] = (bundle->Size()>>8) & 255;
@@ -63,7 +60,7 @@ bool WebSockSender::sendOscPacket (osc::OutboundPacketStream *bundle) {
 #else
 	std::list<int>::iterator client;
 #endif
-	
+
 	for (client = tcp_client_list.begin(); client!=tcp_client_list.end(); client++) {
 		int len = bundle->Size();
 		// add WebSocket header on top
