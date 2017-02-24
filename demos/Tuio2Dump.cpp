@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Example - part of the reacTIVision project
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
 
  
  This program is free software; you can redistribute it and/or modify
@@ -21,7 +21,7 @@
 #include "Tuio2Dump.h"
 
 void Tuio2Dump::tuioAdd(TuioObject *tobj) {
-	
+
 	if(tobj->containsNewTuioToken()) std::cout << "add tok " << tobj->getTuioToken()->getSessionID() << std::endl;
 	if(tobj->containsNewTuioPointer()) std::cout << "add ptr " << tobj->getTuioPointer()->getSessionID() << std::endl;
 	if(tobj->containsNewTuioBounds()) std::cout << "add bnd " << tobj->getTuioBounds()->getSessionID() << std::endl;

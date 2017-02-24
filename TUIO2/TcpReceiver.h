@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -36,17 +36,17 @@ typedef int socklen_t;
 #endif
 
 namespace TUIO2 {
-	
+
 	/**
 	 * The TcpReceiver provides the OscReceiver functionality for the TCP transport method 
 	 *
 	 * @author Martin Kaltenbrunner
 	 * @version 2.0.a0
-	 */ 
+	 */
 	class LIBDECL TcpReceiver: public OscReceiver {
-				
+
 	public:
-		
+
 		/**
 		 * This constructor creates a TcpReceiver instance listening to the provided TCP port 
 		 *
@@ -61,41 +61,41 @@ namespace TUIO2 {
 		 * @param  port  the number of the TCP port to listen to, defaults to 3333
 		 */
 		TcpReceiver (const char *host, unsigned short port);
-		
+
 		/**
-		 * The destructor is doing nothing in particular. 
+		 * The destructor is doing nothing in particular.
 		 */
 		virtual ~TcpReceiver();
-		
+
 		/**
 		 * The TcpReceiver connects and starts receiving TUIO messages via TCP
 		 *
 		 * @param  lock  running in the background if set to false (default)
 		 */
 		void connect(bool lock=false);
-		
+
 		/**
 		 * The TcpReceiver disconnects and stops receiving TUIO messages via TCP
 		 */
 		void disconnect();
 
-#ifndef WIN32
-		int tcp_socket;
-		std::list<int> tcp_client_list;
-#else
+#ifdef WIN32
 		SOCKET tcp_socket;
 		std::list<SOCKET> tcp_client_list;
+#else
+		int tcp_socket;
+		std::list<int> tcp_client_list;
 #endif
-		
+
 	private:
 
-#ifndef WIN32
-		pthread_t server_thread;
-#else
+#ifdef WIN32
 		HANDLE server_thread;
 		DWORD ServerThreadId;
-#endif	
-		
+#else
+		pthread_t server_thread;
+#endif
+
 		bool locked;
 	};
 };

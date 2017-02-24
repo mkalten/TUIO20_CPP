@@ -71,15 +71,15 @@ static void* ClientThreadFunc( void* obj )
 	std::cout << "closed TUIO/TCP connection" << std::endl;
 
 	//if (sender->tcp_client_list.size()==0) sender->connected=false;
-	//std::cout << sender->tcp_client_list.size() << " clients left"<< std::endl;	
+	//std::cout << sender->tcp_client_list.size() << " clients left"<< std::endl;
 
 	return 0;
 };
 
-#ifndef  WIN32
-static void* ServerThreadFunc( void* obj )
-#else
+#ifdef  WIN32
 static DWORD WINAPI ServerThreadFunc( LPVOID obj )
+#else
+static void* ServerThreadFunc( void* obj )
 #endif
 {
 	TcpReceiver *sender = static_cast<TcpReceiver*>(obj);
@@ -94,23 +94,23 @@ static DWORD WINAPI ServerThreadFunc( LPVOID obj )
 #endif
 		tcp_client = accept(sender->tcp_socket, (struct sockaddr*)&client_addr, &len);
 
-		if (tcp_client>0) { 
+		if (tcp_client>0) {
 			std::cout << "listening to TUIO/TCP messages from " << inet_ntoa(client_addr.sin_addr) << "@" << client_addr.sin_port << std::endl;
 			sender->tcp_client_list.push_back(tcp_client);
 			//sender->connected=true;
-			//std::cout << sender->tcp_client_list.size() << " clients connected"<< std::endl;	
-			
-#ifndef WIN32
-			pthread_t client_thread;
-			pthread_create(&client_thread , NULL, ClientThreadFunc,obj);
-#else
+			//std::cout << sender->tcp_client_list.size() << " clients connected"<< std::endl;
+
+#ifdef WIN32
 			DWORD ClientThreadId;
 			HANDLE client_thread = CreateThread( 0, 0, ClientThreadFunc, obj, 0, &ClientThreadId );
+#else
+			pthread_t client_thread;
+			pthread_create(&client_thread , NULL, ClientThreadFunc,obj);
 #endif
 		} else break;
 
 	}
-	
+
 	return 0;
 };
 
@@ -121,7 +121,7 @@ TcpReceiver::TcpReceiver(unsigned short port)
 
 	tcp_socket = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if (tcp_socket < 0) std::cerr << "could not create TUIO/TCP socket" << std::endl;
-	
+
 	int optval = 1;
 #ifdef  WIN32
 	int ret = setsockopt(tcp_socket,SOL_SOCKET,SO_REUSEADDR, (const char *)&optval,  sizeof(int));
@@ -132,21 +132,21 @@ TcpReceiver::TcpReceiver(unsigned short port)
 		std::cerr << "could not reuse TUIO/TCP socket address" << std::endl;
 		return;
 	}
-	
+
 	struct sockaddr_in tcp_server;
 	memset( &tcp_server, 0, sizeof (tcp_server));
-	
+
 	tcp_server.sin_family = AF_INET;
 	tcp_server.sin_addr.s_addr = htonl(INADDR_ANY);
 	tcp_server.sin_port = htons(port);
-	
+
 	socklen_t len = sizeof(tcp_server);
 	ret = bind(tcp_socket,(struct sockaddr*)&tcp_server,len);
 	if (ret < 0) {
 		std::cerr << "could not bind to TUIO/TCP socket on port " << port << std::endl;
 		return;
 	}
-	
+
 	ret =  listen(tcp_socket, 1);
 	if (ret < 0) {
 		std::cerr << "could not start listening to TUIO/TCP socket" << std::endl;
@@ -183,7 +183,7 @@ TcpReceiver::TcpReceiver(const char *host, unsigned short port)
 		if (host_info == NULL) std::cerr << "unknown host name: " << host << std::endl;
 		memcpy( (char *)&tcp_server.sin_addr, host_info->h_addr, host_info->h_length );
 	}
-	
+
 	tcp_server.sin_family = AF_INET;
 	tcp_server.sin_port = htons(port);
 
@@ -193,7 +193,7 @@ TcpReceiver::TcpReceiver(const char *host, unsigned short port)
 		closesocket(tcp_socket);
 #else
 		close(tcp_socket);
-#endif		
+#endif
 		std::cerr << "could not connect to TUIO/TCP server at " << host << ":"<< port << std::endl;
 		tcp_socket=-1;
 		return;
@@ -203,30 +203,30 @@ TcpReceiver::TcpReceiver(const char *host, unsigned short port)
 	}
 }
 
-TcpReceiver::~TcpReceiver() {	
-	
+TcpReceiver::~TcpReceiver() {
+
 }
 
 void TcpReceiver::connect(bool lk) {
-	
+
 	if (connected) return;
 	if ((int)tcp_socket<0) return;
 	locked = lk;
-	
+
 	if (tcp_client_list.size()>0) {
 		if (!locked) {
-#ifndef WIN32
-			pthread_create(&server_thread , NULL, ClientThreadFunc, this);
-#else
+#ifdef WIN32
 			server_thread = CreateThread( 0, 0, ClientThreadFunc, this, 0, &ServerThreadId );
+#else
+			pthread_create(&server_thread , NULL, ClientThreadFunc, this);
 #endif
-		} else ClientThreadFunc(this);		
+		} else ClientThreadFunc(this);
 	} else {
 		if (!locked) {
-#ifndef WIN32
-			pthread_create(&server_thread , NULL, ServerThreadFunc, this);
-#else
+#ifdef WIN32
 			server_thread = CreateThread( 0, 0, ServerThreadFunc, this, 0, &ServerThreadId );
+#else
+			pthread_create(&server_thread , NULL, ServerThreadFunc, this);
 #endif
 		} else ServerThreadFunc(this);
 	}
@@ -235,7 +235,7 @@ void TcpReceiver::connect(bool lk) {
 }
 
 void TcpReceiver::disconnect() {
-	
+
 	if (!connected) return;
 	if ((int)tcp_socket<0) return;
 
@@ -249,8 +249,8 @@ void TcpReceiver::disconnect() {
 		close((*client));
 	close(tcp_socket);
 	server_thread = 0;
-#endif	
-	
+#endif
+
 	tcp_client_list.clear();
 	if (!locked) {
 #ifdef WIN32
@@ -261,5 +261,3 @@ void TcpReceiver::disconnect() {
 
 	connected = false;
 }
-
-

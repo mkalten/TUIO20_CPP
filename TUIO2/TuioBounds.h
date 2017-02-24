@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 #include "TuioComponent.h"
 
 namespace TUIO2 {
-	
+
 	/**
 	 * The TuioBounds class encapsulates /tuio2/bnd TUIO boundary ellipses.
 	 *
@@ -31,38 +31,38 @@ namespace TUIO2 {
 	 */
 
 	class LIBDECL TuioBounds: public TuioComponent {
-		
+
 	protected:
 		/**
 		 * The rotation angle value.
-		 */ 
+		 */
 		float angle;
 		/**
 		 * The width value.
-		 */ 
+		 */
 		float width;
 		/**
 		 * The height value.
-		 */ 
+		 */
 		float height;
 		/**
 		 * The area value.
-		 */ 
+		 */
 		float area;
 		/**
 		 * The rotation speed value.
-		 */ 
+		 */
 		float rotation_speed;
 		/**
 		 * The rotation acceleration value.
-		 */ 
+		 */
 		float rotation_accel;
-		
+
 	public:
 		using TuioComponent::update;
-		
+
 		/**
-		 * This constructor takes a TuioTime argument and assigns it along with the provided 
+		 * This constructor takes a TuioTime argument and assigns it along with the provided
 		 * Session ID, X and Y coordinate, width, height and angle to the newly created TuioBounds.
 		 *
 		 * @param	ttime	the TuioTime to assign

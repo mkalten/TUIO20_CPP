@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -41,7 +41,7 @@ namespace TUIO2 {
 	 * <p>The TuioServer class is the central TUIO protocol encoder component.
 	 * In order to encode and send TUIO messages an instance of TuioServer needs to be created. The TuioServer instance then generates TUIO messages
 	 * which are deliverered by the provided OSCSender. The shown UDPSender send OSC to UDP port 3333 on localhost or to the configured host and port.</p> 
-	 * <p>During runtime the each frame is marked with the initFrame and commitFrame methods, 
+	 * <p>During runtime the each frame is marked with the initFrame and commitFrame methods,
 	 * while the currently present TuioTokens are managed by the server with ADD, UPDATE and REMOVE methods in analogy to the TuioClient's TuioListener interface.</p>
 	 *<p>See the SimpleSimulator example project for further hints on how to use the TuioServer class and its various methods.
 	 * <p><code>
@@ -70,9 +70,9 @@ namespace TUIO2 {
 	 *
 	 * @author Martin Kaltenbrunner
 	 * @version 2.0.a0
-	 */ 
-	class LIBDECL TuioServer : public TuioManager { 
-	
+	 */
+	class LIBDECL TuioServer : public TuioManager {
+
 	public:
 
 		/**
@@ -87,7 +87,7 @@ namespace TUIO2 {
 		 * @param  port  the UDP port number on the provided host
 		 */
 		TuioServer(const char *host, unsigned short port);
-		
+
 		/**
 		 * This constructor creates a TuioServer that sends OSC data using the provided OscSender
 		 *
@@ -96,7 +96,7 @@ namespace TUIO2 {
 		TuioServer(OscSender *sender);
 
 		/**
-		 * The destructor is doing nothing in particular. 
+		 * The destructor is doing nothing in particular.
 		 */
 		~TuioServer();
 
@@ -104,7 +104,7 @@ namespace TUIO2 {
 		 * Generates and sends TUIO messages of all currently active TUIO Components
 		 */
 		void sendFullTuioBundle();
-		
+
 		/**
 		 * Enables the full update of all currently active and inactive TUIO Components
 		 *
@@ -112,7 +112,7 @@ namespace TUIO2 {
 		void enableFullUpdate()  {
 			full_update = true;
 		}
-		
+
 		/**
 		 * Disables the full update of all currently active and inactive TUIO Components
 		 */
@@ -137,14 +137,14 @@ namespace TUIO2 {
 			periodic_update =  true;
 			update_interval = interval;
 		}
-		
+
 		/**
 		 * Disables the periodic full update of all currently active and inactive TUIO Components
 		 */
 		void disablePeriodicMessages() {
 			periodic_update = false;
 		}
-		
+
 		/**
 		 * Returns true if the periodic update of all currently active TUIO Components is enabled.
 		 * @return	true if the periodic update of all currently active TUIO Components is enabled
@@ -152,7 +152,7 @@ namespace TUIO2 {
 		bool periodicMessagesEnabled() {
 			return periodic_update;
 		}
-		
+
 		/**
 		 * Returns the periodic update interval in seconds.
 		 * @return	the periodic update interval in seconds
@@ -160,47 +160,47 @@ namespace TUIO2 {
 		int getUpdateInterval() {
 			return update_interval;
 		}
-		
+
 		/**
 		 * Commits the current frame.
 		 * Generates and sends TUIO messages of all currently active and updated TUIO Components.
 		 */
 		void commitTuioFrame();
-		
+
 		/**
 		 * Creates the TuioSource that is transmitted within the /tuio2/frm source attributes.
 		 *
 		 * @param	name	the source name to assign
-		 */		
+		 */
 		void setSourceName(const char* name);
-        void setDimension(unsigned short w, unsigned short h);
-		
+		void setDimension(unsigned short w, unsigned short h);
+
 		void addOscSender(OscSender *sender);
-				
+
 	private:
-			
+
 		void initialize();
-		
+
 		OscSender *primary_sender;
 		bool local_sender;
 
 		std::vector<OscSender*> senderList;
 		void deliverOscPacket(osc::OutboundPacketStream  *packet);
-		
+
 		osc::OutboundPacketStream *oscPacket;
-		char *oscBuffer; 
+		char *oscBuffer;
 		osc::OutboundPacketStream *fullPacket;
-		char *fullBuffer; 
-		
-        void checkBundleCapacity(int size);
+		char *fullBuffer;
+
+		void checkBundleCapacity(int size);
 		void startTuioBundle(unsigned int fseq);
 		void addTokenMessage(TuioToken *ttok);
-        void addPointerMessage(TuioPointer *tptr);
-        void addBoundsMessage(TuioBounds *tbnd);
-        void addSymbolMessage(TuioSymbol *tsym);
+		void addPointerMessage(TuioPointer *tptr);
+		void addBoundsMessage(TuioBounds *tbnd);
+		void addSymbolMessage(TuioSymbol *tsym);
 		void sendTuioBundle();
-        void sendEmptyTuioBundle();
-		
+		void sendEmptyTuioBundle();
+
 		int update_interval;
 		bool full_update, periodic_update;
 		TuioTime updateTime;

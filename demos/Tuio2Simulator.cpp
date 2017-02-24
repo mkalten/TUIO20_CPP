@@ -1,7 +1,7 @@
 /*
-	TUIO2 C++ Server Demo
-    Copyright (c) 2009-2016 Martin Kaltenbrunner <martin@tuio.org>
- 
+    TUIO2 C++ Server Demo
+    Copyright (c) 2009-201/ Martin Kaltenbrunner <martin@tuio.org>
+
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
@@ -115,7 +115,7 @@ void Tuio2Simulator::processEvents()
 				running = false;
 				SDL_Quit();
 			} else if( event.key.keysym.sym == SDLK_F1 ){
-				
+
 				if(fullscreen) {
 					width = window_width;
 					height = window_height;
@@ -127,7 +127,7 @@ void Tuio2Simulator::processEvents()
 					SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 					fullscreen = true;
 				}
-				
+
 				glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 				glViewport(0, 0, (GLint)width, (GLint)height);
 				glMatrixMode(GL_PROJECTION);
@@ -135,7 +135,7 @@ void Tuio2Simulator::processEvents()
 				gluOrtho2D(0, (GLfloat)width, (GLfloat)height, 0);
 				glMatrixMode(GL_MODELVIEW);
 				glLoadIdentity();
-				
+
 			} else if( event.key.keysym.sym == SDLK_f ){
 				fullupdate=!tuioServer->fullUpdateEnabled();
 				if (fullupdate) tuioServer->enableFullUpdate();
@@ -320,7 +320,7 @@ void Tuio2Simulator::initWindow() {
 	SDL_GetCurrentDisplayMode(0, &mode);
 	screen_width = mode.w;
 	screen_height= mode.h;
-	
+
 	int videoFlags = SDL_WINDOW_OPENGL;
 	if( fullscreen ) {
 		videoFlags |= SDL_WINDOW_FULLSCREEN;
@@ -330,15 +330,15 @@ void Tuio2Simulator::initWindow() {
 		width = window_width;
 		height = window_height;
 	}
-	
+
 	SDL_CreateWindowAndRenderer(width, height, videoFlags, &window, &renderer);
-	
+
 	if ( window == NULL ) {
 		std::cerr << "Could not open window: " << SDL_GetError() << std::endl;
 		SDL_Quit();
 		exit(1);
 	}
-	
+
 	SDL_GLContext context = SDL_GL_CreateContext(window);
 	if (!context) {
 		fprintf(stderr, "Couldn't create context: %s\n", SDL_GetError());
@@ -407,7 +407,7 @@ int main(int argc, char* argv[])
 	try { web_sender = new WebSockSender(8080); }
 	catch (std::exception e) { web_sender = NULL; }
 	if (web_sender) server->addOscSender(web_sender);
-	
+
 	// add an additional TUIO/FLC sender
 	OscSender *flash_sender = new FlashSender();
 	server->addOscSender(flash_sender);

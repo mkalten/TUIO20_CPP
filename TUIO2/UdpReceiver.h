@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -23,54 +23,54 @@
 #include "ip/UdpSocket.h"
 
 namespace TUIO2 {
-	
+
 	/**
-	 * The UdpReceiver provides the OscReceiver functionality for the UDP transport method 
+	 * The UdpReceiver provides the OscReceiver functionality for the UDP transport method
 	 *
 	 * @author Martin Kaltenbrunner
 	 * @version 2.0.a0
-	 */ 
+	 */
 	class LIBDECL UdpReceiver: public OscReceiver {
-				
+
 	public:
 
 		/**
 		 * The UDP socket is only public to be accessible from the thread function
-		 */ 
+		 */
 		UdpListeningReceiveSocket *socket;
-		
+
 		/**
-		 * This constructor creates a UdpReceiver instance listening to the provided UDP port 
+		 * This constructor creates a UdpReceiver instance listening to the provided UDP port
 		 *
 		 * @param  port  the number of the UDP port to listen to, defaults to 3333
 		 */
 		UdpReceiver (unsigned short port=3333);
 
 		/**
-		 * The destructor is doing nothing in particular. 
+		 * The destructor is doing nothing in particular.
 		 */
 		virtual ~UdpReceiver();
-		
+
 		/**
 		 * The UdpReceiver connects and starts receiving TUIO messages via UDP
 		 *
 		 * @param  lock  running in the background if set to false (default)
 		 */
 		void connect(bool lock=false);
-		
+
 		/**
 		 * The UdpReceiver disconnects and stops receiving TUIO messages via UDP
 		 */
 		void disconnect();
-		
+
 	private:
 
-#ifndef WIN32
-		pthread_t thread;
-#else
+#ifdef WIN32
 		HANDLE thread;
-#endif	
-		
+#else
+		pthread_t thread;
+#endif
+
 		bool locked;
 	};
 };

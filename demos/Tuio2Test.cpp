@@ -1,6 +1,6 @@
 /*
-	TUIO2 C++ Test
-    Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+    TUIO2 C++ Test
+    Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
  
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ Tuio2Test::Tuio2Test(TuioServer *server)
 
 
 void Tuio2Test::run() {
-	
+
 	frameTime = TuioTime::getSystemTime();
 	tuioServer->initTuioFrame(frameTime);
 	TuioObject *tobj = tuioServer->createTuioObject();
@@ -42,7 +42,7 @@ void Tuio2Test::run() {
 	tuioServer->addTuioSymbol(tobj,0,0,0,"type0","data0");
 	tuioServer->commitTuioFrame();
 	usleep(10000);
-	
+
 	frameTime = TuioTime::getSystemTime();
 	tuioServer->initTuioFrame(frameTime);
 	TuioObject *to = tuioServer->createTuioPointer(0.1,0.1,0.1,0.1,0.1,0.1);
@@ -55,7 +55,7 @@ void Tuio2Test::run() {
 	TuioSymbol *symbol = to->getTuioSymbol();
 	tuioServer->commitTuioFrame();
 	usleep(100000);
-	
+
 	frameTime = TuioTime::getSystemTime();
 	tuioServer->initTuioFrame(frameTime);
 	TuioPointer *tp = tobj->getTuioPointer();
@@ -66,7 +66,7 @@ void Tuio2Test::run() {
 	tuioServer->updateTuioBounds(tb,0.01,0.01,0.01,0.01,0.01,0.01);
 	tuioServer->commitTuioFrame();
 	usleep(100000);
-	
+
 	frameTime = TuioTime::getSystemTime();
 	tuioServer->initTuioFrame(frameTime);
 	tuioServer->updateTuioPointer(pointer,0.11,0.11,0.11,0.11,0.11,0.11);
@@ -74,13 +74,13 @@ void Tuio2Test::run() {
 	tuioServer->updateTuioBounds(bounds,0.11,0.11,0.11,0.11,0.11,0.11);
 	tuioServer->commitTuioFrame();
 	usleep(100000);
-	
+
 	frameTime = TuioTime::getSystemTime();
 	tuioServer->initTuioFrame(frameTime);
 	tuioServer->removeTuioObject(tobj);
 	tuioServer->commitTuioFrame();
 	usleep(100000);
-	
+
 	frameTime = TuioTime::getSystemTime();
 	tuioServer->initTuioFrame(frameTime);
 	tuioServer->removeTuioPointer(pointer);
@@ -120,12 +120,8 @@ int main(int argc, char* argv[])
 
 	delete test;
 	delete server;
-#ifndef LINUX
 	delete flash_sender;
-#endif
 	delete tcp_sender;
 	delete websock_sender;
 	return 0;
 }
-
-

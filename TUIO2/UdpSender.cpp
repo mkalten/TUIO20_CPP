@@ -1,6 +1,6 @@
 /*
- TUIO C++ Library
- Copyright (c) 2005-2016 Martin Kaltenbrunner <martin@tuio.org>
+ TUIO2 C++ Library
+ Copyright (c) 2005-2017 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -27,7 +27,7 @@ UdpSender::UdpSender() {
 		socket = new UdpTransmitSocket(IpEndpointName(ip, 3333));
 		buffer_size = MAX_UDP_SIZE;
 		std::cout << "TUIO/UDP messages to " << "127.0.0.1@3333" << std::endl;
-	} catch (std::exception &e) { 
+	} catch (std::exception &e) {
 		std::cout << "could not create UDP socket" << std::endl;
 		socket = NULL;
 		throw std::exception();
@@ -46,7 +46,7 @@ UdpSender::UdpSender(const char *host, int port) {
 		long unsigned int ip = GetHostByName(host);
 		socket = new UdpTransmitSocket(IpEndpointName(ip, port));
 		std::cout << "TUIO/UDP messages to " << host << "@" << port << std::endl;
-	} catch (std::exception &e) { 
+	} catch (std::exception &e) {
 		std::cout << "could not create UDP socket" << std::endl;
 		socket = NULL;
 		throw std::exception();
@@ -63,7 +63,7 @@ UdpSender::UdpSender(const char *host, int port, int size) {
 		if (buffer_size>MAX_UDP_SIZE) buffer_size = MAX_UDP_SIZE;
 		else if (buffer_size<MIN_UDP_SIZE) buffer_size = MIN_UDP_SIZE;
 		std::cout << "TUIO/UDP messages to " << host << "@" << port << std::endl;
-	} catch (std::exception &e) { 
+	} catch (std::exception &e) {
 		std::cout << "could not create UDP socket" << std::endl;
 		socket = NULL;
 		throw std::exception();
@@ -71,16 +71,16 @@ UdpSender::UdpSender(const char *host, int port, int size) {
 }
 
 UdpSender::~UdpSender() {
-	delete socket;		
+	delete socket;
 }
 
-bool UdpSender::isConnected() { 
-	if (socket==NULL) return false; 
+bool UdpSender::isConnected() {
+	if (socket==NULL) return false;
 	return true;
 }
 
 bool UdpSender::sendOscPacket (osc::OutboundPacketStream *bundle) {
-	if (socket==NULL) return false; 
+	if (socket==NULL) return false;
 	if ( bundle->Size() > buffer_size ) return false;
 	if ( bundle->Size() == 0 ) return false;
 

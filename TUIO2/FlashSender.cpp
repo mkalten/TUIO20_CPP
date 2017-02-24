@@ -589,16 +589,16 @@ int _TFLCSDelayedConnect(TFLCSLocalConnection_t* connection)
 	
 	connection->data = (char*)connection->mapAddress;
 	connection->open = 1;
-	
+
 errorReturn:
 #endif
-	
+
 	return connection->open;
 }
 
 /*
- TUIO C++ Library
- Copyright (c) 2005-2016 Martin Kaltenbrunner <martin@tuio.org>
+ TUIO2 C++ Library
+ Copyright (c) 2005-2017 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -631,17 +631,17 @@ FlashSender::FlashSender(const char *conn_name, const char *meth_name) {
 }
 
 FlashSender::~FlashSender() {
-	TFLCSDisconnect(lcConnection);	
+	TFLCSDisconnect(lcConnection);
 }
 
-bool FlashSender::isConnected() { 
+bool FlashSender::isConnected() {
 	if (TFLCSConnectionHasConnectedClient(lcConnection)) return true;
 	else return false;
 }
 
 bool FlashSender::sendOscPacket (osc::OutboundPacketStream *bundle) {
-	if (lcConnection==NULL)return false; 
-	if (!TFLCSConnectionHasConnectedClient(lcConnection))return false; 
+	if (lcConnection==NULL)return false;
+	if (!TFLCSConnectionHasConnectedClient(lcConnection))return false;
 	if ( bundle->Size() > buffer_size ) return false;
 	if ( bundle->Size() == 0 ) return false;
 

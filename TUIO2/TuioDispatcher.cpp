@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -26,34 +26,34 @@
 using namespace TUIO2;
 
 TuioDispatcher::TuioDispatcher() {
-#ifndef WIN32	
-	pthread_mutex_init(&tobjMutex,NULL);
-#else
+#ifdef WIN32
 	tobjMutex = CreateMutex(NULL,FALSE,"tobjMutex");
-#endif	
+#else
+	pthread_mutex_init(&tobjMutex,NULL);
+#endif
 }
 
 TuioDispatcher::~TuioDispatcher() {
-#ifndef WIN32	
-	pthread_mutex_destroy(&tobjMutex);
-#else
+#ifdef WIN32
 	CloseHandle(tobjMutex);
-#endif		
+#else
+	pthread_mutex_destroy(&tobjMutex);
+#endif
 }
 
 void TuioDispatcher::lockObjectList() {
-#ifndef WIN32	
-	pthread_mutex_lock(&tobjMutex);
-#else
+#ifdef WIN32
 	WaitForSingleObject(tobjMutex, INFINITE);
-#endif		
+#else
+	pthread_mutex_lock(&tobjMutex);
+#endif
 }
 
 void TuioDispatcher::unlockObjectList() {
-#ifndef WIN32	
-	pthread_mutex_unlock(&tobjMutex);
-#else
+#ifdef WIN32
 	ReleaseMutex(tobjMutex);
+#else
+	pthread_mutex_unlock(&tobjMutex);
 #endif
 }
 

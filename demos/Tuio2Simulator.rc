@@ -41,7 +41,7 @@ BEGIN
             VALUE "FileDescription", "Tangible Interaction Framework\0"
             VALUE "FileVersion", "1, 9, 9, 0\0"
             VALUE "InternalName", "Tuio2Simulator.exe\0"
-            VALUE "LegalCopyright", "2016 Martin Kaltenbrunner.\0"
+            VALUE "LegalCopyright", "2017 Martin Kaltenbrunner.\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "Tuio2Simulator.exe\0"
             VALUE "ProductName", "Tuio2Simulator\0"

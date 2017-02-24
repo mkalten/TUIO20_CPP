@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -21,10 +21,10 @@
 using namespace TUIO2;
 using namespace osc;
 
-#ifndef WIN32
-static void* ClientThreadFunc( void* obj )
-#else
+#ifdef WIN32
 static DWORD WINAPI ClientThreadFunc( LPVOID obj )
+#else
+static void* ClientThreadFunc( void* obj )
 #endif
 {
 	static_cast<UdpReceiver*>(obj)->socket->Run();
@@ -56,21 +56,21 @@ void UdpReceiver::connect(bool lk) {
 	if (connected) return;
 	if (socket==NULL) return;
 	locked = lk;
-	
+
 	if (!locked) {
-#ifndef WIN32
-		pthread_create(&thread , NULL, ClientThreadFunc, this);
-#else
+#ifdef WIN32
 		DWORD threadId;
 		thread = CreateThread( 0, 0, ClientThreadFunc, this, 0, &threadId );
+#else
+		pthread_create(&thread , NULL, ClientThreadFunc, this);
 #endif
 	} else socket->Run();
-	
+
 	connected = true;
 }
 
 void UdpReceiver::disconnect() {
-	
+
 	if (!connected) return;
 	if (socket==NULL) {
 		connected = false;
@@ -78,7 +78,7 @@ void UdpReceiver::disconnect() {
 		return;
 	}
 	socket->Break();
-	
+
 	if (!locked) {
 #ifdef WIN32
 		if( thread ) CloseHandle( thread );
@@ -88,5 +88,3 @@ void UdpReceiver::disconnect() {
 
 	connected = false;
 }
-
-

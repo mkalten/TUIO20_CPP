@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Test
- Copyright (c) 2005-2014 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2005-2017 Martin Kaltenbrunner <martin@tuio.org>
  
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -32,16 +32,15 @@
 
 using namespace TUIO2;
 
-class Tuio2Test { 
-	
+class Tuio2Test {
+
 public:
 	Tuio2Test(TuioServer *server);
 	Tuio2Test() {};
-	
+
 	void run();
 	TuioServer *tuioServer;
 
-	
 private:
 
 	int width, height;

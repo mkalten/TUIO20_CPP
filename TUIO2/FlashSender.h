@@ -130,15 +130,15 @@ typedef	DWORD u_int32_t;
 	// dumps a given buffer (size bytes starting at offset) to stdout in a nice hex/ascii format.
 	// useful for debugging purposes.
 	void TFLCSDumpMemory(char* buffer, int offset, int size);
-	
+
 #ifdef __cplusplus
 }
-#endif /* __cplusplus */ 		
+#endif /* __cplusplus */
 #endif //__TFFlashLCSHMEM_H__
 
 /*
- TUIO C++ Library
- Copyright (c) 2005-2016 Martin Kaltenbrunner <martin@tuio.org>
+ TUIO2 C++ Library
+ Copyright (c) 2005-2017 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -164,7 +164,7 @@ typedef	DWORD u_int32_t;
 #define DEFAULT_LC_METH_NAME    "receiveOscData"
 
 namespace TUIO2 {
-	
+
 	/**
 	 * The FlashSender implements the Flash LocalConnection transport method for OSC
 	 *
@@ -172,7 +172,7 @@ namespace TUIO2 {
 	 * @version 2.0.a0
 	 */
 	class LIBDECL FlashSender : public OscSender {
-				
+
 	public:
 
 		/**
@@ -184,19 +184,19 @@ namespace TUIO2 {
 		 * The default constructor creates a FlashSender using a Flash LocalConnection on localhost
 		 */
 		FlashSender(const char *conn_name, const char *meth_name);
-		
+
 		/**
-		 * The destructor closes the connection. 
+		 * The destructor closes the connection.
 		 */
 		virtual ~FlashSender();
-		
+
 		/**
 		 * This method delivers the provided OSC data
 		 *
 		 * @param *bundle  the OSC stream to deliver
 		 * @return true if the data was delivered successfully
 		 */
-		
+
 		bool sendOscPacket (osc::OutboundPacketStream *bundle);
 
 		/**
@@ -205,9 +205,9 @@ namespace TUIO2 {
 		 * @return true if the connection is alive
 		 */
 		bool isConnected ();
-		
+
 		const char* tuio_type() { return "TUIO/FLC"; }
-		
+
 	private:
 		TFLCSLocalConnection_t* lcConnection;
 	};

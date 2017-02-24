@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Example - part of the reacTIVision project
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
  
  
  This program is free software; you can redistribute it and/or modify
@@ -30,7 +30,7 @@
 using namespace TUIO2;
 
 class Tuio2Dump : public TuioListener {
-	
+
 	public:
 	void tuioAdd(TuioObject *tobj);
 	void tuioUpdate(TuioObject *tobj);

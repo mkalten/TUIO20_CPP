@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2014 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -22,12 +22,12 @@
 #include "LibExport.h"
 #include "osc/OscTypes.h"
 
-#ifndef WIN32
-#include <pthread.h>
-#include <sys/time.h>
-#else
+#ifdef WIN32
 #include <windows.h>
 #include <ctime>
+#else
+#include <pthread.h>
+#include <sys/time.h>
 #endif
 
 #define MSEC_SECOND 1000
