@@ -42,11 +42,11 @@ WebSockSender::WebSockSender(int port)
 }
 
 bool WebSockSender::sendOscPacket (osc::OutboundPacketStream *bundle) {
-	if (!connected) return false;
+	if (!connected) return false; 
 	if ( bundle->Size() > buffer_size ) return false;
 	if ( bundle->Size() == 0 ) return false;
-
-#ifdef OSC_HOST_LITTLE_ENDIAN
+	
+#ifdef OSC_HOST_LITTLE_ENDIAN             
 	data_size[0] =  bundle->Size()>>24;
 	data_size[1] = (bundle->Size()>>16) & 255;
 	data_size[2] = (bundle->Size()>>8) & 255;
@@ -60,9 +60,9 @@ bool WebSockSender::sendOscPacket (osc::OutboundPacketStream *bundle) {
 #else
 	std::list<int>::iterator client;
 #endif
-
+	
 	for (client = tcp_client_list.begin(); client!=tcp_client_list.end(); client++) {
-		int len = bundle->Size();
+		size_t len = bundle->Size();
 		// add WebSocket header on top
 		uint8_t header[4] = {
 			0x82,
@@ -111,8 +111,9 @@ void WebSockSender::newClient( int tcp_client ) {
 		"HTTP/1.1 101 Switching Protocols\r\n"
 		"Upgrade: websocket\r\n"
 		"Connection: Upgrade\r\n"
+		"Access-Control-Allow-Origin: *\r\n"
 		"Sec-WebSocket-Accept: %s\r\n\r\n",
-		base64( digest, SHA1_HASH_SIZE ).c_str() );
+		base64( digest, SHA1_HASH_SIZE ).c_str() ); 
 
 	send(tcp_client,buf, strlen(buf),0);
 }
@@ -147,29 +148,29 @@ void WebSockSender::newClient( int tcp_client ) {
  */
 
 void WebSockSender::sha1( uint8_t digest[SHA1_HASH_SIZE], const uint8_t* inbuf, size_t length) {
-
-	size_t i, j;
+	
+	int i, j;
 	int remaining_bytes;
 	uint32_t h0, h1, h2, h3, h4, a, b, c, d, e, temp;
 	uint32_t w[80];
 	unsigned char buf[64];
-
+	
 	/* Initialize SHA1 hash state. */
 	h0 = 0x67452301;
 	h1 = 0xefcdab89;
 	h2 = 0x98badcfe;
 	h3 = 0x10325476;
 	h4 = 0xc3d2e1f0;
-
+	
 	/* The extra 9 bytes are the pad byte (0x80) and 64-bit bit count that
 	 are appended to the data being hashed.	(There will more than likely
 	 also be some zeroes in between the 0x80 and the bit count so that we
 	 operate on a multiple of 64 bytes; 9 bytes, though, is the minimal
 	 amount of extra data.)	*/
 	for (i = 0; i < length + 9; i += 64) {
-
+		
 		/* Perform any padding necessary. */
-		remaining_bytes = length - i;
+		remaining_bytes = (int)length - i;
 		if (remaining_bytes >= 64) {
 			memcpy(buf, inbuf + i, 64);
 		} else if (remaining_bytes >= 0) {
@@ -179,26 +180,26 @@ void WebSockSender::sha1( uint8_t digest[SHA1_HASH_SIZE], const uint8_t* inbuf, 
 		} else {
 			memset(buf, 0, 64);
 		}
-
+		
 		if (remaining_bytes < 56)
 			*(uint32_t*)(buf + 60) = SWAP(length * 8);
-
+		
 		/* Build the input array. */
 		for (j = 0; j < 16; j++)
 			w[j] = SWAP(*(uint32_t*)(buf + j * 4));
-
+		
 		for (j = 16; j < 80; j++)
 			w[j] = ROL(w[j - 3] ^ w[j - 8] ^ w[j - 14] ^ w[j - 16], 1);
-
+		
 		/* Load hash state. */
 		a = h0;
 		b = h1;
 		c = h2;
 		d = h3;
 		e = h4;
-
+		
 		for (j = 0; j < 80; j++) {
-
+			
 			if (j < 20)
 				temp = ((b & c) | ((~b) & d)) + 0x5a827999;
 			else if (j < 40)
@@ -207,16 +208,16 @@ void WebSockSender::sha1( uint8_t digest[SHA1_HASH_SIZE], const uint8_t* inbuf, 
 				temp = ((b & c) | (b & d) | (c & d)) + 0x8f1bbcdc;
 			else
 				temp = (b ^ c ^ d) + 0xca62c1d6;
-
+			
 			temp += ROL(a, 5) + e + w[j];
-
+			
 			e = d;
 			d = c;
 			c = ROR(b, 2);
 			b = a;
 			a = temp;
 		}
-
+		
 		/* Incorporate the results of the hash operation. */
 		h0 += a;
 		h1 += b;
@@ -224,7 +225,7 @@ void WebSockSender::sha1( uint8_t digest[SHA1_HASH_SIZE], const uint8_t* inbuf, 
 		h3 += d;
 		h4 += e;
 	}
-
+	
 	/* Write the hash into the output buffer. */
 	*(uint32_t*)(digest) = SWAP(h0);
 	*(uint32_t*)(digest + 4) = SWAP(h1);
@@ -233,7 +234,7 @@ void WebSockSender::sha1( uint8_t digest[SHA1_HASH_SIZE], const uint8_t* inbuf, 
 	*(uint32_t*)(digest + 16) = SWAP(h4);
 }
 
-/*
+/* 
  * a very simple base64 encoder, licensed as public domain. original source:
  * https://en.wikibooks.org/wiki/Algorithm_Implementation/Miscellaneous/Base64
  */
@@ -242,24 +243,24 @@ const static unsigned char encodeLookup[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghi
 const static unsigned char padCharacter = '=';
 
 std::string WebSockSender::base64( uint8_t* cursor, size_t size ) {
-
+	
 	std::string encodedString;
 	uint32_t temp;
-
+	
 	encodedString.reserve(((size/3) + (size % 3 > 0)) * 4);
-
+	
 	for (size_t idx = 0; idx < size/3; idx++) {
-
+		
 		temp  = (*cursor++) << 16;
 		temp += (*cursor++) << 8;
 		temp += (*cursor++);
-
+		
 		encodedString.append( 1, encodeLookup[(temp & 0x00FC0000) >> 18] );
 		encodedString.append( 1, encodeLookup[(temp & 0x0003F000) >> 12] );
 		encodedString.append( 1, encodeLookup[(temp & 0x00000FC0) >> 6 ] );
 		encodedString.append( 1, encodeLookup[(temp & 0x0000003F)      ] );
 	}
-
+	
 	switch (size % 3) {
 		case 1:
 			temp = (*cursor++) << 16;
@@ -276,6 +277,8 @@ std::string WebSockSender::base64( uint8_t* cursor, size_t size ) {
 			encodedString.append( 1, padCharacter);
 			break;
 	}
-
+	
 	return encodedString;
 }
+
+

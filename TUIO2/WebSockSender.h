@@ -68,34 +68,34 @@ __inline int c99_snprintf(char *outBuf, size_t size, const char *format, ...)
 #include <vector>
 
 namespace TUIO2 {
-
+	
 	/**
 	 * The WebSockSender implements the WebSocket transport method for OSC
 	 *
 	 * @author Florian Echtler
 	 * @version 2.0.a0
-	 */
+	 */ 
 	class LIBDECL WebSockSender : public TcpSender {
-
+				
 	public:
 
 		/**
 		 * The default constructor creates a WebSockSender that listens to the default HTTP-alt port 8080 on localhost
 		 */
 		WebSockSender();
-
+		
 		/**
 		 * This constructor creates a WebSockSender that listens to the provided port
 		 *
 		 * @param  port	the listening WebSocket port number
 		 */
-		WebSockSender(int port);
-
+		WebSockSender(int port);	
+		
 		/**
-		 * The destructor closes the socket.
+		 * The destructor closes the socket. 
 		 */
 		virtual ~WebSockSender() {}
-
+		
 		/**
 		 * This method delivers the provided OSC data
 		 *
@@ -110,10 +110,10 @@ namespace TUIO2 {
 		 * @param tcp_client the socket handle of the new client
 		 */
 		void newClient( int tcp_client );
-
-		const char* tuio_type() { return "TUIO/WEB"; }
+	
+		const char* tuio_type() { return "TUIO2/WEB"; }
 	private:
-
+		
 		void sha1( uint8_t digest[SHA1_HASH_SIZE], const uint8_t* inbuf, size_t length );
 		std::string base64( uint8_t* buffer, size_t size );
 	};

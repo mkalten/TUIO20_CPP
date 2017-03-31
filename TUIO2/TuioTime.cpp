@@ -152,7 +152,7 @@ osc::TimeTag TuioTime::getSystemTimeTag() {
 
     TuioTime systemTime = getSystemTime();
     
-    osc::uint32 secs = systemTime.getSeconds() + JAN_1970;
+    osc::uint32 secs = (osc::uint32)systemTime.getSeconds() + JAN_1970;
     osc::uint32 frac = systemTime.getMicroseconds() * NTP_UNITS;
     
     osc::uint64 timetag = (osc::uint64) secs << 32 | frac;

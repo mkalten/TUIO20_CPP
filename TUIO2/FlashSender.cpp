@@ -37,25 +37,25 @@
 
 #endif
 
-#define FLASHLC_SHM_SIZE			(64528)	// This is what Flash always uses as size
-#define	FLASHLC_SHM_LISTENERS_OFFSET		(40976)	// Another "magic number"
+#define FLASHLC_SHM_SIZE				(64528)	// This is what Flash always uses as size
+#define	FLASHLC_SHM_LISTENERS_OFFSET	(40976)	// Another "magic number"
 #define MAX_LISTENER_NAME_LEN			(64)
 #define MAX_LISTENER_METHOD_NAME		(64)
 
-#define	PROTOCOL_NAME				("localhost")
+#define	PROTOCOL_NAME					("localhost")
 
 #define WIN32_SEMAPHORE_NAME			TEXT("MacromediaMutexOmega")
-#define WIN32_SHMEM_NAME			TEXT("MacromediaFMOmega")
+#define WIN32_SHMEM_NAME				TEXT("MacromediaFMOmega")
 #define POSIX_SEMAPHORE_NAME			("MacromediaSemaphoreDig")
-#define	POSIX_SEMAPHORE_INITIAL_VALUE		(10)
+#define	POSIX_SEMAPHORE_INITIAL_VALUE	(10)
 
 #define	AMF_TYPE_STRING				(0x02)
 #define AMF_TYPE_AMF3OBJ			(0x11)
 #define AMF3_TYPE_BYTEARRAY			(0x0C)
 
-#define AMF_ENVELOPE_LEN			(16)
-#define AMF_ENVELOPE_TIMESTAMP_POS	(8)
-#define AMF_ENVELOPE_SIZE_POS		(12)
+#define AMF_ENVELOPE_LEN				(16)
+#define AMF_ENVELOPE_TIMESTAMP_POS		(8)
+#define AMF_ENVELOPE_SIZE_POS			(12)
 
 void _TFLCSLockSemaphore(TFLCSLocalConnection_t* connection);
 void _TFLCSUnlockSemaphore(TFLCSLocalConnection_t* connection);
@@ -589,16 +589,16 @@ int _TFLCSDelayedConnect(TFLCSLocalConnection_t* connection)
 	
 	connection->data = (char*)connection->mapAddress;
 	connection->open = 1;
-
+	
 errorReturn:
 #endif
-
+	
 	return connection->open;
 }
 
 /*
  TUIO2 C++ Library
- Copyright (c) 2005-2017 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -631,17 +631,17 @@ FlashSender::FlashSender(const char *conn_name, const char *meth_name) {
 }
 
 FlashSender::~FlashSender() {
-	TFLCSDisconnect(lcConnection);
+	TFLCSDisconnect(lcConnection);	
 }
 
-bool FlashSender::isConnected() {
+bool FlashSender::isConnected() { 
 	if (TFLCSConnectionHasConnectedClient(lcConnection)) return true;
 	else return false;
 }
 
 bool FlashSender::sendOscPacket (osc::OutboundPacketStream *bundle) {
-	if (lcConnection==NULL)return false;
-	if (!TFLCSConnectionHasConnectedClient(lcConnection))return false;
+	if (lcConnection==NULL) return false;
+	if (!TFLCSConnectionHasConnectedClient(lcConnection)) return false; 
 	if ( bundle->Size() > buffer_size ) return false;
 	if ( bundle->Size() == 0 ) return false;
 

@@ -196,7 +196,7 @@ void TuioServer::sendFullTuioBundle() {
 
 void TuioServer::checkBundleCapacity(int msg_size) {
 
-    int size = msg_size + ALV_MESSAGE_SIZE + 4*tobjList.size();
+    unsigned long size = msg_size + ALV_MESSAGE_SIZE + 4*tobjList.size();
 
     if ((oscPacket->Capacity()-oscPacket->Size())<size) {
         (*oscPacket) << osc::EndBundle;

@@ -21,17 +21,17 @@
 using namespace TUIO2;
 using namespace osc;
 
-#ifdef WIN32
-static DWORD WINAPI ClientThreadFunc( LPVOID obj )
-#else
+#ifndef WIN32
 static void* ClientThreadFunc( void* obj )
+#else
+static DWORD WINAPI ClientThreadFunc( LPVOID obj )
 #endif
 {
 	static_cast<UdpReceiver*>(obj)->socket->Run();
 	return 0;
 };
 
-UdpReceiver::UdpReceiver(unsigned short port):locked (false) {
+UdpReceiver::UdpReceiver(int port):locked (false) {
 	try {
 		socket = new UdpListeningReceiveSocket(IpEndpointName( IpEndpointName::ANY_ADDRESS, port ), this );
 	} catch (std::exception &e) {
@@ -43,7 +43,7 @@ UdpReceiver::UdpReceiver(unsigned short port):locked (false) {
 		if (!socket->IsBound()) {
 			delete socket;
 			socket = NULL;
-		} else std::cout << "listening to TUIO/UDP messages on port " << port << std::endl;
+		} else std::cout << "listening to " << tuio_type() <<  "  messages on port " << port << std::endl;
 	}
 }
 
@@ -56,21 +56,21 @@ void UdpReceiver::connect(bool lk) {
 	if (connected) return;
 	if (socket==NULL) return;
 	locked = lk;
-
+	
 	if (!locked) {
-#ifdef WIN32
+#ifndef WIN32
+		pthread_create(&thread , NULL, ClientThreadFunc, this);
+#else
 		DWORD threadId;
 		thread = CreateThread( 0, 0, ClientThreadFunc, this, 0, &threadId );
-#else
-		pthread_create(&thread , NULL, ClientThreadFunc, this);
 #endif
 	} else socket->Run();
-
+	
 	connected = true;
 }
 
 void UdpReceiver::disconnect() {
-
+	
 	if (!connected) return;
 	if (socket==NULL) {
 		connected = false;
@@ -78,7 +78,7 @@ void UdpReceiver::disconnect() {
 		return;
 	}
 	socket->Break();
-
+	
 	if (!locked) {
 #ifdef WIN32
 		if( thread ) CloseHandle( thread );
@@ -88,3 +88,5 @@ void UdpReceiver::disconnect() {
 
 	connected = false;
 }
+
+
