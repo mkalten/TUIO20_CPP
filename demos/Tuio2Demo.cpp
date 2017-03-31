@@ -247,6 +247,8 @@ void Tuio2Demo::processEvents()
 					glMatrixMode(GL_MODELVIEW);
 					glLoadIdentity();
 					
+					SDL_ShowCursor(!fullscreen);
+					
 				} else if( event.key.keysym.sym == SDLK_v ){
 					verbose = !verbose;	
 				} 
