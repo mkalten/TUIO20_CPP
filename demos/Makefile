@@ -21,12 +21,12 @@ SHARED_OPTIONS = -shared -Wl,-soname,$(TUIO_SHARED)
 
 ifeq ($(PLATFORM), Darwin)
 	CC = gcc
-	CXX = g++ -stdlib=libstdc++
-	CFLAGS += -mmacosx-version-min=10.6 -arch i386 -arch x86_64
-	CXXFLAGS += -mmacosx-version-min=10.6 -arch i386 -arch x86_64
-#       CXX = g++ -stdlib=libc++
-#       CFLAGS += -mmacosx-version-min=10.9 -arch x86_64
-#       CXXFLAGS += -mmacosx-version-min=10.9 -arch x86_64
+#	CXX = g++ -stdlib=libstdc++
+#	CFLAGS += -mmacosx-version-min=10.6 -arch i386 -arch x86_64
+#	CXXFLAGS += -mmacosx-version-min=10.6 -arch i386 -arch x86_64
+	CXX = g++ -stdlib=libc++
+	CFLAGS += -mmacosx-version-min=10.9 -arch x86_64
+	CXXFLAGS += -mmacosx-version-min=10.9 -arch x86_64
 	TUIO_SHARED  = libTUIO2.dylib
 	LD_FLAGS = -framework OpenGL -framework GLUT -framework SDL2 -framework Cocoa
 	SDL_CFLAGS =
