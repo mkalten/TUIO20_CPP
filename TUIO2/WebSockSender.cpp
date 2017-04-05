@@ -19,7 +19,7 @@
 
 #include "WebSockSender.h"
 
-#if defined (WIN32) && !defined (int32_t)
+#if defined (WIN32) && !defined (_STDINT)
 	typedef DWORD int32_t;
 #endif
 
@@ -149,7 +149,7 @@ void WebSockSender::newClient( int tcp_client ) {
 
 void WebSockSender::sha1( uint8_t digest[SHA1_HASH_SIZE], const uint8_t* inbuf, size_t length) {
 	
-	int i, j;
+	size_t i, j;
 	int remaining_bytes;
 	uint32_t h0, h1, h2, h3, h4, a, b, c, d, e, temp;
 	uint32_t w[80];
