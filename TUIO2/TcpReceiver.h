@@ -25,6 +25,7 @@
 #ifdef WIN32
 #include <winsock.h>
 #include <io.h>
+#include <stdint.h>
 typedef int socklen_t;
 #else
 #include <sys/types.h>
