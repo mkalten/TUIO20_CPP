@@ -26,7 +26,6 @@
 #include <list>
 #include <math.h>
 
-#include "FlashSender.h"
 #include "TcpSender.h"
 #include "WebSockSender.h"
 

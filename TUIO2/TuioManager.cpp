@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2026 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -407,6 +407,195 @@ void TuioManager::removeTuioSymbol(TuioSymbol *tsym) {
         delete tsym;
         return;
     } else removeTuioObject(tobj);
+}
+
+TuioObject* TuioManager::addTuioGeometry(TuioObject *tobj) {
+    if (tobj==NULL) return NULL;
+
+    lockObjectList();
+    tobj->setTuioGeometry(new TuioGeometry(currentFrameTime,tobj));
+    unlockObjectList();
+
+    for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++)
+        (*listener)->tuioUpdate(tobj);
+
+    return tobj;
+}
+
+TuioObject* TuioManager::addTuioGeometry(TuioGeometry *tgeo) {
+    if (tgeo==NULL) return NULL;
+
+    TuioObject *tobj = tgeo->getContainingTuioObject();
+    if (tobj!=NULL) {
+        lockObjectList();
+        tobj->setTuioGeometry(tgeo);
+        unlockObjectList();
+    }
+    return tobj;
+}
+
+void TuioManager::removeTuioGeometry(TuioGeometry *tgeo) {
+    if (tgeo==NULL) return;
+
+    TuioObject *tobj = tgeo->getContainingTuioObject();
+    if (tobj==NULL) {
+        delete tgeo;
+        return;
+    } else tobj->removeTuioGeometry(currentFrameTime);
+}
+
+TuioObject* TuioManager::addTuioControl(TuioControl *tctl) {
+    if (tctl==NULL) return NULL;
+
+    TuioObject *tobj = tctl->getContainingTuioObject();
+    if (tobj!=NULL) {
+        lockObjectList();
+        tobj->setTuioControl(tctl);
+        unlockObjectList();
+    }
+    return tobj;
+}
+
+TuioObject* TuioManager::addTuioData(TuioData *tdat) {
+    if (tdat==NULL) return NULL;
+
+    TuioObject *tobj = tdat->getContainingTuioObject();
+    if (tobj!=NULL) {
+        lockObjectList();
+        tobj->setTuioData(tdat);
+        unlockObjectList();
+    }
+    return tobj;
+}
+
+TuioObject* TuioManager::addTuioSignal(TuioSignal *tsig) {
+    if (tsig==NULL) return NULL;
+
+    TuioObject *tobj = tsig->getContainingTuioObject();
+    if (tobj!=NULL) {
+        lockObjectList();
+        tobj->setTuioSignal(tsig);
+        unlockObjectList();
+    }
+    return tobj;
+}
+
+void TuioManager::removeTuioControl(TuioControl *tctl) {
+    if (tctl==NULL) return;
+
+    TuioObject *tobj = tctl->getContainingTuioObject();
+    if (tobj==NULL) {
+        delete tctl;
+        return;
+    } else tobj->removeTuioControl(currentFrameTime);
+}
+
+void TuioManager::removeTuioData(TuioData *tdat) {
+    if (tdat==NULL) return;
+
+    TuioObject *tobj = tdat->getContainingTuioObject();
+    if (tobj==NULL) {
+        delete tdat;
+        return;
+    } else tobj->removeTuioData(currentFrameTime);
+}
+
+void TuioManager::removeTuioSignal(TuioSignal *tsig) {
+    if (tsig==NULL) return;
+
+    TuioObject *tobj = tsig->getContainingTuioObject();
+    if (tobj==NULL) {
+        delete tsig;
+        return;
+    } else tobj->removeTuioSignal(currentFrameTime);
+}
+
+TuioObject* TuioManager::addTuioAssociation(TuioAssociation *tasc) {
+    if (tasc==NULL) return NULL;
+
+    TuioObject *tobj = tasc->getContainingTuioObject();
+    if (tobj!=NULL) {
+        lockObjectList();
+        tobj->addTuioAssociation(tasc);
+        unlockObjectList();
+    }
+    return tobj;
+}
+
+void TuioManager::removeTuioAssociation(TuioAssociation *tasc) {
+    if (tasc==NULL) return;
+
+    TuioObject *tobj = tasc->getContainingTuioObject();
+    if (tobj==NULL) {
+        delete tasc;
+        return;
+    } else tobj->deleteTuioAssociation(tasc);
+}
+
+TuioObject* TuioManager::addTuioToken3D(TuioToken3D *ttok) {
+    if (ttok==NULL) return NULL;
+
+    TuioObject *tobj = ttok->getContainingTuioObject();
+    if (tobj!=NULL) {
+        lockObjectList();
+        tobj->setTuioToken3D(ttok);
+        unlockObjectList();
+    }
+    return tobj;
+}
+
+TuioObject* TuioManager::addTuioPointer3D(TuioPointer3D *tptr) {
+    if (tptr==NULL) return NULL;
+
+    TuioObject *tobj = tptr->getContainingTuioObject();
+    if (tobj!=NULL) {
+        lockObjectList();
+        tobj->setTuioPointer3D(tptr);
+        unlockObjectList();
+    }
+    return tobj;
+}
+
+TuioObject* TuioManager::addTuioBounds3D(TuioBounds3D *tbnd) {
+    if (tbnd==NULL) return NULL;
+
+    TuioObject *tobj = tbnd->getContainingTuioObject();
+    if (tobj!=NULL) {
+        lockObjectList();
+        tobj->setTuioBounds3D(tbnd);
+        unlockObjectList();
+    }
+    return tobj;
+}
+
+void TuioManager::removeTuioToken3D(TuioToken3D *ttok) {
+    if (ttok==NULL) return;
+
+    TuioObject *tobj = ttok->getContainingTuioObject();
+    if (tobj==NULL) {
+        delete ttok;
+        return;
+    } else tobj->removeTuioToken3D(currentFrameTime);
+}
+
+void TuioManager::removeTuioPointer3D(TuioPointer3D *tptr) {
+    if (tptr==NULL) return;
+
+    TuioObject *tobj = tptr->getContainingTuioObject();
+    if (tobj==NULL) {
+        delete tptr;
+        return;
+    } else tobj->removeTuioPointer3D(currentFrameTime);
+}
+
+void TuioManager::removeTuioBounds3D(TuioBounds3D *tbnd) {
+    if (tbnd==NULL) return;
+
+    TuioObject *tobj = tbnd->getContainingTuioObject();
+    if (tobj==NULL) {
+        delete tbnd;
+        return;
+    } else tobj->removeTuioBounds3D(currentFrameTime);
 }
 
 int TuioManager::getSessionID() {

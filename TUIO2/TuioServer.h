@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2026 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -21,6 +21,7 @@
 
 #include "TuioManager.h"
 #include "UdpSender.h"
+#include "WebSockSender.h"
 #include <iostream>
 #include <vector>
 #include <stdio.h>
@@ -37,6 +38,12 @@
 #define ALV_MESSAGE_SIZE 20
 
 namespace TUIO2 {
+
+	using TUIO::OscSender;
+	using TUIO::UdpSender;
+	using TUIO::TcpSender;
+	using TUIO::WebSockSender;
+
 	/**
 	 * <p>The TuioServer class is the central TUIO protocol encoder component.
 	 * In order to encode and send TUIO messages an instance of TuioServer needs to be created. The TuioServer instance then generates TUIO messages
@@ -69,7 +76,7 @@ namespace TUIO2 {
 	 * </code></p>
 	 *
 	 * @author Martin Kaltenbrunner
-	 * @version 2.0.a0
+	 * @version 2.0.b1
 	 */
 	class LIBDECL TuioServer : public TuioManager {
 
@@ -198,6 +205,14 @@ namespace TUIO2 {
 		void addPointerMessage(TuioPointer *tptr);
 		void addBoundsMessage(TuioBounds *tbnd);
 		void addSymbolMessage(TuioSymbol *tsym);
+		void addGeometryMessage(TuioGeometry *tgeo);
+		void addControlMessage(TuioControl *tctl);
+		void addDataMessage(TuioData *tdat);
+		void addSignalMessage(TuioSignal *tsig);
+		void addAssociationMessage(TuioAssociation *tasc);
+		void addToken3DMessage(TuioToken3D *ttok);
+		void addPointer3DMessage(TuioPointer3D *tptr);
+		void addBounds3DMessage(TuioBounds3D *tbnd);
 		void sendTuioBundle();
 		void sendEmptyTuioBundle();
 

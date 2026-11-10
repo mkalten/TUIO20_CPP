@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2026 Martin Kaltenbrunner <martin@tuio.org>
 
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -21,7 +21,7 @@
 //#pragma clang diagnostic ignored "-Woverloaded-virtual"
 
 #include "TuioTime.h"
-#include "TuioComponent.h"
+#include "TuioContent.h"
 #include <string>
 
 namespace TUIO2 {
@@ -30,9 +30,9 @@ namespace TUIO2 {
      * The TuioSymbol class encapsulates /tuio2/sym TUIO symbol.
 	 *
 	 * @author Martin Kaltenbrunner
-	 * @version 2.0.a0
+	 * @version 2.0.b1
 	 */
-	class LIBDECL TuioSymbol : public TuioComponent {
+	class LIBDECL TuioSymbol : public TuioContent {
 
 	protected:
         /**
@@ -59,6 +59,14 @@ namespace TUIO2 {
          * The actual symbol data
          */
         std::string symbol_data;
+        /**
+         * The symbol data when transmitted as OSC blob
+         */
+        std::string symbol_blob;
+        /**
+         * Reflects if the symbol data was transmitted as OSC blob
+         */
+        bool symbol_is_blob;
         /**
          * The time stamp of the last update represented as TuioTime (time since session start)
          */
@@ -149,12 +157,49 @@ namespace TUIO2 {
          * @return	the actual data of this TuioSymbol
          */
         const char* getSymbolData() const;
-        
-        
+
+        /**
+         * This method assigns string data to this TuioSymbol.
+         *
+         * @param	data	the symbol data to assign
+         */
+        void setSymbolData(const char *data);
+
+        /**
+         * This method tests if the symbol data was transmitted as OSC blob.
+         * @return	true if the symbol data is a blob
+         */
+        bool isSymbolDataBlob() const;
+
+        /**
+         * This method assigns OSC blob data to this TuioSymbol.
+         *
+         * @param	data	the blob data to assign
+         * @param	size	the blob data size
+         */
+        void setSymbolDataBlob(const void *data, int size);
+
+        /**
+         * This method returns the symbol blob data of this TuioSymbol.
+         * @param	size	returns the blob data size
+         * @return	the blob data
+         */
+        const void* getSymbolDataBlob(int *size) const;
+ 
+        /**
+         * This method refreshes the currentTime after an update
+         */
         void update(TuioTime ttime);
-        /*void update(TuioTime ttime, float xp, float yp);
-        void update (TuioTime ttime, float xp, float yp, float xs, float ys, float ma);
-        void update (TuioSymbol *tsym);*/
+
+	/**
+	 * This method updates the TuioSymbol with the provided time stamp,
+	 * marking it as stopped. Since TuioSymbols have no positional state
+	 * this is identical to update(TuioTime).
+	 *
+	 * @param	ttime	the TuioTime to assign
+	 */
+	void stop(TuioTime ttime);
+
 	};
 }
 #endif

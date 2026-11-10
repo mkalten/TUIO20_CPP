@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2026 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -150,6 +150,71 @@ std::list<TuioBounds*> TuioDispatcher::getTuioBoundsList() {
         if (tbnd!=NULL) listBuffer.push_back(tbnd);
     }
     unlockObjectList();
+    return listBuffer;
+}
+
+std::list<TuioGeometry*> TuioDispatcher::getTuioGeometryList() {
+    std::list<TuioGeometry*> listBuffer;
+    for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++) {
+        if ((*iter)->getTuioGeometry()!=NULL) listBuffer.push_back((*iter)->getTuioGeometry());
+    }
+    return listBuffer;
+}
+
+std::list<TuioControl*> TuioDispatcher::getTuioControlList() {
+    std::list<TuioControl*> listBuffer;
+    for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++) {
+        if ((*iter)->getTuioControl()!=NULL) listBuffer.push_back((*iter)->getTuioControl());
+    }
+    return listBuffer;
+}
+
+std::list<TuioData*> TuioDispatcher::getTuioDataList() {
+    std::list<TuioData*> listBuffer;
+    for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++) {
+        if ((*iter)->getTuioData()!=NULL) listBuffer.push_back((*iter)->getTuioData());
+    }
+    return listBuffer;
+}
+
+std::list<TuioSignal*> TuioDispatcher::getTuioSignalList() {
+    std::list<TuioSignal*> listBuffer;
+    for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++) {
+        if ((*iter)->getTuioSignal()!=NULL) listBuffer.push_back((*iter)->getTuioSignal());
+    }
+    return listBuffer;
+}
+
+std::list<TuioAssociation*> TuioDispatcher::getTuioAssociationList() {
+    std::list<TuioAssociation*> listBuffer;
+    for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++) {
+        std::list<TuioAssociation*> assocs = (*iter)->getTuioAssociationList();
+        listBuffer.insert(listBuffer.end(), assocs.begin(), assocs.end());
+    }
+    return listBuffer;
+}
+
+std::list<TuioToken3D*> TuioDispatcher::getTuioToken3DList() {
+    std::list<TuioToken3D*> listBuffer;
+    for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++) {
+        if ((*iter)->getTuioToken3D()!=NULL) listBuffer.push_back((*iter)->getTuioToken3D());
+    }
+    return listBuffer;
+}
+
+std::list<TuioPointer3D*> TuioDispatcher::getTuioPointer3DList() {
+    std::list<TuioPointer3D*> listBuffer;
+    for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++) {
+        if ((*iter)->getTuioPointer3D()!=NULL) listBuffer.push_back((*iter)->getTuioPointer3D());
+    }
+    return listBuffer;
+}
+
+std::list<TuioBounds3D*> TuioDispatcher::getTuioBounds3DList() {
+    std::list<TuioBounds3D*> listBuffer;
+    for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++) {
+        if ((*iter)->getTuioBounds3D()!=NULL) listBuffer.push_back((*iter)->getTuioBounds3D());
+    }
     return listBuffer;
 }
 

@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2026 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -27,7 +27,7 @@ namespace TUIO2 {
 	 * The TuioBounds class encapsulates /tuio2/bnd TUIO boundary ellipses.
 	 *
 	 * @author Martin Kaltenbrunner
-	 * @version 2.0.a0
+	 * @version 2.0.b1
 	 */
 
 	class LIBDECL TuioBounds: public TuioComponent {
@@ -72,9 +72,9 @@ namespace TUIO2 {
 		 * @param	a	the angle to assign
 		 * @param	w	the width to assign
 		 * @param	h	the height to assign
-		 * @param	f	the area to assign
+		 * @param	area	the area to assign
 		 */
-		TuioBounds (TuioTime ttime, TuioObject *tobj, float xp, float yp, float a, float w, float h, float f);
+		TuioBounds (TuioTime ttime, TuioObject *tobj, float xp, float yp, float a, float w, float h, float area);
         
         /**
          * This constructor takes a TuioTime argument and assigns it along with the provided
@@ -86,9 +86,9 @@ namespace TUIO2 {
          * @param	a	the angle to assign
          * @param	w	the width to assign
          * @param	h	the height to assign
-         * @param	f	the area to assign
+         * @param	area	the area to assign
          */
-        TuioBounds (TuioObject *tobj, float xp, float yp, float a, float w, float h, float f);
+        TuioBounds (TuioObject *tobj, float xp, float yp, float a, float w, float h, float area);
 		
 		/**
 		 * This constructor takes the atttibutes of the provided TuioBounds 
@@ -114,14 +114,14 @@ namespace TUIO2 {
 		 * @param	a	the rotation angle to assign
 		 * @param	w	the width to assign
 		 * @param	h	the height to assign
-		 * @param	f	the area to assign
+		 * @param	area	the area to assign
 		 * @param	xs	the X velocity to assign
 		 * @param	ys	the Y velocity to assign
 		 * @param	rs	the rotation velocity to assign
 		 * @param	ma	the motion acceleration to assign
 		 * @param	ra	the rotation acceleration to assign
 		 */
-		void update (TuioTime ttime, float xp, float yp, float a, float w, float h, float f, float xs, float ys, float rs, float ma, float ra);
+		void update (TuioTime ttime, float xp, float yp, float a, float w, float h, float area, float xs, float ys, float rs, float ma, float ra);
 
 		/**
 		 * Assigns the provided X and Y coordinate, angle, X and Y velocity, motion acceleration
@@ -133,14 +133,14 @@ namespace TUIO2 {
 		 * @param	a	the angle to assign
 		 * @param	w	the width to assign
 		 * @param	h	the height to assign
-		 * @param	f	the area to assign
+		 * @param	area	the area to assign
 		 * @param	xs	the X velocity to assign
 		 * @param	ys	the Y velocity to assign
 		 * @param	rs	the rotation velocity to assign
 		 * @param	ma	the motion acceleration to assign
 		 * @param	ra	the rotation acceleration to assign
 		 */
-		void update (float xp, float yp, float a, float w, float h, float f, float xs, float ys, float rs, float ma, float ra);
+		void update (float xp, float yp, float a, float w, float h, float area, float xs, float ys, float rs, float ma, float ra);
 		
 		/**
 		 * Takes a TuioTime argument and assigns it along with the provided 
@@ -153,9 +153,9 @@ namespace TUIO2 {
 		 * @param	a	the angle coordinate to assign
 		 * @param	w	the width to assign
 		 * @param	h	the height to assign
-		 * @param	f	the area to assign
+		 * @param	area	the area to assign
 		 */
-		void update (TuioTime ttime, float xp, float yp, float a, float w, float h, float f);
+		void update (TuioTime ttime, float xp, float yp, float a, float w, float h, float area);
 
 		/**
 		 * This method is used to calculate the speed and acceleration values of a

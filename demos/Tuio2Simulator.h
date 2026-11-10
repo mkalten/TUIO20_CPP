@@ -27,7 +27,6 @@
 #include <math.h>
 
 #include "WebSockSender.h"
-#include "FlashSender.h"
 #include "TcpSender.h"
 
 #ifdef __APPLE__
@@ -63,7 +62,6 @@ private:
 	void initWindow();
 
 	SDL_Window *window;
-	SDL_Renderer *renderer;
 	bool verbose, fullupdate, periodic, fullscreen, running, help;
 	
 	int width, height;

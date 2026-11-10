@@ -93,7 +93,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\TUIO2;..\oscpack;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\TUIO;..\TUIO2;..\oscpack;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;LIB_EXPORT;ENDIANESS=OSC_HOST_LITTLE_ENDIAN;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -115,7 +115,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\TUIO2;..\oscpack;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\TUIO;..\TUIO2;..\oscpack;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;LIB_EXPORT;ENDIANESS=OSC_HOST_LITTLE_ENDIAN;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -138,7 +138,7 @@
     <ClCompile>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\TUIO2;..\oscpack;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\TUIO;..\TUIO2;..\oscpack;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;LIB_EXPORT;OSC_HOST_LITTLE_ENDIAN;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>false</FunctionLevelLinking>
@@ -159,7 +159,7 @@
     <ClCompile>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\TUIO2;..\oscpack;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\TUIO;..\TUIO2;..\oscpack;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;LIB_EXPORT;OSC_HOST_LITTLE_ENDIAN;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>false</FunctionLevelLinking>
@@ -198,25 +198,34 @@
     <ClCompile Include="..\oscpack\osc\OscPrintReceivedElements.cpp" />
     <ClCompile Include="..\oscpack\osc\OscReceivedElements.cpp" />
     <ClCompile Include="..\oscpack\osc\OscTypes.cpp" />
-    <ClCompile Include="..\TUIO2\FlashSender.cpp" />
-    <ClCompile Include="..\TUIO2\OscReceiver.cpp" />
-    <ClCompile Include="..\TUIO2\TcpReceiver.cpp" />
-    <ClCompile Include="..\TUIO2\TcpSender.cpp" />
+    <ClCompile Include="..\TUIO\OscReceiver.cpp" />
+    <ClCompile Include="..\TUIO\TcpReceiver.cpp" />
+    <ClCompile Include="..\TUIO\TcpSender.cpp" />
     <ClCompile Include="..\TUIO2\TuioBounds.cpp" />
     <ClCompile Include="..\TUIO2\TuioClient.cpp" />
     <ClCompile Include="..\TUIO2\TuioComponent.cpp" />
     <ClCompile Include="..\TUIO2\TuioDispatcher.cpp" />
+    <ClCompile Include="..\TUIO\OneEuroFilter.cpp" />
     <ClCompile Include="..\TUIO2\TuioManager.cpp" />
+    <ClCompile Include="..\TUIO2\TuioGeometry.cpp" />
+    <ClCompile Include="..\TUIO2\TuioContent.cpp" />
+    <ClCompile Include="..\TUIO2\TuioControl.cpp" />
+    <ClCompile Include="..\TUIO2\TuioData.cpp" />
+    <ClCompile Include="..\TUIO2\TuioSignal.cpp" />
+    <ClCompile Include="..\TUIO2\TuioComponent3D.cpp" />
+    <ClCompile Include="..\TUIO2\TuioToken3D.cpp" />
+    <ClCompile Include="..\TUIO2\TuioPointer3D.cpp" />
+    <ClCompile Include="..\TUIO2\TuioBounds3D.cpp" />
     <ClCompile Include="..\TUIO2\TuioObject.cpp" />
-    <ClCompile Include="..\TUIO2\TuioPoint.cpp" />
+    <ClCompile Include="..\TUIO\TuioPoint.cpp" />
     <ClCompile Include="..\TUIO2\TuioPointer.cpp" />
     <ClCompile Include="..\TUIO2\TuioServer.cpp" />
     <ClCompile Include="..\TUIO2\TuioSymbol.cpp" />
-    <ClCompile Include="..\TUIO2\TuioTime.cpp" />
+    <ClCompile Include="..\TUIO\TuioTime.cpp" />
     <ClCompile Include="..\TUIO2\TuioToken.cpp" />
-    <ClCompile Include="..\TUIO2\UdpReceiver.cpp" />
-    <ClCompile Include="..\TUIO2\UdpSender.cpp" />
-    <ClCompile Include="..\TUIO2\WebSockSender.cpp" />
+    <ClCompile Include="..\TUIO\UdpReceiver.cpp" />
+    <ClCompile Include="..\TUIO\UdpSender.cpp" />
+    <ClCompile Include="..\TUIO\WebSockSender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\oscpack\ip\IpEndpointName.h" />
@@ -232,29 +241,44 @@
     <ClInclude Include="..\oscpack\osc\OscPrintReceivedElements.h" />
     <ClInclude Include="..\oscpack\osc\OscReceivedElements.h" />
     <ClInclude Include="..\oscpack\osc\OscTypes.h" />
-    <ClInclude Include="..\TUIO2\FlashSender.h" />
     <ClInclude Include="..\TUIO2\LibExport.h" />
-    <ClInclude Include="..\TUIO2\OscReceiver.h" />
-    <ClInclude Include="..\TUIO2\OscSender.h" />
-    <ClInclude Include="..\TUIO2\TcpReceiver.h" />
-    <ClInclude Include="..\TUIO2\TcpSender.h" />
+    <ClInclude Include="..\TUIO\OscClient.h" />
+    <ClInclude Include="..\TUIO\OscReceiver.h" />
+    <ClInclude Include="..\TUIO\OscSender.h" />
+    <ClInclude Include="..\TUIO\TcpReceiver.h" />
+    <ClInclude Include="..\TUIO\TcpSender.h" />
+    <ClInclude Include="..\TUIO\TcpUtils.h" />
     <ClInclude Include="..\TUIO2\TuioBounds.h" />
     <ClInclude Include="..\TUIO2\TuioClient.h" />
     <ClInclude Include="..\TUIO2\TuioComponent.h" />
     <ClInclude Include="..\TUIO2\TuioDispatcher.h" />
     <ClInclude Include="..\TUIO2\TuioListener.h" />
     <ClInclude Include="..\TUIO2\TuioManager.h" />
+    <ClInclude Include="..\TUIO2\TuioGeometry.h" />
+    <ClInclude Include="..\TUIO2\TuioAssociation.h" />
+    <ClInclude Include="..\TUIO2\TuioContainer.h" />
+    <ClInclude Include="..\TUIO2\TuioLink.h" />
+    <ClInclude Include="..\TUIO2\TuioList.h" />
+    <ClInclude Include="..\TUIO2\TuioTree.h" />
+    <ClInclude Include="..\TUIO2\TuioContent.h" />
+    <ClInclude Include="..\TUIO2\TuioControl.h" />
+    <ClInclude Include="..\TUIO2\TuioData.h" />
+    <ClInclude Include="..\TUIO2\TuioSignal.h" />
+    <ClInclude Include="..\TUIO2\TuioComponent3D.h" />
+    <ClInclude Include="..\TUIO2\TuioToken3D.h" />
+    <ClInclude Include="..\TUIO2\TuioPointer3D.h" />
+    <ClInclude Include="..\TUIO2\TuioBounds3D.h" />
     <ClInclude Include="..\TUIO2\TuioObject.h" />
-    <ClInclude Include="..\TUIO2\TuioPoint.h" />
+    <ClInclude Include="..\TUIO\TuioPoint.h" />
     <ClInclude Include="..\TUIO2\TuioPointer.h" />
     <ClInclude Include="..\TUIO2\TuioServer.h" />
     <ClInclude Include="..\TUIO2\TuioSource.h" />
     <ClInclude Include="..\TUIO2\TuioSymbol.h" />
-    <ClInclude Include="..\TUIO2\TuioTime.h" />
+    <ClInclude Include="..\TUIO\TuioTime.h" />
     <ClInclude Include="..\TUIO2\TuioToken.h" />
-    <ClInclude Include="..\TUIO2\UdpReceiver.h" />
-    <ClInclude Include="..\TUIO2\UdpSender.h" />
-    <ClInclude Include="..\TUIO2\WebSockSender.h" />
+    <ClInclude Include="..\TUIO\UdpReceiver.h" />
+    <ClInclude Include="..\TUIO\UdpSender.h" />
+    <ClInclude Include="..\TUIO\WebSockSender.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2026 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -21,6 +21,8 @@
 
 #include "TuioDispatcher.h"
 #include "OscReceiver.h"
+#include "UdpReceiver.h"
+#include "TcpReceiver.h"
 #include "osc/OscReceivedElements.h"
 
 #include <iostream>
@@ -32,7 +34,9 @@
 
 namespace TUIO2 {
 
-	class OscReceiver; // Forward declaration
+	using TUIO::OscReceiver;
+	using TUIO::UdpReceiver;
+	using TUIO::TcpReceiver;
 
 	/**
 	 * <p>The TuioClient class is the central TUIO protocol decoder component. It provides a simple callback infrastructure using the {@link TuioListener} interface.
@@ -45,9 +49,9 @@ namespace TUIO2 {
 	 * </code></p>
 	 *
 	 * @author Martin Kaltenbrunner
-	 * @version 2.0.a0
+	 * @version 2.0.b1
 	 */
-	class LIBDECL TuioClient : public TuioDispatcher {
+	class LIBDECL TuioClient : public TuioDispatcher, public TUIO::OscClient {
 
 	public:
 		/**
@@ -210,12 +214,19 @@ namespace TUIO2 {
          */
          void processOSC( const osc::ReceivedMessage& message);
 
+        /**
+         * Discards any pending frame objects left over
+         * from an incomplete or malformed OSC bundle
+         */
+         void processBundleBegin();
+
 	private:
 		void initialize();
 
         void addFrameObject(TuioObject *con);
         TuioObject* getFrameObject(unsigned int src_id,unsigned int s_id);
         std::list<unsigned int> aliveObjectList;
+        std::list<unsigned int> associatedObjectList;
 	std::list<TuioObject*> frameObjectList;
 
         TuioTime frameTime;

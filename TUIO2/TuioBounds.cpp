@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2026 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -19,16 +19,16 @@
 #include "TuioBounds.h"
 using namespace TUIO2;
 
-TuioBounds::TuioBounds (TuioTime ttime, TuioObject *tobj, float xp, float yp, float a, float w, float h, float f):TuioComponent(ttime, tobj, xp, yp,a) {
+TuioBounds::TuioBounds (TuioTime ttime, TuioObject *tobj, float xp, float yp, float a, float w, float h, float area):TuioComponent(ttime, tobj, xp, yp,a) {
 	width = w;
 	height = h;
-    area = f;
+    this->area = area;
 }
 
-TuioBounds::TuioBounds (TuioObject *tobj, float xp, float yp, float a, float  w, float h, float f):TuioComponent(tobj, xp, yp, a) {
+TuioBounds::TuioBounds (TuioObject *tobj, float xp, float yp, float a, float  w, float h, float area):TuioComponent(tobj, xp, yp, a) {
 	width = w;
 	height = h; 
-	area = f;
+	this->area = area;
 }
 
 TuioBounds::TuioBounds (TuioBounds *tbnd):TuioComponent(tbnd) {
@@ -40,26 +40,26 @@ TuioBounds::TuioBounds (TuioBounds *tbnd):TuioComponent(tbnd) {
 	rotation_accel = 0.0f;
 }
 
-void TuioBounds::update (TuioTime ttime, float xp, float yp, float a, float w, float h, float f, float xs, float ys, float rs, float ma, float ra) {
+void TuioBounds::update (TuioTime ttime, float xp, float yp, float a, float w, float h, float area, float xs, float ys, float rs, float ma, float ra) {
 	TuioComponent::update(ttime,xp,yp,a,xs,ys,rs,ma,ra);
 	width = w;
 	height = h;
-	area = f;
+	this->area = area;
 }
 
-void TuioBounds::update (float xp, float yp, float a, float w, float h, float f, float xs, float ys, float rs, float ma, float ra) {
+void TuioBounds::update (float xp, float yp, float a, float w, float h, float area, float xs, float ys, float rs, float ma, float ra) {
 	TuioComponent::update(xp,yp,a,xs,ys,rs,ma,ra);
 	width = w;
 	height = h;
-	area = f;
+	this->area = area;
 }
 
-void TuioBounds::update (TuioTime ttime, float xp, float yp, float a, float w, float h, float f) {
+void TuioBounds::update (TuioTime ttime, float xp, float yp, float a, float w, float h, float area) {
     TuioComponent::update(ttime,xp,yp,a);
 	
 	width = w;
 	height = h;
-	area = f;
+	this->area = area;
 }
 
 void TuioBounds::stop (TuioTime ttime) {

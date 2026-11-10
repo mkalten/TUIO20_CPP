@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2026 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -84,21 +84,22 @@ void TuioComponent::update (TuioTime ttime, float xp, float yp, float a) {
 	float dist = sqrt(dx*dx+dy*dy);
 	float last_motion_speed = motion_speed;
 	
-	x_speed = dx/dt;
-	y_speed = dy/dt;
-	motion_speed = dist/dt;
-	motion_accel = (motion_speed - last_motion_speed)/dt;
-	
-    float last_angle = angle;
-    float last_rotation_speed = rotation_speed;
-    angle = a;
-    
-    double da = (angle-last_angle)/(2*M_PI);
-    if (da > 0.75f) da-=1.0f;
-    else if (da < -0.75f) da+=1.0f;
-    
-    rotation_speed = (float)da/dt;
-    rotation_accel =  (rotation_speed - last_rotation_speed)/dt;
+	float last_angle = angle;
+	float last_rotation_speed = rotation_speed;
+	angle = a;
+
+	double da = (angle-last_angle)/(2*M_PI);
+	if (da > 0.75f) da-=1.0f;
+	else if (da < -0.75f) da+=1.0f;
+
+	if (dt>0) {
+		x_speed = dx/dt;
+		y_speed = dy/dt;
+		motion_speed = dist/dt;
+		motion_accel = (motion_speed - last_motion_speed)/dt;
+		rotation_speed = (float)da/dt;
+		rotation_accel =  (rotation_speed - last_rotation_speed)/dt;
+	}
     
 	TuioPoint p(currentTime,xpos,ypos);
 	path.push_back(p);
@@ -113,8 +114,7 @@ void TuioComponent::update (TuioTime ttime, float xp, float yp, float a) {
 }
 
 void TuioComponent::stop(TuioTime ttime) {
-	update(ttime,xpos,ypos);
-    container->update(ttime);
+	update(ttime,xpos,ypos,angle);
 }
 
 void TuioComponent::update (TuioTime ttime, float xp, float yp, float a, float xs, float ys, float rs, float ma, float ra) {
@@ -190,7 +190,7 @@ void TuioComponent::remove(TuioTime ttime) {
 }
 
 unsigned int TuioComponent::getSessionID() const{
-    return container->getSessionID();
+	return container ? container->getSessionID() : 0;
 }
 
 float TuioComponent::getAngle() const{

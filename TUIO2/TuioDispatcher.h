@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2026 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -34,7 +34,7 @@ namespace TUIO2 {
 	 * registered classes that implement the {@link TuioListener} interface.</p>
 	 *
 	 * @author Martin Kaltenbrunner
-	 * @version 2.0.a0
+	 * @version 2.0.b1
 	 */
 	class LIBDECL TuioDispatcher {
 
@@ -103,6 +103,62 @@ namespace TUIO2 {
 		* @return  a List of all currently active TuioSymbols
 		*/
 		std::list<TuioSymbol*> getTuioSymbolList();
+
+        /**
+		* Returns a List of all currently active TuioGeometry
+		*
+		* @return  a List of all currently active TuioGeometry
+		*/
+		std::list<TuioGeometry*> getTuioGeometryList();
+
+        /**
+		* Returns a List of all currently active TuioControl
+		*
+		* @return  a List of all currently active TuioControl
+		*/
+		std::list<TuioControl*> getTuioControlList();
+
+        /**
+		* Returns a List of all currently active TuioData
+		*
+		* @return  a List of all currently active TuioData
+		*/
+		std::list<TuioData*> getTuioDataList();
+
+        /**
+		* Returns a List of all currently active TuioSignal
+		*
+		* @return  a List of all currently active TuioSignal
+		*/
+		std::list<TuioSignal*> getTuioSignalList();
+
+        /**
+		* Returns a List of all currently active TuioAssociations
+		*
+		* @return  a List of all currently active TuioAssociations
+		*/
+		std::list<TuioAssociation*> getTuioAssociationList();
+
+        /**
+		* Returns a List of all currently active TuioToken3D
+		*
+		* @return  a List of all currently active TuioToken3D
+		*/
+		std::list<TuioToken3D*> getTuioToken3DList();
+
+        /**
+		* Returns a List of all currently active TuioPointer3D
+		*
+		* @return  a List of all currently active TuioPointer3D
+		*/
+		std::list<TuioPointer3D*> getTuioPointer3DList();
+
+        /**
+		* Returns a List of all currently active TuioBounds3D
+		*
+		* @return  a List of all currently active TuioBounds3D
+		*/
+		std::list<TuioBounds3D*> getTuioBounds3DList();
 
 		/**
 		* Returns the TuioObject corresponding to the provided Session ID

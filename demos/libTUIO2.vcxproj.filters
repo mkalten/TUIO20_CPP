@@ -15,6 +15,12 @@
     <Filter Include="Header Files\oscpack">
       <UniqueIdentifier>{264df986-0a03-47af-83fa-231acc6373a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\TUIO">
+      <UniqueIdentifier>{7a3f9c1e-2b4d-4e8a-9f5c-1d6e8b3a5c7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TUIO">
+      <UniqueIdentifier>{4b8e2d6a-9c1f-4a7b-8e3d-5f9c2a6b1d4e}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\TUIO2">
       <UniqueIdentifier>{e224dea0-b2a2-4b4b-9cf4-58e4db6e7756}</UniqueIdentifier>
     </Filter>
@@ -35,17 +41,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\TUIO2\FlashSender.cpp">
-      <Filter>Source Files\TUIO2</Filter>
+    <ClCompile Include="..\TUIO\OscReceiver.cpp">
+      <Filter>Source Files\TUIO</Filter>
     </ClCompile>
-    <ClCompile Include="..\TUIO2\OscReceiver.cpp">
-      <Filter>Source Files\TUIO2</Filter>
+    <ClCompile Include="..\TUIO\TcpReceiver.cpp">
+      <Filter>Source Files\TUIO</Filter>
     </ClCompile>
-    <ClCompile Include="..\TUIO2\TcpReceiver.cpp">
-      <Filter>Source Files\TUIO2</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TUIO2\TcpSender.cpp">
-      <Filter>Source Files\TUIO2</Filter>
+    <ClCompile Include="..\TUIO\TcpSender.cpp">
+      <Filter>Source Files\TUIO</Filter>
     </ClCompile>
     <ClCompile Include="..\TUIO2\TuioBounds.cpp">
       <Filter>Source Files\TUIO2</Filter>
@@ -59,13 +62,43 @@
     <ClCompile Include="..\TUIO2\TuioDispatcher.cpp">
       <Filter>Source Files\TUIO2</Filter>
     </ClCompile>
+    <ClCompile Include="..\TUIO\OneEuroFilter.cpp">
+      <Filter>Source Files\TUIO2</Filter>
+    </ClCompile>
     <ClCompile Include="..\TUIO2\TuioManager.cpp">
+      <Filter>Source Files\TUIO2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TUIO2\TuioGeometry.cpp">
+      <Filter>Source Files\TUIO2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TUIO2\TuioContent.cpp">
+      <Filter>Source Files\TUIO2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TUIO2\TuioControl.cpp">
+      <Filter>Source Files\TUIO2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TUIO2\TuioData.cpp">
+      <Filter>Source Files\TUIO2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TUIO2\TuioSignal.cpp">
+      <Filter>Source Files\TUIO2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TUIO2\TuioComponent3D.cpp">
+      <Filter>Source Files\TUIO2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TUIO2\TuioToken3D.cpp">
+      <Filter>Source Files\TUIO2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TUIO2\TuioPointer3D.cpp">
+      <Filter>Source Files\TUIO2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TUIO2\TuioBounds3D.cpp">
       <Filter>Source Files\TUIO2</Filter>
     </ClCompile>
     <ClCompile Include="..\TUIO2\TuioObject.cpp">
       <Filter>Source Files\TUIO2</Filter>
     </ClCompile>
-    <ClCompile Include="..\TUIO2\TuioPoint.cpp">
+    <ClCompile Include="..\TUIO\TuioPoint.cpp">
       <Filter>Source Files\TUIO2</Filter>
     </ClCompile>
     <ClCompile Include="..\TUIO2\TuioPointer.cpp">
@@ -77,17 +110,17 @@
     <ClCompile Include="..\TUIO2\TuioSymbol.cpp">
       <Filter>Source Files\TUIO2</Filter>
     </ClCompile>
-    <ClCompile Include="..\TUIO2\TuioTime.cpp">
+    <ClCompile Include="..\TUIO\TuioTime.cpp">
       <Filter>Source Files\TUIO2</Filter>
     </ClCompile>
     <ClCompile Include="..\TUIO2\TuioToken.cpp">
       <Filter>Source Files\TUIO2</Filter>
     </ClCompile>
-    <ClCompile Include="..\TUIO2\UdpReceiver.cpp">
-      <Filter>Source Files\TUIO2</Filter>
+    <ClCompile Include="..\TUIO\UdpReceiver.cpp">
+      <Filter>Source Files\TUIO</Filter>
     </ClCompile>
-    <ClCompile Include="..\TUIO2\UdpSender.cpp">
-      <Filter>Source Files\TUIO2</Filter>
+    <ClCompile Include="..\TUIO\UdpSender.cpp">
+      <Filter>Source Files\TUIO</Filter>
     </ClCompile>
     <ClCompile Include="..\oscpack\osc\OscOutboundPacketStream.cpp">
       <Filter>Source Files\oscpack\osc</Filter>
@@ -110,28 +143,31 @@
     <ClCompile Include="..\oscpack\ip\win32\UdpSocket.cpp">
       <Filter>Source Files\oscpack\ip</Filter>
     </ClCompile>
-    <ClCompile Include="..\TUIO2\WebSockSender.cpp">
-      <Filter>Source Files\TUIO2</Filter>
+    <ClCompile Include="..\TUIO\WebSockSender.cpp">
+      <Filter>Source Files\TUIO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\TUIO2\FlashSender.h">
-      <Filter>Header Files\TUIO2</Filter>
-    </ClInclude>
     <ClInclude Include="..\TUIO2\LibExport.h">
       <Filter>Header Files\TUIO2</Filter>
     </ClInclude>
-    <ClInclude Include="..\TUIO2\OscReceiver.h">
-      <Filter>Header Files\TUIO2</Filter>
+    <ClInclude Include="..\TUIO\OscClient.h">
+      <Filter>Header Files\TUIO</Filter>
     </ClInclude>
-    <ClInclude Include="..\TUIO2\OscSender.h">
-      <Filter>Header Files\TUIO2</Filter>
+    <ClInclude Include="..\TUIO\OscReceiver.h">
+      <Filter>Header Files\TUIO</Filter>
     </ClInclude>
-    <ClInclude Include="..\TUIO2\TcpReceiver.h">
-      <Filter>Header Files\TUIO2</Filter>
+    <ClInclude Include="..\TUIO\OscSender.h">
+      <Filter>Header Files\TUIO</Filter>
     </ClInclude>
-    <ClInclude Include="..\TUIO2\TcpSender.h">
-      <Filter>Header Files\TUIO2</Filter>
+    <ClInclude Include="..\TUIO\TcpReceiver.h">
+      <Filter>Header Files\TUIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TUIO\TcpSender.h">
+      <Filter>Header Files\TUIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TUIO\TcpUtils.h">
+      <Filter>Header Files\TUIO</Filter>
     </ClInclude>
     <ClInclude Include="..\TUIO2\TuioBounds.h">
       <Filter>Header Files\TUIO2</Filter>
@@ -151,10 +187,52 @@
     <ClInclude Include="..\TUIO2\TuioManager.h">
       <Filter>Header Files\TUIO2</Filter>
     </ClInclude>
+    <ClInclude Include="..\TUIO2\TuioGeometry.h">
+      <Filter>Header Files\TUIO2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TUIO2\TuioAssociation.h">
+      <Filter>Header Files\TUIO2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TUIO2\TuioContainer.h">
+      <Filter>Header Files\TUIO2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TUIO2\TuioLink.h">
+      <Filter>Header Files\TUIO2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TUIO2\TuioList.h">
+      <Filter>Header Files\TUIO2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TUIO2\TuioTree.h">
+      <Filter>Header Files\TUIO2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TUIO2\TuioContent.h">
+      <Filter>Header Files\TUIO2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TUIO2\TuioControl.h">
+      <Filter>Header Files\TUIO2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TUIO2\TuioData.h">
+      <Filter>Header Files\TUIO2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TUIO2\TuioSignal.h">
+      <Filter>Header Files\TUIO2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TUIO2\TuioComponent3D.h">
+      <Filter>Header Files\TUIO2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TUIO2\TuioToken3D.h">
+      <Filter>Header Files\TUIO2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TUIO2\TuioPointer3D.h">
+      <Filter>Header Files\TUIO2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TUIO2\TuioBounds3D.h">
+      <Filter>Header Files\TUIO2</Filter>
+    </ClInclude>
     <ClInclude Include="..\TUIO2\TuioObject.h">
       <Filter>Header Files\TUIO2</Filter>
     </ClInclude>
-    <ClInclude Include="..\TUIO2\TuioPoint.h">
+    <ClInclude Include="..\TUIO\TuioPoint.h">
       <Filter>Header Files\TUIO2</Filter>
     </ClInclude>
     <ClInclude Include="..\TUIO2\TuioPointer.h">
@@ -169,17 +247,17 @@
     <ClInclude Include="..\TUIO2\TuioSymbol.h">
       <Filter>Header Files\TUIO2</Filter>
     </ClInclude>
-    <ClInclude Include="..\TUIO2\TuioTime.h">
+    <ClInclude Include="..\TUIO\TuioTime.h">
       <Filter>Header Files\TUIO2</Filter>
     </ClInclude>
     <ClInclude Include="..\TUIO2\TuioToken.h">
       <Filter>Header Files\TUIO2</Filter>
     </ClInclude>
-    <ClInclude Include="..\TUIO2\UdpReceiver.h">
-      <Filter>Header Files\TUIO2</Filter>
+    <ClInclude Include="..\TUIO\UdpReceiver.h">
+      <Filter>Header Files\TUIO</Filter>
     </ClInclude>
-    <ClInclude Include="..\TUIO2\UdpSender.h">
-      <Filter>Header Files\TUIO2</Filter>
+    <ClInclude Include="..\TUIO\UdpSender.h">
+      <Filter>Header Files\TUIO</Filter>
     </ClInclude>
     <ClInclude Include="..\oscpack\osc\MessageMappingOscPacketListener.h">
       <Filter>Header Files\oscpack\osc</Filter>
@@ -220,8 +298,8 @@
     <ClInclude Include="..\oscpack\ip\UdpSocket.h">
       <Filter>Header Files\oscpack\ip</Filter>
     </ClInclude>
-    <ClInclude Include="..\TUIO2\WebSockSender.h">
-      <Filter>Header Files\TUIO2</Filter>
+    <ClInclude Include="..\TUIO\WebSockSender.h">
+      <Filter>Header Files\TUIO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

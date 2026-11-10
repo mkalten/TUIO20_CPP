@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2026 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -27,7 +27,7 @@ namespace TUIO2 {
 	 * The TuioPointer class encapsulates /tuio2/ptr TUIO pointers.
 	 *
 	 * @author Martin Kaltenbrunner
-	 * @version 2.0.a0
+	 * @version 2.0.b1
 	 */
 
 	class LIBDECL TuioPointer: public TuioComponent {
@@ -198,7 +198,15 @@ namespace TUIO2 {
          * @param	ttok	the TuioComponent to assign
          */
         void update (TuioPointer *tptr);
-        
+
+		/**
+		 * This method updates the TuioPointer with its current position, angle, shear, radius and pressure
+		 * and marks it as stopped at the provided time stamp.
+		 *
+		 * @param	ttime	the TuioTime to assign
+		 */
+		void stop (TuioTime ttime);
+
 		/**
 		 * Returns the Pointer ID of this TuioPointer.
 		 * @return	the Pointer ID of this TuioPointer

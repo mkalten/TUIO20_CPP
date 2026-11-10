@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2026 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -39,7 +39,7 @@ namespace TUIO2 {
 	 * The abstract TuioComponent class defines common attributes that apply to all subclasses {@link TuioToken}, {@link TuioPointer} and {@link TuioBounds}.
 	 *
 	 * @author Martin Kaltenbrunner
-	 * @version 2.0.a0
+	 * @version 2.0.b1
 	 */
     
     class TuioObject;
@@ -111,7 +111,7 @@ namespace TUIO2 {
 		 * @param	yp	the Y coordinate to assign
          * @param	a	the angle to assign
 		 */
-		TuioComponent (TuioObject *tobj, float xp, float yp,float a);
+		TuioComponent (TuioObject *tobj, float xp, float yp, float a);
 		
 		/**
 		 * This constructor takes the atttibutes of the provided TuioComponent 

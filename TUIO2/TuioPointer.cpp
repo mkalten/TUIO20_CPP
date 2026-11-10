@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2026 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -86,6 +86,10 @@ void TuioPointer::update (TuioPointer *tptr) {
     shear = tptr->getShear();
     radius = tptr->getRadius();
     pressure = tptr->getPressure();
+}
+
+void TuioPointer::stop (TuioTime ttime) {
+	update(ttime,xpos,ypos,angle,shear,radius,pressure);
 }
 
 unsigned int TuioPointer::getPointerID() const{

@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B6D563878F54474EBE6B1DA8 /* TuioBounds3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B6C30005C03747378F2B1A7D /* TuioBounds3D.cpp */; };
+		B6D36FB9AC1845D9B369C35D /* TuioPointer3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B6CA8E13813B4FED92B6B43D /* TuioPointer3D.cpp */; };
+		B6DA34C67D0A4D93A9DD9434 /* TuioToken3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B6CA0A6202D44045B03108B7 /* TuioToken3D.cpp */; };
+		B6D14A38905A4CFAAE0F66A5 /* TuioComponent3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B6CE90D9877A4AFD9A7758EC /* TuioComponent3D.cpp */; };
+		B4F0DDBF9A2B472F94630DC2 /* TuioSignal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4F6AE48C8394257B6CFBF97 /* TuioSignal.cpp */; };
+		B4E661FF6FB345849C8C23FE /* TuioData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4E8EF62DED94FBA9D92EA10 /* TuioData.cpp */; };
+		B4DA1E62137B48D3B3A92F51 /* TuioControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4D9C8FE3F06413B84F7AD4C /* TuioControl.cpp */; };
+		B4C06EF1B780499395A5C4D1 /* TuioContent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CEF39D0B6645D0A0042B9C /* TuioContent.cpp */; };
+		B3F2D1A1CCD0FB8F0F99425E /* TuioGeometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F2D1A05CD6EB75264C4F88 /* TuioGeometry.cpp */; };
+		B2E1CFA160BD08DBADDB42F5 /* OneEuroFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CFA0C6C7C41D95B54A72 /* OneEuroFilter.cpp */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		B20EE3CE0C340C4B00026AC5 /* Tuio2Demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B20EE3C90C340C4B00026AC5 /* Tuio2Demo.cpp */; };
 		B20EE47F0C340E0300026AC5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20EE47E0C340E0300026AC5 /* OpenGL.framework */; };
@@ -60,10 +70,10 @@
 		B20EE4820C340E1100026AC5 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
 		B29857291CFA1D0F0068D153 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = /Library/Frameworks/SDL2.framework; sourceTree = "<absolute>"; };
 		B2C2B89C109067D000262014 /* TUIO.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TUIO.icns; sourceTree = SOURCE_ROOT; };
-		B2E1CEAF1A1AB50600710202 /* OscReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OscReceiver.cpp; path = ../TUIO2/OscReceiver.cpp; sourceTree = "<group>"; };
-		B2E1CEB01A1AB50600710202 /* OscReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OscReceiver.h; path = ../TUIO2/OscReceiver.h; sourceTree = "<group>"; };
-		B2E1CEB31A1AB50600710202 /* TcpReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TcpReceiver.cpp; path = ../TUIO2/TcpReceiver.cpp; sourceTree = "<group>"; };
-		B2E1CEB41A1AB50600710202 /* TcpReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TcpReceiver.h; path = ../TUIO2/TcpReceiver.h; sourceTree = "<group>"; };
+		B2E1CEAF1A1AB50600710202 /* OscReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OscReceiver.cpp; path = ../TUIO/OscReceiver.cpp; sourceTree = "<group>"; };
+		B2E1CEB01A1AB50600710202 /* OscReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OscReceiver.h; path = ../TUIO/OscReceiver.h; sourceTree = "<group>"; };
+		B2E1CEB31A1AB50600710202 /* TcpReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TcpReceiver.cpp; path = ../TUIO/TcpReceiver.cpp; sourceTree = "<group>"; };
+		B2E1CEB41A1AB50600710202 /* TcpReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TcpReceiver.h; path = ../TUIO/TcpReceiver.h; sourceTree = "<group>"; };
 		B2E1CEB71A1AB50600710202 /* TuioBounds.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioBounds.cpp; path = ../TUIO2/TuioBounds.cpp; sourceTree = "<group>"; };
 		B2E1CEB81A1AB50600710202 /* TuioBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioBounds.h; path = ../TUIO2/TuioBounds.h; sourceTree = "<group>"; };
 		B2E1CEBB1A1AB50600710202 /* TuioComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioComponent.cpp; path = ../TUIO2/TuioComponent.cpp; sourceTree = "<group>"; };
@@ -73,21 +83,46 @@
 		B2E1CEBF1A1AB50600710202 /* TuioListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioListener.h; path = ../TUIO2/TuioListener.h; sourceTree = "<group>"; };
 		B2E1CEC01A1AB50600710202 /* TuioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioManager.cpp; path = ../TUIO2/TuioManager.cpp; sourceTree = "<group>"; };
 		B2E1CEC11A1AB50600710202 /* TuioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioManager.h; path = ../TUIO2/TuioManager.h; sourceTree = "<group>"; };
+		B2E1CFA0C6C7C41D95B54A72 /* OneEuroFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OneEuroFilter.cpp; path = ../TUIO/OneEuroFilter.cpp; sourceTree = "<group>"; };
+		B2E1CFA2A6708DF6A26D465A /* OneEuroFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OneEuroFilter.h; path = ../TUIO/OneEuroFilter.h; sourceTree = "<group>"; };
+		B3F2D1A05CD6EB75264C4F88 /* TuioGeometry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioGeometry.cpp; path = ../TUIO2/TuioGeometry.cpp; sourceTree = "<group>"; };
+		B4F6AE48C8394257B6CFBF97 /* TuioSignal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioSignal.cpp; path = ../TUIO2/TuioSignal.cpp; sourceTree = "<group>"; };
+		B6C30005C03747378F2B1A7D /* TuioBounds3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioBounds3D.cpp; path = ../TUIO2/TuioBounds3D.cpp; sourceTree = "<group>"; };
+		B6EB5C70831349609CA798B2 /* TuioBounds3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioBounds3D.h; path = ../TUIO2/TuioBounds3D.h; sourceTree = "<group>"; };
+		B6CA8E13813B4FED92B6B43D /* TuioPointer3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioPointer3D.cpp; path = ../TUIO2/TuioPointer3D.cpp; sourceTree = "<group>"; };
+		B6ED3F1024CD4DD7A9B83256 /* TuioPointer3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioPointer3D.h; path = ../TUIO2/TuioPointer3D.h; sourceTree = "<group>"; };
+		B6CA0A6202D44045B03108B7 /* TuioToken3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioToken3D.cpp; path = ../TUIO2/TuioToken3D.cpp; sourceTree = "<group>"; };
+		B6E4A550D0564D0C8BB91B24 /* TuioToken3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioToken3D.h; path = ../TUIO2/TuioToken3D.h; sourceTree = "<group>"; };
+		B6CE90D9877A4AFD9A7758EC /* TuioComponent3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioComponent3D.cpp; path = ../TUIO2/TuioComponent3D.cpp; sourceTree = "<group>"; };
+		B6ECA06E7D1F4BEF850B988B /* TuioComponent3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioComponent3D.h; path = ../TUIO2/TuioComponent3D.h; sourceTree = "<group>"; };
+		B4FC53A66E124EBD806A35DD /* TuioSignal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioSignal.h; path = ../TUIO2/TuioSignal.h; sourceTree = "<group>"; };
+		B4E8EF62DED94FBA9D92EA10 /* TuioData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioData.cpp; path = ../TUIO2/TuioData.cpp; sourceTree = "<group>"; };
+		B4E9FA9E387147ED8874E706 /* TuioData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioData.h; path = ../TUIO2/TuioData.h; sourceTree = "<group>"; };
+		B4D9C8FE3F06413B84F7AD4C /* TuioControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioControl.cpp; path = ../TUIO2/TuioControl.cpp; sourceTree = "<group>"; };
+		B4D477FF76774894AD6671AE /* TuioControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioControl.h; path = ../TUIO2/TuioControl.h; sourceTree = "<group>"; };
+		B4CEF39D0B6645D0A0042B9C /* TuioContent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioContent.cpp; path = ../TUIO2/TuioContent.cpp; sourceTree = "<group>"; };
+		B4C85BC3590344F5A43F8C00 /* TuioContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioContent.h; path = ../TUIO2/TuioContent.h; sourceTree = "<group>"; };
+		B3F2D1A2052648043B3744E4 /* TuioGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioGeometry.h; path = ../TUIO2/TuioGeometry.h; sourceTree = "<group>"; };
+		B5AECD399D774FDFA6CEDA1E /* TuioTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioTree.h; path = ../TUIO2/TuioTree.h; sourceTree = "<group>"; };
+		B5A0F4560FCF460CA948EB2D /* TuioList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioList.h; path = ../TUIO2/TuioList.h; sourceTree = "<group>"; };
+		B5AB5FEE5F6F4CEC81F35E91 /* TuioLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioLink.h; path = ../TUIO2/TuioLink.h; sourceTree = "<group>"; };
+		B5A5A914277347BCA938E4BA /* TuioContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioContainer.h; path = ../TUIO2/TuioContainer.h; sourceTree = "<group>"; };
+		B5A754989E2F4FFD88931D79 /* TuioAssociation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioAssociation.h; path = ../TUIO2/TuioAssociation.h; sourceTree = "<group>"; };
 		B2E1CEC21A1AB50600710202 /* TuioObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioObject.cpp; path = ../TUIO2/TuioObject.cpp; sourceTree = "<group>"; };
 		B2E1CEC31A1AB50600710202 /* TuioObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioObject.h; path = ../TUIO2/TuioObject.h; sourceTree = "<group>"; };
-		B2E1CEC41A1AB50600710202 /* TuioPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioPoint.cpp; path = ../TUIO2/TuioPoint.cpp; sourceTree = "<group>"; };
-		B2E1CEC51A1AB50600710202 /* TuioPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioPoint.h; path = ../TUIO2/TuioPoint.h; sourceTree = "<group>"; };
+		B2E1CEC41A1AB50600710202 /* TuioPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioPoint.cpp; path = ../TUIO/TuioPoint.cpp; sourceTree = "<group>"; };
+		B2E1CEC51A1AB50600710202 /* TuioPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioPoint.h; path = ../TUIO/TuioPoint.h; sourceTree = "<group>"; };
 		B2E1CEC61A1AB50600710202 /* TuioPointer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioPointer.cpp; path = ../TUIO2/TuioPointer.cpp; sourceTree = "<group>"; };
 		B2E1CEC71A1AB50600710202 /* TuioPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioPointer.h; path = ../TUIO2/TuioPointer.h; sourceTree = "<group>"; };
 		B2E1CECA1A1AB50600710202 /* TuioSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioSource.h; path = ../TUIO2/TuioSource.h; sourceTree = "<group>"; };
 		B2E1CECB1A1AB50600710202 /* TuioSymbol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioSymbol.cpp; path = ../TUIO2/TuioSymbol.cpp; sourceTree = "<group>"; };
 		B2E1CECC1A1AB50600710202 /* TuioSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioSymbol.h; path = ../TUIO2/TuioSymbol.h; sourceTree = "<group>"; };
-		B2E1CECD1A1AB50600710202 /* TuioTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioTime.cpp; path = ../TUIO2/TuioTime.cpp; sourceTree = "<group>"; };
-		B2E1CECE1A1AB50600710202 /* TuioTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioTime.h; path = ../TUIO2/TuioTime.h; sourceTree = "<group>"; };
+		B2E1CECD1A1AB50600710202 /* TuioTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioTime.cpp; path = ../TUIO/TuioTime.cpp; sourceTree = "<group>"; };
+		B2E1CECE1A1AB50600710202 /* TuioTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioTime.h; path = ../TUIO/TuioTime.h; sourceTree = "<group>"; };
 		B2E1CECF1A1AB50600710202 /* TuioToken.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TuioToken.cpp; path = ../TUIO2/TuioToken.cpp; sourceTree = "<group>"; };
 		B2E1CED01A1AB50600710202 /* TuioToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TuioToken.h; path = ../TUIO2/TuioToken.h; sourceTree = "<group>"; };
-		B2E1CED11A1AB50600710202 /* UdpReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UdpReceiver.cpp; path = ../TUIO2/UdpReceiver.cpp; sourceTree = "<group>"; };
-		B2E1CED21A1AB50600710202 /* UdpReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UdpReceiver.h; path = ../TUIO2/UdpReceiver.h; sourceTree = "<group>"; };
+		B2E1CED11A1AB50600710202 /* UdpReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UdpReceiver.cpp; path = ../TUIO/UdpReceiver.cpp; sourceTree = "<group>"; };
+		B2E1CED21A1AB50600710202 /* UdpReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UdpReceiver.h; path = ../TUIO/UdpReceiver.h; sourceTree = "<group>"; };
 		B2E1CEEB1A1AB57F00710202 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		B2E1CEEC1A1AB57F00710202 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
 		B2E1CEED1A1AB57F00710202 /* NetworkingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingUtils.h; sourceTree = "<group>"; };
@@ -217,6 +252,30 @@
 				B2E1CEBD1A1AB50600710202 /* TuioDispatcher.cpp */,
 				B2E1CEBE1A1AB50600710202 /* TuioDispatcher.h */,
 				B2E1CEBF1A1AB50600710202 /* TuioListener.h */,
+				B2E1CFA0C6C7C41D95B54A72 /* OneEuroFilter.cpp */,
+		B4CEF39D0B6645D0A0042B9C /* TuioContent.cpp */,
+		B4C85BC3590344F5A43F8C00 /* TuioContent.h */,
+		B4D9C8FE3F06413B84F7AD4C /* TuioControl.cpp */,
+		B4D477FF76774894AD6671AE /* TuioControl.h */,
+		B4E8EF62DED94FBA9D92EA10 /* TuioData.cpp */,
+		B4E9FA9E387147ED8874E706 /* TuioData.h */,
+		B6CE90D9877A4AFD9A7758EC /* TuioComponent3D.cpp */,
+		B6ECA06E7D1F4BEF850B988B /* TuioComponent3D.h */,
+		B6CA0A6202D44045B03108B7 /* TuioToken3D.cpp */,
+		B6E4A550D0564D0C8BB91B24 /* TuioToken3D.h */,
+		B6CA8E13813B4FED92B6B43D /* TuioPointer3D.cpp */,
+		B6ED3F1024CD4DD7A9B83256 /* TuioPointer3D.h */,
+		B6C30005C03747378F2B1A7D /* TuioBounds3D.cpp */,
+		B6EB5C70831349609CA798B2 /* TuioBounds3D.h */,
+		B4F6AE48C8394257B6CFBF97 /* TuioSignal.cpp */,
+		B4FC53A66E124EBD806A35DD /* TuioSignal.h */,
+				B3F2D1A05CD6EB75264C4F88 /* TuioGeometry.cpp */,
+		B5A754989E2F4FFD88931D79 /* TuioAssociation.h */,
+		B5A5A914277347BCA938E4BA /* TuioContainer.h */,
+		B5AB5FEE5F6F4CEC81F35E91 /* TuioLink.h */,
+		B5A0F4560FCF460CA948EB2D /* TuioList.h */,
+		B5AECD399D774FDFA6CEDA1E /* TuioTree.h */,
+				B3F2D1A2052648043B3744E4 /* TuioGeometry.h */,
 				B2E1CEC21A1AB50600710202 /* TuioObject.cpp */,
 				B2E1CEC31A1AB50600710202 /* TuioObject.h */,
 				B2E1CEC41A1AB50600710202 /* TuioPoint.cpp */,
@@ -373,6 +432,16 @@
 				B2E1CED61A1AB50600710202 /* OscReceiver.cpp in Sources */,
 				B2E1CEE11A1AB50600710202 /* TuioPointer.cpp in Sources */,
 				B2E1CF081A1AB57F00710202 /* IpEndpointName.cpp in Sources */,
+				B2E1CFA160BD08DBADDB42F5 /* OneEuroFilter.cpp in Sources */,
+		B4C06EF1B780499395A5C4D1 /* TuioContent.cpp in Sources */,
+		B4DA1E62137B48D3B3A92F51 /* TuioControl.cpp in Sources */,
+		B4E661FF6FB345849C8C23FE /* TuioData.cpp in Sources */,
+		B6D14A38905A4CFAAE0F66A5 /* TuioComponent3D.cpp in Sources */,
+		B6DA34C67D0A4D93A9DD9434 /* TuioToken3D.cpp in Sources */,
+		B6D36FB9AC1845D9B369C35D /* TuioPointer3D.cpp in Sources */,
+		B6D563878F54474EBE6B1DA8 /* TuioBounds3D.cpp in Sources */,
+		B4F0DDBF9A2B472F94630DC2 /* TuioSignal.cpp in Sources */,
+				B3F2D1A1CCD0FB8F0F99425E /* TuioGeometry.cpp in Sources */,
 				B2E1CEDF1A1AB50600710202 /* TuioObject.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,7 +460,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				HEADER_SEARCH_PATHS = ../oscpack;
+				HEADER_SEARCH_PATHS = (../TUIO, ../oscpack);
 				INFOPLIST_FILE = Tuio2Demo.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = Tuio2Demo;
@@ -408,7 +477,7 @@
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				HEADER_SEARCH_PATHS = ../oscpack;
+				HEADER_SEARCH_PATHS = (../TUIO, ../oscpack);
 				INFOPLIST_FILE = Tuio2Demo.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = Tuio2Demo;
@@ -427,7 +496,7 @@
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = ../TUIO;
 				INFOPLIST_FILE = Tuio2Demo.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = Tuio2Demo;
@@ -446,7 +515,7 @@
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = ../TUIO;
 				INFOPLIST_FILE = Tuio2Demo.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;

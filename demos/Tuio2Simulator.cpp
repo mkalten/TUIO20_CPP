@@ -331,7 +331,7 @@ void Tuio2Simulator::initWindow() {
 		height = window_height;
 	}
 
-	SDL_CreateWindowAndRenderer(width, height, videoFlags, &window, &renderer);
+	window = SDL_CreateWindow("Tuio2Simulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, videoFlags);
 
 	if ( window == NULL ) {
 		std::cerr << "Could not open window: " << SDL_GetError() << std::endl;
@@ -407,10 +407,6 @@ int main(int argc, char* argv[])
 	try { web_sender = new WebSockSender(8080); }
 	catch (std::exception e) { web_sender = NULL; }
 	if (web_sender) server->addOscSender(web_sender);
-
-	// add an additional TUIO/FLC sender
-	OscSender *flash_sender = new FlashSender();
-	server->addOscSender(flash_sender);
 
 	Tuio2Simulator *app = new Tuio2Simulator(server);
 	app->run();

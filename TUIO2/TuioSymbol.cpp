@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2026 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -17,10 +17,11 @@
 */
 
 #include "TuioSymbol.h"
+#include "TuioObject.h"
 
 using namespace TUIO2;
 
-TuioSymbol::TuioSymbol (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, const char *type, const char *data):TuioComponent(ttime,tobj,0,0,0) {
+TuioSymbol::TuioSymbol (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, const char *type, const char *data):TuioContent(ttime,tobj) {
     currentTime = ttime;
     startTime = currentTime;
     type_id = ti;
@@ -28,10 +29,11 @@ TuioSymbol::TuioSymbol (TuioTime ttime, TuioObject *tobj, unsigned short ti, uns
     symbol_id = sym;
     symbol_type = std::string(type);
     symbol_data = std::string(data);
+    symbol_is_blob = false;
     state = TUIO_ADDED;
 }
 	
-TuioSymbol::TuioSymbol (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, const char *type, const char *data):TuioComponent(tobj,0,0,0) {
+TuioSymbol::TuioSymbol (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, const char *type, const char *data):TuioContent(tobj) {
     currentTime = TuioTime::getSystemTime();
     startTime = currentTime;
     type_id = ti;
@@ -39,10 +41,11 @@ TuioSymbol::TuioSymbol (TuioObject *tobj, unsigned short ti, unsigned short ui, 
     symbol_id = sym;
     symbol_type = std::string(type);
     symbol_data = std::string(data);
+    symbol_is_blob = false;
     state = TUIO_ADDED;
 }
 
-TuioSymbol::TuioSymbol (TuioSymbol *tsym):TuioComponent(tsym->getTuioTime(),tsym->getContainingTuioObject(),0,0,0) {
+TuioSymbol::TuioSymbol (TuioSymbol *tsym):TuioContent(tsym->getTuioTime(),tsym->getContainingTuioObject()) {
     currentTime = TuioTime::getSystemTime();
     startTime = currentTime;
     session_id = tsym->getSessionID();
@@ -51,6 +54,10 @@ TuioSymbol::TuioSymbol (TuioSymbol *tsym):TuioComponent(tsym->getTuioTime(),tsym
     symbol_id = tsym->getSymbolID();
     symbol_type = tsym->getSymbolType();
     symbol_data = tsym->getSymbolData();
+    symbol_is_blob = tsym->isSymbolDataBlob();
+    int bsize;
+    const void *bdata = tsym->getSymbolDataBlob(&bsize);
+    if (bdata != NULL) symbol_blob.assign((const char*)bdata, bsize);
     state = TUIO_ADDED;
 }
 
@@ -85,7 +92,36 @@ const char* TuioSymbol::getSymbolData() const {
 }
 
 void TuioSymbol::update(TuioTime ttime) {
-    TuioComponent::update(ttime,0,0);
+    TuioContent::update(ttime);
 
 }
 
+void TuioSymbol::stop(TuioTime ttime) {
+	update(ttime);
+}
+
+
+bool TuioSymbol::isSymbolDataBlob() const {
+    return symbol_is_blob;
+}
+
+void TuioSymbol::setSymbolDataBlob(const void *data, int size) {
+    symbol_is_blob = true;
+    if (data != NULL && size > 0) symbol_blob.assign((const char*)data, size);
+    else symbol_blob.clear();
+}
+
+const void* TuioSymbol::getSymbolDataBlob(int *size) const {
+    if (!symbol_is_blob || symbol_blob.empty()) {
+        if (size != NULL) *size = 0;
+        return NULL;
+    }
+    if (size != NULL) *size = (int)symbol_blob.size();
+    return symbol_blob.data();
+}
+
+void TuioSymbol::setSymbolData(const char *data) {
+    symbol_is_blob = false;
+    symbol_data = std::string(data);
+    symbol_blob.clear();
+}

@@ -1,6 +1,6 @@
 /*
  TUIO2 C++ Library
- Copyright (c) 2009-2017 Martin Kaltenbrunner <martin@tuio.org>
+ Copyright (c) 2009-2026 Martin Kaltenbrunner <martin@tuio.org>
  
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -34,18 +34,17 @@ namespace TUIO2 {
 	 * TuioManager *manager = new TuioManager();<br/>
 	 * ...<br/>
 	 * server->initTuioFrame(TuioTime::getSessionTime());<br/>
-	 * TuioToken *ttok = server->addTuioToken(xpos,ypos, angle);<br/>
-	 * TuioPointer *tptr = server->addTuioToken(xpos,ypos);<br/>
-	 * TuioBounds *tbnd = server->addTuioBounds(xpos,ypos,width,height,angle);<br/>
-	 * server->commitFrame();<br/>
+	 * TuioObject *tobj = server->createTuioToken(sym,xpos,ypos,angle);<br/>
+	 * TuioToken *ttok = tobj->getTuioToken();<br/>
+	 * server->commitTuioFrame();<br/>
 	 * ...<br/>
-	 * server->initFrame(TuioTime::getSessionTime());<br/>
+	 * server->initTuioFrame(TuioTime::getSessionTime());<br/>
 	 * server->updateTuioToken(ttok, xpos,ypos, angle);<br/>
-	 * server->updateTuioPointer(tptr, xpos,ypos);<br/>
-	 * server->updateTuioBounds(tbnd, xpos,ypos,width,height,angle);<br/>
-	 * server->commitFrame();<br/>
+	 * server->updateTuioPointer(tptr, xpos,ypos,angle,shear,radius,pressure);<br/>
+	 * server->updateTuioBounds(tbnd, xpos,ypos,angle,width,height,area);<br/>
+	 * server->commitTuioFrame();<br/>
 	 * ...<br/>
-	 * server->initFrame(TuioTime::getSessionTime());<br/>
+	 * server->initTuioFrame(TuioTime::getSessionTime());<br/>
 	 * server->removeTuioToken(ttok);<br/>
 	 * server->removeTuioPointer(tptr);<br/>
 	 * server->removeTuioBounds(tbnd);<br/>
@@ -53,7 +52,7 @@ namespace TUIO2 {
 	 * </code></p>
 	 *
 	 * @author Martin Kaltenbrunner
-	 * @version 2.0.a0
+	 * @version 2.0.b1
 	 */ 
 	class LIBDECL TuioManager : public TuioDispatcher { 
 	
@@ -479,6 +478,79 @@ namespace TUIO2 {
          * @return	a reference to the TuioObject of the TuioSymbol
          */
         TuioObject* addTuioSymbol(TuioSymbol *tsym);
+
+        /**
+         * Creates a new TuioGeometry and adds it to the provided TuioObject
+         *
+         * @param	tobj	the TuioObject the TuioGeometry is added to
+         * @return	a reference to the TuioObject of the TuioGeometry
+         */
+        TuioObject* addTuioGeometry(TuioObject *tobj);
+
+        /**
+         * Adds the provided TuioGeometry to the TuioServer's internal list of TuioObjects,
+         * or creates the according TuioObject if not found.
+         *
+         * @param	tgeo	the TuioGeometry to add
+         * @return	a reference to the TuioObject of the TuioGeometry
+         */
+        TuioObject* addTuioGeometry(TuioGeometry *tgeo);
+
+        /**
+         * Adds the provided TuioControl to the TuioServer's internal list of TuioObjects,
+         * or creates the according TuioObject if not found.
+         *
+         * @param	tctl	the TuioControl to add
+         * @return	a reference to the TuioObject of the TuioControl
+         */
+        TuioObject* addTuioControl(TuioControl *tctl);
+
+        /**
+         * Adds the provided TuioData to the TuioServer's internal list of TuioObjects,
+         * or creates the according TuioObject if not found.
+         *
+         * @param	tdat	the TuioData to add
+         * @return	a reference to the TuioObject of the TuioData
+         */
+        TuioObject* addTuioData(TuioData *tdat);
+
+        /**
+         * Adds the provided TuioSignal to the TuioServer's internal list of TuioObjects,
+         * or creates the according TuioObject if not found.
+         *
+         * @param	tsig	the TuioSignal to add
+         * @return	a reference to the TuioObject of the TuioSignal
+         */
+        TuioObject* addTuioSignal(TuioSignal *tsig);
+
+        /**
+         * Adds the provided TuioAssociation to its TuioObject
+         *
+         * @param	tasc	the TuioAssociation to add
+         * @return	a reference to the TuioObject of the TuioAssociation
+         */
+        TuioObject* addTuioAssociation(TuioAssociation *tasc);
+
+        /**
+         * Adds the provided TuioToken3D to its TuioObject
+         * @param	ttok	the TuioToken3D to add
+         * @return	a reference to the TuioObject of the TuioToken3D
+         */
+        TuioObject* addTuioToken3D(TuioToken3D *ttok);
+
+        /**
+         * Adds the provided TuioPointer3D to its TuioObject
+         * @param	tptr	the TuioPointer3D to add
+         * @return	a reference to the TuioObject of the TuioPointer3D
+         */
+        TuioObject* addTuioPointer3D(TuioPointer3D *tptr);
+
+        /**
+         * Adds the provided TuioBounds3D to its TuioObject
+         * @param	tbnd	the TuioBounds3D to add
+         * @return	a reference to the TuioObject of the TuioBounds3D
+         */
+        TuioObject* addTuioBounds3D(TuioBounds3D *tbnd);
         
         /**
          * Removes the referenced TuioSymbol from the TuioServer's internal list of TuioObjects
@@ -487,6 +559,63 @@ namespace TUIO2 {
          * @param	tsym	the TuioSymbol to remove
          */
         void removeTuioSymbol(TuioSymbol *tsym);
+
+        /**
+         * Removes the referenced TuioGeometry from the TuioServer's internal list of TuioObjects
+         * and also deletes its TuioObject (and all its encapsulated TUIO Components)
+         *
+         * @param	tgeo	the TuioGeometry to remove
+         */
+        void removeTuioGeometry(TuioGeometry *tgeo);
+
+        /**
+         * Removes the referenced TuioControl from the TuioServer's internal list of TuioObjects
+         * and also deletes its TuioObject (and all its encapsulated TUIO Components)
+         *
+         * @param	tctl	the TuioControl to remove
+         */
+        void removeTuioControl(TuioControl *tctl);
+
+        /**
+         * Removes the referenced TuioData from the TuioServer's internal list of TuioObjects
+         * and also deletes its TuioObject (and all its encapsulated TUIO Components)
+         *
+         * @param	tdat	the TuioData to remove
+         */
+        void removeTuioData(TuioData *tdat);
+
+        /**
+         * Removes the referenced TuioSignal from the TuioServer's internal list of TuioObjects
+         * and also deletes its TuioObject (and all its encapsulated TUIO Components)
+         *
+         * @param	tsig	the TuioSignal to remove
+         */
+        void removeTuioSignal(TuioSignal *tsig);
+
+        /**
+         * Removes the referenced TuioAssociation from its TuioObject
+         *
+         * @param	tasc	the TuioAssociation to remove
+         */
+        void removeTuioAssociation(TuioAssociation *tasc);
+
+        /**
+         * Removes the referenced TuioToken3D from its TuioObject
+         * @param	ttok	the TuioToken3D to remove
+         */
+        void removeTuioToken3D(TuioToken3D *ttok);
+
+        /**
+         * Removes the referenced TuioPointer3D from its TuioObject
+         * @param	tptr	the TuioPointer3D to remove
+         */
+        void removeTuioPointer3D(TuioPointer3D *tptr);
+
+        /**
+         * Removes the referenced TuioBounds3D from its TuioObject
+         * @param	tbnd	the TuioBounds3D to remove
+         */
+        void removeTuioBounds3D(TuioBounds3D *tbnd);
 		
 		/**
 		 * Initializes a new frame with the given TuioTime
