@@ -740,19 +740,11 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
                         }
                         unlockObjectList();
                         break;
-                    case TUIO_ADDED:
-
-                        lockObjectList();
-                        tobjList.push_back(tobj);
-                        unlockObjectList();
-                        for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++)
-                            (*listener)->tuioAdd(tobj);
-
-                        break;
                     default: {
 
-                        // an object created and updated within the same frame is
-                        // downgraded to TUIO_IDLE before this point — add it if not tracked
+                        // membership in tobjList is the reliable discriminator —
+                        // the state alone cannot distinguish a fresh object from one
+                        // re-marked ADDED or left in a stale state
                         bool known = false;
                         lockObjectList();
                         for (std::list<TuioObject*>::iterator findobj=tobjList.begin(); findobj!=tobjList.end(); findobj++) {
@@ -768,6 +760,10 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
                             if (!known) (*listener)->tuioAdd(tobj);
                             else (*listener)->tuioUpdate(tobj);
                         }
+
+                        // commit the object and its components — otherwise objects that
+                        // never receive a real update remain in a stale TUIO_ADDED state
+                        tobj->commit(frameTime);
                         break;
                     }
                 }

@@ -122,6 +122,14 @@ namespace TUIO2 {
 		virtual void update(TuioTime ttime);
 
 		/**
+		 * This method commits the content's state after the frame has been
+		 * processed, downgrading TUIO_ADDED to TUIO_IDLE.
+		 *
+		 * @param	ttime	the TuioTime to assign
+		 */
+		void commit(TuioTime ttime) { update(ttime); };
+
+		/**
 		 * This method marks this TuioContent as removed.
 		 *
 		 * @param	ttime	the TuioTime to assign

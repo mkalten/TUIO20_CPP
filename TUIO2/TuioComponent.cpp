@@ -117,6 +117,11 @@ void TuioComponent::stop(TuioTime ttime) {
 	update(ttime,xpos,ypos,angle);
 }
 
+void TuioComponent::commit(TuioTime ttime) {
+	currentTime = ttime;
+	if (state==TUIO_ADDED) state = TUIO_IDLE;
+}
+
 void TuioComponent::update (TuioTime ttime, float xp, float yp, float a, float xs, float ys, float rs, float ma, float ra) {
 	TuioPoint::update(ttime,xp, yp);
     angle = a;

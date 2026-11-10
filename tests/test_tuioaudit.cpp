@@ -1108,6 +1108,59 @@ TEST(tuioaudit_rapid_frames) {
 	CHECK_EQ(client.getTuioObjectList().size(), 1);
 }
 
+// identical frames must produce one tuioAdd + one tuioUpdate, not two tuioAdd events
+// (github.com/mkalten/TUIO20_CPP/issues/10)
+TEST(tuioaudit_identical_frames_no_dup_add) {
+	StubReceiver stub;
+	TuioClient client(&stub);
+	RecordingListener listener;
+	client.addTuioListener(&listener);
+
+	for (unsigned int f = 1; f <= 3; f++) {
+		char buffer[4096];
+		OutboundPacketStream bundle(buffer, sizeof(buffer));
+		bundle << BeginBundleImmediate
+			<< BeginMessage("/tuio2/frm") << (int32)f << TimeTag(1) << (int32)8191 << "f@x" << EndMessage
+			<< BeginMessage("/tuio2/ptr") << (int32)101027 << (int32)0x00010000 << (int32)0
+				<< 0.409512f << 0.49871f << 0.0f << 0.0f << 0.0f << 0.136719f << EndMessage
+			<< BeginMessage("/tuio2/alv") << (int32)101027 << EndMessage
+		<< EndBundle;
+		stub.ProcessPacket(bundle.Data(), (int)bundle.Size(), IpEndpointName());
+	}
+
+	// one add, two updates — and only one object in the list
+	CHECK_EQ(listener.addObj, 1);
+	CHECK_EQ(listener.updObj, 2);
+	CHECK_EQ(client.getTuioObjectList().size(), 1);
+}
+
+// containsNewTuioX must clear once the frame commits, even when the
+// component never receives a data-changing update
+TEST(tuioaudit_component_state_commit) {
+	StubReceiver stub;
+	TuioClient client(&stub);
+	RecordingListener listener;
+	client.addTuioListener(&listener);
+
+	for (unsigned int f = 1; f <= 2; f++) {
+		char buffer[4096];
+		OutboundPacketStream bundle(buffer, sizeof(buffer));
+		bundle << BeginBundleImmediate
+			<< BeginMessage("/tuio2/frm") << (int32)f << TimeTag(1) << (int32)8191 << "f@x" << EndMessage
+			<< BeginMessage("/tuio2/tok") << (int32)8 << (int32)0x00010002 << (int32)5 << 0.5f << 0.5f << 0.0f << EndMessage
+			<< BeginMessage("/tuio2/alv") << (int32)8 << EndMessage
+		<< EndBundle;
+		stub.ProcessPacket(bundle.Data(), (int)bundle.Size(), IpEndpointName());
+	}
+
+	TuioObject *tobj = client.getTuioObject(8);
+	CHECK(tobj != NULL);
+	CHECK(tobj->getTuioState() != TUIO_ADDED);
+	TuioToken *ttok = tobj->getTuioToken();
+	CHECK(ttok != NULL);
+	CHECK(tobj->containsNewTuioToken() == false);
+}
+
 // NOTE: sendFullTuioBundle currently emits only token messages (known limitation)
 
 // disconnect clears pending and session state; reconnecting starts clean

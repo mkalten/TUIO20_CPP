@@ -678,6 +678,15 @@ namespace TUIO2 {
          * This method refreshes the currentTime after an update
          */
         void update(TuioTime ttime);
+
+        /**
+         * This method commits this TuioObject and all of its TuioComponents
+         * after the frame has been processed, downgrading TUIO_ADDED
+         * states to TUIO_IDLE.
+         *
+         * @param	ttime	the TuioTime to assign
+         */
+        void commit(TuioTime ttime);
     
         /**
          * Returns current time stamp of this TuioPoint as TuioTime

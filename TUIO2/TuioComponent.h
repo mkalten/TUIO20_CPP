@@ -157,6 +157,14 @@ namespace TUIO2 {
 		virtual void stop(TuioTime ttime);
 
 		/**
+		 * This method commits the component's state after the frame has been
+		 * processed, downgrading TUIO_ADDED to TUIO_IDLE.
+		 *
+		 * @param	ttime	the TuioTime to assign
+		 */
+		virtual void commit(TuioTime ttime);
+
+		/**
 		 * Takes a TuioTime argument and assigns it along with the provided 
 		 * X and Y coordinate, X and Y velocity and acceleration
 		 * to the private TuioComponent attributes.

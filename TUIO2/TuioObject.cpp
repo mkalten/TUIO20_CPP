@@ -660,6 +660,23 @@ void TuioObject::update(TuioTime ttime){
     state = TUIO_IDLE;
 }
 
+void TuioObject::commit(TuioTime ttime){
+    if (token!=NULL) token->commit(ttime);
+    if (pointer!=NULL) pointer->commit(ttime);
+    if (bounds!=NULL) bounds->commit(ttime);
+    if (symbol!=NULL) symbol->commit(ttime);
+    if (geometry!=NULL) geometry->commit(ttime);
+    if (control!=NULL) control->commit(ttime);
+    if (data!=NULL) data->commit(ttime);
+    if (signal!=NULL) signal->commit(ttime);
+    if (token3d!=NULL) token3d->commit(ttime);
+    if (pointer3d!=NULL) pointer3d->commit(ttime);
+    if (bounds3d!=NULL) bounds3d->commit(ttime);
+    for (std::list<TuioAssociation*>::iterator it = associations.begin(); it != associations.end(); it++)
+        (*it)->commit(ttime);
+    update(ttime);
+}
+
 bool TuioObject::isMoving(){
     if ((token!=NULL) && token->isMoving()) return true;
     if ((pointer!=NULL) && pointer->isMoving()) return true;
