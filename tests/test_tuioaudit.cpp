@@ -2,6 +2,7 @@
 #include "TuioClient.h"
 #include "TuioServer.h"
 #include "osc/OscOutboundPacketStream.h"
+#include "osc/OscReceivedElements.h"
 using namespace TUIO2;
 using namespace osc;
 
@@ -1159,6 +1160,131 @@ TEST(tuioaudit_component_state_commit) {
 	TuioToken *ttok = tobj->getTuioToken();
 	CHECK(ttok != NULL);
 	CHECK(tobj->containsNewTuioToken() == false);
+}
+
+
+// verify each emitted message's OSC typetags match the spec's declared types
+static std::string msgTypetags(const osc::ReceivedMessage &msg) {
+	return msg.TypeTags();
+}
+TEST(tuioaudit_encode_typetags) {
+	CaptureSender sender;
+	TuioServer server(&sender);
+	server.setSourceName("ttsrc");
+
+	TuioTime ftime = TuioTime::getSystemTime();
+	server.initTuioFrame(ftime);
+	TuioObject *tobj = server.createTuioToken(9, 0.5f, 0.5f, 0.25f);
+	server.addTuioPointer(tobj, 2, 1, 0.1f, 0.2f, 0.3f, 0.4f, 0.05f, 0.9f);
+	server.addTuioBounds(tobj, 0.4f, 0.5f, 0.1f, 0.3f, 0.2f, 0.06f);
+	server.addTuioSymbol(tobj, 7, 2, 4, "grp", "code");
+	TuioControl *tctl = new TuioControl(ftime,tobj);
+	std::list< std::pair<bool,float> > ctls;
+	ctls.push_back(std::make_pair(true,1.0f));
+	ctls.push_back(std::make_pair(false,0.5f));
+	tctl->setControls(ctls);
+	server.addTuioControl(tctl);
+	server.addTuioData(new TuioData(ftime,tobj,"text/plain","hello"));
+	std::list<unsigned int> tgts; tgts.push_back(11);
+	server.addTuioSignal(new TuioSignal(ftime,tobj,3,tgts));
+	std::list<unsigned int> kids; kids.push_back(20);
+	server.addTuioAssociation(new TuioContainer(ftime,tobj,1,kids));
+	std::list< std::pair<unsigned int,unsigned int> > links;
+	links.push_back(std::make_pair(10u,0x00020001u));
+	server.addTuioAssociation(new TuioLink(ftime,tobj,true,links));
+	server.addTuioAssociation(new TuioList(ftime,tobj,false,links));
+	std::list<float> nodes; nodes.push_back(0.0f);
+	server.addTuioAssociation(new TuioTree(ftime,tobj,true,links,nodes));
+	server.addTuioToken3D(new TuioToken3D(ftime,tobj,1,3,6,0.1f,0.2f,0.3f,0.4f,0.5f,0.6f,0.7f));
+	server.addTuioPointer3D(new TuioPointer3D(ftime,tobj,2,4,8,0.1f,0.2f,0.3f,0.0f,0.0f,1.0f,0.05f));
+	server.addTuioBounds3D(new TuioBounds3D(ftime,tobj,0.5f,0.5f,0.25f,0.1f,0.0f,0.0f,1.0f,0.3f,0.2f,0.1f,0.006f));
+
+	// geometry with all descriptors
+	TuioGeometry *tgeo = new TuioGeometry(ftime,tobj);
+	std::list<TuioPoint> hull; hull.push_back(TuioPoint(0.1f,0.1f)); hull.push_back(TuioPoint(0.2f,0.2f));
+	tgeo->setConvexHull(hull);
+	tgeo->setOuterContour(hull);
+	std::list< std::list<TuioPoint> > ic; ic.push_back(hull); ic.push_back(hull);
+	tgeo->setInnerContours(ic);
+	std::list< std::list<TuioPoint> > sk; sk.push_back(hull); sk.push_back(hull);
+	tgeo->setSkeleton(sk);
+	std::list<unsigned int> jumps; jumps.push_back(0);
+	tgeo->setSkeletonJumps(jumps);
+	std::list< std::list<float> > sk3;
+	std::list<float> b1; b1.push_back(0.1f); b1.push_back(0.2f); b1.push_back(0.3f);
+	sk3.push_back(b1); sk3.push_back(b1);
+	tgeo->setSkeleton3D(sk3);
+	tgeo->setSkeletonJumps3D(jumps);
+	std::list<float> vols; vols.push_back(0.01f);
+	tgeo->setSkeletonVolumes(vols);
+	std::list<float> widths; widths.push_back(0.02f); widths.push_back(0.03f);
+	tgeo->setArea(hull);
+	tgeo->setAreaWidths(widths);
+	tgeo->setRawData(2, std::string("\x01\x02\x03\x04",4));
+	server.addTuioGeometry(tgeo);
+	server.commitTuioFrame();
+
+	// parse the emitted packet
+	CHECK(!sender.allPackets.empty());
+	std::map< std::string,std::string > tags;
+	for (std::vector< std::vector<char> >::iterator p = sender.allPackets.begin(); p != sender.allPackets.end(); p++) {
+		osc::ReceivedPacket packet(p->data(), p->size());
+		CHECK(packet.IsBundle());
+		osc::ReceivedBundle bundle(packet);
+		for (osc::ReceivedBundleElementIterator it = osc::ReceivedBundleElementIterator(bundle.ElementsBegin());
+			 it != osc::ReceivedBundleElementIterator(bundle.ElementsEnd()); it++) {
+			if (it->IsMessage()) { osc::ReceivedMessage m(*it); tags[m.AddressPattern()] = m.TypeTags(); }
+		}
+	}
+
+	CHECK_EQ(std::string("itis"), tags["/tuio2/frm"]);       // int32 ttag int32 string
+	CHECK(tags["/tuio2/tok"]=="iiifff" || tags["/tuio2/tok"]=="iiiffffffff");   // 3f or 3+5f tail
+	CHECK(tags["/tuio2/ptr"]=="iiiffffff" || tags["/tuio2/ptr"]=="iiifffffffffff"); // 6f or 6+5f tail
+	CHECK(tags["/tuio2/bnd"]=="iffffff" || tags["/tuio2/bnd"]=="ifffffffffff");
+	CHECK_EQ(std::string("iiiss"), tags["/tuio2/sym"]);     // int int int string string
+	CHECK(tags["/tuio2/icg"].substr(0,1)=="i" && tags["/tuio2/icg"].find('T')!=std::string::npos);
+	CHECK(tags["/tuio2/skg"].substr(0,1)=="i" && tags["/tuio2/skg"].find('f')!=std::string::npos && tags["/tuio2/skg"].substr(1).find('i')!=std::string::npos);
+	CHECK(tags["/tuio2/s3d"].substr(0,1)=="i" && tags["/tuio2/s3d"].substr(1).find('i')!=std::string::npos);
+	CHECK_EQ(std::string("if"), tags["/tuio2/svg"]);
+	CHECK(tags["/tuio2/arg"].substr(0,2)=="if" && (tags["/tuio2/arg"].size()-1)%3==0);  // i + fff per span
+	CHECK_EQ(std::string("iib"), tags["/tuio2/raw"]);
+	CHECK(tags["/tuio2/ctl"]=="iTf" || tags["/tuio2/ctl"]=="iFF" || tags["/tuio2/ctl"].substr(0,2)=="iT" || tags["/tuio2/ctl"].substr(0,2)=="iF");
+	CHECK_EQ(std::string("iss"), tags["/tuio2/dat"]);
+	CHECK(tags["/tuio2/sig"].substr(0,2)=="ii" && tags["/tuio2/sig"].size()>=3);
+	CHECK(tags["/tuio2/alv"].size()>=1 && tags["/tuio2/alv"].find_first_not_of('i')==std::string::npos);
+	CHECK(tags["/tuio2/ala"].find_first_not_of('i')==std::string::npos);
+	CHECK(tags["/tuio2/coa"].substr(0,2)=="ii" && tags["/tuio2/coa"].find_first_not_of('i',2)==std::string::npos);
+	CHECK(tags["/tuio2/lia"].substr(0,2)=="iT");
+	CHECK(tags["/tuio2/lla"].substr(0,2)=="iF");            // logical -> false
+	CHECK(tags["/tuio2/lta"].substr(0,2)=="iT" && tags["/tuio2/lta"].find('f',2)!=std::string::npos);
+	CHECK(tags["/tuio2/t3d"].substr(0,3)=="iii" && tags["/tuio2/t3d"].size()>=10);
+	CHECK(tags["/tuio2/p3d"].substr(0,3)=="iii" && tags["/tuio2/p3d"].size()>=10);
+	CHECK(tags["/tuio2/b3d"].substr(0,1)=="i" && tags["/tuio2/b3d"].size()>=12);
+}
+
+// uint32 session IDs must round-trip bit-for-bit through the signed int32
+// OSC field per the spec's cast convention
+TEST(tuioaudit_uint32_boundary) {
+	unsigned int ids[] = { 0x7FFFFFFFu, 0x80000000u, 0xFFFFFFFFu };
+	for (int i = 0; i < 3; i++) {
+		StubReceiver stub;
+		TuioClient client(&stub);
+		RecordingListener listener;
+		client.addTuioListener(&listener);
+
+		char buffer[4096];
+		OutboundPacketStream bundle(buffer, sizeof(buffer));
+		bundle << BeginBundleImmediate
+			<< BeginMessage("/tuio2/frm") << (int32)(i+1) << TimeTag(1) << (int32)8191 << "f@x" << EndMessage
+			<< BeginMessage("/tuio2/tok") << (int32)ids[i] << (int32)0x00010002 << (int32)5 << 0.5f << 0.5f << 0.0f << EndMessage
+			<< BeginMessage("/tuio2/alv") << (int32)ids[i] << EndMessage
+		<< EndBundle;
+		stub.ProcessPacket(bundle.Data(), (int)bundle.Size(), IpEndpointName());
+
+		TuioObject *tobj = client.getTuioObject(ids[i]);
+		CHECK(tobj != NULL);
+		CHECK_EQ(ids[i], tobj->getSessionID());
+	}
 }
 
 // s3d: 3D skeleton with xyz triples + node jumps
