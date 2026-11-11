@@ -25,10 +25,11 @@
 namespace TUIO2 {
 	
 	/**
-	 * The TuioGeometry class encodes the detailed contour geometry
-	 * of a TuioObject component. It can be assigned to a TuioObject
-	 * to describe its convex hull, its outer contour as well as
-	 * one or more inner contours as lists of TuioPoints.
+	 * The TuioGeometry class encodes the optional geometry descriptors
+	 * that can be associated to an existing component instance, such as
+	 * the convex hull (CHG), outer (OCG) and inner (ICG) contours, the
+	 * skeleton graph (SKG) with its node jumps and skeleton volumes (SVG),
+	 * the area spans (ARG) as well as raw region data (RAW).
 	 *
 	 * @author Martin Kaltenbrunner
 	 * @version 2.0.b1
@@ -37,198 +38,71 @@ namespace TUIO2 {
 		
 	protected:
 		/**
-		 * The convex hull of this TuioGeometry represented as a list of TuioPoints
+		 * The convex hull point list of this TuioGeometry
 		 */
 		std::list<TuioPoint> convexHull;
 		/**
-		 * The outer contour of this TuioGeometry represented as a list of TuioPoints
+		 * The outer contour point list of this TuioGeometry
 		 */
 		std::list<TuioPoint> outerContour;
 		/**
-		 * The inner contours of this TuioGeometry represented as a list of TuioPoint lists
+		 * The inner contour point lists of this TuioGeometry
 		 */
 		std::list< std::list<TuioPoint> > innerContours;
 		/**
-		 * The skeleton of this TuioGeometry as a list of point lists,
-		 * one per leaf-to-node branch
+		 * The skeleton branches of this TuioGeometry as point lists
 		 */
 		std::list< std::list<TuioPoint> > skeleton;
 		/**
-		 * The node indices where each skeleton branch continues from
+		 * The node-jump markers between skeleton branches
 		 */
 		std::list<unsigned int> skeletonJumps;
 		/**
-		 * The volume radius of each skeleton point (normalized to the sensor height)
+		 * The skeleton node volumes (radii) of this TuioGeometry
 		 */
 		std::list<float> skeletonVolumes;
 		/**
-		 * The span start points of the area description
+		 * The area span points of this TuioGeometry
 		 */
 		std::list<TuioPoint> areaPoints;
 		/**
-		 * The span lengths of the area description
+		 * The area span widths of this TuioGeometry
 		 */
 		std::list<float> areaWidths;
 		/**
-		 * The raw region data of this TuioGeometry (8bit samples)
+		 * The raw region data of this TuioGeometry
 		 */
 		std::string rawData;
 		/**
-		 * The relative width between raw region data points
+		 * The row width of the raw region data
 		 */
 		unsigned int rawWidth;
 		
 	public:
-		/**
-		 * This constructor takes a TuioTime argument and a TuioObject argument
-		 * and creates an empty TuioGeometry.
-		 *
-		 * @param	ttime	the TuioTime to assign
-		 * @param	tobj	the TuioObject to assign
-		 */
 		TuioGeometry (TuioTime ttime, TuioObject *tobj);
-
-		/**
-		 * This constructor takes a TuioObject argument
-		 * and creates an empty TuioGeometry.
-		 *
-		 * @param	tobj	the TuioObject to assign
-		 */
 		TuioGeometry (TuioObject *tobj);
-
-		/**
-		 * This constructor takes a TuioGeometry argument and copies
-		 * all of its attributes to the newly created TuioGeometry.
-		 *
-		 * @param	tgeo	the TuioGeometry to assign
-		 */
 		TuioGeometry (TuioGeometry *tgeo);
 
-		/**
-		 * This method refreshes the currentTime after an update.
-		 *
-		 * @param	ttime	the TuioTime to assign
-		 */
-		void update(TuioTime ttime);
+		virtual void update(TuioTime ttime);
 
-		/**
-		 * This method updates the TuioGeometry with the provided time stamp,
-		 * marking it as stopped.
-		 *
-		 * @param	ttime	the TuioTime to assign
-		 */
-		void stop(TuioTime ttime);
-
-		/**
-		 * Assigns the provided list of TuioPoints as the convex hull
-		 * of this TuioGeometry.
-		 *
-		 * @param	hull	the convex hull point list to assign
-		 */
 		void setConvexHull(std::list<TuioPoint> hull);
-
-		/**
-		 * Returns the convex hull of this TuioGeometry.
-		 *
-		 * @return	the convex hull point list
-		 */
 		std::list<TuioPoint> getConvexHull();
-
-		/**
-		 * Assigns the provided list of TuioPoints as the outer contour
-		 * of this TuioGeometry.
-		 *
-		 * @param	contour	the outer contour point list to assign
-		 */
 		void setOuterContour(std::list<TuioPoint> contour);
-
-		/**
-		 * Returns the outer contour of this TuioGeometry.
-		 *
-		 * @return	the outer contour point list
-		 */
 		std::list<TuioPoint> getOuterContour();
-
-		/**
-		 * Assigns the provided list of TuioPoint lists as the inner contours
-		 * of this TuioGeometry.
-		 *
-		 * @param	contours	the inner contour point lists to assign
-		 */
 		void setInnerContours(std::list< std::list<TuioPoint> > contours);
-
-		/**
-		 * Returns the inner contours of this TuioGeometry.
-		 *
-		 * @return	the inner contour point lists
-		 */
 		std::list< std::list<TuioPoint> > getInnerContours();
-
-		/**
-		 * Assigns the skeleton branches of this TuioGeometry.
-		 * @param	skltn	the skeleton branch point lists
-		 */
 		void setSkeleton(std::list< std::list<TuioPoint> > skltn);
-		/**
-		 * Returns the skeleton branches of this TuioGeometry.
-		 * @return	the skeleton branch point lists
-		 */
 		std::list< std::list<TuioPoint> > getSkeleton();
-		/**
-		 * Assigns the skeleton node jump indices of this TuioGeometry.
-		 * @param	jumps	the node jump indices
-		 */
 		void setSkeletonJumps(std::list<unsigned int> jumps);
-		/**
-		 * Returns the skeleton node jump indices of this TuioGeometry.
-		 * @return	the node jump indices
-		 */
 		std::list<unsigned int> getSkeletonJumps();
-		/**
-		 * Assigns the per-point skeleton volume radii of this TuioGeometry.
-		 * @param	vols	the skeleton volume radii
-		 */
 		void setSkeletonVolumes(std::list<float> vols);
-		/**
-		 * Returns the per-point skeleton volume radii of this TuioGeometry.
-		 * @return	the skeleton volume radii
-		 */
 		std::list<float> getSkeletonVolumes();
-		/**
-		 * Assigns the area span points of this TuioGeometry.
-		 * @param	points	the area span start points
-		 */
 		void setArea(std::list<TuioPoint> points);
-		/**
-		 * Returns the area span points of this TuioGeometry.
-		 * @return	the area span start points
-		 */
 		std::list<TuioPoint> getArea();
-		/**
-		 * Assigns the area span widths of this TuioGeometry.
-		 * @param	widths	the area span lengths
-		 */
 		void setAreaWidths(std::list<float> widths);
-		/**
-		 * Returns the area span widths of this TuioGeometry.
-		 * @return	the area span lengths
-		 */
 		std::list<float> getAreaWidths();
-		/**
-		 * Assigns the raw region data of this TuioGeometry.
-		 * @param	width	the relative width between data points
-		 * @param	data	the raw 8bit sample data
-		 */
 		void setRawData(unsigned int width, std::string data);
-		/**
-		 * Returns the raw region data of this TuioGeometry.
-		 * @return	the raw 8bit sample data
-		 */
 		std::string getRawData();
-		/**
-		 * Returns the relative width between raw region data points.
-		 * @return	the raw data width
-		 */
 		unsigned int getRawWidth();
 	};
 }

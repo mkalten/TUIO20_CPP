@@ -96,9 +96,6 @@ void TuioSymbol::update(TuioTime ttime) {
 
 }
 
-void TuioSymbol::stop(TuioTime ttime) {
-	update(ttime);
-}
 
 
 bool TuioSymbol::isSymbolDataBlob() const {

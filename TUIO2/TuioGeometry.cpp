@@ -45,9 +45,6 @@ void TuioGeometry::update(TuioTime ttime) {
 	TuioContent::update(ttime);
 }
 
-void TuioGeometry::stop(TuioTime ttime) {
-	update(ttime);
-}
 
 void TuioGeometry::setConvexHull(std::list<TuioPoint> hull) {
 	convexHull = hull;

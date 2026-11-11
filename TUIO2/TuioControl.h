@@ -73,13 +73,6 @@ namespace TUIO2 {
 		 */
 		void update(TuioTime ttime);
 
-		/**
-		 * This method updates the TuioControl with the provided time stamp,
-		 * marking it as stopped.
-		 *
-		 * @param	ttime	the TuioTime to assign
-		 */
-		void stop(TuioTime ttime);
 
 		/**
 		 * Assigns the control dimension list of this TuioControl.

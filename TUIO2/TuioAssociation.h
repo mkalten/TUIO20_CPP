@@ -56,14 +56,6 @@ namespace TUIO2 {
 		 * @param	ttime	the TuioTime to assign
 		 */
 		virtual void update(TuioTime ttime) { TuioContent::update(ttime); }
-
-		/**
-		 * This method updates this TuioAssociation with the provided time stamp,
-		 * marking it as stopped.
-		 *
-		 * @param	ttime	the TuioTime to assign
-		 */
-		void stop(TuioTime ttime) { update(ttime); }
 	};
 }
 #endif /* INCLUDED_TUIOASSOCIATION_H */

@@ -80,13 +80,6 @@ namespace TUIO2 {
 		 */
 		void update(TuioTime ttime);
 
-		/**
-		 * This method updates the TuioSignal with the provided time stamp,
-		 * marking it as stopped.
-		 *
-		 * @param	ttime	the TuioTime to assign
-		 */
-		void stop(TuioTime ttime);
 
 		/**
 		 * Returns the signal ID of this TuioSignal.

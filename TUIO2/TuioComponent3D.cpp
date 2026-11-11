@@ -69,6 +69,10 @@ void TuioComponent3D::update (TuioTime ttime, float xp, float yp, float zp, floa
 	zaxis = za;
 }
 
+void TuioComponent3D::stop(TuioTime ttime) {
+	update(ttime,xpos,ypos,zpos,angle,xaxis,yaxis,zaxis);
+}
+
 float TuioComponent3D::getZ() const {
 	return zpos;
 }

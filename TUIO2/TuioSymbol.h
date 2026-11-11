@@ -191,15 +191,6 @@ namespace TUIO2 {
          */
         void update(TuioTime ttime);
 
-	/**
-	 * This method updates the TuioSymbol with the provided time stamp,
-	 * marking it as stopped. Since TuioSymbols have no positional state
-	 * this is identical to update(TuioTime).
-	 *
-	 * @param	ttime	the TuioTime to assign
-	 */
-	void stop(TuioTime ttime);
-
 	};
 }
 #endif

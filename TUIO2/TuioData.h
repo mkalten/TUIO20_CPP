@@ -89,13 +89,6 @@ namespace TUIO2 {
 		 */
 		void update(TuioTime ttime);
 
-		/**
-		 * This method updates the TuioData with the provided time stamp,
-		 * marking it as stopped.
-		 *
-		 * @param	ttime	the TuioTime to assign
-		 */
-		void stop(TuioTime ttime);
 
 		/**
 		 * Returns the MIME type descriptor of this TuioData.

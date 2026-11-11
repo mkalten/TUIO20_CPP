@@ -39,9 +39,6 @@ void TuioSignal::update(TuioTime ttime) {
 	TuioContent::update(ttime);
 }
 
-void TuioSignal::stop(TuioTime ttime) {
-	update(ttime);
-}
 
 unsigned int TuioSignal::getSignalID() const {
 	return signal_id;

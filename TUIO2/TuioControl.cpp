@@ -36,9 +36,6 @@ void TuioControl::update(TuioTime ttime) {
 	TuioContent::update(ttime);
 }
 
-void TuioControl::stop(TuioTime ttime) {
-	update(ttime);
-}
 
 void TuioControl::setControls(std::list< std::pair<bool,float> > ctls) {
 	controls = ctls;

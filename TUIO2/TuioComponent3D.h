@@ -96,6 +96,14 @@ namespace TUIO2 {
 		virtual void update (TuioTime ttime, float xp, float yp, float zp, float a, float xa, float ya, float za, float xs, float ys, float zs, float rs, float ma, float ra);
 
 		/**
+		 * This method updates the component's position, angle and orientation axis
+		 * with the provided time stamp, marking it as stopped.
+		 *
+		 * @param	ttime	the TuioTime to assign
+		 */
+		virtual void stop(TuioTime ttime);
+
+		/**
 		 * Returns the Z coordinate of this component.
 		 * @return	the Z coordinate
 		 */

@@ -45,9 +45,6 @@ void TuioData::update(TuioTime ttime) {
 	TuioContent::update(ttime);
 }
 
-void TuioData::stop(TuioTime ttime) {
-	update(ttime);
-}
 
 const char* TuioData::getMimeType() const {
 	return mime_type.c_str();
