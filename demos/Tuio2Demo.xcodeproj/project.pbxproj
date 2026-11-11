@@ -22,6 +22,7 @@
 		B20EE47F0C340E0300026AC5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20EE47E0C340E0300026AC5 /* OpenGL.framework */; };
 		B20EE4830C340E1100026AC5 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B20EE4820C340E1100026AC5 /* GLUT.framework */; };
 		B298572A1CFA1D0F0068D153 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29857291CFA1D0F0068D153 /* SDL2.framework */; };
+		B2A000020000000000000002 /* SDL2.framework in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = B29857291CFA1D0F0068D153 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B2C2B89D109067D000262014 /* TUIO.icns in Resources */ = {isa = PBXBuildFile; fileRef = B2C2B89C109067D000262014 /* TUIO.icns */; };
 		B2E1CED61A1AB50600710202 /* OscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CEAF1A1AB50600710202 /* OscReceiver.cpp */; };
 		B2E1CED81A1AB50600710202 /* TcpReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E1CEB31A1AB50600710202 /* TcpReceiver.cpp */; };
@@ -52,6 +53,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				B2A000020000000000000002 /* SDL2.framework in Copy Frameworks into .app bundle */,
 			);
 			name = "Copy Frameworks into .app bundle";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,6 +465,7 @@
 				HEADER_SEARCH_PATHS = (../TUIO, ../oscpack);
 				INFOPLIST_FILE = Tuio2Demo.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				PRODUCT_NAME = Tuio2Demo;
 				WRAPPER_EXTENSION = app;
 			};
@@ -480,6 +483,7 @@
 				HEADER_SEARCH_PATHS = (../TUIO, ../oscpack);
 				INFOPLIST_FILE = Tuio2Demo.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				PRODUCT_NAME = Tuio2Demo;
 				WRAPPER_EXTENSION = app;
 			};
@@ -498,7 +502,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = ../TUIO;
 				INFOPLIST_FILE = Tuio2Demo.plist;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_NAME = Tuio2Demo;
 				SDKROOT = macosx;
 			};
@@ -517,7 +521,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = ../TUIO;
 				INFOPLIST_FILE = Tuio2Demo.plist;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = Tuio2Demo;
 				SDKROOT = macosx;
