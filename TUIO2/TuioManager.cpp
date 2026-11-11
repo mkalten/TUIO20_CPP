@@ -118,7 +118,7 @@ void TuioManager::removeTuioObject(TuioObject *tobj) {
     }
     
     if (tobj->containsTuioSymbol()) {
-        if (verbose) std::cout << "del sym " << tobj->getSessionID() << std::endl;
+        if (verbose) std::cout << "del c_id " << tobj->getSessionID() << std::endl;
         tobj->deleteTuioSymbol();
     }
     
@@ -127,21 +127,21 @@ void TuioManager::removeTuioObject(TuioObject *tobj) {
     delete tobj;
 }
 
-TuioObject* TuioManager::createTuioToken(unsigned int sym, float x, float y, float a) {
-    return addTuioToken(NULL, sym, 0, 0, x, y, a);
+TuioObject* TuioManager::createTuioToken(unsigned int c_id, float x, float y, float a) {
+    return addTuioToken(NULL, c_id, 0, 0, x, y, a);
 }
 
-TuioObject* TuioManager::createTuioToken(unsigned int sym, unsigned short t_id, unsigned short u_id, float x, float y, float a) {
-    return addTuioToken(NULL, sym, t_id, u_id, x, y, a);
+TuioObject* TuioManager::createTuioToken(unsigned int c_id, unsigned short t_id, unsigned short u_id, float x, float y, float a) {
+    return addTuioToken(NULL, c_id, t_id, u_id, x, y, a);
 }
 
-TuioObject* TuioManager::addTuioToken(TuioObject *tobj, unsigned int sym, float x, float y, float a) {
-    return addTuioToken(tobj, sym, 0, 0, x, y, a);
+TuioObject* TuioManager::addTuioToken(TuioObject *tobj, unsigned int c_id, float x, float y, float a) {
+    return addTuioToken(tobj, c_id, 0, 0, x, y, a);
 }
 
-TuioObject* TuioManager::addTuioToken(TuioObject *tobj, unsigned short t_id, unsigned short u_id, unsigned int sym, float x, float y, float a) {
+TuioObject* TuioManager::addTuioToken(TuioObject *tobj, unsigned short t_id, unsigned short u_id, unsigned int c_id, float x, float y, float a) {
     
-    TuioToken *ttok = new TuioToken(currentFrameTime, tobj, t_id, u_id, sym, x, y, a);
+    TuioToken *ttok = new TuioToken(currentFrameTime, tobj, t_id, u_id, c_id, x, y, a);
     return addTuioToken(ttok);
 }
 
@@ -208,7 +208,7 @@ TuioObject* TuioManager::addTuioPointer(TuioObject *tobj, unsigned short t_id, u
         }
         
         TuioPointer *freePointer = (*closestPointer);
-        pointerID = (*closestPointer)->getPointerID();
+        pointerID = (*closestPointer)->getComponentID();
         freePointerList.erase(closestPointer);
         delete freePointer;
     } else maxPointerID = pointerID;
@@ -279,14 +279,14 @@ void TuioManager::removeTuioPointer(TuioPointer *tptr) {
     
     TuioObject *tobj = tptr->getContainingTuioObject();
     
-    if (tptr->getPointerID()==maxPointerID) {
+    if (tptr->getComponentID()==maxPointerID) {
         maxPointerID = -1;
         
         if (pointerCount>0) {
         
             for (std::list<TuioObject*>::iterator iter=tobjList.begin(); iter != tobjList.end(); iter++) {
                 if ((*iter)->containsTuioPointer()) {
-                    int pointerID = (*iter)->getTuioPointer()->getPointerID();
+                    int pointerID = (*iter)->getTuioPointer()->getComponentID();
                     if (pointerID>maxPointerID) maxPointerID=pointerID;
                 }
             }
@@ -294,7 +294,7 @@ void TuioManager::removeTuioPointer(TuioPointer *tptr) {
             freePointerBuffer.clear();
             for (std::list<TuioPointer*>::iterator flist=freePointerList.begin(); flist != freePointerList.end(); flist++) {
                 TuioPointer *freePointer = (*flist);
-                if (freePointer->getPointerID()<=maxPointerID) freePointerBuffer.push_back(new TuioPointer(freePointer));
+                if (freePointer->getComponentID()<=maxPointerID) freePointerBuffer.push_back(new TuioPointer(freePointer));
             }
             
             freePointerList = freePointerBuffer;
@@ -306,7 +306,7 @@ void TuioManager::removeTuioPointer(TuioPointer *tptr) {
             }
             freePointerList.clear();
         }
-    } else if (tptr->getPointerID()<maxPointerID) {
+    } else if (tptr->getComponentID()<maxPointerID) {
         freePointerList.push_back(new TuioPointer(tptr));
     }
     
@@ -370,14 +370,14 @@ void TuioManager::removeTuioBounds(TuioBounds *tbnd) {
     } else removeTuioObject(tobj);
 }
 
-TuioObject* TuioManager::createTuioSymbol(unsigned short t_id, unsigned short u_id, unsigned int sym, const char *type, const char *data) {
+TuioObject* TuioManager::createTuioSymbol(unsigned short t_id, unsigned short u_id, unsigned int c_id, const char *type, const char *data) {
     
-    return addTuioSymbol(NULL, t_id,  u_id, sym, type, data);
+    return addTuioSymbol(NULL, t_id,  u_id, c_id, type, data);
 }
 
-TuioObject* TuioManager::addTuioSymbol(TuioObject *tobj, unsigned short t_id, unsigned short u_id, unsigned int sym, const char *type, const char *data) {
+TuioObject* TuioManager::addTuioSymbol(TuioObject *tobj, unsigned short t_id, unsigned short u_id, unsigned int c_id, const char *type, const char *data) {
     
-    TuioSymbol *tsym = new TuioSymbol(currentFrameTime, tobj, t_id, u_id, sym, type, data);
+    TuioSymbol *tsym = new TuioSymbol(currentFrameTime, tobj, t_id, u_id, c_id, type, data);
     return addTuioSymbol(tsym);
 }
 
@@ -393,7 +393,7 @@ TuioObject* TuioManager::addTuioSymbol(TuioSymbol *tsym) {
         else(*listener)->tuioAdd(tobj);
     }
     
-    if (verbose) std::cout << "add sym " << tobj->getSessionID() << std::endl;
+    if (verbose) std::cout << "add c_id " << tobj->getSessionID() << std::endl;
     tobjUpdate = true;
     
     return tobj;

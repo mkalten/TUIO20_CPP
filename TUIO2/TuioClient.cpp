@@ -355,6 +355,50 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
             } tgeo->setSkeleton(skeleton);
             tgeo->setSkeletonJumps(jumps);
 
+        } else if( strcmp( msg.AddressPattern(), "/tuio2/s3d" ) == 0 ) {
+
+            if (lateFrame) return;
+            int32 s_id_raw;
+            args >> s_id_raw;
+            unsigned int s_id = (unsigned int)s_id_raw;
+
+            // skeleton is a tree: float xyz triples per branch,
+            // int32 node indices mark the jump back to a previous node
+            std::list< std::list<float> > skeleton;
+            std::list<unsigned int> jumps;
+            std::list<float> *branch = NULL;
+            ReceivedMessage::const_iterator arg = msg.ArgumentsBegin();
+            arg++;
+            while (arg != msg.ArgumentsEnd()) {
+                if (arg->IsInt32()) {
+                    jumps.push_back((unsigned int)arg->AsInt32Unchecked());
+                    branch = NULL;
+                    arg++;
+                } else if (arg->TypeTag()=='f') {
+                    float xpos = arg->AsFloat(); arg++;
+                    float ypos = arg->AsFloat(); arg++;
+                    float zpos = arg->AsFloat(); arg++;
+                    if (branch == NULL) {
+                        skeleton.push_back(std::list<float>());
+                        branch = &skeleton.back();
+                    }
+                    branch->push_back(xpos);
+                    branch->push_back(ypos);
+                    branch->push_back(zpos);
+                } else arg++;
+            }
+
+            TuioObject *tobj = getFrameObject(frameSource->getSourceID(),s_id);
+            if (tobj == NULL) tobj = new TuioObject(frameTime,frameSource,s_id);
+            addFrameObject(tobj);
+
+            TuioGeometry *tgeo = tobj->getTuioGeometry();
+            if (tgeo == NULL) {
+                tgeo = new TuioGeometry(frameTime, tobj);
+                tobj->setTuioGeometry(tgeo);
+            } tgeo->setSkeleton3D(skeleton);
+            tgeo->setSkeletonJumps3D(jumps);
+
         } else if( strcmp( msg.AddressPattern(), "/tuio2/svg" ) == 0 ) {
 
             if (lateFrame) return;
@@ -519,7 +563,7 @@ void TuioClient::processOSC( const ReceivedMessage& msg ) {
                 tobj->setTuioSignal(tsig);
             } else {
                 tsig->update(frameTime);
-                tsig->setSignalID(c_id);
+                tsig->setComponentID(c_id);
                 tsig->setSignalTargets(targets);
             }
 

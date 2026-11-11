@@ -58,6 +58,15 @@ namespace TUIO2 {
 		 */
 		std::list<unsigned int> skeletonJumps;
 		/**
+		 * The skeleton branches of this TuioGeometry as 3D point lists
+		 * (flat xyz triples per branch)
+		 */
+		std::list< std::list<float> > skeleton3D;
+		/**
+		 * The node-jump markers between skeleton3D branches
+		 */
+		std::list<unsigned int> skeletonJumps3D;
+		/**
 		 * The skeleton node volumes (radii) of this TuioGeometry
 		 */
 		std::list<float> skeletonVolumes;
@@ -95,6 +104,10 @@ namespace TUIO2 {
 		std::list< std::list<TuioPoint> > getSkeleton();
 		void setSkeletonJumps(std::list<unsigned int> jumps);
 		std::list<unsigned int> getSkeletonJumps();
+		void setSkeleton3D(std::list< std::list<float> > skltn);
+		std::list< std::list<float> > getSkeleton3D();
+		void setSkeletonJumps3D(std::list<unsigned int> jumps);
+		std::list<unsigned int> getSkeletonJumps3D();
 		void setSkeletonVolumes(std::list<float> vols);
 		std::list<float> getSkeletonVolumes();
 		void setArea(std::list<TuioPoint> points);

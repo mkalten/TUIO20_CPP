@@ -34,7 +34,7 @@ namespace TUIO2 {
 	 * TuioManager *manager = new TuioManager();<br/>
 	 * ...<br/>
 	 * server->initTuioFrame(TuioTime::getSessionTime());<br/>
-	 * TuioObject *tobj = server->createTuioToken(sym,xpos,ypos,angle);<br/>
+	 * TuioObject *tobj = server->createTuioToken(c_id,xpos,ypos,angle);<br/>
 	 * TuioToken *ttok = tobj->getTuioToken();<br/>
 	 * server->commitTuioFrame();<br/>
 	 * ...<br/>
@@ -120,13 +120,13 @@ namespace TUIO2 {
          * to the TuioServer's internal list of TuioObjects
          * and the TuioToken reference is returned to the caller.
          *
-         * @param	sym	the Symbol ID  to assign
+         * @param	c_id	the Component ID to assign
          * @param	xp	the X coordinate to assign
          * @param	yp	the Y coordinate to assign
          * @param	a	the angle to assign
          * @return	reference to the created TuioToken
          */
-        TuioObject* createTuioToken(unsigned int sym, float xp, float yp, float a);
+        TuioObject* createTuioToken(unsigned int c_id, float xp, float yp, float a);
         
         /**
          * Creates a new TuioToken based on the given arguments.
@@ -136,13 +136,13 @@ namespace TUIO2 {
          *
          * @param	t_id	the Type ID to assign
          * @param	u_id	the User ID to assign
-         * @param	sym	the Symbol ID  to assign
+         * @param	c_id	the Component ID to assign
          * @param	xp	the X coordinate to assign
          * @param	yp	the Y coordinate to assign
          * @param	a	the angle to assign
          * @return	a reference to the TuioObject of the TuioToken
          */
-        TuioObject* createTuioToken(unsigned int sym, unsigned short t_id, unsigned short u_id, float xp, float yp, float a);
+        TuioObject* createTuioToken(unsigned int c_id, unsigned short t_id, unsigned short u_id, float xp, float yp, float a);
         
         /**
          * Creates a new TuioToken based on the given arguments.
@@ -153,13 +153,13 @@ namespace TUIO2 {
          * @param	tobj	the existing TuioObject
          * @param	t_id	the Type ID to assign
          * @param	u_id	the User ID to assign
-         * @param	sym	the Symbol ID to assign
+         * @param	c_id	the Component ID to assign
          * @param	xp	the X coordinate to assign
          * @param	yp	the Y coordinate to assign
          * @param	a	the angle to assign
          * @return	a reference to the TuioObject of the TuioToken
          */
-        TuioObject* addTuioToken(TuioObject *tobj, unsigned short t_id, unsigned short u_id, unsigned int sym, float xp, float yp, float a);
+        TuioObject* addTuioToken(TuioObject *tobj, unsigned short t_id, unsigned short u_id, unsigned int c_id, float xp, float yp, float a);
         
         /**
          * Creates a new TuioToken based on the given arguments.
@@ -170,13 +170,13 @@ namespace TUIO2 {
          * @param	tobj	the existing TuioObject
          * @param	t_id	the Type ID to assign
          * @param	u_id	the User ID to assign
-         * @param	sym	the Symbol ID to assign
+         * @param	c_id	the Component ID to assign
          * @param	xp	the X coordinate to assign
          * @param	yp	the Y coordinate to assign
          * @param	a	the angle to assign
          * @return	a reference to the TuioObject of the TuioToken
          */
-        TuioObject* addTuioToken(TuioObject *tobj, unsigned int sym, float xp, float yp, float a);
+        TuioObject* addTuioToken(TuioObject *tobj, unsigned int c_id, float xp, float yp, float a);
         
         /**
          * Adds the provided TuioToken to an existing TuioObject
@@ -447,12 +447,12 @@ namespace TUIO2 {
          *
          * @param	t_id	the Type ID to assign
          * @param	u_id	the User ID to assign
-         * @param	sym     the Symbol ID to assign
+         * @param	c_id     the Component ID to assign
          * @param	type	the type descriptor to assign
          * @param	data	the synbol data to assign
          * @return	a reference to the TuioObject of the TuioSymbol
          */
-        TuioObject* createTuioSymbol(unsigned short t_id, unsigned short u_id, unsigned int sym, const char *type, const char *data);
+        TuioObject* createTuioSymbol(unsigned short t_id, unsigned short u_id, unsigned int c_id, const char *type, const char *data);
         
         /**
          * Creates a new TuioSymbol based on the given arguments.
@@ -462,12 +462,12 @@ namespace TUIO2 {
          * @param	tobj	the existing TuioObject
          * @param	t_id	the Type ID to assign
          * @param	u_id	the User ID to assign
-         * @param	sym     the Symbol ID to assign
+         * @param	c_id     the Component ID to assign
          * @param	type	the type descriptor to assign
          * @param	data	the synbol data to assign
          * @return	a reference to the TuioObject of the TuioSymbol
          */
-        TuioObject* addTuioSymbol(TuioObject *tobj, unsigned short t_id, unsigned short u_id, unsigned int sym, const char *type, const char *data);
+        TuioObject* addTuioSymbol(TuioObject *tobj, unsigned short t_id, unsigned short u_id, unsigned int c_id, const char *type, const char *data);
         
         /**
          * Adds the provided TuioSymbol to an existing TuioObject

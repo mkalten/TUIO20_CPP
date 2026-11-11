@@ -278,7 +278,7 @@ void TuioServer::addTokenMessage(TuioToken *ttok) {
 	}
 
 	(*oscPacket) << osc::BeginMessage( "/tuio2/tok");
-	(*oscPacket) << (int32)ttok->getSessionID() << (int32)ttok->getTypeUserID() << (int32)ttok->getSymbolID() << xpos << ypos << angle;
+	(*oscPacket) << (int32)ttok->getSessionID() << (int32)ttok->getTypeUserID() << (int32)ttok->getComponentID() << xpos << ypos << angle;
 	(*oscPacket) << xvel << yvel << rvel << ttok->getMotionAccel() << ttok->getRotationAccel();
 	(*oscPacket) << osc::EndMessage;
 }
@@ -302,7 +302,7 @@ void TuioServer::addPointerMessage(TuioPointer *tptr) {
     }
 
     (*oscPacket) << osc::BeginMessage( "/tuio2/ptr");
-    (*oscPacket) << (int32)tptr->getSessionID() << (int32)tptr->getTypeUserID() << (int32)tptr->getPointerID();
+    (*oscPacket) << (int32)tptr->getSessionID() << (int32)tptr->getTypeUserID() << (int32)tptr->getComponentID();
     (*oscPacket) << xpos << ypos << tptr->getAngle() << tptr->getShear() << tptr->getRadius() << tptr->getPressure();
     (*oscPacket) << xvel << yvel << tptr->getPressureSpeed() << tptr->getMotionAccel() << tptr->getPressureAccel();
     (*oscPacket) << osc::EndMessage;
@@ -344,7 +344,7 @@ void TuioServer::addSymbolMessage(TuioSymbol *tsym) {
     checkBundleCapacity(SYM_MESSAGE_SIZE);
 
     (*oscPacket) << osc::BeginMessage( "/tuio2/sym");
-    (*oscPacket) << (int32)tsym->getSessionID() << (int32)tsym->getTypeUserID() << (int32)tsym->getSymbolID();
+    (*oscPacket) << (int32)tsym->getSessionID() << (int32)tsym->getTypeUserID() << (int32)tsym->getComponentID();
     (*oscPacket) << tsym->getSymbolType();
     if (tsym->isSymbolDataBlob()) {
         int bsize;
@@ -395,6 +395,21 @@ void TuioServer::addGeometryMessage(TuioGeometry *tgeo) {
             if (!first && j != jumps.end()) (*oscPacket) << (int32)(*j++);
             for (std::list<TuioPoint>::iterator p = b->begin(); p != b->end(); p++)
                 (*oscPacket) << p->getX() << p->getY();
+            first = false;
+        }
+        (*oscPacket) << osc::EndMessage;
+    }
+
+    std::list< std::list<float> > skltn3d = tgeo->getSkeleton3D();
+    std::list<unsigned int> jumps3d = tgeo->getSkeletonJumps3D();
+    if (!skltn3d.empty()) {
+        (*oscPacket) << osc::BeginMessage( "/tuio2/s3d") << (int32)tgeo->getSessionID();
+        std::list<unsigned int>::iterator j = jumps3d.begin();
+        bool first = true;
+        for (std::list< std::list<float> >::iterator b = skltn3d.begin(); b != skltn3d.end(); b++) {
+            if (!first && j != jumps3d.end()) (*oscPacket) << (int32)(*j++);
+            for (std::list<float>::iterator p = b->begin(); p != b->end(); p++)
+                (*oscPacket) << (*p);
             first = false;
         }
         (*oscPacket) << osc::EndMessage;
@@ -455,7 +470,7 @@ void TuioServer::addDataMessage(TuioData *tdat) {
 
 void TuioServer::addSignalMessage(TuioSignal *tsig) {
 
-    (*oscPacket) << osc::BeginMessage( "/tuio2/sig") << (int32)tsig->getSessionID() << (int32)tsig->getSignalID();
+    (*oscPacket) << osc::BeginMessage( "/tuio2/sig") << (int32)tsig->getSessionID() << (int32)tsig->getComponentID();
     std::list<unsigned int> targets = tsig->getSignalTargets();
     for (std::list<unsigned int>::iterator it = targets.begin(); it != targets.end(); it++)
         (*oscPacket) << (int32)(*it);
@@ -513,7 +528,7 @@ void TuioServer::addAssociationMessage(TuioAssociation *tasc) {
 void TuioServer::addToken3DMessage(TuioToken3D *ttok) {
 
     (*oscPacket) << osc::BeginMessage( "/tuio2/t3d");
-    (*oscPacket) << (int32)ttok->getSessionID() << (int32)ttok->getTypeUserID() << (int32)ttok->getSymbolID()
+    (*oscPacket) << (int32)ttok->getSessionID() << (int32)ttok->getTypeUserID() << (int32)ttok->getComponentID()
         << ttok->getX() << ttok->getY() << ttok->getZ() << ttok->getAngle()
         << ttok->getXAxis() << ttok->getYAxis() << ttok->getZAxis()
         << ttok->getXSpeed() << ttok->getYSpeed() << ttok->getZSpeed()
@@ -524,7 +539,7 @@ void TuioServer::addToken3DMessage(TuioToken3D *ttok) {
 void TuioServer::addPointer3DMessage(TuioPointer3D *tptr) {
 
     (*oscPacket) << osc::BeginMessage( "/tuio2/p3d");
-    (*oscPacket) << (int32)tptr->getSessionID() << (int32)tptr->getTypeUserID() << (int32)tptr->getPointerID()
+    (*oscPacket) << (int32)tptr->getSessionID() << (int32)tptr->getTypeUserID() << (int32)tptr->getComponentID()
         << tptr->getX() << tptr->getY() << tptr->getZ()
         << tptr->getXAxis() << tptr->getYAxis() << tptr->getZAxis() << tptr->getRadius()
         << tptr->getXSpeed() << tptr->getYSpeed() << tptr->getZSpeed()

@@ -94,7 +94,7 @@ void Tuio2Demo::drawObjects() {
 			
 			glColor3f(0.0, 0.0, 0.0);
 			glRasterPos2f(tptr->getScreenX(width),tptr->getScreenY(height));
-			sprintf(id,"%d",tptr->getPointerID());
+			sprintf(id,"%d",tptr->getComponentID());
 			drawString(id);
 		}
 	}
@@ -125,7 +125,7 @@ void Tuio2Demo::drawObjects() {
 		
 		glColor3f(1.0, 1.0, 1.0);
 		glRasterPos2f(xpos,ypos+5);
-		sprintf(id,"%d",ttok->getSymbolID());
+		sprintf(id,"%d",ttok->getComponentID());
 		drawString(id);
 	}
     tuioClient->unlockObjectList();

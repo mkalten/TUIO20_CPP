@@ -48,7 +48,7 @@ TEST(dispatcher_getters_counts) {
 	TuioObject *found = disp.getTuioObject(11);
 	CHECK(found != NULL);
 	CHECK(found->getTuioToken() != NULL);
-	CHECK_EQ(found->getTuioToken()->getSymbolID(), 5u);
+	CHECK_EQ(found->getTuioToken()->getComponentID(), 5u);
 	CHECK(disp.getTuioObject(99) == NULL);
 	CHECK(disp.getTuioToken(11) != NULL);
 	CHECK(disp.getTuioPointer(12) != NULL);

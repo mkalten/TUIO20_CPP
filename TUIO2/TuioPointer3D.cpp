@@ -20,29 +20,29 @@
 #include "TuioObject.h"
 using namespace TUIO2;
 
-TuioPointer3D::TuioPointer3D (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int pi, float xp, float yp, float zp, float xa, float ya, float za, float r):TuioComponent3D(ttime,tobj,xp,yp,zp,0.0f,xa,ya,za) {
+TuioPointer3D::TuioPointer3D (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int c_id, float xp, float yp, float zp, float xa, float ya, float za, float r):TuioComponent3D(ttime,tobj,xp,yp,zp,0.0f,xa,ya,za) {
     type_id = ti;
     user_id = ui;
-	pointer_id = pi;
+	component_id = c_id;
 	radius = r;
 }
 
-TuioPointer3D::TuioPointer3D (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int pi, float xp, float yp, float zp, float xa, float ya, float za, float r):TuioComponent3D(tobj,xp,yp,zp,0.0f,xa,ya,za) {
+TuioPointer3D::TuioPointer3D (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int c_id, float xp, float yp, float zp, float xa, float ya, float za, float r):TuioComponent3D(tobj,xp,yp,zp,0.0f,xa,ya,za) {
     type_id = ti;
     user_id = ui;
-	pointer_id = pi;
+	component_id = c_id;
 	radius = r;
 }
 
 TuioPointer3D::TuioPointer3D (TuioPointer3D *tptr):TuioComponent3D(tptr->getTuioTime(),tptr->getContainingTuioObject(),tptr->getX(),tptr->getY(),tptr->getZ(),0.0f,tptr->getXAxis(),tptr->getYAxis(),tptr->getZAxis()) {
     type_id = tptr->getTypeID();
     user_id = tptr->getUserID();
-	pointer_id = tptr->getPointerID();
+	component_id = tptr->getComponentID();
 	radius = tptr->getRadius();
 }
 
-unsigned int TuioPointer3D::getPointerID() const{
-	return pointer_id;
+unsigned int TuioPointer3D::getComponentID() const{
+	return component_id;
 }
 
 unsigned short TuioPointer3D::getTypeID() const{

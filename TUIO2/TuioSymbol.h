@@ -27,7 +27,7 @@
 namespace TUIO2 {
 
 	/**
-     * The TuioSymbol class encapsulates /tuio2/sym TUIO symbol.
+     * The TuioSymbol class encapsulates /tuio2/c_id TUIO symbol.
 	 *
 	 * @author Martin Kaltenbrunner
 	 * @version 2.0.b1
@@ -42,7 +42,7 @@ namespace TUIO2 {
         /**
          * The individual symbol ID number that is assigned to each TuioToken.
          */
-        unsigned int symbol_id;
+        unsigned int component_id;
         /**
          * The symbol type ID that is assigned to each TuioToken.
          */
@@ -83,30 +83,30 @@ namespace TUIO2 {
 	public:
         /**
          * This constructor takes a TuioTime argument and assigns it along with the provided
-         * Session ID, Type ID, User ID and Symbol ID as well as the Symbol type and data.
+         * Session ID, Type ID, User ID and Component ID as well as the Symbol type and data.
          *
          * @param	ttime	the TuioTime to assign
          * @param	tobj	the TuioObject to assign
          * @param	ti	the Type ID  to assign
          * @param	ui	the User ID  to assign
-         * @param	sym	the Symbol ID  to assign
+         * @param	c_id	the Component ID to assign
          * @param	type	the symbol type descriptor
          * @param	data	the symbol data to assign
          */
-		TuioSymbol (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, const char *type, const char *data);
+		TuioSymbol (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int c_id, const char *type, const char *data);
 
         /**
-         * This constructor assigns the provided Session ID, Type ID, User ID and Symbol ID
+         * This constructor assigns the provided Session ID, Type ID, User ID and Component ID
          * as well as the Symbol type and data.
          *
          * @param	tobj	the TuioObject to assign
          * @param	ti	the Type ID  to assign
          * @param	ui	the User ID  to assign
-         * @param	sym	the Symbol ID  to assign
+         * @param	c_id	the Component ID to assign
          * @param	type	the symbol type descriptor
          * @param	data	the symbol data to assign
          */
-        TuioSymbol (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, const char *type, const char *data);
+        TuioSymbol (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int c_id, const char *type, const char *data);
 		
 		/**
 		 * This constructor takes a TuioSymbol argument and sets its attributes
@@ -117,10 +117,10 @@ namespace TUIO2 {
 		TuioSymbol (TuioSymbol *tsym);
         
         /**
-         * Returns the Symbol ID of this TuioSymbol.
-         * @return	the Symbol ID of this TuioSymbol
+         * Returns the Component ID of this TuioSymbol.
+         * @return	the Component ID of this TuioSymbol
          */
-        unsigned int getSymbolID() const;
+        unsigned int getComponentID() const;
         
         /**
          * Returns the Type ID of this TuioSymbol.
@@ -149,6 +149,12 @@ namespace TUIO2 {
         /**
          * Returns the Type string of this TuioSymbol.
          * @return	the Type string of this TuioSymbol
+         */
+        /**
+         * Returns the symbol group of this TuioSymbol,
+         * corresponding to the group attribute of the SYM message.
+         *
+         * @return	the symbol group
          */
         const char* getSymbolType() const;
         

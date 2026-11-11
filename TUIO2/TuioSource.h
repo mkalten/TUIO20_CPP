@@ -77,7 +77,7 @@ namespace TUIO2 {
         /**
          * Sets the ID, name and address of the TUIO source
          *
-         * @param	src_name	the name of the TUIO source
+         * @param	sid		the source ID to assign
          */
         TuioSource(std::string src_name) {
             source_id = 0;
@@ -90,7 +90,7 @@ namespace TUIO2 {
         /**
          * Sets the ID, name and address of the TUIO source
          *
-         * @param	src_name	the name of the TUIO source
+         * @param	sid		the source ID to assign
          */
         TuioSource(unsigned int sid, std::string src_string, unsigned int dim) {
             source_id = sid;
@@ -101,7 +101,7 @@ namespace TUIO2 {
         /**
          * Sets the ID, name and address of the TUIO source
          *
-         * @param	src_name	the name of the TUIO source
+         * @param	sid		the source ID to assign
          * @param	src_inst	the instance of the TUIO source
          * @param	src_addr	the address of the TUIO source
          */
@@ -116,7 +116,7 @@ namespace TUIO2 {
          * Sets the ID, name and address of the TUIO source
          *
          * @param	src_id		the ID of the TUIO source
-         * @param	src_name	the name of the TUIO source
+         * @param	sid		the source ID to assign
          * @param	src_inst	the instance of the TUIO source
          * @param	src_addr	the address of the TUIO source
          */

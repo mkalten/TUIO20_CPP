@@ -105,6 +105,7 @@ namespace TUIO2 {
 
 		/**
 		 * Returns the Z coordinate of this component.
+		 * The Z-axis values are relative to the sensor height.
 		 * @return	the Z coordinate
 		 */
 		float getZ() const;

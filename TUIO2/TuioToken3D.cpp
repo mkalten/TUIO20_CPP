@@ -20,26 +20,26 @@
 #include "TuioObject.h"
 using namespace TUIO2;
 
-TuioToken3D::TuioToken3D (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, float xp, float yp, float zp, float a, float xa, float ya, float za):TuioComponent3D(ttime,tobj,xp,yp,zp,a,xa,ya,za) {
+TuioToken3D::TuioToken3D (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int c_id, float xp, float yp, float zp, float a, float xa, float ya, float za):TuioComponent3D(ttime,tobj,xp,yp,zp,a,xa,ya,za) {
     type_id = ti;
     user_id = ui;
-	symbol_id = sym;
+	component_id = c_id;
 }
 
-TuioToken3D::TuioToken3D (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, float xp, float yp, float zp, float a, float xa, float ya, float za):TuioComponent3D(tobj,xp,yp,zp,a,xa,ya,za) {
+TuioToken3D::TuioToken3D (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int c_id, float xp, float yp, float zp, float a, float xa, float ya, float za):TuioComponent3D(tobj,xp,yp,zp,a,xa,ya,za) {
     type_id = ti;
     user_id = ui;
-	symbol_id = sym;
+	component_id = c_id;
 }
 
 TuioToken3D::TuioToken3D (TuioToken3D *ttok):TuioComponent3D(ttok->getTuioTime(),ttok->getContainingTuioObject(),ttok->getX(),ttok->getY(),ttok->getZ(),ttok->getAngle(),ttok->getXAxis(),ttok->getYAxis(),ttok->getZAxis()) {
     type_id = ttok->getTypeID();
     user_id = ttok->getUserID();
-	symbol_id = ttok->getSymbolID();
+	component_id = ttok->getComponentID();
 }
 
-unsigned int TuioToken3D::getSymbolID() const{
-	return symbol_id;
+unsigned int TuioToken3D::getComponentID() const{
+	return component_id;
 }
 
 unsigned short TuioToken3D::getTypeID() const{

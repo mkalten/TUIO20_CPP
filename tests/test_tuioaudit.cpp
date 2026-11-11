@@ -402,7 +402,7 @@ TEST(tuioaudit_sig_targets) {
 
 	TuioObject *tobj = client.getTuioObject(4);
 	CHECK(tobj != NULL && tobj->getTuioSignal() != NULL);
-	CHECK_EQ(tobj->getTuioSignal()->getSignalID(), 7);
+	CHECK_EQ(tobj->getTuioSignal()->getComponentID(), 7);
 	std::list<unsigned int> targets = tobj->getTuioSignal()->getSignalTargets();
 	CHECK_EQ(targets.size(), 3);
 	CHECK_EQ(targets.front(), 1);
@@ -541,7 +541,7 @@ TEST(tuioaudit_t3d_token) {
 	CHECK_NEAR(ttok->getZAxis(), 1.0, 1e-06);
 	CHECK_EQ(ttok->getTypeID(), 2);
 	CHECK_EQ(ttok->getUserID(), 3);
-	CHECK_EQ(ttok->getSymbolID(), 5);
+	CHECK_EQ(ttok->getComponentID(), 5);
 }
 
 // /tuio2/p3d decodes z-position, direction vector and radius
@@ -568,7 +568,7 @@ TEST(tuioaudit_p3d_pointer) {
 	CHECK_NEAR(tptr->getZ(), 0.1, 1e-06);
 	CHECK_NEAR(tptr->getXAxis(), 1.0, 1e-06);
 	CHECK_NEAR(tptr->getRadius(), 0.02, 1e-06);
-	CHECK_EQ(tptr->getPointerID(), 3);
+	CHECK_EQ(tptr->getComponentID(), 3);
 }
 
 // /tuio2/b3d decodes z-position, axis, depth and volume
@@ -670,7 +670,7 @@ TEST(tuioaudit_roundtrip_content) {
 	CHECK_EQ(rtobj->getTuioControl()->getControls().size(), 2);
 	CHECK_EQ(std::string(rtobj->getTuioData()->getMimeType()), "text/plain");
 	CHECK_EQ(std::string(rtobj->getTuioData()->getDataContent()), "hello");
-	CHECK_EQ(rtobj->getTuioSignal()->getSignalID(), 7);
+	CHECK_EQ(rtobj->getTuioSignal()->getComponentID(), 7);
 	CHECK_EQ(rtobj->getTuioSignal()->getSignalTargets().size(), 2);
 }
 
@@ -1159,6 +1159,48 @@ TEST(tuioaudit_component_state_commit) {
 	TuioToken *ttok = tobj->getTuioToken();
 	CHECK(ttok != NULL);
 	CHECK(tobj->containsNewTuioToken() == false);
+}
+
+// s3d: 3D skeleton with xyz triples + node jumps
+TEST(tuioaudit_s3d_skeleton) {
+	StubReceiver stub;
+	TuioClient client(&stub);
+	RecordingListener listener;
+	client.addTuioListener(&listener);
+
+	char buffer[4096];
+	OutboundPacketStream bundle(buffer, sizeof(buffer));
+	bundle << BeginBundleImmediate
+		<< BeginMessage("/tuio2/frm") << (int32)1 << TimeTag(1) << (int32)8191 << "f@x" << EndMessage
+		<< BeginMessage("/tuio2/bnd") << (int32)7 << 0.5f << 0.5f << 0.0f << 0.1f << 0.1f << 0.01f << EndMessage
+		<< BeginMessage("/tuio2/s3d") << (int32)7
+			<< 0.1f << 0.2f << 0.3f  << 0.4f << 0.5f << 0.6f
+			<< (int32)0
+			<< 0.7f << 0.8f << 0.9f
+		<< EndMessage
+		<< BeginMessage("/tuio2/alv") << (int32)7 << EndMessage
+	<< EndBundle;
+	stub.ProcessPacket(bundle.Data(), (int)bundle.Size(), IpEndpointName());
+
+	TuioObject *tobj = client.getTuioObject(7);
+	CHECK(tobj != NULL);
+	TuioGeometry *tgeo = tobj->getTuioGeometry();
+	CHECK(tgeo != NULL);
+	std::list< std::list<float> > sk = tgeo->getSkeleton3D();
+	CHECK_EQ(2, (int)sk.size());
+	CHECK_EQ(2, (int)sk.front().size() / 3);  // first branch: 2 points
+	CHECK_NEAR(0.3f,sk.front().front() + 0.2f,0.001f);  // z of first point
+	std::list<unsigned int> jumps = tgeo->getSkeletonJumps3D();
+	CHECK_EQ(1, (int)jumps.size());
+}
+
+// link ID packs output<<16|input per spec; the association base
+// provides static port helpers
+TEST(tuioaudit_link_port_split) {
+	unsigned int l_id = TuioAssociation::setLinkPort(0x1234, 0xABCD);
+	CHECK(TuioAssociation::getLinkOutputPort(l_id) == 0x1234);
+	CHECK(TuioAssociation::getLinkInputPort(l_id) == 0xABCD);
+	CHECK(TuioAssociation::getLinkOutputPort(l_id) + (TuioAssociation::getLinkInputPort(l_id)<<16) == 0xABCD1234u);
 }
 
 // NOTE: sendFullTuioBundle currently emits only token messages (known limitation)

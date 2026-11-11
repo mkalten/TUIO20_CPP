@@ -20,18 +20,18 @@
 #include "TuioObject.h"
 using namespace TUIO2;
 
-TuioSignal::TuioSignal (TuioTime ttime, TuioObject *tobj, unsigned int sid, std::list<unsigned int> trgts):TuioContent(ttime,tobj) {
-	signal_id = sid;
+TuioSignal::TuioSignal (TuioTime ttime, TuioObject *tobj, unsigned int c_id, std::list<unsigned int> trgts):TuioContent(ttime,tobj) {
+	component_id = c_id;
 	targets = trgts;
 }
 
-TuioSignal::TuioSignal (TuioObject *tobj, unsigned int sid, std::list<unsigned int> trgts):TuioContent(tobj) {
-	signal_id = sid;
+TuioSignal::TuioSignal (TuioObject *tobj, unsigned int c_id, std::list<unsigned int> trgts):TuioContent(tobj) {
+	component_id = c_id;
 	targets = trgts;
 }
 
 TuioSignal::TuioSignal (TuioSignal *tsig):TuioContent(tsig->getTuioTime(),tsig->getContainingTuioObject()) {
-	signal_id = tsig->getSignalID();
+	component_id = tsig->getComponentID();
 	targets = tsig->getSignalTargets();
 }
 
@@ -40,12 +40,12 @@ void TuioSignal::update(TuioTime ttime) {
 }
 
 
-unsigned int TuioSignal::getSignalID() const {
-	return signal_id;
+unsigned int TuioSignal::getComponentID() const {
+	return component_id;
 }
 
-void TuioSignal::setSignalID(unsigned int sid) {
-	signal_id = sid;
+void TuioSignal::setComponentID(unsigned int c_id) {
+	component_id = c_id;
 }
 
 std::list<unsigned int> TuioSignal::getSignalTargets() {

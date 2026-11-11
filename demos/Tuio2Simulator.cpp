@@ -59,7 +59,7 @@ void Tuio2Simulator::drawFrame() {
 
 			glColor3f(0.0, 0.0, 0.0);
 			glRasterPos2f(tptr->getScreenX(width),tptr->getScreenY(height));
-			sprintf(id,"%d",tptr->getPointerID());
+			sprintf(id,"%d",tptr->getComponentID());
 			drawString(id);
 		}
 	}

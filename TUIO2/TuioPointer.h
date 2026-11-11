@@ -36,7 +36,7 @@ namespace TUIO2 {
 		/**
 		 * The individual pointer ID number that is assigned to each TuioPointer.
 		 */ 
-		unsigned int pointer_id;
+		unsigned int component_id;
         
         /**
          * The pointer type ID that is assigned to each TuioPointer.
@@ -84,7 +84,7 @@ namespace TUIO2 {
 		 * @param	tobj	the TuioObject to assign
          * @param	ti	the Type ID  to assign
          * @param	ui	the User ID  to assign
-		 * @param	pi	the Pointer ID  to assign
+		 * @param	c_id	the Component ID  to assign
 		 * @param	xp	the X coordinate to assign
 		 * @param	yp	the Y coordinate to assign
          * @param	a	the angle to assign
@@ -92,7 +92,7 @@ namespace TUIO2 {
          * @param	r	the radius to assign
          * @param	p	the pressure to assign
 		 */
-		TuioPointer (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int pi, float xp, float yp, float a, float sa, float r, float p);
+		TuioPointer (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int c_id, float xp, float yp, float a, float sa, float r, float p);
 
 		/**
 		 * This constructor takes the provided Session ID, Pointer ID, X and Y coordinate
@@ -101,7 +101,7 @@ namespace TUIO2 {
 		 * @param	tobj	the TuioObject to assign
          * @param	ti	the Type ID  to assign
          * @param	ui	the User ID  to assign
-         * @param	pi	the Pointer ID  to assign
+         * @param	c_id	the Component ID  to assign
 		 * @param	xp	the X coordinate to assign
 		 * @param	yp	the Y coordinate to assign
          * @param	a	the angle to assign
@@ -109,7 +109,7 @@ namespace TUIO2 {
          * @param	r	the radius to assign
          * @param	p	the pressure to assign
 		 */
-		TuioPointer (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int pi, float xp, float yp, float a, float sa, float r, float p);
+		TuioPointer (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int c_id, float xp, float yp, float a, float sa, float r, float p);
         
         
         /**
@@ -117,7 +117,7 @@ namespace TUIO2 {
          * and assigs these values to the newly created TuioPointer.
          *
          * @param	tobj	the TuioObject to assign
-         * @param	pi	the Pointer ID  to assign
+         * @param	c_id	the Component ID  to assign
          * @param	xp	the X coordinate to assign
          * @param	yp	the Y coordinate to assign
          * @param	a	the angle to assign
@@ -125,7 +125,7 @@ namespace TUIO2 {
          * @param	r	the radius to assign
          * @param	p	the pressure to assign
          */
-        TuioPointer (TuioObject *tobj, unsigned int pi, float xp, float yp, float a, float sa, float r, float p);
+        TuioPointer (TuioObject *tobj, unsigned int c_id, float xp, float yp, float a, float sa, float r, float p);
 		
 		/**
 		 * This constructor takes the atttibutes of the provided TuioPointer 
@@ -208,10 +208,10 @@ namespace TUIO2 {
 		void stop (TuioTime ttime);
 
 		/**
-		 * Returns the Pointer ID of this TuioPointer.
-		 * @return	the Pointer ID of this TuioPointer
+		 * Returns the Component ID of this TuioPointer.
+		 * @return	the Component ID of this TuioPointer
 		 */
-		unsigned int getPointerID() const;
+		unsigned int getComponentID() const;
         
         /**
          * Returns the Type ID of this TuioPointer.
@@ -254,6 +254,14 @@ namespace TUIO2 {
          * @return	the Pressure of this TuioPointer
          */
         float getPressure() const;
+
+        /**
+         * Tests if this TuioPointer is currently hovering.
+         * A negative pressure value indicates a hovering pointer.
+         *
+         * @return	true if the pointer is hovering
+         */
+        bool isHover() const { return pressure < 0; };
         
         /**
          * Returns the pressure speed of this TuioPointer.

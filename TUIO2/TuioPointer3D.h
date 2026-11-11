@@ -37,7 +37,7 @@ namespace TUIO2 {
 		/**
 		 * The pointer ID that is assigned to each TuioPointer3D
 		 */
-		unsigned int pointer_id;
+		unsigned int component_id;
 		/**
 		 * The type ID that is assigned to each TuioPointer3D
 		 */
@@ -57,14 +57,14 @@ namespace TUIO2 {
 		 * the Type/User/Pointer IDs as well as the initial position,
 		 * direction vector and radius.
 		 */
-		TuioPointer3D (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int pi, float xp, float yp, float zp, float xa, float ya, float za, float r);
+		TuioPointer3D (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int c_id, float xp, float yp, float zp, float xa, float ya, float za, float r);
 
 		/**
 		 * This constructor takes a TuioObject argument,
 		 * the Type/User/Pointer IDs as well as the initial position,
 		 * direction vector and radius.
 		 */
-		TuioPointer3D (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int pi, float xp, float yp, float zp, float xa, float ya, float za, float r);
+		TuioPointer3D (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int c_id, float xp, float yp, float zp, float xa, float ya, float za, float r);
 
 		/**
 		 * This constructor takes a TuioPointer3D argument and copies
@@ -72,7 +72,7 @@ namespace TUIO2 {
 		 */
 		TuioPointer3D (TuioPointer3D *tptr);
 
-		unsigned int getPointerID() const;
+		unsigned int getComponentID() const;
 		unsigned short getTypeID() const;
 		unsigned short getUserID() const;
 		unsigned int getTypeUserID() const;
@@ -83,6 +83,7 @@ namespace TUIO2 {
 		 * @return	the pointer radius
 		 */
 		float getRadius() const;
+
 	};
 }
 #endif /* INCLUDED_TUIOPOINTER3D_H */

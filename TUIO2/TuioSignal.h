@@ -37,7 +37,7 @@ namespace TUIO2 {
 		/**
 		 * The signal type ID of this TuioSignal
 		 */
-		unsigned int signal_id;
+		unsigned int component_id;
 		/**
 		 * The session IDs of the signal target components
 		 */
@@ -46,24 +46,24 @@ namespace TUIO2 {
 	public:
 		/**
 		 * This constructor takes a TuioTime argument, a TuioObject argument
-		 * as well as the signal ID and target session IDs of this TuioSignal.
+		 * as well as the Component ID and target session IDs of this TuioSignal.
 		 *
 		 * @param	ttime	the TuioTime to assign
 		 * @param	tobj	the TuioObject to assign
-		 * @param	sid	the signal ID to assign
+		 * @param	c_id	the Component ID to assign
 		 * @param	trgts	the target session IDs to assign
 		 */
-		TuioSignal (TuioTime ttime, TuioObject *tobj, unsigned int sid, std::list<unsigned int> trgts);
+		TuioSignal (TuioTime ttime, TuioObject *tobj, unsigned int c_id, std::list<unsigned int> trgts);
 
 		/**
 		 * This constructor takes a TuioObject argument as well as the
 		 * signal ID and target session IDs of this TuioSignal.
 		 *
 		 * @param	tobj	the TuioObject to assign
-		 * @param	sid	the signal ID to assign
+		 * @param	c_id	the Component ID to assign
 		 * @param	trgts	the target session IDs to assign
 		 */
-		TuioSignal (TuioObject *tobj, unsigned int sid, std::list<unsigned int> trgts);
+		TuioSignal (TuioObject *tobj, unsigned int c_id, std::list<unsigned int> trgts);
 
 		/**
 		 * This constructor takes a TuioSignal argument and copies
@@ -82,18 +82,18 @@ namespace TUIO2 {
 
 
 		/**
-		 * Returns the signal ID of this TuioSignal.
+		 * Returns the Component ID of this TuioSignal.
 		 *
 		 * @return	the signal ID
 		 */
-		unsigned int getSignalID() const;
+		unsigned int getComponentID() const;
 
 		/**
-		 * Assigns the signal ID of this TuioSignal.
+		 * Assigns the Component ID of this TuioSignal.
 		 *
-		 * @param	sid	the signal ID to assign
+		 * @param	c_id	the Component ID to assign
 		 */
-		void setSignalID(unsigned int sid);
+		void setComponentID(unsigned int c_id);
 
 		/**
 		 * Returns the target session IDs of this TuioSignal.

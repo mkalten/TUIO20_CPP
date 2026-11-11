@@ -67,7 +67,7 @@ TEST(tuiotoken_fields) {
 	TuioToken *ttok = new TuioToken(TuioTime(0,0), tobj, 2, 3, 5, 0.3f, 0.4f, 0.5f);
 	CHECK_EQ(ttok->getTypeID(), 2);
 	CHECK_EQ(ttok->getUserID(), 3);
-	CHECK_EQ(ttok->getSymbolID(), 5u);
+	CHECK_EQ(ttok->getComponentID(), 5u);
 	CHECK_NEAR(ttok->getX(), 0.3, 1e-6);
 	CHECK_NEAR(ttok->getY(), 0.4, 1e-6);
 	CHECK_NEAR(ttok->getAngle(), 0.5, 1e-6);
@@ -102,7 +102,7 @@ TEST(tuiosymbol_fields) {
 	TuioSymbol *tsym = new TuioSymbol(TuioTime(0,0), tobj, 1, 1, 9, "tuio2-type", "payload");
 	CHECK_EQ(tsym->getTypeID(), 1);
 	CHECK_EQ(tsym->getUserID(), 1);
-	CHECK_EQ(tsym->getSymbolID(), 9u);
+	CHECK_EQ(tsym->getComponentID(), 9u);
 	CHECK_EQ(std::string(tsym->getSymbolType()), "tuio2-type");
 	CHECK_EQ(std::string(tsym->getSymbolData()), "payload");
 	delete tobj;

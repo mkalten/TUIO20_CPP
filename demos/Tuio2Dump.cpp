@@ -25,7 +25,7 @@ void Tuio2Dump::tuioAdd(TuioObject *tobj) {
 	if(tobj->containsNewTuioPointer()) std::cout << "add ptr " << tobj->getTuioPointer()->getSessionID() << std::endl;
 	if(tobj->containsNewTuioBounds()) std::cout << "add bnd " << tobj->getTuioBounds()->getSessionID() << std::endl;
 	if(tobj->containsNewTuioSymbol()) std::cout << "add sym " << tobj->getTuioSymbol()->getSessionID() << std::endl;
-	//std::cout << "add obj " << tobj->getSymbolID() << " (" << tobj->getSessionID() << "/"<<  tobj->getTuioSourceID() << ") "<< tobj->getX() << " " << tobj->getY() << " " << tobj->getAngle() << std::endl;
+	//std::cout << "add obj " << tobj->getComponentID() << " (" << tobj->getSessionID() << "/"<<  tobj->getTuioSourceID() << ") "<< tobj->getX() << " " << tobj->getY() << " " << tobj->getAngle() << std::endl;
 	std::cout << std::flush;
 }
 
@@ -34,7 +34,7 @@ void Tuio2Dump::tuioUpdate(TuioObject *tobj) {
 	if(tobj->containsTuioPointer()) std::cout << "set ptr " << tobj->getTuioPointer()->getSessionID() << std::endl;
 	if(tobj->containsTuioBounds()) std::cout << "set bnd " << tobj->getTuioBounds()->getSessionID() << std::endl;
 	if(tobj->containsTuioSymbol()) std::cout << "set sym " << tobj->getTuioSymbol()->getSessionID() << std::endl;
-	//std::cout << "set obj " << tobj->getSymbolID() << " (" << tobj->getSessionID() << "/"<<  tobj->getTuioSourceID() << ") "<< tobj->getX() << " " << tobj->getY() << " " << tobj->getAngle() << " " << tobj->getMotionSpeed() << " " << tobj->getRotationSpeed() << " " << tobj->getMotionAccel() << " " << tobj->getRotationAccel() << std::endl;	
+	//std::cout << "set obj " << tobj->getComponentID() << " (" << tobj->getSessionID() << "/"<<  tobj->getTuioSourceID() << ") "<< tobj->getX() << " " << tobj->getY() << " " << tobj->getAngle() << " " << tobj->getMotionSpeed() << " " << tobj->getRotationSpeed() << " " << tobj->getMotionAccel() << " " << tobj->getRotationAccel() << std::endl;	
 	std::cout << std::flush;
 }
 
@@ -43,7 +43,7 @@ void Tuio2Dump::tuioRemove(TuioObject *tobj) {
 	if(tobj->containsTuioPointer()) std::cout << "del ptr " << tobj->getSessionID() << std::endl;
 	if(tobj->containsTuioBounds()) std::cout << "del bnd " << tobj->getSessionID() << std::endl;
 	if(tobj->containsTuioSymbol()) std::cout << "del sym " << tobj->getSessionID() << std::endl;
-	//std::cout << "del obj " << tobj->getSymbolID() << " (" << tobj->getSessionID() << "/"<<  tobj->getTuioSourceID() << ")" << std::endl;
+	//std::cout << "del obj " << tobj->getComponentID() << " (" << tobj->getSessionID() << "/"<<  tobj->getTuioSourceID() << ")" << std::endl;
 	std::cout << std::flush;
 }
 

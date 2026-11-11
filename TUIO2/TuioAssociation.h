@@ -56,6 +56,34 @@ namespace TUIO2 {
 		 * @param	ttime	the TuioTime to assign
 		 */
 		virtual void update(TuioTime ttime) { TuioContent::update(ttime); }
+
+		/**
+		 * A Link ID is comprised of two 16bit unsigned integer values
+		 * embedded into a single 32bit integer value: the output port
+		 * within the initial two bytes and the input port of the connected
+		 * component within the last two bytes.
+		 *
+		 * @param	l_id	the Link ID to decode
+		 * @return	the output port of the provided Link ID
+		 */
+		static unsigned short getLinkOutputPort(unsigned int l_id) { return (unsigned short)(l_id>>16); };
+
+		/**
+		 * Returns the input port of the provided Link ID.
+		 *
+		 * @param	l_id	the Link ID to decode
+		 * @return	the input port of the provided Link ID
+		 */
+		static unsigned short getLinkInputPort(unsigned int l_id) { return (unsigned short)(l_id&0xFFFF); };
+
+		/**
+		 * Encodes a Link ID from the provided output and input ports.
+		 *
+		 * @param	output	the output port to encode
+		 * @param	input	the input port to encode
+		 * @return	the combined Link ID
+		 */
+		static unsigned int setLinkPort(unsigned short output, unsigned short input) { return (((unsigned int)output)<<16)|((unsigned int)input); };
 	};
 }
 #endif /* INCLUDED_TUIOASSOCIATION_H */

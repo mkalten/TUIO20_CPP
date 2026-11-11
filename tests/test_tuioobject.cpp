@@ -14,7 +14,7 @@ TEST(tuioobject_state_and_components) {
 
 	tobj->setTuioToken(new TuioToken(TuioTime(0,0), tobj, 0, 0, 5, 0.3f, 0.4f, 0.5f));
 	CHECK(tobj->getTuioToken() != NULL);
-	CHECK_EQ(tobj->getTuioToken()->getSymbolID(), 5u);
+	CHECK_EQ(tobj->getTuioToken()->getComponentID(), 5u);
 	CHECK_NEAR(tobj->getTuioToken()->getX(), 0.3, 1e-6);
 	CHECK_EQ((int)tobj->getTuioState(), TUIO_ADDED);
 

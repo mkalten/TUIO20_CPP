@@ -20,34 +20,34 @@
 
 using namespace TUIO2;
 
-TuioToken::TuioToken (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, float xp, float yp, float a):TuioComponent(ttime, tobj, xp, yp,a) {
+TuioToken::TuioToken (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int c_id, float xp, float yp, float a):TuioComponent(ttime, tobj, xp, yp,a) {
     type_id = ti;
     user_id = ui;
-    symbol_id = sym;
+    component_id = c_id;
 }
 
-TuioToken::TuioToken (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, float xp, float yp, float a):TuioComponent(tobj, xp, yp, a) {
+TuioToken::TuioToken (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int c_id, float xp, float yp, float a):TuioComponent(tobj, xp, yp, a) {
     type_id = ti;
     user_id = ui;
-    symbol_id = sym;
+    component_id = c_id;
 }
 
-TuioToken::TuioToken (TuioObject *tobj, unsigned int sym, float xp, float yp, float a):TuioComponent(tobj, xp, yp, a) {
+TuioToken::TuioToken (TuioObject *tobj, unsigned int c_id, float xp, float yp, float a):TuioComponent(tobj, xp, yp, a) {
     type_id = 0;
     user_id = 0;
-    symbol_id = sym;
+    component_id = c_id;
 }
 
 TuioToken::TuioToken (TuioToken *ttok):TuioComponent(ttok) {
-	symbol_id = ttok->getSymbolID();
+	component_id = ttok->getComponentID();
 }
 
 void TuioToken::stop (TuioTime ttime) {
 	update(ttime,xpos,ypos,angle);
 }
 
-unsigned int TuioToken::getSymbolID() const{
-	return symbol_id;
+unsigned int TuioToken::getComponentID() const{
+	return component_id;
 }
 
 unsigned short TuioToken::getTypeID() const{

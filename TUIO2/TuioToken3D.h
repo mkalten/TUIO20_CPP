@@ -37,7 +37,7 @@ namespace TUIO2 {
 		/**
 		 * The symbol ID that is assigned to each TuioToken3D
 		 */
-		unsigned int symbol_id;
+		unsigned int component_id;
 		/**
 		 * The type ID that is assigned to each TuioToken3D
 		 */
@@ -53,14 +53,14 @@ namespace TUIO2 {
 		 * the Type/User/Symbol IDs as well as the initial position, angle
 		 * and orientation axis.
 		 */
-		TuioToken3D (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, float xp, float yp, float zp, float a, float xa, float ya, float za);
+		TuioToken3D (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int c_id, float xp, float yp, float zp, float a, float xa, float ya, float za);
 
 		/**
 		 * This constructor takes a TuioObject argument,
 		 * the Type/User/Symbol IDs as well as the initial position, angle
 		 * and orientation axis.
 		 */
-		TuioToken3D (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, float xp, float yp, float zp, float a, float xa, float ya, float za);
+		TuioToken3D (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int c_id, float xp, float yp, float zp, float a, float xa, float ya, float za);
 
 		/**
 		 * This constructor takes a TuioToken3D argument and copies
@@ -69,10 +69,10 @@ namespace TUIO2 {
 		TuioToken3D (TuioToken3D *ttok);
 
 		/**
-		 * Returns the Symbol ID of this TuioToken3D.
-		 * @return	the Symbol ID
+		 * Returns the Component ID of this TuioToken3D.
+		 * @return	the Component ID
 		 */
-		unsigned int getSymbolID() const;
+		unsigned int getComponentID() const;
 
 		/**
 		 * Returns the Type ID of this TuioToken3D.
@@ -82,7 +82,7 @@ namespace TUIO2 {
 
 		/**
 		 * Returns the User ID of this TuioToken3D.
-		 * @return	the User ID
+		 * @return	the User ID (0 encodes the "no user" state)
 		 */
 		unsigned short getUserID() const;
 

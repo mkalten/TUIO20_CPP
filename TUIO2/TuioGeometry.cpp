@@ -34,6 +34,8 @@ TuioGeometry::TuioGeometry (TuioGeometry *tgeo):TuioContent(tgeo->getTuioTime(),
 	innerContours = tgeo->getInnerContours();
 	skeleton = tgeo->getSkeleton();
 	skeletonJumps = tgeo->getSkeletonJumps();
+	skeleton3D = tgeo->getSkeleton3D();
+	skeletonJumps3D = tgeo->getSkeletonJumps3D();
 	skeletonVolumes = tgeo->getSkeletonVolumes();
 	areaPoints = tgeo->getArea();
 	areaWidths = tgeo->getAreaWidths();
@@ -86,6 +88,18 @@ std::list<unsigned int> TuioGeometry::getSkeletonJumps() {
 	return skeletonJumps;
 }
 
+void TuioGeometry::setSkeleton3D(std::list< std::list<float> > skltn) {
+	skeleton3D = skltn;
+}
+std::list< std::list<float> > TuioGeometry::getSkeleton3D() {
+	return skeleton3D;
+}
+void TuioGeometry::setSkeletonJumps3D(std::list<unsigned int> jumps) {
+	skeletonJumps3D = jumps;
+}
+std::list<unsigned int> TuioGeometry::getSkeletonJumps3D() {
+	return skeletonJumps3D;
+}
 void TuioGeometry::setSkeletonVolumes(std::list<float> vols) {
 	skeletonVolumes = vols;
 }

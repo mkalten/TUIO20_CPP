@@ -21,24 +21,24 @@
 
 using namespace TUIO2;
 
-TuioSymbol::TuioSymbol (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, const char *type, const char *data):TuioContent(ttime,tobj) {
+TuioSymbol::TuioSymbol (TuioTime ttime, TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int c_id, const char *type, const char *data):TuioContent(ttime,tobj) {
     currentTime = ttime;
     startTime = currentTime;
     type_id = ti;
     user_id = ui;
-    symbol_id = sym;
+    component_id = c_id;
     symbol_type = std::string(type);
     symbol_data = std::string(data);
     symbol_is_blob = false;
     state = TUIO_ADDED;
 }
 	
-TuioSymbol::TuioSymbol (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int sym, const char *type, const char *data):TuioContent(tobj) {
+TuioSymbol::TuioSymbol (TuioObject *tobj, unsigned short ti, unsigned short ui, unsigned int c_id, const char *type, const char *data):TuioContent(tobj) {
     currentTime = TuioTime::getSystemTime();
     startTime = currentTime;
     type_id = ti;
     user_id = ui;
-    symbol_id = sym;
+    component_id = c_id;
     symbol_type = std::string(type);
     symbol_data = std::string(data);
     symbol_is_blob = false;
@@ -51,7 +51,7 @@ TuioSymbol::TuioSymbol (TuioSymbol *tsym):TuioContent(tsym->getTuioTime(),tsym->
     session_id = tsym->getSessionID();
     type_id = tsym->getTypeID();
     user_id = tsym->getUserID();
-    symbol_id = tsym->getSymbolID();
+    component_id = tsym->getComponentID();
     symbol_type = tsym->getSymbolType();
     symbol_data = tsym->getSymbolData();
     symbol_is_blob = tsym->isSymbolDataBlob();
@@ -61,8 +61,8 @@ TuioSymbol::TuioSymbol (TuioSymbol *tsym):TuioContent(tsym->getTuioTime(),tsym->
     state = TUIO_ADDED;
 }
 
-unsigned int TuioSymbol::getSymbolID() const {
-    return symbol_id;
+unsigned int TuioSymbol::getComponentID() const {
+    return component_id;
 }
         
 unsigned short TuioSymbol::getTypeID() const {
